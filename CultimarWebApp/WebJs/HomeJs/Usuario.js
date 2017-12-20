@@ -21,7 +21,7 @@
                 if (data == 4) {
                 }
                 if (data == 0) {
-                    alert("El Rut ingresado no corresponde a un rur correcto, intentalo nuevamente.");
+                    alert("El Rut ingresado no corresponde a un rut correcto, intentalo nuevamente.");
                 }
             }
         });

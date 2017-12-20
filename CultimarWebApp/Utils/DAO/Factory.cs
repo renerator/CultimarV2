@@ -98,9 +98,9 @@ namespace CultimarWebApp.Utils.DAO
         /// Listado de Perfiles del sistema
         /// </summary>
         /// <returns>lista con los perfiles del sistema.</returns>
-        public List<ObjetoUsuario> ListadoPerfiles()
+        public List<ObjetoPerfil> ListadoPerfiles()
         {
-            var ListadoPerfil = new List<ObjetoUsuario>();
+            var ListadoPerfil = new List<ObjetoPerfil>();
             var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_GET_LISTADOPERFILES", new System.Collections.Hashtable());
 
             if (data.Rows.Count > 0)
@@ -108,7 +108,7 @@ namespace CultimarWebApp.Utils.DAO
                 for (var i = 0; i < data.Rows.Count; i++)
                 {
                     var validador = new object();
-                    var resultadoListado = new ObjetoUsuario();
+                    var resultadoListado = new ObjetoPerfil();
                     validador = data.Rows[i].Field<object>("id_Perfil");
                     resultadoListado.IdPerfil = validador != null ? data.Rows[i].Field<int>("id_Perfil") : -1;
 
@@ -153,6 +153,10 @@ namespace CultimarWebApp.Utils.DAO
 
                     validador = data.Rows[i].Field<object>("Activo");
                     resultadoListado.Activo = validador != null ? data.Rows[i].Field<bool>("Activo") : false;
+
+                    validador = data.Rows[i].Field<object>("id_Perfil");
+                    resultadoListado.IdPerfil = validador != null ? data.Rows[i].Field<int>("id_Perfil") : -1;
+
 
                     ListadoUsuarios.Add(resultadoListado);
                 }

@@ -45,9 +45,9 @@
                             grid.Column(columnName: "Nombre", header: "Nombre Usuario", format: @<text>@item.NombreUsuario</text>),
                             grid.Column(columnName: "NombrePerfil", header: "Tipo Usuario", format: @<text>@item.NombrePerfilUsuario</text>),
                             @*grid.Column(header: "Autorizar", format: @<button class="btn btn-success" onclick="EditaUsuarios(@item.IdUsuario)">Autorizar</button> ),*@
-                            grid.Column(header: "Acción", format: item => item.NombrePerfilUsuario == "Usuario Ingreso"  & item.PuedeModificar  ? 
-                                                            Html.Raw("<button class='btn btn-warning' onclick='QuitapermisoUsuarios(" + item.IdUsuario + ")'>Quitar Permiso</button>") : 
-                                                            item.NombrePerfilUsuario =="Usuario Ingreso" ? Html.Raw("<button class='btn btn-success' onclick='EditaUsuarios(" + item.IdUsuario + ")'>Autorizar</button>") : Html.Raw(""))
+                            grid.Column(header: "Acción", format: item => item.IdPerfil == 2  & item.PuedeModificar  ?
+                                                            Html.Raw("<button class='btn btn-warning' onclick='QuitapermisoUsuarios(" + item.IdUsuario + ")'>Quitar Permiso</button>") :
+                                                            item.IdPerfil == 2 ? Html.Raw("<button class='btn btn-success' onclick='EditaUsuarios(" + item.IdUsuario + ")'>Autorizar</button>") : Html.Raw(""))
 
                         ))
 

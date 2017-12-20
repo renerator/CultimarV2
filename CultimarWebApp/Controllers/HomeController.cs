@@ -30,6 +30,23 @@ namespace CultimarWebApp.Controllers
                 throw;
             }
         }
+
+        public ActionResult FactoresMedicion()
+        {
+            try
+            {
+                var datosUsuario = new ObjetoLogin();
+                datosUsuario = (ObjetoLogin)Session["DatosUsuario"];
+                ViewBag.Message = "Bienvenido: " + datosUsuario.Nombre;
+                return View();
+            }
+            catch (Exception ex)
+            {
+                new CapturaExcepciones(ex);
+                return ErrorPage(1001);
+                throw;
+            }
+        }
         [SessionFilter]
         public ActionResult Usuarios()
         {
@@ -56,7 +73,7 @@ namespace CultimarWebApp.Controllers
                 var datosUsuario = new ObjetoLogin();
                 datosUsuario = (ObjetoLogin)Session["DatosUsuario"];
                 ViewBag.Message = "Bienvenido: " + datosUsuario.Nombre;
-                IEnumerable<ObjetoUsuario> model = _control.ListadoPerfiles();
+                IEnumerable<ObjetoPerfil> model = _control.ListadoPerfiles();
                 return View(model);
             }
             catch (Exception ex)

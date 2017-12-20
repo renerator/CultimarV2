@@ -23,7 +23,7 @@ namespace CultimarWebApp.Utils.DAO
             return _dtFac.LoginUsuario(rut, pass);
         }
 
-        public List<ObjetoUsuario> ListadoPerfiles()
+        public List<ObjetoPerfil> ListadoPerfiles()
         {
             return _dtFac.ListadoPerfiles();
         }

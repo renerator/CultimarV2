@@ -5,7 +5,7 @@ using System.Web;
 
 namespace CultimarWebApp.Utils.Objetos
 {
-    public class ObjetoUsuario
+    public class ObjetoPerfil
     {
 
         private int _idPerfil;

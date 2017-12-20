@@ -185,7 +185,7 @@
     <Compile Include="Utils\HashMd5.cs" />
     <Compile Include="Utils\Objetos\ObjetoLogin.cs" />
     <Compile Include="Utils\Objetos\ObjetoMenu.cs" />
-    <Compile Include="Utils\Objetos\ObjetoUsuario.cs" />
+    <Compile Include="Utils\Objetos\ObjetoPerfil.cs" />
     <Compile Include="Utils\Objetos\ObjetoUsuarios.cs" />
     <Compile Include="Utils\Smtp.cs" />
     <Compile Include="Utils\ValidaRut.cs" />
@@ -3713,6 +3713,7 @@
     <Content Include="Scripts\vendors\validator\index.html" />
     <Content Include="Scripts\vendors\validator\multifield.js" />
     <Content Include="Scripts\vendors\validator\validator.js" />
+    <Content Include="WebJs\HomeJs\FactoresMedicion.js" />
     <Content Include="WebJs\HomeJs\Usuario.js" />
     <Content Include="WebJs\Rut.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -4537,6 +4538,9 @@
     <Content Include="Views\Home\Perfiles.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Usuarios.cshtml" />
+    <Content Include="Views\Produccion\SeguimientoSemilla.cshtml" />
+    <Content Include="Views\Produccion\test.cshtml" />
+    <Content Include="Views\Home\FactoresMedicion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
