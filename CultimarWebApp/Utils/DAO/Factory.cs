@@ -124,7 +124,46 @@ namespace CultimarWebApp.Utils.DAO
             return ListadoPerfil;
         }
 
+        public List<ObjetoFactoresMedicion> ListadoFactoresMedicion()
+        {
+            var ListadoUsuarios = new List<ObjetoFactoresMedicion>();
+            var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_GET_LISTAFACTORESMEDICION", new System.Collections.Hashtable());
 
+            if (data.Rows.Count > 0)
+            {
+                for (var i = 0; i < data.Rows.Count; i++)
+                {
+                    var validador = new object();
+                    var resultadoListado = new ObjetoFactoresMedicion();
+                    validador = data.Rows[i].Field<object>("idFactor");
+                    resultadoListado.IdFactor = validador != null ? data.Rows[i].Field<int>("idFactor") : -1;
+
+                    validador = data.Rows[i].Field<object>("Nombre");
+                    resultadoListado.NombreFactor = validador != null ? data.Rows[i].Field<string>("Nombre") : "NO ASIGNADO";
+
+                    validador = data.Rows[i].Field<object>("Parametro");
+                    resultadoListado.ParametroFactor = validador != null ? data.Rows[i].Field<string>("Parametro") : "NO ASIGNADO";
+
+                    validador = data.Rows[i].Field<object>("Frecuencia");
+                    resultadoListado.FrecuenciaFactor = validador != null ? data.Rows[i].Field<string>("Frecuencia") : "NO ASIGNADO";
+
+                    validador = data.Rows[i].Field<object>("Temperatura");
+                    resultadoListado.TemperaturaFactor = validador != null ? data.Rows[i].Field<string>("Temperatura") : "NO ASIGNADO";
+
+                    validador = data.Rows[i].Field<object>("Alimentacion");
+                    resultadoListado.AlimentacionFactor = validador != null ? data.Rows[i].Field<string>("Alimentacion") : "NO ASIGNADO";
+
+                    validador = data.Rows[i].Field<object>("Oxigeno");
+                    resultadoListado.OxigenoFactor = validador != null ? data.Rows[i].Field<string>("Oxigeno") : "NO ASIGNADO";
+
+                    validador = data.Rows[i].Field<object>("Estado");
+                    resultadoListado.Estado = validador != null ? data.Rows[i].Field<bool>("Estado") : false;
+
+                    ListadoUsuarios.Add(resultadoListado);
+                }
+            }
+            return ListadoUsuarios;
+        }
         public List<ObjetoUsuarios> ListadoUsuarios()
         {
             var ListadoUsuarios = new List<ObjetoUsuarios>();

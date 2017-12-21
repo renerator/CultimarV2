@@ -175,17 +175,25 @@
     <Compile Include="Helper\MenuHelper.cs" />
     <Compile Include="Models\Filters\SessionFilter.cs" />
     <Compile Include="Models\LoginModels.cs" />
+    <Compile Include="Models\SeguimientoLarvalModels.cs" />
     <Compile Include="Models\UsuariosModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\CapturaExcepciones.cs" />
     <Compile Include="Utils\DAO\Control.cs" />
     <Compile Include="Utils\DAO\Factory.cs" />
+    <Compile Include="Utils\DAO\FactorySeguimientoFijacion.cs" />
+    <Compile Include="Utils\DAO\FactorySeguimientoLarval.cs" />
+    <Compile Include="Utils\DAO\FactorySeguimientosSemillas.cs" />
     <Compile Include="Utils\DataSource.cs" />
     <Compile Include="Utils\DBConector.cs" />
     <Compile Include="Utils\HashMd5.cs" />
+    <Compile Include="Utils\Objetos\ObjetoFactoresMedicion.cs" />
     <Compile Include="Utils\Objetos\ObjetoLogin.cs" />
     <Compile Include="Utils\Objetos\ObjetoMenu.cs" />
     <Compile Include="Utils\Objetos\ObjetoPerfil.cs" />
+    <Compile Include="Utils\Objetos\ObjetoSeguimientoFijacion.cs" />
+    <Compile Include="Utils\Objetos\ObjetoSeguimientoLarval.cs" />
+    <Compile Include="Utils\Objetos\ObjetoSeguimientoSemilla.cs" />
     <Compile Include="Utils\Objetos\ObjetoUsuarios.cs" />
     <Compile Include="Utils\Smtp.cs" />
     <Compile Include="Utils\ValidaRut.cs" />
@@ -3716,6 +3724,7 @@
     <Content Include="WebJs\HomeJs\FactoresMedicion.js" />
     <Content Include="WebJs\HomeJs\Usuario.js" />
     <Content Include="WebJs\Rut.js" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -4539,7 +4548,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Usuarios.cshtml" />
     <Content Include="Views\Produccion\SeguimientoSemilla.cshtml" />
-    <Content Include="Views\Produccion\test.cshtml" />
     <Content Include="Views\Home\FactoresMedicion.cshtml" />
   </ItemGroup>
   <ItemGroup>

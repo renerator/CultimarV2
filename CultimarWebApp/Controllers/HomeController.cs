@@ -30,7 +30,7 @@ namespace CultimarWebApp.Controllers
                 throw;
             }
         }
-
+        [SessionFilter]
         public ActionResult FactoresMedicion()
         {
             try
@@ -38,7 +38,8 @@ namespace CultimarWebApp.Controllers
                 var datosUsuario = new ObjetoLogin();
                 datosUsuario = (ObjetoLogin)Session["DatosUsuario"];
                 ViewBag.Message = "Bienvenido: " + datosUsuario.Nombre;
-                return View();
+                IEnumerable<ObjetoFactoresMedicion> model = _control.ListaFactoresMedicion();
+                return View(model);
             }
             catch (Exception ex)
             {

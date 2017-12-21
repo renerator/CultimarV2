@@ -1,4 +1,5 @@
 ﻿using CultimarWebApp.Utils;
+using CultimarWebApp.Utils.DAO;
 using CultimarWebApp.Utils.Objetos;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace CultimarWebApp.Controllers
     public class ProduccionController : Controller
     {
         // GET: Produccion
+        Control _control = new Control();
         public ActionResult SeguimientoCultivoLarval()
         {
             try
@@ -18,7 +20,9 @@ namespace CultimarWebApp.Controllers
                 var datosUsuario = new ObjetoLogin();
                 datosUsuario = (ObjetoLogin)Session["DatosUsuario"];
                 ViewBag.Message = "Bienvenido: " + datosUsuario.Nombre;
-                return View();
+                IEnumerable<ObjetoSeguimientoLarval> model = _control.ListadoSeguimientoLarval();
+
+                return View(model);
             }
             catch (Exception ex)
             {
@@ -35,7 +39,10 @@ namespace CultimarWebApp.Controllers
                 var datosUsuario = new ObjetoLogin();
                 datosUsuario = (ObjetoLogin)Session["DatosUsuario"];
                 ViewBag.Message = "Bienvenido: " + datosUsuario.Nombre;
-                return View();
+                IEnumerable<ObjetoSeguimientoSemilla> model = _control.ListadoSeguimientoSemilla();
+                return View(model);
+
+
             }
             catch (Exception ex)
             {

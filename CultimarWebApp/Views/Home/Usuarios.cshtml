@@ -37,6 +37,7 @@
                             var grid = new WebGrid(Model);
                         }
                         @grid.GetHtml(
+                        htmlAttributes: new { id = "tblUsuarios" },
                     tableStyle: "table table-bordered",
                     columns:
                         grid.Columns(

@@ -12,6 +12,32 @@ namespace CultimarWebApp.Utils.DAO
     public class Control
     {
         private Factory _dtFac = new Factory();
+        private FactorySeguimientoLarval _dtSegLarval = new FactorySeguimientoLarval();
+        private FactorySeguimientosSemillas _dtFacSeguimientoSemilla = new FactorySeguimientosSemillas();
+
+        public List<ObjetoSeguimientoLarval> ListadoSeguimientoLarval()
+        {
+            return _dtSegLarval.ListadoSeguimientoLarval(1);
+        }
+
+        public bool setGrabaSeguimientoLarval(ObjetoSeguimientoLarval larval)
+        {
+            return _dtSegLarval.setGrabaSegimientoLarval(larval);
+        }
+
+        public bool setEditaSegimientoLarval(ObjetoSeguimientoLarval larval)
+        {
+            return _dtSegLarval.setEditaSegimientoLarval(larval);
+        }
+        public bool setEliminaSeguimientoLarval(int id)
+        {
+            return _dtSegLarval.setEliminaSeguimientoLarval(id);
+        }
+
+        public List<ObjetoSeguimientoSemilla> ListadoSeguimientoSemilla()
+        {
+            return _dtFacSeguimientoSemilla.SeguimientoSemilla(1);
+        }
 
         public List<ObjetoMenu> MenuUsuario(int idUsuario)
         {
@@ -31,6 +57,11 @@ namespace CultimarWebApp.Utils.DAO
         public List<ObjetoUsuarios> ListadoUsuarios()
         {
             return _dtFac.ListadoUsuarios();
+        }
+
+        public List<ObjetoFactoresMedicion> ListaFactoresMedicion()
+        {
+            return _dtFac.ListadoFactoresMedicion();
         }
 
         public bool setGrabaUsuario(ObjetoUsuarios usuario)
