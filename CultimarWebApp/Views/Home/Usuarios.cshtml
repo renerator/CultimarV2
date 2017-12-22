@@ -37,20 +37,20 @@
                             var grid = new WebGrid(Model);
                         }
                         @grid.GetHtml(
-                        htmlAttributes: new { id = "tblUsuarios" },
-                    tableStyle: "table table-bordered",
-                    columns:
-                        grid.Columns(
-                            grid.Column(columnName: "IdUsuario", header: "Identificador", format: @<text>@item.IdUsuario</text>),
-                            grid.Column(columnName: "RUT", header: "Usuario", format: @<text>@item.RutUsuario</text>),
-                            grid.Column(columnName: "Nombre", header: "Nombre Usuario", format: @<text>@item.NombreUsuario</text>),
-                            grid.Column(columnName: "NombrePerfil", header: "Tipo Usuario", format: @<text>@item.NombrePerfilUsuario</text>),
+     htmlAttributes: new { id = "tblUsuarios" },
+ tableStyle: "table table-bordered",
+ columns:
+     grid.Columns(
+         grid.Column(columnName: "IdUsuario", header: "Identificador", format: @<text>@item.IdUsuario</text>),
+         grid.Column(columnName: "RUT", header: "Usuario", format: @<text>@item.RutUsuario</text>),
+         grid.Column(columnName: "Nombre", header: "Nombre Usuario", format: @<text>@item.NombreUsuario</text>),
+         grid.Column(columnName: "NombrePerfil", header: "Tipo Usuario", format: @<text>@item.NombrePerfilUsuario</text>),
                             @*grid.Column(header: "Autorizar", format: @<button class="btn btn-success" onclick="EditaUsuarios(@item.IdUsuario)">Autorizar</button> ),*@
-                            grid.Column(header: "Acción", format: item => item.IdPerfil == 2  & item.PuedeModificar  ?
-                                                            Html.Raw("<button class='btn btn-warning' onclick='QuitapermisoUsuarios(" + item.IdUsuario + ")'>Quitar Permiso</button>") :
-                                                            item.IdPerfil == 2 ? Html.Raw("<button class='btn btn-success' onclick='EditaUsuarios(" + item.IdUsuario + ")'>Autorizar</button>") : Html.Raw(""))
+         grid.Column(header: "Acción", format: item => item.IdPerfil == 2 & item.PuedeModificar ?
+                                         Html.Raw("<button class='btn btn-warning' onclick='QuitapermisoUsuarios(" + item.IdUsuario + ")'>Quitar Permiso</button>") :
+                                         item.IdPerfil == 2 ? Html.Raw("<button class='btn btn-success' onclick='EditaUsuarios(" + item.IdUsuario + ")'>Autorizar</button>") : Html.Raw(""))
 
-                        ))
+     ))
 
                     </div>
 
@@ -96,14 +96,9 @@
                                             <div class="form-group">
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Seleccione Perfil</label>
                                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                                    <select class="form-control" id="selectPerfil">
-                                                        <option value="-1">Seleccione...</option>
-                                                        <option value="1">Administrador</option>
-                                                        <option value="2">Usuario Ingreso</option>
-                                                        <option value="3">Usuario lectura</option>
-                                                    </select>
+                                                    @Html.DropDownList("Perfil", (IEnumerable<SelectListItem>)ViewBag.Perfil, "Seleccione..." , new { @class = "form-control", @ID = "selectPerfil" })
+                                                    </div>
                                                 </div>
-                                            </div>
 
                                             <div class="ln_solid"></div>
                                             <div class="form-group">

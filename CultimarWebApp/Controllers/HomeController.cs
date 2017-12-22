@@ -57,6 +57,13 @@ namespace CultimarWebApp.Controllers
                 datosUsuario = (ObjetoLogin)Session["DatosUsuario"];
                 ViewBag.Message = "Bienvenido: " + datosUsuario.Nombre;
                 IEnumerable<ObjetoUsuarios> model = _control.ListadoUsuarios();
+                IEnumerable<SelectListItem> items = _control.ListadoPerfiles().Select(c => new SelectListItem() {
+                                                                            Text = c.NombrePerfil,
+                                                                            Value = c.IdPerfil.ToString()
+                                                }).ToList();
+                ViewBag.Perfil = items;
+
+
                 return View(model);
             }
             catch (Exception ex)
