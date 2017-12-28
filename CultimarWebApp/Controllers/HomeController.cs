@@ -31,6 +31,39 @@ namespace CultimarWebApp.Controllers
             }
         }
         [SessionFilter]
+        public ActionResult Mantenedores()
+        {
+            try
+            {
+                var datosUsuario = new ObjetoLogin();
+                datosUsuario = (ObjetoLogin)Session["DatosUsuario"];
+                ViewBag.Message = "Bienvenido: " + datosUsuario.Nombre;
+                IEnumerable<ObjetoOrigen> parametrosOrigen = _control.ListadoParametrosOrigen();
+                ViewBag.ParametrosOrigen = parametrosOrigen;
+                IEnumerable<ObjetoDestino> parametrosDestino = _control.ListadoParametrosDestino();
+                ViewBag.ParametrosDestino = parametrosDestino;
+                IEnumerable<ObjetoEspecies> parametrosEspecies = _control.ListadoParametrosEspecies();
+                ViewBag.ParametrosEspecies = parametrosEspecies;
+                IEnumerable<ObjetoTipoContenedor> parametrosTipoContenedor = _control.ListadoTipoContenedor();
+                ViewBag.ParametrosTipoContenedor = parametrosTipoContenedor;
+                IEnumerable<ObjetoTipoIdentificacion> parametrosTipoIdentificacion = _control.ListadoTipoIdentificacion();
+                ViewBag.ParametrosTipoIdentificacion = parametrosTipoIdentificacion;
+                IEnumerable<ObjetoTipoMortalidad> parametrosTipoMortalidad = _control.ListadoTipoMortalidad();
+                ViewBag.ParametrosTipoMortalidad = parametrosTipoMortalidad;
+                IEnumerable<ObjetoTipoSistema> parametrosTipoSistema = _control.ListadoTipoSistema();
+                ViewBag.ParametrosTipoSistema = parametrosTipoSistema;
+
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                new CapturaExcepciones(ex);
+                return ErrorPage(1001);
+                throw;
+            }
+        }
+        [SessionFilter]
         public ActionResult FactoresMedicion()
         {
             try
@@ -154,6 +187,78 @@ namespace CultimarWebApp.Controllers
 
             return (Json(validador));
         }
+
+        public JsonResult GrabaParametroOrigen(int idOrigen, string nombreOrigen)
+        {
+            var validador = 0;
+            try
+            {
+                if (!string.IsNullOrEmpty(nombreOrigen))
+                {
+                    var origen = new ObjetoOrigen()
+                    {
+                        IdOrigen = idOrigen,
+                        NombreOrigen = nombreOrigen
+                    };
+                    if (_control.setGrabaParametroOrigen(origen))
+                    {
+                        validador = 1;
+                    }
+                    else
+                    {
+                        validador = 2;
+                    }
+                }
+                else {
+                    validador = 3;
+                }
+            }
+            catch (Exception ex)
+            {
+                new CapturaExcepciones(ex);
+                validador = -1;
+                throw;
+            }
+            
+            return (Json(validador));
+        }
+
+        public JsonResult GrabaParametroDestino(int idDestino, string nombreDestino)
+        {
+            var validador = 0;
+            try
+            {
+                var destino = new ObjetoDestino()
+                {
+                    IdDestino = idDestino,
+                    NombreDestino = nombreDestino
+                };
+                if (_control.setGrabaParametroDestino(destino))
+                {
+                    validador = 1;
+                }
+                else
+                {
+                    validador = 2;
+                }
+            }
+            catch (Exception ex)
+            {
+                new CapturaExcepciones(ex);
+                validador = -1;
+                throw;
+            }
+
+            return (Json(validador));
+        }
+
+        public JsonResult GrabaParametroEspecie(int idEspecie, string nombreEspecie)
+        {
+            var validador = 0;
+
+            return (Json(validador));
+        }
+
 
         public ActionResult ErrorPage(int error)
         {

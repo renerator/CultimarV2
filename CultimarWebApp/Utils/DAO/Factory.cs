@@ -124,6 +124,189 @@ namespace CultimarWebApp.Utils.DAO
             return ListadoPerfil;
         }
 
+        public List<ObjetoOrigen> ListadoParametrosOrigen()
+        {
+            var ListadoOrigen = new List<ObjetoOrigen>();
+            var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_GET_LISTADOORIGEN", new System.Collections.Hashtable());
+
+            if (data.Rows.Count > 0)
+            {
+                for (var i = 0; i < data.Rows.Count; i++)
+                {
+                    var validador = new object();
+                    var resultadoListado = new ObjetoOrigen();
+                    validador = data.Rows[i].Field<object>("Id");
+                    resultadoListado.IdOrigen = validador != null ? data.Rows[i].Field<int>("Id") : -1;
+
+                    validador = data.Rows[i].Field<object>("Nombre");
+                    resultadoListado.NombreOrigen = validador != null ? data.Rows[i].Field<string>("Nombre") : "NO ASIGNADO";
+
+                    validador = data.Rows[i].Field<object>("Estado");
+                    resultadoListado.Estado = validador != null ? data.Rows[i].Field<bool>("Estado") : false;
+
+                    ListadoOrigen.Add(resultadoListado);
+                }
+            }
+            return ListadoOrigen;
+        }
+        public List<ObjetoDestino> ListadoParametrosDestino()
+        {
+            var ListadoDestino = new List<ObjetoDestino>();
+            var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_GET_LISTADODESTINO", new System.Collections.Hashtable());
+
+            if (data.Rows.Count > 0)
+            {
+                for (var i = 0; i < data.Rows.Count; i++)
+                {
+                    var validador = new object();
+                    var resultadoListado = new ObjetoDestino();
+                    validador = data.Rows[i].Field<object>("Id");
+                    resultadoListado.IdDestino = validador != null ? data.Rows[i].Field<int>("Id") : -1;
+
+                    validador = data.Rows[i].Field<object>("Destino");
+                    resultadoListado.NombreDestino = validador != null ? data.Rows[i].Field<string>("Destino") : "NO ASIGNADO";
+
+                    validador = data.Rows[i].Field<object>("Estado");
+                    resultadoListado.Estado = validador != null ? data.Rows[i].Field<bool>("Estado") : false;
+
+                    ListadoDestino.Add(resultadoListado);
+                }
+            }
+            return ListadoDestino;
+        }
+
+        public List<ObjetoEspecies> ListadoParametrosEspecies()
+        {
+            var ListadoEspecies = new List<ObjetoEspecies>();
+            var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_GET_LISTADOESPECIES", new System.Collections.Hashtable());
+
+            if (data.Rows.Count > 0)
+            {
+                for (var i = 0; i < data.Rows.Count; i++)
+                {
+                    var validador = new object();
+                    var resultadoListado = new ObjetoEspecies();
+                    validador = data.Rows[i].Field<object>("Id");
+                    resultadoListado.IdEspecies = validador != null ? data.Rows[i].Field<int>("Id") : -1;
+
+                    validador = data.Rows[i].Field<object>("Nombre");
+                    resultadoListado.NombreEspecies = validador != null ? data.Rows[i].Field<string>("Nombre") : "NO ASIGNADO";
+
+                    validador = data.Rows[i].Field<object>("Estado");
+                    resultadoListado.Estado = validador != null ? data.Rows[i].Field<bool>("Estado") : false;
+
+                    ListadoEspecies.Add(resultadoListado);
+                }
+            }
+            return ListadoEspecies;
+        }
+
+        public List<ObjetoTipoContenedor> ListadoTipoContenedor()
+        {
+            var ListadoTipoContenedor = new List<ObjetoTipoContenedor>();
+            var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_GET_TIPOCONTENEDOR", new System.Collections.Hashtable());
+
+            if (data.Rows.Count > 0)
+            {
+                for (var i = 0; i < data.Rows.Count; i++)
+                {
+                    var validador = new object();
+                    var resultadoListado = new ObjetoTipoContenedor();
+                    validador = data.Rows[i].Field<object>("Id");
+                    resultadoListado.IdContenedor = validador != null ? data.Rows[i].Field<int>("Id") : -1;
+
+                    validador = data.Rows[i].Field<object>("Nombre");
+                    resultadoListado.NombreContenedor = validador != null ? data.Rows[i].Field<string>("Nombre") : "NO ASIGNADO";
+
+                    validador = data.Rows[i].Field<object>("Tipo");
+                    resultadoListado.TipoContenedor = validador != null ? data.Rows[i].Field<string>("Tipo") : "NO ASIGNADO";
+
+                    validador = data.Rows[i].Field<object>("Estado");
+                    resultadoListado.Estado = validador != null ? data.Rows[i].Field<bool>("Estado") : false;
+
+                    ListadoTipoContenedor.Add(resultadoListado);
+                }
+            }
+            return ListadoTipoContenedor;
+        }
+
+        public List<ObjetoTipoIdentificacion> ListadoTipoIdentificacion()
+        {
+            var ListadoTipoIdentificacion = new List<ObjetoTipoIdentificacion>();
+            var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_GET_LISTADOTIPOIDENTIFICACION", new System.Collections.Hashtable());
+
+            if (data.Rows.Count > 0)
+            {
+                for (var i = 0; i < data.Rows.Count; i++)
+                {
+                    var validador = new object();
+                    var resultadoListado = new ObjetoTipoIdentificacion();
+                    validador = data.Rows[i].Field<object>("Id");
+                    resultadoListado.IdIdentificacion = validador != null ? data.Rows[i].Field<int>("Id") : -1;
+
+                    validador = data.Rows[i].Field<object>("Nombre");
+                    resultadoListado.NombreIdentificacion = validador != null ? data.Rows[i].Field<string>("Nombre") : "NO ASIGNADO";
+
+                    validador = data.Rows[i].Field<object>("Estado");
+                    resultadoListado.Estado = validador != null ? data.Rows[i].Field<bool>("Estado") : false;
+
+                    ListadoTipoIdentificacion.Add(resultadoListado);
+                }
+            }
+            return ListadoTipoIdentificacion;
+        }
+
+        public List<ObjetoTipoMortalidad> ListadoTipoMortalidad()
+        {
+            var ListadoTipoMortalidad = new List<ObjetoTipoMortalidad>();
+            var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_GET_LISTADOTIPOMORTALIDAD", new System.Collections.Hashtable());
+
+            if (data.Rows.Count > 0)
+            {
+                for (var i = 0; i < data.Rows.Count; i++)
+                {
+                    var validador = new object();
+                    var resultadoListado = new ObjetoTipoMortalidad();
+                    validador = data.Rows[i].Field<object>("Id");
+                    resultadoListado.IdMortalidad = validador != null ? data.Rows[i].Field<int>("Id") : -1;
+
+                    validador = data.Rows[i].Field<object>("Nombre");
+                    resultadoListado.NombreMortalidad = validador != null ? data.Rows[i].Field<string>("Nombre") : "NO ASIGNADO";
+
+                    validador = data.Rows[i].Field<object>("Estado");
+                    resultadoListado.Estado = validador != null ? data.Rows[i].Field<bool>("Estado") : false;
+
+                    ListadoTipoMortalidad.Add(resultadoListado);
+                }
+            }
+            return ListadoTipoMortalidad;
+        }
+        public List<ObjetoTipoSistema> ListadoTipoSistema()
+        {
+            var ListadoTipoSistema = new List<ObjetoTipoSistema>();
+            var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_GET_LISTADOTIPOSISTEMA", new System.Collections.Hashtable());
+
+            if (data.Rows.Count > 0)
+            {
+                for (var i = 0; i < data.Rows.Count; i++)
+                {
+                    var validador = new object();
+                    var resultadoListado = new ObjetoTipoSistema();
+                    validador = data.Rows[i].Field<object>("Id");
+                    resultadoListado.IdTipoSistema = validador != null ? data.Rows[i].Field<int>("Id") : -1;
+
+                    validador = data.Rows[i].Field<object>("Nombre");
+                    resultadoListado.NombreSistema = validador != null ? data.Rows[i].Field<string>("Nombre") : "NO ASIGNADO";
+
+                    validador = data.Rows[i].Field<object>("Estado");
+                    resultadoListado.Estado = validador != null ? data.Rows[i].Field<bool>("Estado") : false;
+
+                    ListadoTipoSistema.Add(resultadoListado);
+                }
+            }
+            return ListadoTipoSistema;
+        }
+
         public List<ObjetoFactoresMedicion> ListadoFactoresMedicion()
         {
             var ListadoUsuarios = new List<ObjetoFactoresMedicion>();
@@ -218,6 +401,68 @@ namespace CultimarWebApp.Utils.DAO
                                                                                                 {"pass", usuario.Pass },
                                                                                                 {"nombreUsuario", usuario.NombreUsuario },
                                                                                                 {"idPerfil", usuario.IdPerfil }
+                                                                                            });
+                if (data.Rows.Count > 0)
+                {
+                    respuesta = true;
+                }
+            }
+            catch (SqlException ex)
+            {
+                new CapturaExcepciones(ex);
+            }
+            catch (Exception ex)
+            {
+                new CapturaExcepciones(ex);
+            }
+            return respuesta;
+        }
+
+        /// <summary>
+        /// Metodo de grabacion de parametros de Origen
+        /// </summary>
+        /// <param name="origen">Objeto tipo Origen con todos los datos</param>
+        /// <returns>True o False según resultado en la BD</returns>
+        public bool setGrabaParametroOrigen(ObjetoOrigen origen)
+        {
+            var respuesta = false;
+            try
+            {
+                var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_SET_GRABAORIGEN", new System.Collections.Hashtable()
+                                                                                            {
+                                                                                                {"idOrigen", origen.IdOrigen},
+                                                                                                {"nombreOrigen", origen.NombreOrigen }
+                                                                                            });
+                if (data.Rows.Count > 0)
+                {
+                    respuesta = true;
+                }
+            }
+            catch (SqlException ex)
+            {
+                new CapturaExcepciones(ex);
+            }
+            catch (Exception ex)
+            {
+                new CapturaExcepciones(ex);
+            }
+            return respuesta;
+        }
+
+        /// <summary>
+        /// Metodo de grabacion de parametros de Destino
+        /// </summary>
+        /// <param name="destino">Objeto tipo destino con todos los datos</param>
+        /// <returns>True o False, segun resultado en la BD.</returns>
+        public bool setGrabaParametroDestino(ObjetoDestino destino)
+        {
+            var respuesta = false;
+            try
+            {
+                var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_SET_GRABADESTINO", new System.Collections.Hashtable()
+                                                                                            {
+                                                                                                {"idDestino", destino.IdDestino},
+                                                                                                {"nombreDestino", destino.NombreDestino }
                                                                                             });
                 if (data.Rows.Count > 0)
                 {

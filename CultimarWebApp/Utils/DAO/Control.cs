@@ -59,6 +59,43 @@ namespace CultimarWebApp.Utils.DAO
             return _dtFac.ListadoUsuarios();
         }
 
+        public List<ObjetoOrigen> ListadoParametrosOrigen()
+        {
+            return _dtFac.ListadoParametrosOrigen();
+        }
+
+        public List<ObjetoDestino> ListadoParametrosDestino()
+        {
+            return _dtFac.ListadoParametrosDestino();
+        }
+
+        public List<ObjetoEspecies> ListadoParametrosEspecies()
+        {
+            return _dtFac.ListadoParametrosEspecies();
+        }
+
+        public List<ObjetoTipoContenedor> ListadoTipoContenedor()
+        {
+            return _dtFac.ListadoTipoContenedor();
+        }
+
+        public List<ObjetoTipoIdentificacion> ListadoTipoIdentificacion()
+        {
+            return _dtFac.ListadoTipoIdentificacion();
+        }
+
+        public List<ObjetoTipoMortalidad> ListadoTipoMortalidad()
+        {
+            return _dtFac.ListadoTipoMortalidad();
+        }
+
+        public List<ObjetoTipoSistema> ListadoTipoSistema()
+        {
+            return _dtFac.ListadoTipoSistema();
+        }
+
+
+
         public List<ObjetoFactoresMedicion> ListaFactoresMedicion()
         {
             return _dtFac.ListadoFactoresMedicion();
@@ -82,6 +119,15 @@ namespace CultimarWebApp.Utils.DAO
         public bool setQuitaPermisoUsuario(int idUsuario)
         {
             return _dtFac.setQuitaPermisoUsuario(idUsuario);
+        }
+
+        public bool setGrabaParametroOrigen(ObjetoOrigen origen)
+        {
+            return _dtFac.setGrabaParametroOrigen(origen);
+        }
+        public bool setGrabaParametroDestino(ObjetoDestino destino)
+        {
+            return _dtFac.setGrabaParametroDestino(destino);
         }
 
     }
