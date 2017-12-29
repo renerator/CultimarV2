@@ -187,13 +187,20 @@
     <Compile Include="Utils\DataSource.cs" />
     <Compile Include="Utils\DBConector.cs" />
     <Compile Include="Utils\HashMd5.cs" />
+    <Compile Include="Utils\Objetos\ObjetoDestino.cs" />
+    <Compile Include="Utils\Objetos\ObjetoEspecies.cs" />
     <Compile Include="Utils\Objetos\ObjetoFactoresMedicion.cs" />
     <Compile Include="Utils\Objetos\ObjetoLogin.cs" />
     <Compile Include="Utils\Objetos\ObjetoMenu.cs" />
+    <Compile Include="Utils\Objetos\ObjetoOrigen.cs" />
     <Compile Include="Utils\Objetos\ObjetoPerfil.cs" />
     <Compile Include="Utils\Objetos\ObjetoSeguimientoFijacion.cs" />
     <Compile Include="Utils\Objetos\ObjetoSeguimientoLarval.cs" />
     <Compile Include="Utils\Objetos\ObjetoSeguimientoSemilla.cs" />
+    <Compile Include="Utils\Objetos\ObjetoTipoContenedor.cs" />
+    <Compile Include="Utils\Objetos\ObjetoTipoIdentificacion.cs" />
+    <Compile Include="Utils\Objetos\ObjetoTipoMortalidad.cs" />
+    <Compile Include="Utils\Objetos\ObjetoTipoSistema.cs" />
     <Compile Include="Utils\Objetos\ObjetoUsuarios.cs" />
     <Compile Include="Utils\Smtp.cs" />
     <Compile Include="Utils\ValidaRut.cs" />
@@ -3722,6 +3729,7 @@
     <Content Include="Scripts\vendors\validator\multifield.js" />
     <Content Include="Scripts\vendors\validator\validator.js" />
     <Content Include="WebJs\HomeJs\FactoresMedicion.js" />
+    <Content Include="WebJs\HomeJs\Mantenedores.js" />
     <Content Include="WebJs\HomeJs\Usuario.js" />
     <Content Include="WebJs\Rut.js" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
@@ -4549,10 +4557,12 @@
     <Content Include="Views\Home\Usuarios.cshtml" />
     <Content Include="Views\Produccion\SeguimientoSemilla.cshtml" />
     <Content Include="Views\Home\FactoresMedicion.cshtml" />
+    <Content Include="Views\Home\Mantenedores.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Error\" />
+    <Folder Include="WebJs\SeguimientoSemilla\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

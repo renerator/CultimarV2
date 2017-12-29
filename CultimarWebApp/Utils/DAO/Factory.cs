@@ -306,7 +306,10 @@ namespace CultimarWebApp.Utils.DAO
             }
             return ListadoTipoSistema;
         }
-
+        /// <summary>
+        /// Listado de Factores de medicion
+        /// </summary>
+        /// <returns>lista con los factores de medicion</returns>
         public List<ObjetoFactoresMedicion> ListadoFactoresMedicion()
         {
             var ListadoUsuarios = new List<ObjetoFactoresMedicion>();
@@ -347,6 +350,10 @@ namespace CultimarWebApp.Utils.DAO
             }
             return ListadoUsuarios;
         }
+        /// <summary>
+        /// Listado de Usuarios
+        /// </summary>
+        /// <returns>listado de usuarios del sistema</returns>
         public List<ObjetoUsuarios> ListadoUsuarios()
         {
             var ListadoUsuarios = new List<ObjetoUsuarios>();
@@ -479,6 +486,157 @@ namespace CultimarWebApp.Utils.DAO
             }
             return respuesta;
         }
+        /// <summary>
+        /// Metodo de grabacion de parametro Especies
+        /// </summary>
+        /// <param name="especies">Objeto tipo especies con todos los parametros</param>
+        /// <returns>true o false segun el caso</returns>
+        public bool setGrabaParametrosEspecies(ObjetoEspecies especies)
+        {
+            var respuesta = false;
+            try
+            {
+                var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_SET_GRABAESPECIES", new System.Collections.Hashtable()
+                                                                                            {
+                                                                                                {"idEspecies", especies.IdEspecies},
+                                                                                                {"nombreEspecies", especies.NombreEspecies }
+                                                                                            });
+                if (data.Rows.Count > 0)
+                {
+                    respuesta = true;
+                }
+            }
+            catch (SqlException ex)
+            {
+                new CapturaExcepciones(ex);
+            }
+            catch (Exception ex)
+            {
+                new CapturaExcepciones(ex);
+            }
+            return respuesta;
+        }
+        /// <summary>
+        /// Metodo de grabacion para parametro de tipoContenedor
+        /// </summary>
+        /// <param name="tipoContenedor">objeto tipo contenedor con todos los parametros</param>
+        /// <returns>true o false segun el caso</returns>
+        public bool setGrabaParametrosTipoContenedor(ObjetoTipoContenedor tipoContenedor)
+        {
+            var respuesta = false;
+            try
+            {
+                var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_SET_GRABATIPOCONTENEDOR", new System.Collections.Hashtable()
+                                                                                            {
+                                                                                                {"idTipoContenedor", tipoContenedor.IdContenedor },
+                                                                                                {"nombreContenedor",tipoContenedor.NombreContenedor },
+                                                                                                {"tipoContenedor",tipoContenedor.TipoContenedor }
+                                                                                            });
+                if (data.Rows.Count > 0)
+                {
+                    respuesta = true;
+                }
+            }
+            catch (SqlException ex)
+            {
+                new CapturaExcepciones(ex);
+            }
+            catch (Exception ex)
+            {
+                new CapturaExcepciones(ex);
+            }
+            return respuesta;
+        }
+        /// <summary>
+        /// metodo de grabacion de parametros de Tipo de Identificacion
+        /// </summary>
+        /// <param name="tipoIdentificacion">objeto tipo identificacion con todos los parametros</param>
+        /// <returns>true o false segun corresponda</returns>
+        public bool setGrabaParametrosTipoIdentificacion(ObjetoTipoIdentificacion tipoIdentificacion)
+        {
+            var respuesta = false;
+            try
+            {
+                var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_SET_GRABATIPOIDENTIFICACION", new System.Collections.Hashtable()
+                                                                                            {
+                                                                                                {"idTipoIdentificacion", tipoIdentificacion.IdIdentificacion },
+                                                                                                {"nombreIdentificacion",tipoIdentificacion.NombreIdentificacion }
+                                                                                            });
+                if (data.Rows.Count > 0)
+                {
+                    respuesta = true;
+                }
+            }
+            catch (SqlException ex)
+            {
+                new CapturaExcepciones(ex);
+            }
+            catch (Exception ex)
+            {
+                new CapturaExcepciones(ex);
+            }
+            return respuesta;
+        }
+        /// <summary>
+        /// Metodo de grabacion de parametros de tipo de Mortalidad
+        /// </summary>
+        /// <param name="tipoMortalidad">Objeto tipo mortalidad con todos los parametros</param>
+        /// <returns>true o false segun corresponda</returns>
+        public bool setGrabaParametrosTipoMortalidad(ObjetoTipoMortalidad tipoMortalidad)
+        {
+            var respuesta = false;
+            try
+            {
+                var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_SET_GRABATIPOMORTALIDAD", new System.Collections.Hashtable()
+                                                                                            {
+                                                                                                {"idTipoMortalidad", tipoMortalidad.IdMortalidad },
+                                                                                                {"nombreMortalidad",tipoMortalidad.NombreMortalidad }
+                                                                                            });
+                if (data.Rows.Count > 0)
+                {
+                    respuesta = true;
+                }
+            }
+            catch (SqlException ex)
+            {
+                new CapturaExcepciones(ex);
+            }
+            catch (Exception ex)
+            {
+                new CapturaExcepciones(ex);
+            }
+            return respuesta;
+        }
+        /// <summary>
+        /// Metodo de grabacion de parametros de tipo de sistema
+        /// </summary>
+        /// <param name="tipoSistema">Objeto tipo Sistema con todos los parametros</param>
+        /// <returns>true o false segun corresponda</returns>
+        public bool setGrabaParametrosTipoSistema(ObjetoTipoSistema tipoSistema)
+        {
+            var respuesta = false;
+            try
+            {
+                var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_SET_GRABATIPOSISTEMA", new System.Collections.Hashtable()
+                                                                                            {
+                                                                                                {"idTipoSistema", tipoSistema.IdTipoSistema },
+                                                                                                {"nombreSistema", tipoSistema.NombreSistema }
+                                                                                            });
+                if (data.Rows.Count > 0)
+                {
+                    respuesta = true;
+                }
+            }
+            catch (SqlException ex)
+            {
+                new CapturaExcepciones(ex);
+            }
+            catch (Exception ex)
+            {
+                new CapturaExcepciones(ex);
+            }
+            return respuesta;
+        }
 
         /// <summary>
         /// Metodo que consume SP para autorizar usuario
@@ -509,7 +667,11 @@ namespace CultimarWebApp.Utils.DAO
             }
             return respuesta;
         }
-
+        /// <summary>
+        /// Metodo para Quitar permisos de modificacion a usuarios
+        /// </summary>
+        /// <param name="idUsuario">Id del usuario al que quitara el permiso</param>
+        /// <returns>true o false segun corresponda</returns>
         public bool setQuitaPermisoUsuario(int idUsuario)
         {
             var respuesta = false;

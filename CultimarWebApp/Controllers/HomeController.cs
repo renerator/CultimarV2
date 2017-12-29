@@ -223,23 +223,30 @@ namespace CultimarWebApp.Controllers
             return (Json(validador));
         }
 
-        public JsonResult GrabaParametroDestino(int idDestino, string nombreDestino)
+        public JsonResult GrabaParametrosDestino(int idDestino, string nombreDestino)
         {
             var validador = 0;
             try
             {
-                var destino = new ObjetoDestino()
+                if (!string.IsNullOrEmpty(nombreDestino))
                 {
-                    IdDestino = idDestino,
-                    NombreDestino = nombreDestino
-                };
-                if (_control.setGrabaParametroDestino(destino))
-                {
-                    validador = 1;
+                    var destino = new ObjetoDestino()
+                    {
+                        IdDestino = idDestino,
+                        NombreDestino = nombreDestino
+                    };
+                    if (_control.setGrabaParametroDestino(destino))
+                    {
+                        validador = 1;
+                    }
+                    else
+                    {
+                        validador = 2;
+                    }
                 }
                 else
                 {
-                    validador = 2;
+                    validador = 3;
                 }
             }
             catch (Exception ex)
@@ -255,9 +262,183 @@ namespace CultimarWebApp.Controllers
         public JsonResult GrabaParametroEspecie(int idEspecie, string nombreEspecie)
         {
             var validador = 0;
+            try
+            {
+                if (!string.IsNullOrEmpty(nombreEspecie))
+                {
+                    var especies = new ObjetoEspecies()
+                    {
+                        IdEspecies = idEspecie,
+                        NombreEspecies = nombreEspecie
+                    };
+                    if (_control.setGrabaParametroEspecies(especies))
+                    {
+                        validador = 1;
+                    }
+                    else
+                    {
+                        validador = 2;
+                    }
+                }
+                else
+                {
+                    validador = 3;
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                new CapturaExcepciones(ex);
+                validador = -1;
+                throw;
+            }
 
             return (Json(validador));
         }
+
+        public JsonResult GrabaParametroTipoSistema(int idTipoSistema, string nombreSistema)
+        {
+            var validador = 0;
+            try
+            {
+                if (!string.IsNullOrEmpty(nombreSistema))
+                {
+                    var tipoSistema = new ObjetoTipoSistema()
+                    {
+                        IdTipoSistema = idTipoSistema,
+                        NombreSistema = nombreSistema
+                    };
+                    if (_control.setGrabaParametrosTipoSistema(tipoSistema))
+                    {
+                        validador = 1;
+                    }
+                    else
+                    {
+                        validador = 2;
+                    }
+                }
+                else
+                {
+                    validador = 3;
+                }
+            }
+            catch (Exception ex)
+            {
+                new CapturaExcepciones(ex);
+                validador = -1;
+                throw;
+            }
+
+            return (Json(validador));
+
+        }
+        public JsonResult GrabaParametroTipoMortalidad(int idTipoMortalidad, string nombreMortalidad)
+        {
+            var validador = 0;
+            try
+            {
+                if (!string.IsNullOrEmpty(nombreMortalidad))
+                {
+                    var tipoMortalidad = new ObjetoTipoMortalidad()
+                    {
+                        IdMortalidad = idTipoMortalidad,
+                        NombreMortalidad = nombreMortalidad
+                    };
+                    if (_control.setGrabaParametrosTipoMortalidad(tipoMortalidad))
+                    {
+                        validador = 1;
+                    }
+                    else
+                    {
+                        validador = 2;
+                    }
+                }
+                else
+                {
+                    validador = 3;
+                }
+            }
+            catch (Exception ex)
+            {
+                new CapturaExcepciones(ex);
+                validador = -1;
+                throw;
+            }
+
+            return (Json(validador));
+        }
+        public JsonResult GrabaParametroTipoIdentificacion(int idTipoIdentificacion, string nombreIdentificacion)
+        {
+            var validador = 0;
+            try
+            {
+                if (!string.IsNullOrEmpty(nombreIdentificacion))
+                {
+                    var tipoIdentificacion = new ObjetoTipoIdentificacion()
+                    {
+                        IdIdentificacion = idTipoIdentificacion,
+                        NombreIdentificacion = nombreIdentificacion
+                    };
+                    if (_control.setGrabaParametrosTipoIdentificacion(tipoIdentificacion))
+                    {
+                        validador = 1;
+                    }
+                    else
+                    {
+                        validador = 2;
+                    }
+                }
+                else
+                {
+                    validador = 3;
+                }
+            }
+            catch (Exception ex)
+            {
+                new CapturaExcepciones(ex);
+                validador = -1;
+                throw;
+            }
+
+            return (Json(validador));
+        }
+        public JsonResult GrabaParametroTipoContenedor(int idContenedor, string nombreContenedor, string tipoContenedor)
+        {
+            var validador = 0;
+            try
+            {
+                if (!string.IsNullOrEmpty(nombreContenedor) && !string.IsNullOrEmpty(tipoContenedor))
+                {
+                    var PtipoContenedor = new ObjetoTipoContenedor()
+                    {
+                        IdContenedor = idContenedor,
+                        NombreContenedor = nombreContenedor,
+                        TipoContenedor = tipoContenedor
+                    };
+                    if (_control.setGrabaParametrosTipoContenedor(PtipoContenedor))
+                    {
+                        validador = 1;
+                    }
+                    else
+                    {
+                        validador = 2;
+                    }
+                }
+                else
+                {
+                    validador = 3;
+                }
+            }
+            catch (Exception ex)
+            {
+                new CapturaExcepciones(ex);
+                validador = -1;
+                throw;
+            }
+
+            return (Json(validador));
+        }
+
 
 
         public ActionResult ErrorPage(int error)

@@ -130,5 +130,26 @@ namespace CultimarWebApp.Utils.DAO
             return _dtFac.setGrabaParametroDestino(destino);
         }
 
+        public bool setGrabaParametroEspecies(ObjetoEspecies especies)
+        {
+            return _dtFac.setGrabaParametrosEspecies(especies);
+        }
+        public bool setGrabaParametrosTipoContenedor(ObjetoTipoContenedor tipoContenedor)
+        {
+            return _dtFac.setGrabaParametrosTipoContenedor(tipoContenedor);
+        }
+        public bool setGrabaParametrosTipoIdentificacion(ObjetoTipoIdentificacion tipoIdentificacion)
+        {
+            return _dtFac.setGrabaParametrosTipoIdentificacion(tipoIdentificacion);
+        }
+
+        public bool setGrabaParametrosTipoMortalidad(ObjetoTipoMortalidad tipoMortalidad)
+        {
+            return _dtFac.setGrabaParametrosTipoMortalidad(tipoMortalidad);
+        }
+        public bool setGrabaParametrosTipoSistema(ObjetoTipoSistema tipoSistema)
+        {
+            return _dtFac.setGrabaParametrosTipoSistema(tipoSistema);
+        }
     }
 }
