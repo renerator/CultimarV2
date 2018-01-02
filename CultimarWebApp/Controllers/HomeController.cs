@@ -137,13 +137,13 @@ namespace CultimarWebApp.Controllers
                     usuario.Pass = HashMd5.GetMD5(pass);
                     usuario.NombreUsuario = string.Concat(nombreUsuario, " ", apellidoUsuario);
                     usuario.IdPerfil = idPerfil;
-                    if (_control.getVerificaUsuario(rut))
+                    if (_control.GetVerificaUsuario(rut))
                     {
                         validador = 2;
                     }
                     else
                     {
-                        if (_control.setGrabaUsuario(usuario))
+                        if (_control.SetGrabaUsuario(usuario))
                         {
                             validador = 1;
                         }
@@ -167,7 +167,7 @@ namespace CultimarWebApp.Controllers
 
             var validador = 0;
 
-            if (_control.setAutorizaUsuario(idUsuario))
+            if (_control.SetAutorizaUsuario(idUsuario))
             {
                 validador = 1;
             }
@@ -180,7 +180,7 @@ namespace CultimarWebApp.Controllers
 
             var validador = 0;
 
-            if (_control.setQuitaPermisoUsuario(idUsuario))
+            if (_control.SetQuitaPermisoUsuario(idUsuario))
             {
                 validador = 1;
             }
@@ -200,7 +200,7 @@ namespace CultimarWebApp.Controllers
                         IdOrigen = idOrigen,
                         NombreOrigen = nombreOrigen
                     };
-                    if (_control.setGrabaParametroOrigen(origen))
+                    if (_control.SetGrabaParametroOrigen(origen))
                     {
                         validador = 1;
                     }
@@ -235,7 +235,7 @@ namespace CultimarWebApp.Controllers
                         IdDestino = idDestino,
                         NombreDestino = nombreDestino
                     };
-                    if (_control.setGrabaParametroDestino(destino))
+                    if (_control.SetGrabaParametroDestino(destino))
                     {
                         validador = 1;
                     }
@@ -271,7 +271,7 @@ namespace CultimarWebApp.Controllers
                         IdEspecies = idEspecie,
                         NombreEspecies = nombreEspecie
                     };
-                    if (_control.setGrabaParametroEspecies(especies))
+                    if (_control.SetGrabaParametroEspecies(especies))
                     {
                         validador = 1;
                     }
@@ -308,7 +308,7 @@ namespace CultimarWebApp.Controllers
                         IdTipoSistema = idTipoSistema,
                         NombreSistema = nombreSistema
                     };
-                    if (_control.setGrabaParametrosTipoSistema(tipoSistema))
+                    if (_control.SetGrabaParametrosTipoSistema(tipoSistema))
                     {
                         validador = 1;
                     }
@@ -344,7 +344,7 @@ namespace CultimarWebApp.Controllers
                         IdMortalidad = idTipoMortalidad,
                         NombreMortalidad = nombreMortalidad
                     };
-                    if (_control.setGrabaParametrosTipoMortalidad(tipoMortalidad))
+                    if (_control.SetGrabaParametrosTipoMortalidad(tipoMortalidad))
                     {
                         validador = 1;
                     }
@@ -379,7 +379,7 @@ namespace CultimarWebApp.Controllers
                         IdIdentificacion = idTipoIdentificacion,
                         NombreIdentificacion = nombreIdentificacion
                     };
-                    if (_control.setGrabaParametrosTipoIdentificacion(tipoIdentificacion))
+                    if (_control.SetGrabaParametrosTipoIdentificacion(tipoIdentificacion))
                     {
                         validador = 1;
                     }
@@ -415,7 +415,7 @@ namespace CultimarWebApp.Controllers
                         NombreContenedor = nombreContenedor,
                         TipoContenedor = tipoContenedor
                     };
-                    if (_control.setGrabaParametrosTipoContenedor(PtipoContenedor))
+                    if (_control.SetGrabaParametrosTipoContenedor(PtipoContenedor))
                     {
                         validador = 1;
                     }

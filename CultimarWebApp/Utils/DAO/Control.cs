@@ -14,22 +14,29 @@ namespace CultimarWebApp.Utils.DAO
         private Factory _dtFac = new Factory();
         private FactorySeguimientoLarval _dtSegLarval = new FactorySeguimientoLarval();
         private FactorySeguimientosSemillas _dtFacSeguimientoSemilla = new FactorySeguimientosSemillas();
+        private FactoryTipoContenedor _dtFactoryTipoContenedor = new FactoryTipoContenedor();
+        private FactoryRegistroProduccion _dtFactoryRegistroProduccion = new FactoryRegistroProduccion();
+        private FactoryMicroAlgas _dtMicroAlgas = new FactoryMicroAlgas();
 
         public List<ObjetoSeguimientoLarval> ListadoSeguimientoLarval()
         {
             return _dtSegLarval.ListadoSeguimientoLarval(1);
         }
+        public List<ObjetoFactoresMedicion> ListadoFactorMedicion()
+        {
+            return _dtFac.ListadoFactoresMedicion();
+        }
 
-        public bool setGrabaSeguimientoLarval(ObjetoSeguimientoLarval larval)
+        public bool SetGrabaSeguimientoLarval(ObjetoSeguimientoLarval larval)
         {
             return _dtSegLarval.setGrabaSegimientoLarval(larval);
         }
 
-        public bool setEditaSegimientoLarval(ObjetoSeguimientoLarval larval)
+        public bool SetEditaSegimientoLarval(ObjetoSeguimientoLarval larval)
         {
             return _dtSegLarval.setEditaSegimientoLarval(larval);
         }
-        public bool setEliminaSeguimientoLarval(int id)
+        public bool SetEliminaSeguimientoLarval(int id)
         {
             return _dtSegLarval.setEliminaSeguimientoLarval(id);
         }
@@ -37,6 +44,10 @@ namespace CultimarWebApp.Utils.DAO
         public List<ObjetoSeguimientoSemilla> ListadoSeguimientoSemilla()
         {
             return _dtFacSeguimientoSemilla.SeguimientoSemilla(1);
+        }
+        public List<ObjetoRegistroProduccion> ListadoRegistroProduccion()
+        {
+            return _dtFactoryRegistroProduccion.listadoRegistroProduccion();
         }
 
         public List<ObjetoMenu> MenuUsuario(int idUsuario)
@@ -78,6 +89,16 @@ namespace CultimarWebApp.Utils.DAO
         {
             return _dtFac.ListadoTipoContenedor();
         }
+        public List<ObjetoTipoContenedor> ListadoTipoContenedorOrigen()
+        {
+            return _dtFactoryTipoContenedor.ListadoContenedorOrigen();
+        }
+
+        public List<ObjetoTipoContenedor> ListadoTipoContenedorDestino()
+        {
+            return _dtFactoryTipoContenedor.ListadoContenedorDestino();
+
+        }
 
         public List<ObjetoTipoIdentificacion> ListadoTipoIdentificacion()
         {
@@ -94,60 +115,71 @@ namespace CultimarWebApp.Utils.DAO
             return _dtFac.ListadoTipoSistema();
         }
 
-
-
         public List<ObjetoFactoresMedicion> ListaFactoresMedicion()
         {
             return _dtFac.ListadoFactoresMedicion();
         }
 
-        public bool setGrabaUsuario(ObjetoUsuarios usuario)
+        public List<ObjetoMicroAlga> ListadoMicroAlgas()
+        {
+            return _dtMicroAlgas.ListadoMicroAlgas();
+        }
+
+        public bool SetGrabaUsuario(ObjetoUsuarios usuario)
         {
             return _dtFac.setGrabaUsuario(usuario);
         }
+        public bool SetGrabaSeguimientoSemilla(ObjetoSeguimientoSemilla semilla)
+        {
+            return _dtFacSeguimientoSemilla.setGrabaSeuimientoSemillla(semilla);
+        }
 
-        public bool getVerificaUsuario(string rutUsuario)
+        public bool SetGrabaRegistroProduccion(ObjetoRegistroProduccion produccion)
+        {
+            return _dtFactoryRegistroProduccion.setGrabaRegistroProduccion(produccion);
+        }
+        public bool GetVerificaUsuario(string rutUsuario)
         {
             return _dtFac.getVerificaUsuario(rutUsuario);
         }
 
-        public bool setAutorizaUsuario(int idUsuario)
+        public bool SetAutorizaUsuario(int idUsuario)
         {
             return _dtFac.setAutorizaUsuario(idUsuario);
         }
 
-        public bool setQuitaPermisoUsuario(int idUsuario)
+        public bool SetQuitaPermisoUsuario(int idUsuario)
         {
             return _dtFac.setQuitaPermisoUsuario(idUsuario);
         }
 
-        public bool setGrabaParametroOrigen(ObjetoOrigen origen)
+        public bool SetGrabaParametroOrigen(ObjetoOrigen origen)
         {
             return _dtFac.setGrabaParametroOrigen(origen);
         }
-        public bool setGrabaParametroDestino(ObjetoDestino destino)
+        public bool SetGrabaParametroDestino(ObjetoDestino destino)
         {
             return _dtFac.setGrabaParametroDestino(destino);
         }
 
-        public bool setGrabaParametroEspecies(ObjetoEspecies especies)
+        public bool SetGrabaParametroEspecies(ObjetoEspecies especies)
         {
             return _dtFac.setGrabaParametrosEspecies(especies);
         }
-        public bool setGrabaParametrosTipoContenedor(ObjetoTipoContenedor tipoContenedor)
+        public bool SetGrabaParametrosTipoContenedor(ObjetoTipoContenedor tipoContenedor)
         {
             return _dtFac.setGrabaParametrosTipoContenedor(tipoContenedor);
         }
-        public bool setGrabaParametrosTipoIdentificacion(ObjetoTipoIdentificacion tipoIdentificacion)
+        public bool SetGrabaParametrosTipoIdentificacion(ObjetoTipoIdentificacion tipoIdentificacion)
         {
             return _dtFac.setGrabaParametrosTipoIdentificacion(tipoIdentificacion);
         }
 
-        public bool setGrabaParametrosTipoMortalidad(ObjetoTipoMortalidad tipoMortalidad)
+        public bool SetGrabaParametrosTipoMortalidad(ObjetoTipoMortalidad tipoMortalidad)
         {
             return _dtFac.setGrabaParametrosTipoMortalidad(tipoMortalidad);
         }
-        public bool setGrabaParametrosTipoSistema(ObjetoTipoSistema tipoSistema)
+        public bool SetGrabaParametrosTipoSistema(ObjetoTipoSistema tipoSistema)
         {
             return _dtFac.setGrabaParametrosTipoSistema(tipoSistema);
         }

@@ -12,6 +12,9 @@ namespace CultimarWebApp.Utils.DAO
 
     internal class FactorySeguimientosSemillas
     {
+         
+         
+
         /// <summary>
         /// Metodo Menu
         /// Segun el ID del seguimiento, carga a la base la momento de grabar un dato ya la tabla se auto incrementa.
@@ -25,6 +28,8 @@ namespace CultimarWebApp.Utils.DAO
                                                                                             {
                                                                                                 {"Id", Id}
                                                                                             });
+
+           
 
             if (data.Rows.Count > 0)
             {
@@ -42,20 +47,20 @@ namespace CultimarWebApp.Utils.DAO
                     resultadoListado.FechaRegistro = validador != null ? data.Rows[i].Field<DateTime>("FechaRegistro") : Convert.ToDateTime("01/01/2017");
 
                     validador = data.Rows[i].Field<object>("nombreContenedor");
-                    resultadoListado.NombreContendor = validador != null ? data.Rows[i].Field<string>("nombreContenedor") : "Sin Contendor";
+                    resultadoListado.NombreContendor = validador != null ? data.Rows[i].Field<string>("nombreContenedor") : "Sin Contenedor";
 
                     validador = data.Rows[i].Field<object>("CantidadOrigen");
                     resultadoListado.CantidadOrigen = validador != null ? data.Rows[i].Field<int>("CantidadOrigen") : 0;
 
                     validador = data.Rows[i].Field<object>("CalibreOrigen");
-                    resultadoListado.CantidadOrigen = validador != null ? data.Rows[i].Field<int>("CalibreOrigen") : 0;
+                    resultadoListado.CalibreOrigen = validador != null ? data.Rows[i].Field<int>("CalibreOrigen") : 0;
 
                     validador = data.Rows[i].Field<object>("CantidadCosechado");
-                    resultadoListado.CantidadOrigen = validador != null ? data.Rows[i].Field<int>("CantidadCosechado") : 0;
+                    resultadoListado.CantidadCosechado = validador != null ? data.Rows[i].Field<int>("CantidadCosechado") : 0;
 
 
                     validador = data.Rows[i].Field<object>("CantidadCalibre");
-                    resultadoListado.CantidadOrigen = validador != null ? data.Rows[i].Field<int>("CantidadCalibre") : 0;
+                    resultadoListado.CantidadCalibre = validador != null ? data.Rows[i].Field<int>("CantidadCalibre") : 0;
                       
 
                     listadoSeguimientoSemilla.Add(resultadoListado);
@@ -79,13 +84,14 @@ namespace CultimarWebApp.Utils.DAO
             {
                 var data = new DBConector().EjecutarProcedimientoAlmacenado("CRUD_SeguimientoSemilla", new System.Collections.Hashtable()
                                                                                             {
-                                                                                                {"@p_id_SeguimientoSemilla", semilla.IdSeguimientoSemilla},
+                                                                                                {"@p_id_SeguimientoSemilla",0},
                                                                                                 {"@p_IdTipoContenedorOrigen", semilla.IdTipoContenedorOrigen },
                                                                                                 {"@p_FechaRegistro", semilla.FechaRegistro },
                                                                                                 {"@p_IdFactoresMedicion", semilla.IdFactoresMedicion },
-                                                                                                { "@p_CalibreOrigen", semilla.CalibreOrigen },
-                                                                                                {"@p_IdTipoContenedorDestino", semilla.IdTipoContenedorDestino },
-                                                                                                {"@p_CantidadCosechado", semilla.CantidadCosechado },
+                                                                                                {"@p_CantidadOrigen", semilla.CantidadOrigen },
+                                                                                                {"@p_CalibreOrigen", semilla.CalibreOrigen },
+                                                                                                {"@p_IdTipoContenedorDestino", semilla.IdTipoContenedorDestino},
+                                                                                                {"@p_CantidadCosechado", semilla.CantidadCosechado},
                                                                                                 {"@p_CantidadCalibre", semilla.CantidadCalibre },
                                                                                                 {"@p_accion", "A" }}); 
                 if (data.Rows.Count > 0)
