@@ -262,3 +262,7 @@ C:\Desarrollo\CultimarV2\CultimarV2\CultimarWebApp\bin\es\System.Web.WebPages.Ra
 C:\Desarrollo\CultimarV2\CultimarV2\CultimarWebApp\obj\Debug\CultimarWebApp.dll
 C:\Desarrollo\CultimarV2\CultimarV2\CultimarWebApp\obj\Debug\CultimarWebApp.pdb
 C:\Desarrollo\CultimarV2\CultimarV2\CultimarWebApp\obj\Debug\CultimarWebApp.csprojResolveAssemblyReference.cache
+C:\Desarrollos\CultimarV2\CultimarV2\CultimarWebApp\obj\Debug\CultimarWebApp.csprojResolveAssemblyReference.cache
+C:\Desarrollos\CultimarV2\CultimarV2\CultimarWebApp\obj\Debug\CultimarWebApp.csproj.CoreCompileInputs.cache
+C:\Desarrollos\CultimarV2\CultimarV2\CultimarWebApp\obj\Debug\CultimarWebApp.dll
+C:\Desarrollos\CultimarV2\CultimarV2\CultimarWebApp\obj\Debug\CultimarWebApp.pdb

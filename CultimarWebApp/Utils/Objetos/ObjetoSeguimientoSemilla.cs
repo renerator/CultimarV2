@@ -13,8 +13,7 @@ namespace CultimarWebApp.Utils.Objetos
         private DateTime _FechaRegistro;
         private int _IdFactoresMedicion;
         private int _CantidadOrigen;
-        private int _CalibreOrigen;
-        private int _IdOrigen;
+        private int _CalibreOrigen; 
         private int _IdTipoContenedorDestino;
         private int _CantidadCosechado;
         private int _CantidadCalibre;
@@ -61,11 +60,7 @@ namespace CultimarWebApp.Utils.Objetos
             get { return _CalibreOrigen; }
             set { _CalibreOrigen = value; }
         }
-        public int IdOrigen
-        {
-            get { return _IdOrigen; }
-            set { _IdOrigen = value; }
-        }
+      
         public int IdTipoContenedorDestino
         {
             get { return _IdTipoContenedorDestino; }

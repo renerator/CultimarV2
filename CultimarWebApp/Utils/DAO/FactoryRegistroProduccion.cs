@@ -87,7 +87,7 @@ namespace CultimarWebApp.Utils.DAO
             var respuesta = false;
             try
             {
-                var data = new DBConector().EjecutarProcedimientoAlmacenado("CRUD_SeguimientoSemilla", new System.Collections.Hashtable()
+                var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_Set_GrabaProduccion", new System.Collections.Hashtable()
                                                                                             {
                                                                                                 {"@p_CantidadProductoresMachos",produccion.CantidadProductoresMachos},
                                                                                                 {"@p_CantidadProductoresHembras", produccion.CantidadProductoresHembras },

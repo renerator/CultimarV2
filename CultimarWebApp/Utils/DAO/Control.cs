@@ -12,25 +12,27 @@ namespace CultimarWebApp.Utils.DAO
     public class Control
     {
         private Factory _dtFac = new Factory();
-        private FactorySeguimientoLarval _dtSegLarval = new FactorySeguimientoLarval();
+       // private FactorySeguimientoLarval _dtSegLarval = new FactorySeguimientoLarval();
         private FactorySeguimientosSemillas _dtFacSeguimientoSemilla = new FactorySeguimientosSemillas();
         private FactoryTipoContenedor _dtFactoryTipoContenedor = new FactoryTipoContenedor();
         private FactoryRegistroProduccion _dtFactoryRegistroProduccion = new FactoryRegistroProduccion();
         private FactoryMicroAlgas _dtMicroAlgas = new FactoryMicroAlgas();
 
-        public List<ObjetoSeguimientoLarval> ListadoSeguimientoLarval()
-        {
-            return _dtSegLarval.ListadoSeguimientoLarval(1);
-        }
-        public List<ObjetoFactoresMedicion> ListadoFactorMedicion()
+        //public List<ObjetoSeguimientoLarval> ListadoSeguimientoLarval()
+        //{
+        //    return _dtSegLarval.ListadoSeguimientoLarval(1);
+        //} 
+          
+
+        public List<ObjetoFactorMedicion> ListadoFactorMedicion()
         {
             return _dtFac.ListadoFactoresMedicion();
         }
 
-        public bool SetGrabaSeguimientoLarval(ObjetoSeguimientoLarval larval)
-        {
-            return _dtSegLarval.setGrabaSegimientoLarval(larval);
-        }
+        //public bool setGrabaSeguimientoLarval(ObjetoSeguimientoLarval larval)
+        //{
+        //    return _dtSegLarval.GrabaSegimientoLarval(larval);
+        //}
 
         public bool SetEditaSegimientoLarval(ObjetoSeguimientoLarval larval)
         {
@@ -45,10 +47,12 @@ namespace CultimarWebApp.Utils.DAO
         {
             return _dtFacSeguimientoSemilla.SeguimientoSemilla(1);
         }
+
         public List<ObjetoRegistroProduccion> ListadoRegistroProduccion()
         {
             return _dtFactoryRegistroProduccion.listadoRegistroProduccion();
         }
+
 
         public List<ObjetoMenu> MenuUsuario(int idUsuario)
         {

@@ -17,12 +17,10 @@ namespace CultimarWebApp.Utils.DAO
         public List<ObjetoTipoContenedor> ListadoContenedorOrigen()
         {
             var ListadoContenedoresOrgigen= new List<ObjetoTipoContenedor>();
-            //var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_GET_TipoContenedor", new System.Collections.Hashtable()
-            //                                                                                {
-            //                                                                                    {"pTipo", "Origen"}
-            //                                                                                  });
-
-            var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_GET_TIPOCONTENEDOR", new System.Collections.Hashtable());
+            var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_GET_TipoContenedor", new System.Collections.Hashtable()
+                                                                                            {
+                                                                                                {"pTipo", "Origen"}
+                                                                                              });
 
             if (data.Rows.Count > 0)
             {
@@ -31,10 +29,10 @@ namespace CultimarWebApp.Utils.DAO
                     var validador = new object();
                     var resultadoListado = new ObjetoTipoContenedor();
                     validador = data.Rows[i].Field<object>("Id");
-                    resultadoListado.IdContenedor = validador != null ? data.Rows[i].Field<int>("Id") : -1;
+                    resultadoListado.IdTipoContendor = validador != null ? data.Rows[i].Field<int>("Id") : -1;
 
                     validador = data.Rows[i].Field<object>("Nombre");
-                    resultadoListado.NombreContenedor = validador != null ? data.Rows[i].Field<string>("Nombre") : "NO ASIGNADO";
+                    resultadoListado.NombreTipoContendor = validador != null ? data.Rows[i].Field<string>("Nombre") : "NO ASIGNADO";
 
                     ListadoContenedoresOrgigen.Add(resultadoListado);
                 }
@@ -46,12 +44,10 @@ namespace CultimarWebApp.Utils.DAO
         public List<ObjetoTipoContenedor> ListadoContenedorDestino()
         {
             var ListadoContenedoresOrgigen = new List<ObjetoTipoContenedor>();
-            //var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_GET_TipoContenedor", new System.Collections.Hashtable()
-            //                                                                                {
-            //                                                                                    {"pTipo", "Destino"}
-            //                                                                                  });
-
-            var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_GET_TIPOCONTENEDOR", new System.Collections.Hashtable());
+            var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_GET_TipoContenedor", new System.Collections.Hashtable()
+                                                                                            {
+                                                                                                {"pTipo", "Destino"}
+                                                                                              });
 
             if (data.Rows.Count > 0)
             {
@@ -60,10 +56,10 @@ namespace CultimarWebApp.Utils.DAO
                     var validador = new object();
                     var resultadoListado = new ObjetoTipoContenedor();
                     validador = data.Rows[i].Field<object>("Id");
-                    resultadoListado.IdContenedor = validador != null ? data.Rows[i].Field<int>("Id") : -1;
+                    resultadoListado.IdTipoContendor = validador != null ? data.Rows[i].Field<int>("Id") : -1;
 
                     validador = data.Rows[i].Field<object>("Nombre");
-                    resultadoListado.NombreContenedor = validador != null ? data.Rows[i].Field<string>("Nombre") : "NO ASIGNADO";
+                    resultadoListado.NombreTipoContendor = validador != null ? data.Rows[i].Field<string>("Nombre") : "NO ASIGNADO";
 
                     ListadoContenedoresOrgigen.Add(resultadoListado);
                 }

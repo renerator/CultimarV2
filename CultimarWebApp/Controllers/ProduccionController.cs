@@ -13,24 +13,24 @@ namespace CultimarWebApp.Controllers
     {
         // GET: Produccion
         Control _control = new Control();
-        public ActionResult SeguimientoCultivoLarval()
-        {
-            try
-            {
-                var datosUsuario = new ObjetoLogin();
-                datosUsuario = (ObjetoLogin)Session["DatosUsuario"];
-                ViewBag.Message = "Bienvenido: " + datosUsuario.Nombre;
-                IEnumerable<ObjetoSeguimientoLarval> model = _control.ListadoSeguimientoLarval();
+        //public ActionResult SeguimientoCultivoLarval()
+        //{
+        //    try
+        //    {
+        //        var datosUsuario = new ObjetoLogin();
+        //        datosUsuario = (ObjetoLogin)Session["DatosUsuario"];
+        //        ViewBag.Message = "Bienvenido: " + datosUsuario.Nombre;
+        //      //  IEnumerable<ObjetoSeguimientoLarval> model = _control.ListadoSeguimientoLarval();
 
-                return View(model);
-            }
-            catch (Exception ex)
-            {
-                new CapturaExcepciones(ex);
-                return ErrorPage(1001);
-                throw;
-            }
-        }
+        //   //    return View(model);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        new CapturaExcepciones(ex);
+        //        return ErrorPage(1001);
+        //        throw;
+        //    }
+        //}
 
         public ActionResult RegistroProduccion()
         {
@@ -54,11 +54,45 @@ namespace CultimarWebApp.Controllers
         }
 
 
+        public JsonResult GrabaDatosLarval(int _CantidadDeLarvas,
+                                    int _CosechaLarvas,
+                                    int _NumeroEstanque,
+                                    int _DensidadCultivo,
+                                    DateTime _FechaRegistro,
+                                    string _FactoresMedicion,
+                                    string _Nombre,
+                                    bool _Estado)
+        {
+
+            var seguimientoLarval = new ObjetoSeguimientoLarval();
+            var validador = 0;
+
+            seguimientoLarval.CantidadDeLarvas = _CantidadDeLarvas;
+            seguimientoLarval.CosechaLarvas = _CosechaLarvas;
+            seguimientoLarval.NumeroEstanque = _NumeroEstanque;
+            seguimientoLarval.DensidadCultivo = _DensidadCultivo;
+            seguimientoLarval.FechaRegistro = _FechaRegistro;
+            seguimientoLarval.FactoresMedicion = _FactoresMedicion;
+            seguimientoLarval.Nombre = _Nombre;
+            seguimientoLarval.Estado = true;
+
+            //if (_control.setGrabaSeguimientoLarval(seguimientoLarval))
+            //{
+            //    validador = 1;
+            //}
+
+
+            return (Json(validador));
+
+
+        }
+
+
         public JsonResult GrabaDatosRegistroProduccion(int _CantidadProductoresMachos,
                                                        int _CantidadProductoresHembras,
                                                        string _FechaInicioCultivo,
+                                                       int _CantidadFecundada ,
                                                        int _NumeroDesoveTemporada,
-                                                       int _CantidadFecundada,
                                                        int _CantidadSembrada,
                                                        int _FactoresMedicion,
                                                        int _NumeroEstanquesUtilizado,
@@ -161,7 +195,7 @@ namespace CultimarWebApp.Controllers
             seguimientoSemilla.Estado = true;
 
 
-            if (_control.SetGrabaSeguimientoSemilla(seguimientoSemilla))
+            if (_control.setGrabaSeguimientoSemilla(seguimientoSemilla))
             {
                 validador = 1;
             }
