@@ -195,7 +195,7 @@ namespace CultimarWebApp.Controllers
             seguimientoSemilla.Estado = true;
 
 
-            if (_control.setGrabaSeguimientoSemilla(seguimientoSemilla))
+            if (_control.SetGrabaSeguimientoSemilla(seguimientoSemilla))
             {
                 validador = 1;
             }

@@ -29,10 +29,10 @@ namespace CultimarWebApp.Utils.DAO
                     var validador = new object();
                     var resultadoListado = new ObjetoTipoContenedor();
                     validador = data.Rows[i].Field<object>("Id");
-                    resultadoListado.IdTipoContendor = validador != null ? data.Rows[i].Field<int>("Id") : -1;
+                    resultadoListado.IdContenedor = validador != null ? data.Rows[i].Field<int>("Id") : -1;
 
                     validador = data.Rows[i].Field<object>("Nombre");
-                    resultadoListado.NombreTipoContendor = validador != null ? data.Rows[i].Field<string>("Nombre") : "NO ASIGNADO";
+                    resultadoListado.NombreContenedor = validador != null ? data.Rows[i].Field<string>("Nombre") : "NO ASIGNADO";
 
                     ListadoContenedoresOrgigen.Add(resultadoListado);
                 }
@@ -56,10 +56,10 @@ namespace CultimarWebApp.Utils.DAO
                     var validador = new object();
                     var resultadoListado = new ObjetoTipoContenedor();
                     validador = data.Rows[i].Field<object>("Id");
-                    resultadoListado.IdTipoContendor = validador != null ? data.Rows[i].Field<int>("Id") : -1;
+                    resultadoListado.IdContenedor = validador != null ? data.Rows[i].Field<int>("Id") : -1;
 
                     validador = data.Rows[i].Field<object>("Nombre");
-                    resultadoListado.NombreTipoContendor = validador != null ? data.Rows[i].Field<string>("Nombre") : "NO ASIGNADO";
+                    resultadoListado.NombreContenedor = validador != null ? data.Rows[i].Field<string>("Nombre") : "NO ASIGNADO";
 
                     ListadoContenedoresOrgigen.Add(resultadoListado);
                 }
