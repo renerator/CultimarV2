@@ -22,26 +22,26 @@ namespace CultimarWebApp.Utils.DAO
         //{
         //    return _dtSegLarval.ListadoSeguimientoLarval(1);
         //} 
-          
 
-        public List<ObjetoFactorMedicion> ListadoFactorMedicion()
-        {
-            return _dtFac.ListadoFactoresMedicion();
-        }
+
+        //public List<ObjetoFactorMedicion> ListadoFactorMedicion()
+        //{
+        //    return _dtFac.ListadoFactoresMedicion();
+        //}
 
         //public bool setGrabaSeguimientoLarval(ObjetoSeguimientoLarval larval)
         //{
         //    return _dtSegLarval.GrabaSegimientoLarval(larval);
         //}
 
-        public bool SetEditaSegimientoLarval(ObjetoSeguimientoLarval larval)
-        {
-            return _dtSegLarval.setEditaSegimientoLarval(larval);
-        }
-        public bool SetEliminaSeguimientoLarval(int id)
-        {
-            return _dtSegLarval.setEliminaSeguimientoLarval(id);
-        }
+        //public bool SetEditaSegimientoLarval(ObjetoSeguimientoLarval larval)
+        //{
+        //    return _dtSegLarval.setEditaSegimientoLarval(larval);
+        //}
+        //public bool SetEliminaSeguimientoLarval(int id)
+        //{
+        //    return _dtSegLarval.setEliminaSeguimientoLarval(id);
+        //}
 
         public List<ObjetoSeguimientoSemilla> ListadoSeguimientoSemilla()
         {

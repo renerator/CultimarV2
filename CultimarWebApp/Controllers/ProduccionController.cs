@@ -152,8 +152,8 @@ namespace CultimarWebApp.Controllers
 
                 IEnumerable<SelectListItem> items3 = _control.ListadoFactorMedicion().Select(c => new SelectListItem()
                 {
-                    Text = c.NombreFactor,
-                    Value = c.IdFactor.ToString()
+                    Text = c.NombreMedicion,
+                    Value = c.IdTipoMedicion.ToString()
                 }).ToList();
 
                 ViewBag.FactorMedicion = items3;
@@ -195,7 +195,7 @@ namespace CultimarWebApp.Controllers
             seguimientoSemilla.Estado = true;
 
 
-            if (_control.setGrabaSeguimientoSemilla(seguimientoSemilla))
+            if (_control.SetGrabaSeguimientoSemilla(seguimientoSemilla))
             {
                 validador = 1;
             }

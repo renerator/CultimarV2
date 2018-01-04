@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -168,6 +169,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MicroAlgasController.cs" />
     <Compile Include="Controllers\ProduccionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -181,19 +183,25 @@
     <Compile Include="Utils\CapturaExcepciones.cs" />
     <Compile Include="Utils\DAO\Control.cs" />
     <Compile Include="Utils\DAO\Factory.cs" />
+    <Compile Include="Utils\DAO\FactoryMicroAlgas.cs" />
+    <Compile Include="Utils\DAO\FactoryRegistroProduccion.cs" />
     <Compile Include="Utils\DAO\FactorySeguimientoFijacion.cs" />
     <Compile Include="Utils\DAO\FactorySeguimientoLarval.cs" />
     <Compile Include="Utils\DAO\FactorySeguimientosSemillas.cs" />
+    <Compile Include="Utils\DAO\FactoryTipoContenedor.cs" />
     <Compile Include="Utils\DataSource.cs" />
     <Compile Include="Utils\DBConector.cs" />
     <Compile Include="Utils\HashMd5.cs" />
     <Compile Include="Utils\Objetos\ObjetoDestino.cs" />
     <Compile Include="Utils\Objetos\ObjetoEspecies.cs" />
     <Compile Include="Utils\Objetos\ObjetoFactoresMedicion.cs" />
+    <Compile Include="Utils\Objetos\ObjetoFactorMedicion.cs" />
     <Compile Include="Utils\Objetos\ObjetoLogin.cs" />
     <Compile Include="Utils\Objetos\ObjetoMenu.cs" />
+    <Compile Include="Utils\Objetos\ObjetoMicroAlga.cs" />
     <Compile Include="Utils\Objetos\ObjetoOrigen.cs" />
     <Compile Include="Utils\Objetos\ObjetoPerfil.cs" />
+    <Compile Include="Utils\Objetos\ObjetoRegistroProduccion.cs" />
     <Compile Include="Utils\Objetos\ObjetoSeguimientoFijacion.cs" />
     <Compile Include="Utils\Objetos\ObjetoSeguimientoLarval.cs" />
     <Compile Include="Utils\Objetos\ObjetoSeguimientoSemilla.cs" />
@@ -3731,6 +3739,9 @@
     <Content Include="WebJs\HomeJs\FactoresMedicion.js" />
     <Content Include="WebJs\HomeJs\Mantenedores.js" />
     <Content Include="WebJs\HomeJs\Usuario.js" />
+    <Content Include="WebJs\MicroAlgaJs\IngresoMicroAlga.js" />
+    <Content Include="WebJs\ProduccionJS\RegistroProduccion.js" />
+    <Content Include="WebJs\ProduccionJS\SeguimientoSemilla.js" />
     <Content Include="WebJs\Rut.js" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -4558,6 +4569,8 @@
     <Content Include="Views\Produccion\SeguimientoSemilla.cshtml" />
     <Content Include="Views\Home\FactoresMedicion.cshtml" />
     <Content Include="Views\Home\Mantenedores.cshtml" />
+    <Content Include="Views\Produccion\RegistroProduccion.cshtml" />
+    <Content Include="Views\MicroAlgas\IngresoMicroAlgas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
