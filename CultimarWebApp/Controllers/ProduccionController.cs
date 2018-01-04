@@ -150,10 +150,10 @@ namespace CultimarWebApp.Controllers
 
                 ViewBag.ContenedorDestino = items2;
 
-                IEnumerable<SelectListItem> items3 = _control.ListadoFactorMedicion().Select(c => new SelectListItem()
+                IEnumerable<SelectListItem> items3 = _control.ListaFactoresMedicion().Select(c => new SelectListItem()
                 {
-                    Text = c.NombreMedicion,
-                    Value = c.IdTipoMedicion.ToString()
+                    Text = c.NombreFactor,
+                    Value = c.IdFactor.ToString()
                 }).ToList();
 
                 ViewBag.FactorMedicion = items3;

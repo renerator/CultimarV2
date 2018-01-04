@@ -24,10 +24,7 @@ namespace CultimarWebApp.Utils.DAO
         //} 
 
 
-        //public List<ObjetoFactorMedicion> ListadoFactorMedicion()
-        //{
-        //    return _dtFac.ListadoFactoresMedicion();
-        //}
+       
 
         //public bool setGrabaSeguimientoLarval(ObjetoSeguimientoLarval larval)
         //{
