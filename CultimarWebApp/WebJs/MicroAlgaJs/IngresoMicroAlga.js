@@ -35,7 +35,7 @@ $(document).ready(function () {
             ID = -1;
         }
 
-        if ($("#selectEspecies").val() != 0)
+        if ($("#selectEspecies").val() != "")
         {
             $.ajax({
                 url: "GrabaDatosMicroAlga",

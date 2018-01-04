@@ -23,15 +23,11 @@ namespace CultimarWebApp.Utils.DAO
         //    return _dtSegLarval.ListadoSeguimientoLarval(1);
         //} 
 
-<<<<<<< HEAD
-
-       
-=======
         public List<ObjetoFactoresMedicion> ListadoFactorMedicion()
         {
             return _dtFac.ListadoFactoresMedicion();
         }
->>>>>>> 04588bb2d874cb4ca7e6713d8c5b85924d6f671b
+
 
         //public bool setGrabaSeguimientoLarval(ObjetoSeguimientoLarval larval)
         //{
