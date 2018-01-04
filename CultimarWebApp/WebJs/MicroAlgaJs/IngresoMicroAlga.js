@@ -1,4 +1,6 @@
-﻿$(document).ready(function () {
+﻿
+
+$(document).ready(function () {
 
     $("#tblMicroAlgas").DataTable({
         paging: true,
@@ -24,41 +26,62 @@
     });
 
     $("#btnGrabarDatos").click(function () {
-        
-        //alert("Funcionalidad en Desarrollo");
-        var fecha = formateaFecha($("#single_cal1").val());
-        alert(fecha);
+        var fechaConFormato = formateaFecha($("#single_cal1").val());
+        var ID = $("#IdMicroAlga").val();
+        if (ID != null && ID != "") {
+            ID = ID;
+        }
+        else {
+            ID = -1;
+        }
 
-        //$.ajax({
-        //    url: "GrabaDatos",
-        //    type: "POST",
-        //    data: { rut: $("#inputSuccess4").val(), pass: $("#inputSuccess5").val(), nombreUsuario: $("#inputSuccess2").val(), apellidoUsuario: $("#inputSuccess3").val(), idPerfil: $("#selectPerfil").val() },
-        //    async: true,
-        //    success: function (data) {
-        //        if (data == 1) {
-        //            $("#btnCerrarModal").click();
-        //            alert("El Ingreso se ha realizado sin problemas.");
-        //        }
-        //        if (data == 2) {
-        //            alert("El usuario que intenta agregar, ya existe en la BD.");
-        //        }
-        //        if (data == 3) {
-        //            alert("El usuario que intenta agregar, ya existe en la BD.");
-        //        }
-        //        if (data == 4) {
-        //        }
-        //        if (data == 0) {
-        //            alert("El Rut ingresado no corresponde a un rut correcto, intentalo nuevamente.");
-        //        }
-        //    }
-        //});
+        if ($("#selectEspecies").val() != 0)
+        {
+            $.ajax({
+                url: "GrabaDatosMicroAlga",
+                type: "POST",
+                data: { idMicroAlga: ID, idEspecie: $("#selectEspecies").val(), cantidadVolumen: $("#cantidadVolumen").val(), numeroBolsa: $("#numeroBolsa").val(), fecha: fechaConFormato },
+                async: true,
+                success: function (data) {
+                    if (data == 1) {
+                        $("#btnCerrarModal").click();
+                        alert("El Ingreso se ha realizado sin problemas.");
+                    }
+                    if (data == 2) {
+                        alert("Debe ingresar todos los datos, no podra grabar en la BD.");
+                    }
+                    if (data == 3) {
+                        alert("Ha ocurrido un error al grabar los datos, intentalo nuevamente.");
+                    }
+                    if (data == 4) {
+                    }
+                    if (data == 0) {
+                        alert("No se ha realizado la acción, intentalo nuevamente.");
+                    }
+                }
+            });
+        }
+        else
+        { alert("Debe definir la Especie a ingresar"); }
+        
+    });
+
+    $("#btnPopUpMicroAlga").click(function () {
+        $("#selectEspecies").val("");
+        $("#IdMicroAlga").val("");
+        $("#cantidadVolumen").val("");
+        $("#numeroBolsa").val("");
     });
 });
 
-function EditaMicroAlga(idMicroAlga, nombreEspecie)
-{
-    alert("Funcionalidad en Desarrollo");
+function EditaMicroAlga(idMicroAlga, nombreEspecie, cantidadVolumen, numeroBolsa, fecha, idEspecie) {
+    $("#selectEspecies").val(idEspecie);
+    $("#IdMicroAlga").val(idMicroAlga);
+    $("#cantidadVolumen").val(cantidadVolumen);
+    $("#numeroBolsa").val(numeroBolsa);
+    $("#single_cal1").val(fecha);
 }
+
 
 function formateaFecha(fechaInput) {
     var fecha = fechaInput;

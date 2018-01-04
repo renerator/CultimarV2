@@ -29,12 +29,7 @@ namespace CultimarWebApp.Controllers
                 }).ToList();
 
                 ViewBag.ParametrosEspecies = items;
-
-
-
-
                 return View(model);
-                
             }
             catch (Exception ex)
             {
@@ -42,8 +37,45 @@ namespace CultimarWebApp.Controllers
                 return ErrorPage(1001);
                 throw;
             }
+        }
 
-            
+        public JsonResult GrabaDatosMicroAlga(int idMicroAlga,int idEspecie, string cantidadVolumen, string numeroBolsa, string fecha)
+        {
+            try
+            {
+                var validador = 0;
+                if (!string.IsNullOrEmpty(cantidadVolumen) && !string.IsNullOrEmpty(numeroBolsa))
+                {
+                    var microAlga = new ObjetoMicroAlga()
+                    {
+                        IdMicroAlga = idMicroAlga,
+                        IdEspecie = idEspecie,
+                        VolumenSembrado = Convert.ToInt32(cantidadVolumen),
+                        NumeroBolsa = Convert.ToInt32(numeroBolsa),
+                        FechaRegistro = Convert.ToDateTime(fecha)
+                    };
+                    if (_control.SetGrabaMicroAlga(microAlga))
+                    {
+                        validador = 1;
+                    }
+                    else
+                    {
+                        validador = 3;
+                    }
+                }
+                else
+                {
+                    validador = 2;
+                }
+                //, JsonRequestBehavior.AllowGet --- solo si se usa metodo GET
+                return (Json(validador));
+            }
+            catch (Exception ex)
+            {
+                new CapturaExcepciones(ex);
+                ErrorPage(100);
+                throw;
+            }
         }
 
         public ActionResult ErrorPage(int error)

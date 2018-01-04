@@ -34,12 +34,12 @@
                          tableStyle: "table table-bordered",
                          columns:
                              grid.Columns(
-                                         grid.Column(columnName: "IdMicroAlga", header: "Identificador", format: @<text>@item.IdMicroAlga</text>),
-                                         grid.Column(columnName: "NombreEspecie", header: "Especie", format: @<text>@item.NombreEspecie</text>),
-                                         grid.Column(columnName: "FechaRegistro", header: "Fecha de Registro", format: @<text>@item.FechaRegistro</text>),
-                                         grid.Column(columnName: "VolumenSembrado", header: "Volumen", format: @<text>@item.VolumenSembrado</text>),
-                                         grid.Column(columnName: "NumeroBolsa", header: "Número de Bolsa", format: @<text>@item.NumeroBolsa</text>),
-                                         grid.Column(header: "Editar", format: @<button class="btn btn-success" type="button" data-toggle="modal" tooltip="Editar Parametro" data-target="#modalPopUpIngresoMicroAlga" onclick="EditaMicroAlga(@item.IdMicroAlga,'@item.NombreEspecie')">Editar</button>))
+                                         grid.Column(header: "Identificador", format: @<text>@item.IdMicroAlga</text>),
+                                         grid.Column(header: "Especie", format: @<text>@item.NombreEspecie</text>),
+                                         grid.Column(header: "Fecha de Registro", format: @<text>@item.FechaRegistro.ToString("dd/MM/yyyy")</text>),
+                                         grid.Column(header: "Volumen", format: @<text>@item.VolumenSembrado</text>),
+                                         grid.Column(header: "Número de Bolsa", format: @<text>@item.NumeroBolsa</text>), 
+                                         grid.Column(header: "Editar", format: @<button class="btn btn-success" type="button" data-toggle="modal" tooltip="Editar Parametro" data-target="#modalPopUpIngresoMicroAlga" onclick="EditaMicroAlga(@item.IdMicroAlga,'@item.NombreEspecie', '@item.volumenSembrado', '@item.numeroBolsa','@item.FechaRegistro.ToString("dd/MM/yyyy")','@item.IdEspecie')">Editar</button>))
                                         )
 
                     </div>
@@ -47,7 +47,7 @@
                     <div id="divAlert"></div>
                     <div class="form-group">
                         <div>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Ingresar Micro Alga</button>
+                            <button type="button" id="btnPopUpMicroAlga" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Ingresar Micro Alga</button>
                         </div>
                     </div>
 
@@ -64,11 +64,12 @@
                                     <h4>Ingrese los datos solicitados</h4>
                                     <div class="x_content">
                                         <br />
+                                        <input type="text" id="IdMicroAlga" style="display: none;">
                                         <form class="form-horizontal form-label-left input_mask">
                                             <div class="form-group">
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Seleccione Especie</label>
                                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                                    @Html.DropDownList("Especies", (IEnumerable<SelectListItem>)ViewBag.ParametrosEspecies, "Seleccione...", new { @class = "form-control", @ID = "selectEspecies" })
+                                                    @Html.DropDownList("Especies", (IEnumerable<SelectListItem>)ViewBag.ParametrosEspecies, "Seleccione...", new { @class = "form-control", @required = "required", @ID = "selectEspecies" })
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -94,7 +95,7 @@
                                             <div class="ln_solid"></div>
                                             <div class="form-group">
                                                     <div class="col-md-9 xdisplay_inputx form-group has-feedback">
-                                                        <button class="btn btn-primary" type="reset">Resetear</button>
+                                                        <button class="btn btn-primary" type="reset" id="btnResetPopUp">Resetear</button>
                                                         <button type="submit" class="btn btn-success" id="btnGrabarDatos">Grabar</button>
                                                     </div>
                                                 </div>

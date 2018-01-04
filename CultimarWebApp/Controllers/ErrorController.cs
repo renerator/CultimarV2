@@ -13,6 +13,11 @@ namespace CultimarWebApp.Controllers
         {
             switch (error)
             {
+                case 100:
+                    ViewBag.Title = "Error de grbación";
+                    ViewBag.MyMessageToUsers = error.ToString();
+                    ViewBag.Description = "Ha ocurrido un error inesperado en la grabación de los datos.";
+                    break;
                 case 101:
                     ViewBag.Title = "Error de Validación";
                     ViewBag.MyMessageToUsers = error.ToString();

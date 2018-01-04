@@ -188,5 +188,10 @@ namespace CultimarWebApp.Utils.DAO
         {
             return _dtFac.setGrabaParametrosTipoSistema(tipoSistema);
         }
+
+        public bool SetGrabaMicroAlga(ObjetoMicroAlga microAlga)
+        {
+            return _dtMicroAlgas.SetGrabaMicroAlga(microAlga);
+        }
     }
 }

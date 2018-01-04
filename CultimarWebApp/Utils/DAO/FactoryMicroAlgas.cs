@@ -47,5 +47,34 @@ namespace CultimarWebApp.Utils.DAO
             }
             return lisMicroAlgas;
         }
+
+        public bool SetGrabaMicroAlga(ObjetoMicroAlga microAlga)
+        {
+            var respuesta = false;
+            try
+            {
+                var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_SET_GRABAMICROALGA", new System.Collections.Hashtable()
+                                                                                            {
+                                                                                                {"@id", microAlga.IdMicroAlga },
+                                                                                                {"@idEspecie", microAlga.IdEspecie },
+                                                                                                {"@volumenSembrado", microAlga.VolumenSembrado },
+                                                                                                {"@numeroBolsa", microAlga.NumeroBolsa },
+                                                                                                {"@fechaRegistro", microAlga.FechaRegistro }
+                                                                                             });
+                if (data.Rows.Count > 0)
+                {
+                    respuesta = true;
+                }
+            }
+            catch (SqlException ex)
+            {
+                new CapturaExcepciones(ex);
+            }
+            catch (Exception ex)
+            {
+                new CapturaExcepciones(ex);
+            }
+            return respuesta;
+        }
     }
 }
