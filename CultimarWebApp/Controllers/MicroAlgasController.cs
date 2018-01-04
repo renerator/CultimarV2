@@ -45,7 +45,27 @@ namespace CultimarWebApp.Controllers
                 var datosUsuario = new ObjetoLogin();
                 datosUsuario = (ObjetoLogin)Session["DatosUsuario"];
                 ViewBag.Message = "Bienvenido: " + datosUsuario.Nombre;
-                return View();
+                IEnumerable<ObjetoMicroAlga> model = _control.ListadoSeguimientoMicroAlgas();
+
+                IEnumerable<SelectListItem> parametrosEspecies = _control.ListadoParametrosEspecies().Select(c => new SelectListItem() {
+                    Text = c.NombreEspecies,
+                    Value = c.IdEspecies.ToString()
+                }).ToList();
+                ViewBag.ParametrosEspecies = parametrosEspecies;
+                IEnumerable<SelectListItem> parametrosTipoContenedor = _control.ListadoTipoContenedor().Select(c => new SelectListItem()
+                {
+                    Text = c.NombreContenedor,
+                    Value = c.IdContenedor.ToString()
+                }).ToList();
+                ViewBag.ParametrosTipoContenedor = parametrosTipoContenedor;
+                IEnumerable<SelectListItem> parametrosTipoIdentificacion = _control.ListadoTipoIdentificacion().Select(c => new SelectListItem()
+                {
+                    Text = c.NombreIdentificacion,
+                    Value = c.IdIdentificacion.ToString()
+                }).ToList();
+                ViewBag.ParametrosTipoIdentificacion = parametrosTipoIdentificacion;
+
+                return View(model);
             }
             catch (Exception ex)
             {

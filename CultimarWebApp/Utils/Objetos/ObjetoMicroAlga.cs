@@ -16,6 +16,16 @@ namespace CultimarWebApp.Utils.Objetos
         private DateTime _fechaRegistro;
         private bool _estado;
 
+        private int _idTipoIdentificador;
+        private string _nombreIdentificador;
+        private int _idTipoContenedor;
+        private string _nombreContenedor;
+        private string _tipoContenedor;
+        private int _resultadoTCBS;
+        private int _volumenCosechado;
+        private int _concentracion;
+        private int _conteo;
+
         public int IdMicroAlga
         {
             get { return _idMicroAlga; }
@@ -52,6 +62,54 @@ namespace CultimarWebApp.Utils.Objetos
         public DateTime FechaRegistro {
             get { return _fechaRegistro; }
             set { _fechaRegistro = value; }
+        }
+
+        public int IdTipoIdentificador
+        {
+            get { return _idTipoIdentificador; }
+            set { _idTipoIdentificador = value; }
+        }
+        public string NombreIdentificador
+        {
+            get { return _nombreIdentificador; }
+            set { _nombreIdentificador = value; }
+        }
+        public int IdTipoContenedor
+        {
+            get { return _idTipoContenedor; }
+            set { _idTipoContenedor = value; }
+        }
+        public string NombreContenedor
+        {
+            get { return _nombreContenedor; }
+            set { _nombreContenedor = value; }
+        }
+        public string TipoContenedor
+        {
+            get { return _tipoContenedor; }
+            set { _tipoContenedor = value; }
+        }
+        
+
+        public int ResultadoTCBS
+        {
+            get { return _resultadoTCBS; }
+            set { _resultadoTCBS = value; }
+        }
+        public int VolumenCosechado
+        {
+            get { return _volumenCosechado; }
+            set { _volumenCosechado = value; }
+        }
+        public int Concentracion
+        {
+            get { return _concentracion; }
+            set { _concentracion = value; }
+        }
+        public int Conteo
+        {
+            get { return _conteo; }
+            set { _conteo = value; }
         }
     }
 }
