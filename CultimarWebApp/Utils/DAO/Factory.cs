@@ -521,7 +521,7 @@ namespace CultimarWebApp.Utils.DAO
         /// </summary>
         /// <param name="tipoContenedor">objeto tipo contenedor con todos los parametros</param>
         /// <returns>true o false segun el caso</returns>
-        public bool setGrabaParametrosTipoContenedor(ObjetoTipoContenedor tipoContenedor)
+        public bool SetGrabaParametrosTipoContenedor(ObjetoTipoContenedor tipoContenedor)
         {
             var respuesta = false;
             try
@@ -552,7 +552,7 @@ namespace CultimarWebApp.Utils.DAO
         /// </summary>
         /// <param name="tipoIdentificacion">objeto tipo identificacion con todos los parametros</param>
         /// <returns>true o false segun corresponda</returns>
-        public bool setGrabaParametrosTipoIdentificacion(ObjetoTipoIdentificacion tipoIdentificacion)
+        public bool SetGrabaParametrosTipoIdentificacion(ObjetoTipoIdentificacion tipoIdentificacion)
         {
             var respuesta = false;
             try

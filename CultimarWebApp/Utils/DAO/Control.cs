@@ -12,7 +12,7 @@ namespace CultimarWebApp.Utils.DAO
     public class Control
     {
         private Factory _dtFac = new Factory();
-       // private FactorySeguimientoLarval _dtSegLarval = new FactorySeguimientoLarval();
+        private FactorySeguimientoLarval _dtSegLarval = new FactorySeguimientoLarval();
         private FactorySeguimientosSemillas _dtFacSeguimientoSemilla = new FactorySeguimientosSemillas();
         private FactoryTipoContenedor _dtFactoryTipoContenedor = new FactoryTipoContenedor();
         private FactoryRegistroProduccion _dtFactoryRegistroProduccion = new FactoryRegistroProduccion();
@@ -23,8 +23,15 @@ namespace CultimarWebApp.Utils.DAO
         //    return _dtSegLarval.ListadoSeguimientoLarval(1);
         //} 
 
+<<<<<<< HEAD
 
        
+=======
+        public List<ObjetoFactoresMedicion> ListadoFactorMedicion()
+        {
+            return _dtFac.ListadoFactoresMedicion();
+        }
+>>>>>>> 04588bb2d874cb4ca7e6713d8c5b85924d6f671b
 
         //public bool setGrabaSeguimientoLarval(ObjetoSeguimientoLarval larval)
         //{
@@ -92,13 +99,14 @@ namespace CultimarWebApp.Utils.DAO
         }
         public List<ObjetoTipoContenedor> ListadoTipoContenedorOrigen()
         {
-            return _dtFactoryTipoContenedor.ListadoContenedorOrigen();
+            //return _dtFactoryTipoContenedor.ListadoContenedorOrigen();
+            return _dtFac.ListadoTipoContenedor();
         }
 
         public List<ObjetoTipoContenedor> ListadoTipoContenedorDestino()
         {
-            return _dtFactoryTipoContenedor.ListadoContenedorDestino();
-
+            //return _dtFactoryTipoContenedor.ListadoContenedorDestino();
+            return _dtFac.ListadoTipoContenedor();
         }
 
         public List<ObjetoTipoIdentificacion> ListadoTipoIdentificacion()
@@ -169,11 +177,11 @@ namespace CultimarWebApp.Utils.DAO
         }
         public bool SetGrabaParametrosTipoContenedor(ObjetoTipoContenedor tipoContenedor)
         {
-            return _dtFac.setGrabaParametrosTipoContenedor(tipoContenedor);
+            return _dtFac.SetGrabaParametrosTipoContenedor(tipoContenedor);
         }
         public bool SetGrabaParametrosTipoIdentificacion(ObjetoTipoIdentificacion tipoIdentificacion)
         {
-            return _dtFac.setGrabaParametrosTipoIdentificacion(tipoIdentificacion);
+            return _dtFac.SetGrabaParametrosTipoIdentificacion(tipoIdentificacion);
         }
 
         public bool SetGrabaParametrosTipoMortalidad(ObjetoTipoMortalidad tipoMortalidad)
