@@ -1,0 +1,4 @@
+/CultimarWebApp/Web.config
+/CultimarWebApp/Web.Debug.config
+/CultimarWebApp/Web.Release.config
+/CultimarWebApp/*.config
