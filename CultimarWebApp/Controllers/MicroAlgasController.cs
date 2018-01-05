@@ -77,10 +77,10 @@ namespace CultimarWebApp.Controllers
 
         public JsonResult GrabaDatosMicroAlga(int idMicroAlga,int idEspecie, string cantidadVolumen, string numeroBolsa, string fecha)
         {
-            var datosUsuario = new ObjetoLogin();
-            datosUsuario = (ObjetoLogin)Session["DatosUsuario"];
             try
             {
+                var datosUsuario = new ObjetoLogin();
+                datosUsuario = (ObjetoLogin)Session["DatosUsuario"];
                 var validador = 0;
                 switch (datosUsuario.IdPerfil)
                 {
@@ -127,7 +127,6 @@ namespace CultimarWebApp.Controllers
                                     validador = 3;
                                 }
                             }
-
                         }
                         else
                         {

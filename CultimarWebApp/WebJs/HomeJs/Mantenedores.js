@@ -51,6 +51,7 @@ $(document).ready(function () {
         ],
         searching: true,
         "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json",
             "lengthMenu": "Mostrar _MENU_ filas por Página",
             "zeroRecords": "Sin Resultados",
             "info": "Mostrando página _PAGE_ de _PAGES_",
@@ -73,6 +74,7 @@ $(document).ready(function () {
         ],
         searching: true,
         "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json",
             "lengthMenu": "Mostrar _MENU_ filas por Página",
             "zeroRecords": "Sin Resultados",
             "info": "Mostrando página _PAGE_ de _PAGES_",
@@ -96,6 +98,7 @@ $(document).ready(function () {
         ],
         searching: true,
         "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json",
             "lengthMenu": "Mostrar _MENU_ filas por Página",
             "zeroRecords": "Sin Resultados",
             "info": "Mostrando página _PAGE_ de _PAGES_",
@@ -120,6 +123,7 @@ $(document).ready(function () {
         ],
         searching: true,
         "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json",
             "lengthMenu": "Mostrar _MENU_ filas por Página",
             "zeroRecords": "Sin Resultados",
             "info": "Mostrando página _PAGE_ de _PAGES_",
@@ -143,6 +147,7 @@ $(document).ready(function () {
         ],
         searching: true,
         "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json",
             "lengthMenu": "Mostrar _MENU_ filas por Página",
             "zeroRecords": "Sin Resultados",
             "info": "Mostrando página _PAGE_ de _PAGES_",
@@ -165,6 +170,7 @@ $(document).ready(function () {
         ],
         searching: true,
         "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json",
             "lengthMenu": "Mostrar _MENU_ filas por Página",
             "zeroRecords": "Sin Resultados",
             "info": "Mostrando página _PAGE_ de _PAGES_",
@@ -187,6 +193,7 @@ $(document).ready(function () {
         ],
         searching: true,
         "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json",
             "lengthMenu": "Mostrar _MENU_ filas por Página",
             "zeroRecords": "Sin Resultados",
             "info": "Mostrando página _PAGE_ de _PAGES_",
