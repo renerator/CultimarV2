@@ -3,20 +3,12 @@
     $("#tblUsuarios").DataTable({
         paging: true,
         retrieve: true,
-        dom: 'Bfrtip',
-        buttons: [{
-            text: 'Excel',
-            extend: 'excel'
-        },
-        {
-            text: 'PDF',
-            extend: 'pdf'
-        }
-        ],
         searching: true,
+        responsive: true,
         "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json",
             "lengthMenu": "Mostrar _MENU_ filas por Página",
-            "zeroRecords": "Sin Resultados",
+            "zeroRecords": "No existen Registros en el sistema",
             "info": "Mostrando página _PAGE_ de _PAGES_",
             "infoEmpty": "No se han encontrado registros",
             "infoFiltered": "(Filtrando de un total de  _MAX_ registros)"

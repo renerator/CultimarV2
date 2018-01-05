@@ -31,7 +31,7 @@
                         }
                         @grid.GetHtml(
                          htmlAttributes: new { id = "tblSeguimientoMicroAlgas" },
-                         tableStyle: "table table-bordered",
+                         tableStyle: "table table-striped table-bordered dataTable no-footer dtr-inline",
                          columns:
                              grid.Columns(
                                          grid.Column(header: "Identificador", format: @<text>@item.IdMicroAlga</text>),
@@ -63,7 +63,7 @@
                                     <button type="button" class="close" data-dismiss="modal">
                                         <span aria-hidden="true">×</span>
                                     </button>
-                                    <h4 class="modal-title" id="myModalLabel">Ingresar registro Micro Algas</h4>
+                                    <h4 class="modal-title" id="myModalLabel">Ingresar Seguimiento Micro Algas</h4>
                                 </div>
                                 <div class="modal-body">
                                     <h4>Ingrese los datos solicitados</h4>
@@ -78,25 +78,50 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Ingresa Cantidad de Volumen</label>
-                                                <div class="col-md-9 col-sm-9 col-xs-12">
-                                                    <input type="text" id="cantidadVolumen" required="required" class="form-control col-md-7 col-xs-12">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Ingresa Número de Bolsa</label>
-                                                <div class="col-md-9 col-sm-9 col-xs-12">
-                                                    <input type="text" id="numeroBolsa" required="required" class="form-control col-md-7 col-xs-12">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha</label>
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha Registro</label>
                                                 <div class="col-md-9 col-sm-9 col-xs-12 has-feedback-right">
                                                     <input type="text" class="form-control has-feedback-right" id="single_cal1" placeholder="01/01/0001" aria-describedby="inputSuccess2Status">
                                                     <span class="fa fa-calendar-o form-control-feedback right" aria-hidden="true"></span>
                                                     <span id="inputSuccess2Status" class="sr-only">(success)</span>
                                                 </div>
                                             </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Seleccione Tipo Identificación</label>
+                                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                                    @Html.DropDownList("Especies", (IEnumerable<SelectListItem>)ViewBag.ParametrosTipoIdentificacion, "Seleccione...", new { @class = "form-control", @required = "required", @ID = "selectTipoEspecificacion" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Seleccione Tipo Contenedor</label>
+                                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                                    @Html.DropDownList("Especies", (IEnumerable<SelectListItem>)ViewBag.ParametrosTipoContenedor, "Seleccione...", new { @class = "form-control", @required = "required", @ID = "selectTipoContenedor" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Ingresa Resultado TCBS</label>
+                                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                                    <input type="text" id="resultadoTCBS" required="required" class="form-control col-md-7 col-xs-12">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Ingresa Cantidad de Volumen</label>
+                                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                                    <input type="text" id="cantidadVolumen" required="required" class="form-control col-md-7 col-xs-12">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Ingresa Volumen Cosechado</label>
+                                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                                    <input type="text" id="volumenCosechado" required="required" class="form-control col-md-7 col-xs-12">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Ingresa Concentración/Conteo</label>
+                                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                                    <input type="text" id="concentracion" required="required" class="form-control col-md-7 col-xs-12">
+                                                </div>
+                                            </div>
+                                            
                                             <div class="ln_solid"></div>
                                             <div class="form-group">
                                                 <div class="col-md-9 xdisplay_inputx form-group has-feedback">
