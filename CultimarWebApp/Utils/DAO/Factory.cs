@@ -88,6 +88,12 @@ namespace CultimarWebApp.Utils.DAO
                     validador = data.Rows[i].Field<object>("RUT");
                     resultadoListado.Rut = validador != null ? data.Rows[i].Field<string>("RUT") : "NO ASIGNADO";
 
+                    validador = data.Rows[i].Field<object>("AutorizaModificacion");
+                    resultadoListado.AutorizaModificacion = validador != null ? data.Rows[i].Field<bool>("AutorizaModificacion") : false;
+
+                    validador = data.Rows[i].Field<object>("Activo");
+                    resultadoListado.Activo = validador != null ? data.Rows[i].Field<bool>("Activo") : false;
+                    
                     DatosLogin.Add(resultadoListado);
                 }
             }
