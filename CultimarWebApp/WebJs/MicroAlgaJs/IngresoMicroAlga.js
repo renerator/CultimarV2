@@ -37,29 +37,33 @@ $(document).ready(function () {
 
         if ($("#selectEspecies").val() != "")
         {
-            $.ajax({
-                url: "GrabaDatosMicroAlga",
-                type: "POST",
-                data: { idMicroAlga: ID, idEspecie: $("#selectEspecies").val(), cantidadVolumen: $("#cantidadVolumen").val(), numeroBolsa: $("#numeroBolsa").val(), fecha: fechaConFormato },
-                async: true,
-                success: function (data) {
-                    if (data == 1) {
-                        $("#btnCerrarModal").click();
-                        alert("El Ingreso se ha realizado sin problemas.");
+                $.ajax({
+                    url: "GrabaDatosMicroAlga",
+                    type: "POST",
+                    data: { idMicroAlga: ID, idEspecie: $("#selectEspecies").val(), cantidadVolumen: $("#cantidadVolumen").val(), numeroBolsa: $("#numeroBolsa").val(), fecha: fechaConFormato },
+                    async: true,
+                    success: function (data) {
+                        if (data == 1) {
+                            $("#btnCerrarModal").click();
+                            alert("El Ingreso se ha realizado sin problemas.");
+                        }
+                        if (data == 2) {
+                            alert("Debe ingresar todos los datos, no podra grabar en la BD.");
+                        }
+                        if (data == 3) {
+                            alert("Ha ocurrido un error al grabar los datos, intentalo nuevamente.");
+                        }
+                        if (data == 4) {
+                            alert("No tienes permiso para modificar, debes solicitar permiso al administrador para que puedas modificar datos en el sistema.");
+                        }
+                        if (data == 5) {
+                            alert("Tu perfil de usuario no te permite realizar ninguna acción, solo puedes leer la información ingresada al sistema.");
+                        }
+                        if (data == 0) {
+                            alert("No se ha realizado la acción, intentalo nuevamente.");
+                        }
                     }
-                    if (data == 2) {
-                        alert("Debe ingresar todos los datos, no podra grabar en la BD.");
-                    }
-                    if (data == 3) {
-                        alert("Ha ocurrido un error al grabar los datos, intentalo nuevamente.");
-                    }
-                    if (data == 4) {
-                    }
-                    if (data == 0) {
-                        alert("No se ha realizado la acción, intentalo nuevamente.");
-                    }
-                }
-            });
+                });
         }
         else
         { alert("Debe definir la Especie a ingresar"); }

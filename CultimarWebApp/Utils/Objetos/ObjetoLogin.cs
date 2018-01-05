@@ -11,6 +11,8 @@ namespace CultimarWebApp.Utils.Objetos
         private string _rut;
         private string _nombre;
         private int _idPerfil;
+        private bool _autorizaModificacion;
+        private bool _activo;
 
         public string Rut
         {
@@ -26,6 +28,16 @@ namespace CultimarWebApp.Utils.Objetos
         {
             get { return _idPerfil; }
             set { _idPerfil = value; }
+        }
+        public bool AutorizaModificacion
+        {
+            get { return _autorizaModificacion; }
+            set { _autorizaModificacion = value; }
+        }
+        public bool Activo
+        {
+            get { return _activo; }
+            set { _activo = value; }
         }
     }
 }

@@ -77,33 +77,64 @@ namespace CultimarWebApp.Controllers
 
         public JsonResult GrabaDatosMicroAlga(int idMicroAlga,int idEspecie, string cantidadVolumen, string numeroBolsa, string fecha)
         {
+            var datosUsuario = new ObjetoLogin();
+            datosUsuario = (ObjetoLogin)Session["DatosUsuario"];
             try
             {
                 var validador = 0;
-                if (!string.IsNullOrEmpty(cantidadVolumen) && !string.IsNullOrEmpty(numeroBolsa))
+                switch (datosUsuario.IdPerfil)
                 {
-                    var microAlga = new ObjetoMicroAlga()
-                    {
-                        IdMicroAlga = idMicroAlga,
-                        IdEspecie = idEspecie,
-                        VolumenSembrado = Convert.ToInt32(cantidadVolumen),
-                        NumeroBolsa = Convert.ToInt32(numeroBolsa),
-                        FechaRegistro = Convert.ToDateTime(fecha)
-                    };
-                    if (_control.SetGrabaMicroAlga(microAlga))
-                    {
-                        validador = 1;
-                    }
-                    else
-                    {
-                        validador = 3;
-                    }
+                    case 3:
+                        validador = 5;
+                        break;
+                    default:
+                        if (!string.IsNullOrEmpty(cantidadVolumen) && !string.IsNullOrEmpty(numeroBolsa))
+                        {
+                            var microAlga = new ObjetoMicroAlga()
+                            {
+                                IdMicroAlga = idMicroAlga,
+                                IdEspecie = idEspecie,
+                                VolumenSembrado = Convert.ToInt32(cantidadVolumen),
+                                NumeroBolsa = Convert.ToInt32(numeroBolsa),
+                                FechaRegistro = Convert.ToDateTime(fecha)
+                            };
+                            if (idMicroAlga != -1)
+                            {
+                                if (datosUsuario.AutorizaModificacion)
+                                {
+                                    if (_control.SetGrabaMicroAlga(microAlga))
+                                    {
+                                        validador = 1;
+                                    }
+                                    else
+                                    {
+                                        validador = 3;
+                                    }
+                                }
+                                else
+                                {
+                                    validador = 4;
+                                }
+                            }
+                            else
+                            {
+                                if (_control.SetGrabaMicroAlga(microAlga))
+                                {
+                                    validador = 1;
+                                }
+                                else
+                                {
+                                    validador = 3;
+                                }
+                            }
+
+                        }
+                        else
+                        {
+                            validador = 2;
+                        }
+                        break;
                 }
-                else
-                {
-                    validador = 2;
-                }
-                //, JsonRequestBehavior.AllowGet --- solo si se usa metodo GET
                 return (Json(validador));
             }
             catch (Exception ex)

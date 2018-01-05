@@ -39,6 +39,8 @@ namespace CultimarWebApp.Controllers
                             datosUsuarios.Nombre = resultado[i].Nombre;
                             datosUsuarios.Rut = resultado[i].Rut;
                             datosUsuarios.IdPerfil = resultado[i].IdPerfil;
+                            datosUsuarios.AutorizaModificacion = resultado[i].AutorizaModificacion;
+                            datosUsuarios.Activo = resultado[i].Activo;
                         }
                         url = "~/Home/Index";
                         Session["DatosUsuario"] = datosUsuarios;
