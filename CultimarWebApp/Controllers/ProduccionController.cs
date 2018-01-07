@@ -173,7 +173,7 @@ namespace CultimarWebApp.Controllers
         }
 
 
-        public JsonResult GrabaDatos(string _IdTipoContenedorOrigen, string _FechaRegistro,
+        public JsonResult GrabaDatos(string _IdSemilla, string _IdTipoContenedorOrigen, string _FechaRegistro,
                                      int _IdFactoresMedicion, int _CantidadOrigen, int _CalibreOrigen,
                                        int _IdTipoContenedorDestino, int _CantidadCosechado, int _CantidadCalibre)
         {
@@ -184,7 +184,7 @@ namespace CultimarWebApp.Controllers
 
             var seguimientoSemilla = new ObjetoSeguimientoSemilla();
             var validador = 0;
-
+            seguimientoSemilla.IdSeguimientoSemilla = int.Parse(_IdSemilla.ToString());
             seguimientoSemilla.IdTipoContenedorOrigen = int.Parse(_IdTipoContenedorOrigen);
             seguimientoSemilla.FechaRegistro = DateTime.Parse(_FechaRegistro.ToString());
             seguimientoSemilla.IdFactoresMedicion = _IdFactoresMedicion;
