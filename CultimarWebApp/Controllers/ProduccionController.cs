@@ -88,7 +88,8 @@ namespace CultimarWebApp.Controllers
         }
 
 
-        public JsonResult GrabaDatosRegistroProduccion(int _CantidadProductoresMachos,
+        public JsonResult GrabaDatosRegistroProduccion(int _IdProduccion, 
+                                                        int _CantidadProductoresMachos,
                                                        int _CantidadProductoresHembras,
                                                        string _FechaInicioCultivo,
                                                        int _CantidadFecundada ,
@@ -101,7 +102,7 @@ namespace CultimarWebApp.Controllers
 
             var registoProduccion = new ObjetoRegistroProduccion();
             var validador = 0;
-
+            registoProduccion.IdRegistroProduccion = _IdProduccion;
             registoProduccion.CantidadProductoresMachos = _CantidadProductoresMachos;
             registoProduccion.CantidadProductoresHembras = _CantidadProductoresHembras;
             registoProduccion.FechaInicioCultivo = DateTime.Parse(_FechaInicioCultivo.ToString());

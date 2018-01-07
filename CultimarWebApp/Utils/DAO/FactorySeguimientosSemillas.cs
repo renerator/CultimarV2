@@ -82,7 +82,7 @@ namespace CultimarWebApp.Utils.DAO
             {
                 var data = new DBConector().EjecutarProcedimientoAlmacenado("CRUD_SeguimientoSemilla", new System.Collections.Hashtable()
                                                                                             {
-                                                                                                {"@p_id_SeguimientoSemilla",0},
+                                                                                                {"@p_id_SeguimientoSemilla",semilla.IdSeguimientoSemilla},
                                                                                                 {"@p_IdTipoContenedorOrigen", semilla.IdTipoContenedorOrigen },
                                                                                                 {"@p_FechaRegistro", semilla.FechaRegistro },
                                                                                                 {"@p_IdFactoresMedicion", semilla.IdFactoresMedicion },
