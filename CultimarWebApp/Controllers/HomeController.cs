@@ -24,10 +24,8 @@ namespace CultimarWebApp.Controllers
                 return View();
             }
             catch (Exception ex)
-            {
-                new CapturaExcepciones(ex);
-                return ErrorPage(1001);
-                throw;
+            {             
+                throw (new CapturaExcepciones(ex));
             }
         }
         [SessionFilter]

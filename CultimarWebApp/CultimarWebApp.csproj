@@ -3756,13 +3756,6 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
@@ -4572,7 +4565,18 @@
     <Content Include="Views\Home\Mantenedores.cshtml" />
     <Content Include="Views\Produccion\RegistroProduccion.cshtml" />
     <Content Include="Views\MicroAlgas\IngresoMicroAlgas.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\MicroAlgas\SeguimientoMicroAlgas.cshtml" />
+=======
+    <Content Include="Web.config" />
+    <Content Include="Views\MicroAlgas\SeguimientoMicroAlgas.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+>>>>>>> 04056df48a795a39787e715a48b5367a51b1ff18
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

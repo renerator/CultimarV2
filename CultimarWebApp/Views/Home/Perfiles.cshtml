@@ -32,7 +32,7 @@
                     </p>
                     <div class="table-responsive">
                         @{
-                            var grid = new WebGrid(Model);
+                            var grid = new WebGrid(Model, canPage: false);
                         }
                         @grid.GetHtml(
                     tableStyle: "table table-bordered",

@@ -56,7 +56,7 @@
                                             </p>
                                             <div class="table-responsive">
                                                 @{
-                                                    var gridParametrosOrigen = new WebGrid(source: ViewBag.ParametrosOrigen);
+                                                    var gridParametrosOrigen = new WebGrid(source: ViewBag.ParametrosOrigen, canPage: false);
                                                 }
                                                 @gridParametrosOrigen.GetHtml(
                                                                         htmlAttributes: new { id = "tblParametrosOrigen" },
@@ -129,7 +129,7 @@
                                             </p>
                                             <div class="table-responsive">
                                                 @{
-                                                    var gridDestino = new WebGrid(source: ViewBag.ParametrosDestino);
+                                                    var gridDestino = new WebGrid(source: ViewBag.ParametrosDestino, canPage: false);
                                                 }
                                                 @gridDestino.GetHtml(
                                                                         htmlAttributes: new { id = "tblParametrosDestino" },
@@ -203,7 +203,7 @@
                                             </p>
                                             <div class="table-responsive">
                                                 @{
-                                                    var gridEspecies = new WebGrid(source: ViewBag.ParametrosEspecies);
+                                                    var gridEspecies = new WebGrid(source: ViewBag.ParametrosEspecies, canPage: false);
                                                 }
                                                 @gridEspecies.GetHtml(
                                                                         htmlAttributes: new { id = "tblParametrosEspecies" },
@@ -276,7 +276,7 @@
                                             </p>
                                             <div class="table-responsive">
                                                 @{
-                                                    var gridTipoContenedor = new WebGrid(source: ViewBag.ParametrosTipoContenedor);
+                                                    var gridTipoContenedor = new WebGrid(source: ViewBag.ParametrosTipoContenedor, canPage: false);
                                                 }
                                                 @gridTipoContenedor.GetHtml(
                                                                         htmlAttributes: new { id = "tblParametrosTipoContenedor" },
@@ -357,7 +357,7 @@
                                             </p>
                                             <div class="table-responsive">
                                                 @{
-                                                    var gridTipoIdentificacion = new WebGrid(source: ViewBag.ParametrosTipoIdentificacion);
+                                                    var gridTipoIdentificacion = new WebGrid(source: ViewBag.ParametrosTipoIdentificacion, canPage: false);
                                                 }
                                                 @gridTipoIdentificacion.GetHtml(
                                                                         htmlAttributes: new { id = "tblParametrosTipoIdentificacion" },
@@ -430,7 +430,7 @@
                                             </p>
                                             <div class="table-responsive">
                                                 @{
-                                                    var gridTipoMortalidad = new WebGrid(source: ViewBag.ParametrosTipoMortalidad);
+                                                    var gridTipoMortalidad = new WebGrid(source: ViewBag.ParametrosTipoMortalidad, canPage: false);
                                                 }
                                                 @gridTipoMortalidad.GetHtml(
                                                                         htmlAttributes: new { id = "tblParametrosTipoMortalidad" },
@@ -503,7 +503,7 @@
                                             </p>
                                             <div class="table-responsive">
                                                 @{
-                                                    var gridTipoSistema = new WebGrid(source: ViewBag.ParametrosTipoSistema);
+                                                    var gridTipoSistema = new WebGrid(source: ViewBag.ParametrosTipoSistema, canPage: false);
                                                 }
                                                 @gridTipoSistema.GetHtml(
                                                                         htmlAttributes: new { id = "tblParametrosTipoSistema" },

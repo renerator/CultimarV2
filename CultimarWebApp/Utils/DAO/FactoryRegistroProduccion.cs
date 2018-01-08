@@ -36,7 +36,7 @@ namespace CultimarWebApp.Utils.DAO
 
 
                     validador = data.Rows[i].Field<object>("Id");
-                    resultadoListado.IdRegistroProduccion = validador != null ? data.Rows[i].Field<int>("Id") : -1;
+                    resultadoListado.IdRegistroProduccion = validador != null ? data.Rows[i].Field<int>("Id") : 0;
 
                      
                     validador = data.Rows[i].Field<object>("CantidadProductoresMachos");

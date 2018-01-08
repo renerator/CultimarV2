@@ -25,13 +25,13 @@
                     <p class="text-muted font-13 m-b-30">
                         Este listado muestra los registros existentes del sistema, puedes ingresar un nuevo registro de Micro Algas, para editar debes tener permisos para hacerlo.
                     </p>
-                    <div class="table-responsive">
+                    <div class="dataTables_wrapper form-inline dt-bootstrap no-footer">
                         @{
-                            var grid = new WebGrid(Model);
+                            var grid = new WebGrid(Model, canPage: false);
                         }
                         @grid.GetHtml(
-                         htmlAttributes: new { id = "tblMicroAlgas" },
-                         tableStyle: "table table-striped table-bordered dataTable no-footer dtr-inline",
+                         htmlAttributes: new { id = "tblMicroAlgas"},
+                         tableStyle: "table table-striped table-bordered dataTable no-footer",
                          columns:
                              grid.Columns(
                                          grid.Column(header: "Identificador", format: @<text>@item.IdMicroAlga</text>),
