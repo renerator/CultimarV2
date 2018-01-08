@@ -12,9 +12,6 @@ namespace CultimarWebApp.Utils.DAO
 
     internal class FactorySeguimientosSemillas
     {
-         
-         
-
         /// <summary>
         /// Metodo Menu
         /// Segun el ID del seguimiento, carga a la base la momento de grabar un dato ya la tabla se auto incrementa.
@@ -50,8 +47,6 @@ namespace CultimarWebApp.Utils.DAO
 
                     validador = data.Rows[i].Field<object>("Destino");
                     resultadoListado.NombreContenedorDestino = validador != null ? data.Rows[i].Field<string>("Destino") : "Sin Contendor";
-
-
 
                     validador = data.Rows[i].Field<object>("CantidadOrigen");
                     resultadoListado.CantidadOrigen = validador != null ? data.Rows[i].Field<int>("CantidadOrigen") : 0;

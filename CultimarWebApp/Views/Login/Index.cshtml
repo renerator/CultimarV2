@@ -24,11 +24,11 @@
     <div>
         <div class="login_wrapper">
             <div class="animate form login_form">
-                
                 <section class="login_content">
                     @using (Html.BeginForm("Index", "Login", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
                     {
                         @Html.AntiForgeryToken()
+                        <img src="~/images/logocultimar.png" width="150" height="130" />
                         <h4>Inicio de Sesión</h4>
                         <hr />
                         @Html.ValidationSummary(true, string.Empty, new { @class = "alert text-danger" })
