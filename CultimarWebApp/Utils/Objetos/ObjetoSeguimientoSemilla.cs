@@ -18,8 +18,8 @@ namespace CultimarWebApp.Utils.Objetos
         private int _CantidadCosechado;
         private int _CantidadCalibre;
         private bool _Estado;
-        private string _NombreContenedor;
-
+        private string _Contenedororigen;
+        private string _NombreContenedorDestino;
 
         public Decimal IdSeguimientoSemilla
         {
@@ -27,11 +27,17 @@ namespace CultimarWebApp.Utils.Objetos
             set { _IdSeguimientoSemilla = value; }
         }
 
-
-        public string NombreContendor
+        public string NombreContenedorDestino
         {
-            get { return _NombreContenedor; }
-            set { _NombreContenedor = value; }
+            get { return _NombreContenedorDestino; }
+            set { _NombreContenedorDestino = value; }
+        }
+
+
+        public string NombreContenedororigen
+        {
+            get { return _Contenedororigen; }
+            set { _Contenedororigen = value; }
         }
 
 
