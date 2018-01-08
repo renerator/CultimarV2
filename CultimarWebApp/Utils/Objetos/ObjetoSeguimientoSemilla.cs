@@ -20,6 +20,24 @@ namespace CultimarWebApp.Utils.Objetos
         private bool _Estado;
         private string _Contenedororigen;
         private string _NombreContenedorDestino;
+        private int _idOrigen;
+        private int _IdDestino;
+       
+
+        public int IdDestino
+        {
+            get { return _IdDestino; }
+            set { _IdDestino = value; }
+        }
+
+
+        public int idOrigen
+        {
+            get { return _idOrigen; }
+            set { _idOrigen = value; }
+        }
+
+
 
         public Decimal IdSeguimientoSemilla
         {

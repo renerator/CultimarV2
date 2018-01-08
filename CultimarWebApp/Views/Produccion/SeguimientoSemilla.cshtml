@@ -34,6 +34,7 @@
                         }
                         @grid.GetHtml(
 htmlAttributes: new { id = "tblSeguimientosSemilla" },
+exclusions: new[] { "idOrigen", "IdDestino", "IdFactoresMedicion" },
 tableStyle: "table table-bordered",
 columns:
 grid.Columns(
@@ -43,7 +44,21 @@ grid.Column(columnName: "CantidadOrigen", header: "Cantidad Origen", format: @<t
 grid.Column(columnName: "CalibreOrigen", header: "Calibre Origen", format: @<text>@item.CalibreOrigen</text>),
 grid.Column(columnName: "CantidadCosechado", header: "Cantidad Cosechado", format: @<text>@item.CantidadCosechado</text>),
 grid.Column(columnName: "CantidadCalibre", header: "Cantidad Cosechado", format: @<text>@item.CantidadCosechado</text>),
-grid.Column(columnName: "CantidadCosechado", header: "Cantidad Calibre", format: @<text>@item.CantidadCalibre</text>)  
+grid.Column(columnName: "CantidadCosechado", header: "Cantidad Calibre", format: @<text>@item.CantidadCalibre</text>),
+grid.Column(header: "Editar", format: @<button class="btn btn-success" type="button" data-toggle="modal" tooltip="Editar Parametro" data-target="#modalPopUpIngresoUsuario"
+                                               onclick="EditaSemilla(@item.idOrigen,
+                                               @item.IdDestino,
+                                               @item.IdFactoresMedicion,
+                                               @item.IdSeguimientoSemilla, 
+                                               '@item.FechaRegistro',
+                                               @item.CantidadOrigen,
+                                               @item.CalibreOrigen,
+                                               @item.CantidadCosechado,
+                                               @item.CantidadCalibre, 
+                                               )">
+                        Editar
+                    </button>)
+
 ))
 
                     </div>

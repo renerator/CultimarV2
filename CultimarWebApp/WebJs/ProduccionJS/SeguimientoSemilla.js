@@ -1,38 +1,41 @@
-﻿function EditaSemilla(IdSeguimientoSemilla,
-    selectOrigen, 
-    single_cal1,
-    selectFactorM,
+﻿function EditaSemilla(
+    idOrigen,
+    IdDestino,
+    idFactorMedicion,
+    IdSeguimientoSemilla, 
+    single_cal1, 
     IdCantidadOrigen,
-    IdCalibreOrigen,
-    selectDestino,
+    IdCalibreOrigen, 
     IdCantidadCosechado,
-    IdCantidadCalibre, IdTipoContenedorOrigen) {  
+    IdCantidadCalibre
+     ) {  
+
  
     $("#IdSemilla").val(IdSeguimientoSemilla);
-    $("#selectOrigen").val(selectOrigen);
-    //$(single_cal1).val(single_cal1);
-    //$("#selectFactorM").val(selectFactorM);
-    //$("#IdCantidadOrigen").val(IdCantidadOrigen);
-    //$("#IdCalibreOrigen").val(IdCalibreOrigen);
-    //$("#selectDestino").val(selectDestino);
-    //$("#IdCantidadCosechado").val(IdCantidadCosechado);
-    //$("#IdCantidadCalibre").val(IdCantidadCalibre);
+    $("#selectOrigen").val(idOrigen);
+    $(single_cal1).val(single_cal1);
+    $("#selectFactorM").val(idFactorMedicion);
+    $("#IdCantidadOrigen").val(IdCantidadOrigen);
+    $("#IdCalibreOrigen").val(IdCalibreOrigen);
+    $("#selectDestino").val(IdDestino);
+    $("#IdCantidadCosechado").val(IdCantidadCosechado);
+    $("#IdCantidadCalibre").val(IdCantidadCalibre);
 }
 
 
 $(document).ready(function () {
 
     $("#datepicker").change(function () {
-        changedDate = $(this).val(); //in yyyy-mm-dd format obtained from datepicker
+        changedDate = $(this).val();  
         var date = new Date(changedDate);
-        dd_mm_yyyy = twoDigitDate(date) + "-" + twoDigitMonth(date) + "-" + date.getFullYear(); // in dd-mm-yyyy format
+        dd_mm_yyyy = twoDigitDate(date) + "-" + twoDigitMonth(date) + "-" + date.getFullYear();  
         $('#single_cal1').val(dd_mm_yyyy);
     });
 
 
 
     $("#datepicker").change(function () {
-        changedDate = $(this).val(); //in yyyy-mm-dd format obtained from datepicker
+        changedDate = $(this).val(); 
         var date = new Date(changedDate);
         dd_mm_yyyy = twoDigitDate(date.getDay) + "-" + twoDigitMonth(date.getMonth) + "-" + date.getFullYear(); // in dd-mm-yyyy format
         $('#single_cal1').val(dd_mm_yyyy);

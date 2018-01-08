@@ -20,7 +20,7 @@ namespace CultimarWebApp.Utils.Objetos
         private int _NumeroEstanquesUtilizado;
         private int _DensidadSiembra;
         private int _IdPloidia;
-          
+     
         public int IdPloidia
         {
             get { return _IdPloidia; }
@@ -82,7 +82,7 @@ namespace CultimarWebApp.Utils.Objetos
             set { _IdRegistroProduccion = value; }
         }
 
-         
+
 
     }
 }

@@ -65,7 +65,19 @@ namespace CultimarWebApp.Utils.DAO
 
                     validador = data.Rows[i].Field<object>("CantidadCalibre");
                     resultadoListado.CantidadCalibre = validador != null ? data.Rows[i].Field<int>("CantidadCalibre") : 0;
-                      
+
+
+                    validador = data.Rows[i].Field<object>("idOrigen");
+                    resultadoListado.idOrigen= validador != null ? data.Rows[i].Field<int>("idOrigen") : 0;
+
+
+                    validador = data.Rows[i].Field<object>("IdDestino");
+                    resultadoListado.IdDestino = validador != null ? data.Rows[i].Field<int>("IdDestino") : 0;
+
+
+                    validador = data.Rows[i].Field<object>("idFactorMedicion");
+                    resultadoListado.IdFactoresMedicion = validador != null ? data.Rows[i].Field<int>("idFactorMedicion") : 0;
+
 
                     listadoSeguimientoSemilla.Add(resultadoListado);
                 }
