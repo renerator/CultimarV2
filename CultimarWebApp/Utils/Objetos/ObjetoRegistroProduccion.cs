@@ -8,7 +8,7 @@ namespace CultimarWebApp.Utils.Objetos
     public class ObjetoRegistroProduccion
     {
 
-        private int _IdRegistroProduccion;
+        private int _idRegistroProduccion;
         private int _CantidadProductoresMachos;
         private int _CantidadProductoresHembras;
         private DateTime _FechaInicioCultivo;
@@ -78,8 +78,8 @@ namespace CultimarWebApp.Utils.Objetos
         }
         public int IdRegistroProduccion
         {
-            get { return _IdRegistroProduccion; }
-            set { _IdRegistroProduccion = value; }
+            get { return _idRegistroProduccion; }
+            set { _idRegistroProduccion = value; }
         }
 
          

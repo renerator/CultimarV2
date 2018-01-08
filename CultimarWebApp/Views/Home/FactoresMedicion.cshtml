@@ -29,7 +29,7 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="table-responsive">
                             @{
-                                var grid = new WebGrid(Model);
+                                var grid = new WebGrid(Model, canPage: false);
                             }
                             @grid.GetHtml(
                                                             htmlAttributes: new { id = "tblFactoresMedicion" },

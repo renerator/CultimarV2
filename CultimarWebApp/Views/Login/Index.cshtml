@@ -24,17 +24,18 @@
     <div>
         <div class="login_wrapper">
             <div class="animate form login_form">
+                
                 <section class="login_content">
                     @using (Html.BeginForm("Index", "Login", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
                     {
                         @Html.AntiForgeryToken()
                         <h4>Inicio de Sesión</h4>
                         <hr />
-                        @Html.ValidationSummary(true, string.Empty, new { @class = "text-danger" })
+                        @Html.ValidationSummary(true, string.Empty, new { @class = "alert text-danger" })
                         <div>
                             <div>
                                 @Html.TextBoxFor(m => m.Rut, new { placeholder = "Rut, ejemplo: XXXXXXXX-X", @class = "form-control", @required = "required" })
-                                @*@Html.ValidationMessageFor(m => m.Rut, string.Empty, new { @class = "text-danger" })*@
+                                @*@Html.ValidationMessageFor(m => m.Rut, string.Empty, new { @class = "alert alert-danger", @role="alert" })*@
                                 @ViewBag.MyMessageToUsers
                             </div>
                         </div>
@@ -54,7 +55,7 @@
                             <div class="clearfix"></div>
                             <br />
                             <div>
-                                <h2><i class="fa fa-cogs"></i>Cultimar</h2>
+                                <h2><i class="fa fa-cogs"></i> Cultimar Chile</h2>
                                 <p>Sistema realizado para seguimiento y gestion de cultivos.</p>
                             </div>
                         </div>
