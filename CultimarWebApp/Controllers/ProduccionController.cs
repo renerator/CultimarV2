@@ -88,7 +88,8 @@ namespace CultimarWebApp.Controllers
         }
 
 
-        public JsonResult GrabaDatosRegistroProduccion(int _CantidadProductoresMachos,
+        public JsonResult GrabaDatosRegistroProduccion(int _IdProduccion, 
+                                                        int _CantidadProductoresMachos,
                                                        int _CantidadProductoresHembras,
                                                        string _FechaInicioCultivo,
                                                        int _CantidadFecundada ,
@@ -101,7 +102,7 @@ namespace CultimarWebApp.Controllers
 
             var registoProduccion = new ObjetoRegistroProduccion();
             var validador = 0;
-
+            registoProduccion.IdRegistroProduccion = _IdProduccion;
             registoProduccion.CantidadProductoresMachos = _CantidadProductoresMachos;
             registoProduccion.CantidadProductoresHembras = _CantidadProductoresHembras;
             registoProduccion.FechaInicioCultivo = DateTime.Parse(_FechaInicioCultivo.ToString());
@@ -172,7 +173,7 @@ namespace CultimarWebApp.Controllers
         }
 
 
-        public JsonResult GrabaDatos(string _IdTipoContenedorOrigen, string _FechaRegistro,
+        public JsonResult GrabaDatos(string _IdSemilla, string _IdTipoContenedorOrigen, string _FechaRegistro,
                                      int _IdFactoresMedicion, int _CantidadOrigen, int _CalibreOrigen,
                                        int _IdTipoContenedorDestino, int _CantidadCosechado, int _CantidadCalibre)
         {
@@ -183,7 +184,7 @@ namespace CultimarWebApp.Controllers
 
             var seguimientoSemilla = new ObjetoSeguimientoSemilla();
             var validador = 0;
-
+            seguimientoSemilla.IdSeguimientoSemilla = int.Parse(_IdSemilla.ToString());
             seguimientoSemilla.IdTipoContenedorOrigen = int.Parse(_IdTipoContenedorOrigen);
             seguimientoSemilla.FechaRegistro = DateTime.Parse(_FechaRegistro.ToString());
             seguimientoSemilla.IdFactoresMedicion = _IdFactoresMedicion;

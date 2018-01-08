@@ -1,4 +1,28 @@
-﻿$(document).ready(function () {
+﻿
+function EditaProduccion(IdRegistroProduccion,
+    CantidadProductoresMachos,
+    CantidadProductoresHembras, 
+    FechaInicioCultivo,
+    CantidadFecundada,
+    NumeroDesoveTemporada,
+    CantidadSembrada,
+    FactoresMedicion,
+    NumeroEstanquesUtilizado,
+    DensidadSiembra) {
+     
+    $("#IdRegistro").val(IdRegistroProduccion);
+    $("#CantidadPMachos").val(CantidadProductoresMachos);
+    $("#CantidadPHembras").val(CantidadProductoresHembras);
+    $(single_cal1).val(FechaInicioCultivo);
+    $("#CantidadFecundada").val(CantidadFecundada);
+    $("#NroDesoveTemporada").val(NumeroDesoveTemporada);
+    $("#CantidadSembrada").val(CantidadSembrada);
+    $("#FactoresMedicion").val(FactoresMedicion);
+    $("#NroEstanque").val(NumeroEstanquesUtilizado);
+    $("#DensidadSiembra").val(DensidadSiembra); 
+}
+
+$(document).ready(function () {
 
     $("#datepicker").change(function () {
         changedDate = $(this).val(); //in yyyy-mm-dd format obtained from datepicker
@@ -40,6 +64,7 @@
             url: "GrabaDatosRegistroProduccion",
             type: "POST",
             data: {
+                _IdProduccion: $("#IdRegistro").val(),
                 _CantidadProductoresMachos: $("#CantidadPMachos").val(),
                 _CantidadProductoresHembras: $("#CantidadPHembras").val(),
                 _FechaInicioCultivo: $(single_cal1).val(),

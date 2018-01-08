@@ -3,14 +3,10 @@
     ViewBag.Title = "RegistroProduccion";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
-
+ 
 
 <script src="~/WebJs/ProduccionJS/RegistroProduccion.js"></script>
-
-
-
+ 
     <div class="right_col" role="main">
         <h3>@ViewBag.Message</h3>
         <div class="row">
@@ -34,23 +30,37 @@
                         </p>
                         <div class="table-responsive">
                             @{
-                                var grid = new WebGrid(Model);
+        var grid = new WebGrid(Model);
                             }
                             @grid.GetHtml(
-                                            htmlAttributes: new { id = "tblRegistroProduccion" },
-                                            tableStyle: "table table-bordered",
-                                            columns:
-                                            grid.Columns(
-                                                grid.Column(columnName: "Id", header: "Id", format: @<text>@item.IdRegistroProduccion</text>),
-                                                grid.Column(columnName: "CantidadProductoresMachos", header: "Cant. Machos", format: @<text>@item.CantidadProductoresMachos</text>),
-                                                grid.Column(columnName: "FechaInicioCultivo", header: "F.Inicio Cultivo", format: @<text>@item.FechaInicioCultivo.ToString("MM/dd/yyyy")</text>),
-                                                grid.Column(columnName: "CantidadProductoresHembras", header: "Cant. Hembras", format: @<text>@item.CantidadProductoresHembras</text>),
-                                                grid.Column(columnName: "NumeroDesoveTemporada", header: "N° Desove Temp", format: @<text>@item.NumeroDesoveTemporada</text>),
-                                                grid.Column(columnName: "CantidadFecundada", header: "Cant. Fecundada", format: @<text>@item.CantidadFecundada</text>),
-                                                grid.Column(columnName: "CantidadSembrada", header: "Cant. Sembrada", format: @<text>@item.CantidadSembrada</text>),
-                                                grid.Column(columnName: "FechaRegistro", header: "Fecha Registro", format: @<text>@item.FechaRegistro.ToString("MM/dd/yyyy")</text>),
-                                                grid.Column(header: "Editar", format: @<button class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-lg" onclick="EditaUsuarios(@item.IdRegistroProduccion)">Editar</button>))
-                                                )
+htmlAttributes: new { id = "tblRegistroProduccion" },
+tableStyle: "table table-bordered",
+columns:
+grid.Columns(
+grid.Column(columnName: "Id", header: "Id", format: @<text>@item.IdRegistroProduccion</text>),
+grid.Column(columnName: "CantidadProductoresMachos", header: "Machos", format: @<text>@item.CantidadProductoresMachos</text>),
+grid.Column(columnName: "CantidadProductoresHembras", header: "Hembras", format: @<text>@item.CantidadProductoresHembras</text>),
+grid.Column(columnName: "FechaInicioCultivo", header: "F.Cultivo", format: @<text>@item.FechaInicioCultivo.ToString("MM/dd/yyyy")</text>),
+grid.Column(columnName: "CantidadFecundada", header: "C.Fecundada", format: @<text>@item.CantidadFecundada</text>),
+grid.Column(columnName: "NumeroDesoveTemporada", header: "N°Desove", format: @<text>@item.NumeroDesoveTemporada</text>),
+grid.Column(columnName: "CantidadSembrada", header: "Sembrada", format: @<text>@item.CantidadSembrada</text>),
+grid.Column(columnName: "FactoresMedicion", header: "F.Medición", format: @<text>@item.FactoresMedicion</text>),
+grid.Column(columnName: "NumeroEstanquesUtilizado", header: "Estanques", format: @<text>@item.NumeroEstanquesUtilizado</text>),
+grid.Column(columnName: "DensidadSiembra", header: "Siembra", format: @<text>@item.DensidadSiembra</text>), 
+grid.Column(header: "Editar", format: @<button class="btn btn-success" type="button" data-toggle="modal" tooltip="Editar Parametro" data-target="#modalPopUpIngresoUsuario" 
+                                               onclick="EditaProduccion(@item.IdRegistroProduccion,
+                                               @item.CantidadProductoresMachos,
+                                               @item.CantidadProductoresHembras, 
+                                               '@item.FechaInicioCultivo',
+                                               @item.CantidadFecundada,
+                                               @item.NumeroDesoveTemporada,
+                                               @item.CantidadSembrada,
+                                               @item.FactoresMedicion,
+                                               @item.NumeroEstanquesUtilizado,
+                                               @item.DensidadSiembra)">Editar</button>))
+
+
+)
                         </div>
 
 
@@ -72,9 +82,20 @@
                                     </div>
                                     <div class="modal-body">
                                         <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                                           
+
                                             <div class="form-group">
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
-                                                    Cantidad Productores Machos <span class="required">*</span>
+                                                   Id Produción <span class="required">*</span>
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input type="text" id="IdRegistro" value="-1" class="form-control col-md-7 col-xs-12">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                                                    Cant. Productores Machos <span class="required">*</span>
                                                 </label>
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                                     <input type="text" id="CantidadPMachos" required="required" class="form-control col-md-7 col-xs-12">
@@ -82,7 +103,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
-                                                    Cantidad Productores Hembras <span class="required">*</span>
+                                                    Cant. Productores Hembras <span class="required">*</span>
                                                 </label>
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                                     <input type="text" id="CantidadPHembras" required="required" class="form-control col-md-7 col-xs-12">
@@ -133,7 +154,7 @@
                                                     <input type="text" id="FactoresMedicion" required="required" class="form-control col-md-7 col-xs-12">
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="form-group">
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
                                                     Numeros de Estanque<span class="required">*</span>

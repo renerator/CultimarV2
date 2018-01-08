@@ -89,6 +89,7 @@ namespace CultimarWebApp.Utils.DAO
             {
                 var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_Set_GrabaProduccion", new System.Collections.Hashtable()
                                                                                             {
+                                                                                              {"@idProduccion",produccion.IdRegistroProduccion},
                                                                                                 {"@p_CantidadProductoresMachos",produccion.CantidadProductoresMachos},
                                                                                                 {"@p_CantidadProductoresHembras", produccion.CantidadProductoresHembras },
                                                                                                 {"@p_FechaInicioCultivo", produccion.FechaInicioCultivo },

@@ -1,13 +1,22 @@
-﻿
-function EditaSemilla(selectOrigen, single_cal1, selectFactorM, IdCantidadOrigen, IdCalibreOrigen, selectDestino, IdCantidadCosechado, IdCantidadCalibre ) {  
-    $("selectOrigen").val(selectOrigen);
-    $("single_cal1").val(single_cal1);
-    $("selectFactorM").val(selectFactorM);
-    $("IdCantidadOrigen").val(IdCantidadOrigen);
-    $("IdCalibreOrigen").val(IdCalibreOrigen);
-    $("selectDestino").val(selectDestino);
-    $("IdCantidadCosechado").val(IdCantidadCosechado);
-    $("IdCantidadCalibre").val(IdCantidadCalibre);
+﻿function EditaSemilla(IdSeguimientoSemilla,
+    selectOrigen, 
+    single_cal1,
+    selectFactorM,
+    IdCantidadOrigen,
+    IdCalibreOrigen,
+    selectDestino,
+    IdCantidadCosechado,
+    IdCantidadCalibre, IdTipoContenedorOrigen) {  
+ 
+    $("#IdSemilla").val(IdSeguimientoSemilla);
+    $("#selectOrigen").val(selectOrigen);
+    //$(single_cal1).val(single_cal1);
+    //$("#selectFactorM").val(selectFactorM);
+    //$("#IdCantidadOrigen").val(IdCantidadOrigen);
+    //$("#IdCalibreOrigen").val(IdCalibreOrigen);
+    //$("#selectDestino").val(selectDestino);
+    //$("#IdCantidadCosechado").val(IdCantidadCosechado);
+    //$("#IdCantidadCalibre").val(IdCantidadCalibre);
 }
 
 
@@ -65,6 +74,7 @@ $(document).ready(function () {
             url: "GrabaDatos",
             type: "POST",
             data: {
+                _IdSemilla: $("#IdSemilla").val(),
                 _IdTipoContenedorOrigen: $("#selectOrigen").val(),
                 _FechaRegistro: $(single_cal1).val(),
                 _IdFactoresMedicion: $("#selectFactorM").val(),
