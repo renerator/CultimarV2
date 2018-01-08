@@ -30,7 +30,7 @@
                     </p>
                     <div class="table-responsive">
                         @{
-                            var grid = new WebGrid(Model);
+        var grid = new WebGrid(Model);
                         }
                         @grid.GetHtml(
 htmlAttributes: new { id = "tblSeguimientosSemilla" },
@@ -38,14 +38,14 @@ tableStyle: "table table-bordered",
 columns:
 grid.Columns(
 grid.Column(columnName: "IdSeguimientoSemilla", header: "Id", format: @<text>@item.IdSeguimientoSemilla</text>),
-grid.Column(columnName: "NombreContendor", header: "Contenedor", format: @<text>@item.NombreContendor</text>),
 grid.Column(columnName: "FechaRegistro", header: "FechaRegistro", format: @<text>@item.FechaRegistro.ToString("MM/dd/yyyy") </text>),
 grid.Column(columnName: "CantidadOrigen", header: "Cantidad Origen", format: @<text>@item.CantidadOrigen</text>),
 grid.Column(columnName: "CalibreOrigen", header: "Calibre Origen", format: @<text>@item.CalibreOrigen</text>),
 grid.Column(columnName: "CantidadCosechado", header: "Cantidad Cosechado", format: @<text>@item.CantidadCosechado</text>),
-grid.Column(columnName: "CantidadCalibre", header: "Cantidad Calibre", format: @<text>@item.CantidadCalibre</text>)
-)
-)
+grid.Column(columnName: "CantidadCalibre", header: "Cantidad Cosechado", format: @<text>@item.CantidadCosechado</text>),
+grid.Column(columnName: "CantidadCosechado", header: "Cantidad Calibre", format: @<text>@item.CantidadCalibre</text>)  
+))
+
                     </div>
 
                     <div id="divAlert"></div>
@@ -68,7 +68,7 @@ grid.Column(columnName: "CantidadCalibre", header: "Cantidad Calibre", format: @
                                     <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
 
-                                        <div class="form-group">
+                                        <div  style="display: none;">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
                                                 Id Semilla <span class="required">*</span>
                                             </label>

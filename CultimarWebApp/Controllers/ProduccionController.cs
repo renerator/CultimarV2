@@ -107,6 +107,7 @@ namespace CultimarWebApp.Controllers
             registoProduccion.CantidadProductoresHembras = _CantidadProductoresHembras;
             registoProduccion.FechaInicioCultivo = DateTime.Parse(_FechaInicioCultivo.ToString());
             registoProduccion.NumeroDesoveTemporada = _NumeroDesoveTemporada;
+            registoProduccion.CantidadFecundada = _CantidadFecundada;
             registoProduccion.CantidadSembrada = _CantidadSembrada;
             registoProduccion.FactoresMedicion = _FactoresMedicion;
             registoProduccion.NumeroEstanquesUtilizado = _NumeroEstanquesUtilizado;
@@ -133,20 +134,20 @@ namespace CultimarWebApp.Controllers
                 IEnumerable<ObjetoSeguimientoSemilla> model = _control.ListadoSeguimientoSemilla();
 
 
-                IEnumerable<SelectListItem> items = _control.ListadoTipoContenedorOrigen().Select(c => new SelectListItem()
+                IEnumerable<SelectListItem> items = _control.ListadoParametrosOrigen().Select(c => new SelectListItem()
                 {
-                    Text = c.NombreContenedor,
-                    Value = c.IdContenedor.ToString()
+                    Text = c.NombreOrigen,
+                    Value = c.IdOrigen.ToString()
                 }).ToList();
 
                 ViewBag.ContenedorOrigen = items;
 
 
 
-                IEnumerable<SelectListItem> items2 = _control.ListadoTipoContenedorDestino().Select(c => new SelectListItem()
+                IEnumerable<SelectListItem> items2 = _control.ListadoParametrosDestino().Select(c => new SelectListItem()
                 {
-                    Text = c.NombreContenedor,
-                    Value = c.IdContenedor.ToString()
+                    Text = c.NombreDestino,
+                    Value = c.IdDestino.ToString()
                 }).ToList();
 
                 ViewBag.ContenedorDestino = items2;
