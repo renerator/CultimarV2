@@ -14,17 +14,13 @@ namespace CultimarWebApp.Utils.DAO
         /// <summary>
         /// Metodo para listar el seguimiento larval
         /// </summary>
-      
 
-        public List<ObjetoSeguimientoLarval> ListadoSeguimientoLarval(int id)
+
+        public List<ObjetoSeguimientoLarval> ListadoSeguimientoLarval()
         {
-            var ListadoSeguimientoLarval = new List<ObjetoSeguimientoLarval>();                                                                                                       
-                                                                                          
-            var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_GET_LISTADOSEGUIMIENTOLARVAL", new System.Collections.Hashtable()
-                                                                                            {
-                                                                                                {"Id", id},
+            var ListadoSeguimientoLarval = new List<ObjetoSeguimientoLarval>();
 
-                                                                                            });
+            var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_GET_LISTADOSEGUIMIENTOLARVAL", new System.Collections.Hashtable());
 
             if (data.Rows.Count > 0)
             {
@@ -33,30 +29,29 @@ namespace CultimarWebApp.Utils.DAO
                     var validador = new object();
                     var resultadoListado = new ObjetoSeguimientoLarval();
                     validador = data.Rows[i].Field<object>("Id");
-                    resultadoListado.Id = validador != null ? data.Rows[i].Field<Decimal>("Id") : 1;
+                    resultadoListado.Id = validador != null ? data.Rows[i].Field<int>("Id") : 1;
 
                     validador = data.Rows[i].Field<object>("CantidadDeLarvas");
-                    resultadoListado.CantidadDeLarvas = validador != null ? data.Rows[i].Field<int>("CantidadDeLarvas"): 0 ;
+                    resultadoListado.CantidadDeLarvas = validador != null ? data.Rows[i].Field<int>("CantidadDeLarvas") : 0;
 
                     validador = data.Rows[i].Field<object>("CosechaLarvas");
-                    resultadoListado.CosechaLarvas = validador != null ? data.Rows[i].Field<int>("CosechaLarvas") :0;
+                    resultadoListado.CosechaLarvas = validador != null ? data.Rows[i].Field<int>("CosechaLarvas") : 0;
 
                     validador = data.Rows[i].Field<object>("NumeroEstanque");
-                    resultadoListado.NumeroEstanque = validador != null ? data.Rows[i].Field<int>("NumeroEstanque") :0;
+                    resultadoListado.NumeroEstanque = validador != null ? data.Rows[i].Field<int>("NumeroEstanque") : 0;
 
                     validador = data.Rows[i].Field<object>("DensidadCultivo");
                     resultadoListado.DensidadCultivo = validador != null ? data.Rows[i].Field<int>("DensidadCultivo") : 0;
 
                     validador = data.Rows[i].Field<object>("FechaRegistro");
-                    resultadoListado.FechaRegistro = validador != null ? data.Rows[i].Field<DateTime>("FechaRegistro") : DateTime.Today;    
+                    resultadoListado.FechaRegistro = validador != null ? data.Rows[i].Field<DateTime>("FechaRegistro") : DateTime.Today;
 
                     validador = data.Rows[i].Field<object>("FactoresMedicion");
-                    resultadoListado.FactoresMedicion = validador != null ? data.Rows[i].Field<String>("FactoresMedicion") :"";
+                    resultadoListado.FactoresMedicion = validador != null ? data.Rows[i].Field<int>("FactoresMedicion") : 0;
 
-                    validador = data.Rows[i].Field<object>("Nombre");
-                    resultadoListado.Nombre = validador != null ? data.Rows[i].Field<string>("Nombre") :"";
+                    validador = data.Rows[i].Field<object>("IdMortalidad");
+                    resultadoListado.IdMortalidad= validador != null ? data.Rows[i].Field<int>("IdMortalidad") : 0;
 
-       
                     
                     ListadoSeguimientoLarval.Add(resultadoListado);
                 }
@@ -75,16 +70,14 @@ namespace CultimarWebApp.Utils.DAO
             try
             {
                 var data = new DBConector().EjecutarProcedimientoAlmacenado("CRUD_SeguimientoLarval", new System.Collections.Hashtable()
-                                                                                            {
-                                                                                                {"@CantidadDeLarvas", seguimientolarval.CantidadDeLarvas },
-                                                                                                {"@CosechaLarvas", seguimientolarval.CosechaLarvas },
-                                                                                                {"@NumeroEstanque", seguimientolarval.NumeroEstanque },
-                                                                                                {"@DensidadCultivo", seguimientolarval.DensidadCultivo },
-                                                                                                {"@FechaRegistro", seguimientolarval.FechaRegistro },
-                                                                                                {"@FactoresMedicion", seguimientolarval.FactoresMedicion },
-                                                                                                {"@IdMortalidad", seguimientolarval.Nombre },
-                                                                                                {"true", seguimientolarval.Estado },
-                                                                                                {"A",seguimientolarval }
+                                                                                            {   {"@p_Id", seguimientolarval.Id },
+                                                                                                {"@p_CantidadDeLarvas", seguimientolarval.CantidadDeLarvas },
+                                                                                                {"@p_CosechaLarvas", seguimientolarval.CosechaLarvas},
+                                                                                                {"@p_NumeroEstanque", seguimientolarval.NumeroEstanque},
+                                                                                                {"@p_DensidadCultivo", seguimientolarval.DensidadCultivo },
+                                                                                                {"@p_FechaRegistro", seguimientolarval.FechaRegistro.ToShortDateString() },
+                                                                                                {"@p_FactoresMedicion", seguimientolarval.FactoresMedicion },
+                                                                                                {"@p_IdMortalidad", seguimientolarval.IdMortalidad }
                                                                                            });
                 if (data.Rows.Count > 0)
                 {

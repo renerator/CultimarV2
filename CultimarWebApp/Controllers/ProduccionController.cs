@@ -13,24 +13,35 @@ namespace CultimarWebApp.Controllers
     {
         // GET: Produccion
         Control _control = new Control();
-        //public ActionResult SeguimientoCultivoLarval()
-        //{
-        //    try
-        //    {
-        //        var datosUsuario = new ObjetoLogin();
-        //        datosUsuario = (ObjetoLogin)Session["DatosUsuario"];
-        //        ViewBag.Message = "Bienvenido: " + datosUsuario.Nombre;
-        //        //IEnumerable<ObjetoSeguimientoLarval> model = _control.ListadoSeguimientoLarval();
+        public ActionResult SeguimientoCultivoLarval()
+        {
+            try
+            {
+                var datosUsuario = new ObjetoLogin();
+                datosUsuario = (ObjetoLogin)Session["DatosUsuario"];
+                ViewBag.Message = "Bienvenido: " + datosUsuario.Nombre;
+                IEnumerable<ObjetoSeguimientoLarval> model = _control.ListadoSeguimientoLarval();
 
-        //        //return View(model);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        new CapturaExcepciones(ex);
-        //        return ErrorPage(1001);
-        //        throw;
-        //    }
-        //}
+
+
+                IEnumerable<SelectListItem> TipoMortalidad = _control.ListadoTipoMortalidad().Select(c => new SelectListItem()
+                {
+                    Text = c.NombreMortalidad,
+                    Value = c.IdMortalidad.ToString()
+                }).ToList();
+
+                ViewBag.selectTipoM = TipoMortalidad;
+
+
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                new CapturaExcepciones(ex);
+                return ErrorPage(1001);
+                throw;
+            }
+        }
 
         public ActionResult RegistroProduccion()
         {
@@ -54,32 +65,33 @@ namespace CultimarWebApp.Controllers
         }
 
 
-        public JsonResult GrabaDatosLarval(int _CantidadDeLarvas,
-                                    int _CosechaLarvas,
-                                    int _NumeroEstanque,
-                                    int _DensidadCultivo,
-                                    DateTime _FechaRegistro,
-                                    string _FactoresMedicion,
-                                    string _Nombre,
-                                    bool _Estado)
+        public JsonResult GrabaDatosLarval(int _idCultivoLarval,
+                                           int _CantidadLarvas,
+                                           int _CosechaLarvas,
+                                           int _NumeroEstanque,
+                                           int _DensidadCultivo,
+                                           int _IdFactoresM,
+                                           int _selectTipoM)
         {
+
 
             var seguimientoLarval = new ObjetoSeguimientoLarval();
             var validador = 0;
 
-            seguimientoLarval.CantidadDeLarvas = _CantidadDeLarvas;
+            seguimientoLarval.Id = _idCultivoLarval;
+            seguimientoLarval.CantidadDeLarvas = _CantidadLarvas;
             seguimientoLarval.CosechaLarvas = _CosechaLarvas;
             seguimientoLarval.NumeroEstanque = _NumeroEstanque;
             seguimientoLarval.DensidadCultivo = _DensidadCultivo;
-            seguimientoLarval.FechaRegistro = _FechaRegistro;
-            seguimientoLarval.FactoresMedicion = _FactoresMedicion;
-            seguimientoLarval.Nombre = _Nombre;
+            seguimientoLarval.FechaRegistro = DateTime.Parse(DateTime.Today.ToShortDateString().ToString());
+            seguimientoLarval.FactoresMedicion = _IdFactoresM;
+            seguimientoLarval.IdMortalidad = _selectTipoM;
             seguimientoLarval.Estado = true;
 
-            //if (_control.setGrabaSeguimientoLarval(seguimientoLarval))
-            //{
-            //    validador = 1;
-            //}
+            if (_control.setGrabaSeguimientoLarval(seguimientoLarval))
+            {
+                validador = 1;
+            }
 
 
             return (Json(validador));
@@ -88,11 +100,11 @@ namespace CultimarWebApp.Controllers
         }
 
 
-        public JsonResult GrabaDatosRegistroProduccion(int _IdProduccion, 
+        public JsonResult GrabaDatosRegistroProduccion(int _IdProduccion,
                                                         int _CantidadProductoresMachos,
                                                        int _CantidadProductoresHembras,
                                                        string _FechaInicioCultivo,
-                                                       int _CantidadFecundada ,
+                                                       int _CantidadFecundada,
                                                        int _NumeroDesoveTemporada,
                                                        int _CantidadSembrada,
                                                        int _FactoresMedicion,
@@ -111,7 +123,7 @@ namespace CultimarWebApp.Controllers
             registoProduccion.CantidadSembrada = _CantidadSembrada;
             registoProduccion.FactoresMedicion = _FactoresMedicion;
             registoProduccion.NumeroEstanquesUtilizado = _NumeroEstanquesUtilizado;
-            registoProduccion.DensidadSiembra = _DensidadSiembra; 
+            registoProduccion.DensidadSiembra = _DensidadSiembra;
 
             if (_control.SetGrabaRegistroProduccion(registoProduccion))
             {

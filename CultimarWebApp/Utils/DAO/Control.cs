@@ -18,10 +18,10 @@ namespace CultimarWebApp.Utils.DAO
         private FactoryRegistroProduccion _dtFactoryRegistroProduccion = new FactoryRegistroProduccion();
         private FactoryMicroAlgas _dtMicroAlgas = new FactoryMicroAlgas();
 
-        //public List<ObjetoSeguimientoLarval> ListadoSeguimientoLarval()
-        //{
-        //    return _dtSegLarval.ListadoSeguimientoLarval(1);
-        //} 
+        public List<ObjetoSeguimientoLarval> ListadoSeguimientoLarval()
+        {
+            return _dtSegLarval.ListadoSeguimientoLarval();
+        }
 
         public List<ObjetoFactoresMedicion> ListadoFactorMedicion()
         {
@@ -29,10 +29,10 @@ namespace CultimarWebApp.Utils.DAO
         }
 
 
-        //public bool setGrabaSeguimientoLarval(ObjetoSeguimientoLarval larval)
-        //{
-        //    return _dtSegLarval.GrabaSegimientoLarval(larval);
-        //}
+        public bool setGrabaSeguimientoLarval(ObjetoSeguimientoLarval larval)
+        {
+            return _dtSegLarval.setGrabaSegimientoLarval(larval);
+        }
 
         //public bool SetEditaSegimientoLarval(ObjetoSeguimientoLarval larval)
         //{

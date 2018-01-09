@@ -7,18 +7,24 @@ namespace CultimarWebApp.Utils.Objetos
 {
     public class ObjetoSeguimientoLarval
     {
-        private Decimal _id;
+        private int _id;
         private int _cantidadDeLarvas;
         private int _cosechaLarvas;
         private int _numeroEstanque;
         private int _densidadCultivo;
         private DateTime _fechaRegistro;
-        private string _factoresMedicion;
+        private int _factoresMedicion;
         private string _nombre;
         private bool _estado;
+        private int _IdMortalidad;
 
+        public int IdMortalidad
+        {
+            get { return _IdMortalidad; }
+            set { _IdMortalidad = value; }
+        }
 
-        public Decimal Id
+        public int Id
         {
             get { return _id; }
             set { _id = value; }
@@ -48,7 +54,7 @@ namespace CultimarWebApp.Utils.Objetos
             get { return _fechaRegistro; }
             set { _fechaRegistro = value; }
         }
-        public string FactoresMedicion
+        public int FactoresMedicion
         {
             get { return _factoresMedicion; }
             set { _factoresMedicion = value; }
@@ -66,7 +72,7 @@ namespace CultimarWebApp.Utils.Objetos
 
 
 
-      
+
     }
 }
 
