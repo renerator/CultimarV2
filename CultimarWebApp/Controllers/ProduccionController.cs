@@ -20,9 +20,9 @@ namespace CultimarWebApp.Controllers
         //        var datosUsuario = new ObjetoLogin();
         //        datosUsuario = (ObjetoLogin)Session["DatosUsuario"];
         //        ViewBag.Message = "Bienvenido: " + datosUsuario.Nombre;
-        //      //  IEnumerable<ObjetoSeguimientoLarval> model = _control.ListadoSeguimientoLarval();
+        //        //IEnumerable<ObjetoSeguimientoLarval> model = _control.ListadoSeguimientoLarval();
 
-        //   //    return View(model);
+        //        //return View(model);
         //    }
         //    catch (Exception ex)
         //    {

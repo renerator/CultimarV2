@@ -24,36 +24,16 @@ function EditaProduccion(IdRegistroProduccion,
 
 $(document).ready(function () {
 
-    $("#datepicker").change(function () {
-        changedDate = $(this).val(); //in yyyy-mm-dd format obtained from datepicker
-        var date = new Date(changedDate);
-        dd_mm_yyyy = twoDigitDate(date) + "-" + twoDigitMonth(date) + "-" + date.getFullYear(); // in dd-mm-yyyy format
-        $('#single_cal1').val(dd_mm_yyyy);
-    });
-
-
+ 
  
 
     $("#tblRegistroProduccion").DataTable({
         paging: true,
         retrieve: true,
-        dom: 'Bfrtip',
-        buttons: [{
-            text: 'Excel',
-            extend: 'excel'
-        },
-        {
-            text: 'PDF',
-            extend: 'pdf'
-        }
-        ],
         searching: true,
+        responsive: true,
         "language": {
-            "lengthMenu": "Mostrar _MENU_ filas por Página",
-            "zeroRecords": "Sin Resultados",
-            "info": "Mostrando página _PAGE_ de _PAGES_",
-            "infoEmpty": "No se han encontrado registros",
-            "infoFiltered": "(Filtrando de un total de  _MAX_ registros)"
+            "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
         }
     });
     

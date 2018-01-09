@@ -2,15 +2,15 @@
     idOrigen,
     IdDestino,
     idFactorMedicion,
-    IdSeguimientoSemilla, 
-    single_cal1, 
+    IdSeguimientoSemilla,
+    single_cal1,
     IdCantidadOrigen,
-    IdCalibreOrigen, 
+    IdCalibreOrigen,
     IdCantidadCosechado,
     IdCantidadCalibre
-     ) {  
+) {
 
- 
+
     $("#IdSemilla").val(IdSeguimientoSemilla);
     $("#selectOrigen").val(idOrigen);
     $(single_cal1).val(single_cal1);
@@ -25,46 +25,15 @@
 
 $(document).ready(function () {
 
-    $("#datepicker").change(function () {
-        changedDate = $(this).val();  
-        var date = new Date(changedDate);
-        dd_mm_yyyy = twoDigitDate(date) + "-" + twoDigitMonth(date) + "-" + date.getFullYear();  
-        $('#single_cal1').val(dd_mm_yyyy);
-    });
-
-
-
-    $("#datepicker").change(function () {
-        changedDate = $(this).val(); 
-        var date = new Date(changedDate);
-        dd_mm_yyyy = twoDigitDate(date.getDay) + "-" + twoDigitMonth(date.getMonth) + "-" + date.getFullYear(); // in dd-mm-yyyy format
-        $('#single_cal1').val(dd_mm_yyyy);
-    });
-
-
-
-
+     
 
     $("#tblSeguimientosSemilla").DataTable({
         paging: true,
         retrieve: true,
-        dom: 'Bfrtip',
-        buttons: [{
-            text: 'Excel',
-            extend: 'excel'
-        },
-        {
-            text: 'PDF',
-            extend: 'pdf'
-        }
-        ],
         searching: true,
+        responsive: true,
         "language": {
-            "lengthMenu": "Mostrar _MENU_ filas por Página",
-            "zeroRecords": "Sin Resultados",
-            "info": "Mostrando página _PAGE_ de _PAGES_",
-            "infoEmpty": "No se han encontrado registros",
-            "infoFiltered": "(Filtrando de un total de  _MAX_ registros)"
+            "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
         }
     });
 
