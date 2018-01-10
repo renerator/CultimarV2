@@ -12,18 +12,28 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="~/Content/Publico/assets/images/justice-128x128-128x128.png" type="image/x-icon">
+    <link rel="shortcut icon" href="~/Favicon.png" type="image/x-icon">
     <title>Inicio de Sesión | Produce Software Ltda.</title>
     <link href="~/Scripts/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="~/Scripts/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="~/Scripts/vendors/nprogress/nprogress.css" rel="stylesheet">
     <link href="~/Scripts/vendors/animate.css/animate.min.css" rel="stylesheet">
     <link href="~/Content/css/custom.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url(../../images/DJI_0033.JPG) !important;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+    </style>
 </head>
-<body class="login">
+<body>
     <div>
         <div class="login_wrapper">
             <div class="animate form login_form">
+                
                 <section class="login_content">
                     @using (Html.BeginForm("Index", "Login", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
                     {
