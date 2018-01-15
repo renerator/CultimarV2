@@ -33,8 +33,94 @@ function EditaTipoSistema(idtipoSistema, nombreSistema) {
     $("#nombreTipoSistema").val(nombreSistema);
 }
 
-$(document).ready(function () {
+function EditaTipoAlimento(idTipoAlimento, nombreTipoAlimento, descripcionTipoAlimento)
+{
+    $("#IdtipoAlimento").val(idTipoAlimento);
+    $("#nombreTipoAlimento").val(nombreTipoAlimento);
+    $("#descripcionTipoAlimento").val(descripcionTipoAlimento);
+}
 
+function EditaAlimento(idAlimento, nombreAlimento, idTipoAlimento)
+{
+    $("#IdAlimento").val(idAlimento);
+    $("#nombreAlimento").val(nombreAlimento);
+    $("#selectTipoAlimento").val(idTipoAlimento);
+}
+
+$(document).ready(function () {
+    
+    
+    $("#tblParametrosCalibre").DataTable({
+        paging: true,
+        retrieve: true,
+        dom: 'Bfrtip',
+        buttons: [{
+            text: 'Excel',
+            extend: 'excel'
+        },
+        {
+            text: 'PDF',
+            extend: 'pdf'
+        }
+        ],
+        searching: true,
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json",
+            "lengthMenu": "Mostrar _MENU_ filas por Página",
+            "zeroRecords": "Sin Resultados",
+            "info": "Mostrando página _PAGE_ de _PAGES_",
+            "infoEmpty": "No se han encontrado registros",
+            "infoFiltered": "(Filtrando de un total de  _MAX_ registros)"
+        }
+    });
+
+    $("#tblParametrosAlimentos").DataTable({
+        paging: true,
+        retrieve: true,
+        dom: 'Bfrtip',
+        buttons: [{
+            text: 'Excel',
+            extend: 'excel'
+        },
+        {
+            text: 'PDF',
+            extend: 'pdf'
+        }
+        ],
+        searching: true,
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json",
+            "lengthMenu": "Mostrar _MENU_ filas por Página",
+            "zeroRecords": "Sin Resultados",
+            "info": "Mostrando página _PAGE_ de _PAGES_",
+            "infoEmpty": "No se han encontrado registros",
+            "infoFiltered": "(Filtrando de un total de  _MAX_ registros)"
+        }
+    });
+    
+    $("#tblParametrosTipoAlimentos").DataTable({
+        paging: true,
+        retrieve: true,
+        dom: 'Bfrtip',
+        buttons: [{
+            text: 'Excel',
+            extend: 'excel'
+        },
+        {
+            text: 'PDF',
+            extend: 'pdf'
+        }
+        ],
+        searching: true,
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json",
+            "lengthMenu": "Mostrar _MENU_ filas por Página",
+            "zeroRecords": "Sin Resultados",
+            "info": "Mostrando página _PAGE_ de _PAGES_",
+            "infoEmpty": "No se han encontrado registros",
+            "infoFiltered": "(Filtrando de un total de  _MAX_ registros)"
+        }
+    });
    
     $("#tblParametrosTipoSistema").DataTable({
         paging: true,
@@ -201,8 +287,75 @@ $(document).ready(function () {
             "infoFiltered": "(Filtrando de un total de  _MAX_ registros)"
         }
     });
-
     
+    $("#btnGrabarParametrosAlimentos").click(function () {
+        var ID = $("#IdAlimento").val();
+        if (ID != null && ID != "") {
+            ID = ID;
+        }
+        else {
+            ID = -1;
+        }
+        $.ajax({
+            url: "GrabaParametroAlimento",
+            type: "POST",
+            data: { idAlimento: ID, nombreAlimento: $("#nombreAlimento").val(), idTipoAlimento: $("#selectTipoAlimento").val() },
+            async: true,
+            success: function (data) {
+                if (data == 1) {
+                    $("#btnCerrarModalAlimentos").click();
+                    alert("El Ingreso se ha realizado sin problemas.");
+                }
+                if (data == 2) {
+                    alert("No se puede grabar el dato en la BD, intentalo nuevamente.");
+                }
+                if (data == 3) {
+                    alert("El nombre del parametro no puede estar vacio, no se ha realizado la operación.");
+                }
+                if (data == -1) {
+                    top.location.href = 'ErrorPage?error=101';
+                }
+                if (data == 0) {
+                    alert("Hay un problema con el metodo de grabación, reinicia la sesión e intentalo nuevamente.");
+                }
+            }
+        });
+    });
+
+    $("#btnGrabarParametrosTipoAlimento").click(function () {
+        var ID = $("#IdtipoAlimento").val();
+        if (ID != null && ID != "") {
+            ID = ID;
+        }
+        else {
+            ID = -1;
+        }
+        $.ajax({
+            url: "GrabaParametroTipoAlimento",
+            type: "POST",
+            data: { idTipoAlimento: ID, nombreTipoAlimento: $("#nombreTipoAlimento").val(), descripcionTipoAlimento: $("#descripcionTipoAlimento").val() },
+            async: true,
+            success: function (data) {
+                if (data == 1) {
+                    $("#btnCerrarModalTipoAlimento").click();
+                    alert("El Ingreso se ha realizado sin problemas.");
+                }
+                if (data == 2) {
+                    alert("No se puede grabar el dato en la BD, intentalo nuevamente.");
+                }
+                if (data == 3) {
+                    alert("El nombre del parametro no puede estar vacio, no se ha realizado la operación.");
+                }
+                if (data == -1) {
+                    top.location.href = 'ErrorPage?error=101';
+                }
+                if (data == 0) {
+                    alert("Hay un problema con el metodo de grabación, reinicia la sesión e intentalo nuevamente.");
+                }
+            }
+        });
+    });
+
     $("#btnGrabarParametrosTipoSistema").click(function () {
         var ID = $("#idTipoSistema").val();
         if (ID != null && ID != "") {

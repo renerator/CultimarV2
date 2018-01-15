@@ -313,6 +313,74 @@ namespace CultimarWebApp.Utils.DAO
             return ListadoTipoSistema;
         }
         /// <summary>
+        /// Listado tipo de Alimentos
+        /// </summary>
+        /// <returns>Objeto tipo Alimentos con los parametros que corresponden</returns>
+        public List<ObjetoAlimentos> ListadoTipoAlimentos()
+        {
+            var ListadoTipoAlimento = new List<ObjetoAlimentos>();
+            var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_GET_LISTADOTIPOALIMENTO", new System.Collections.Hashtable());
+
+            if (data.Rows.Count > 0)
+            {
+                for (var i = 0; i < data.Rows.Count; i++)
+                {
+                    var validador = new object();
+                    var resultadoListado = new ObjetoAlimentos();
+                    validador = data.Rows[i].Field<object>("idTipoAlimento");
+                    resultadoListado.IdTipoAlimento = validador != null ? data.Rows[i].Field<int>("idTipoAlimento") : -1;
+
+                    validador = data.Rows[i].Field<object>("NombreTipoAlimento");
+                    resultadoListado.NombreTipoAlimento = validador != null ? data.Rows[i].Field<string>("NombreTipoAlimento") : "NO ASIGNADO";
+
+                    validador = data.Rows[i].Field<object>("Descripcion");
+                    resultadoListado.DescripcionTipoAlimento = validador != null ? data.Rows[i].Field<string>("Descripcion") : "NO ASIGNADO";
+
+                    validador = data.Rows[i].Field<object>("Activo");
+                    resultadoListado.EstadoTipoAlimento = validador != null ? data.Rows[i].Field<bool>("Activo") : false;
+
+                    ListadoTipoAlimento.Add(resultadoListado);
+                }
+            }
+            return ListadoTipoAlimento;
+        }
+        /// <summary>
+        /// Listado de Alimentos
+        /// </summary>
+        /// <returns>Listado con objeto de Alimentos con los parametros que correspondan</returns>
+        public List<ObjetoAlimentos> ListadoAlimentos()
+        {
+            var ListadoAlimentos = new List<ObjetoAlimentos>();
+            var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_GET_LISTADOALIMENTOS", new System.Collections.Hashtable());
+
+            if (data.Rows.Count > 0)
+            {
+                for (var i = 0; i < data.Rows.Count; i++)
+                {
+                    var validador = new object();
+                    var resultadoListado = new ObjetoAlimentos();
+                    validador = data.Rows[i].Field<object>("idAlimento");
+                    resultadoListado.IdAlimento = validador != null ? data.Rows[i].Field<int>("idAlimento") : -1;
+
+                    validador = data.Rows[i].Field<object>("NombreAlimento");
+                    resultadoListado.NombreAlimento = validador != null ? data.Rows[i].Field<string>("NombreAlimento") : "NO ASIGNADO";
+
+                    validador = data.Rows[i].Field<object>("idTipoAlimento");
+                    resultadoListado.IdTipoAlimento = validador != null ? data.Rows[i].Field<int>("idTipoAlimento") : -1;
+
+                    validador = data.Rows[i].Field<object>("NombreTipoAlimento");
+                    resultadoListado.NombreTipoAlimento = validador != null ? data.Rows[i].Field<string>("NombreTipoAlimento") : "NO ASIGNADO";
+
+
+                    validador = data.Rows[i].Field<object>("Activo");
+                    resultadoListado.EstadoAlimento = validador != null ? data.Rows[i].Field<bool>("Activo") : false;
+
+                    ListadoAlimentos.Add(resultadoListado);
+                }
+            }
+            return ListadoAlimentos;
+        }
+        /// <summary>
         /// Listado de Factores de medicion
         /// </summary>
         /// <returns>lista con los factores de medicion</returns>
@@ -553,6 +621,69 @@ namespace CultimarWebApp.Utils.DAO
             }
             return respuesta;
         }
+        /// <summary>
+        /// Metodo que graba tipos de alimentos para asociar a los alimentos.
+        /// </summary>
+        /// <param name="tipoAlimento">objeto TipoAlimento con los parametros de entrada</param>
+        /// <returns>true o false si corresponde.</returns>
+        public bool SetGrabaParametrosTipoAlimento(ObjetoAlimentos tipoAlimento)
+        {
+            var respuesta = false;
+            try
+            {
+                var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_SET_GRABATIPOALIMENTOS", new System.Collections.Hashtable()
+                                                                                            {
+                                                                                                {"idTipoAlimento", tipoAlimento.IdTipoAlimento },
+                                                                                                {"nombreTipoAlimento",tipoAlimento.NombreTipoAlimento },
+                                                                                                {"descripcionTipoAlimento",tipoAlimento.DescripcionTipoAlimento }
+                                                                                            });
+                if (data.Rows.Count > 0)
+                {
+                    respuesta = true;
+                }
+            }
+            catch (SqlException ex)
+            {
+                new CapturaExcepciones(ex);
+            }
+            catch (Exception ex)
+            {
+                new CapturaExcepciones(ex);
+            }
+            return respuesta;
+        }
+        /// <summary>
+        /// Metodo de grabacion de Alimentos con asociacion a tipos de alimentos
+        /// </summary>
+        /// <param name="tipoAlimento">objeto tipo Alimentos con los parametros de entrada</param>
+        /// <returns>true o false segun el caso</returns>
+        public bool SetGrabaParametrosAlimento(ObjetoAlimentos tipoAlimento)
+        {
+            var respuesta = false;
+            try
+            {
+                var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_SET_GRABAALIMENTOS", new System.Collections.Hashtable()
+                                                                                            {
+                                                                                                {"idAlimento", tipoAlimento.IdAlimento },
+                                                                                                {"nombreAlimento",tipoAlimento.NombreAlimento },
+                                                                                                {"idTipoAlimento",tipoAlimento.IdTipoAlimento }
+                                                                                            });
+                if (data.Rows.Count > 0)
+                {
+                    respuesta = true;
+                }
+            }
+            catch (SqlException ex)
+            {
+                new CapturaExcepciones(ex);
+            }
+            catch (Exception ex)
+            {
+                new CapturaExcepciones(ex);
+            }
+            return respuesta;
+        }
+
         /// <summary>
         /// metodo de grabacion de parametros de Tipo de Identificacion
         /// </summary>

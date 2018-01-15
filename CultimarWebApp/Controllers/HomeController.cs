@@ -50,6 +50,21 @@ namespace CultimarWebApp.Controllers
                 ViewBag.ParametrosTipoMortalidad = parametrosTipoMortalidad;
                 IEnumerable<ObjetoTipoSistema> parametrosTipoSistema = _control.ListadoTipoSistema();
                 ViewBag.ParametrosTipoSistema = parametrosTipoSistema;
+                IEnumerable<ObjetoAlimentos> parametrosTipoAlimentos = _control.ListadoTipoAlimentos();
+                ViewBag.ParametrosTipoAlimentos = parametrosTipoAlimentos;
+                IEnumerable<ObjetoAlimentos> parametrosAlimentos = _control.ListadoAlimentos();
+                ViewBag.ParametrosAlimentos = parametrosAlimentos;
+
+                IEnumerable<SelectListItem> selectTipoAlimento = _control.ListadoTipoAlimentos().Select(c => new SelectListItem()
+                {
+                    Text = c.NombreTipoAlimento,
+                    Value = c.IdTipoAlimento.ToString()
+                }).ToList();
+                ViewBag.SelectTipoAlimento = selectTipoAlimento;
+
+                //var list = _control.ListadoTipoMortalidad();
+                //ViewBag.MultiSelector = new MultiSelectList(list, "IdMortalidad", "NombreMortalidad");
+
 
 
                 return View();
@@ -437,6 +452,80 @@ namespace CultimarWebApp.Controllers
             return (Json(validador));
         }
 
+        public JsonResult GrabaParametroTipoAlimento(int idTipoAlimento, string nombreTipoAlimento, string descripcionTipoAlimento)
+        {
+            var validador = 0;
+            try
+            {
+                if (!string.IsNullOrEmpty(nombreTipoAlimento) && !string.IsNullOrEmpty(descripcionTipoAlimento))
+                {
+                    var pTipoAlimento = new ObjetoAlimentos()
+                    {
+                        IdTipoAlimento = idTipoAlimento,
+                        NombreTipoAlimento = nombreTipoAlimento,
+                        DescripcionTipoAlimento = descripcionTipoAlimento
+
+                    };
+                    if (_control.SetGrabaParametroTipoAlimento(pTipoAlimento))
+                    {
+                        validador = 1;
+                    }
+                    else
+                    {
+                        validador = 2;
+                    }
+                }
+                else
+                {
+                    validador = 3;
+                }
+            }
+            catch (Exception ex)
+            {
+                new CapturaExcepciones(ex);
+                validador = -1;
+                throw;
+            }
+
+            return (Json(validador));
+        }
+        public JsonResult GrabaParametroAlimento(int idAlimento, string nombreAlimento, int idTipoAlimento)
+        {
+            var validador = 0;
+            try
+            {
+                if (!string.IsNullOrEmpty(nombreAlimento))
+                {
+                    var pAlimento = new ObjetoAlimentos()
+                    {
+                        IdAlimento = idAlimento,
+                        NombreAlimento = nombreAlimento,
+                        IdTipoAlimento = idTipoAlimento
+
+                    };
+                    if (_control.SetGrabaParametroAlimento(pAlimento))
+                    {
+                        validador = 1;
+                    }
+                    else
+                    {
+                        validador = 2;
+                    }
+                }
+                else
+                {
+                    validador = 3;
+                }
+            }
+            catch (Exception ex)
+            {
+                new CapturaExcepciones(ex);
+                validador = -1;
+                throw;
+            }
+
+            return (Json(validador));
+        }
 
 
         public ActionResult ErrorPage(int error)

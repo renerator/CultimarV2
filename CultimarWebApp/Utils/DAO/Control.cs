@@ -120,6 +120,16 @@ namespace CultimarWebApp.Utils.DAO
             return _dtFac.ListadoTipoSistema();
         }
 
+        public List<ObjetoAlimentos> ListadoTipoAlimentos()
+        {
+            return _dtFac.ListadoTipoAlimentos();
+        }
+
+        public List<ObjetoAlimentos> ListadoAlimentos()
+        {
+            return _dtFac.ListadoAlimentos();
+        }
+
         public List<ObjetoFactoresMedicion> ListaFactoresMedicion()
         {
             return _dtFac.ListadoFactoresMedicion();
@@ -179,6 +189,16 @@ namespace CultimarWebApp.Utils.DAO
         public bool SetGrabaParametrosTipoContenedor(ObjetoTipoContenedor tipoContenedor)
         {
             return _dtFac.SetGrabaParametrosTipoContenedor(tipoContenedor);
+        }
+
+        public bool SetGrabaParametroTipoAlimento(ObjetoAlimentos tipoAlimento)
+        {
+            return _dtFac.SetGrabaParametrosTipoAlimento(tipoAlimento);
+        }
+
+        public bool SetGrabaParametroAlimento(ObjetoAlimentos alimento)
+        {
+            return _dtFac.SetGrabaParametrosAlimento(alimento);
         }
         public bool SetGrabaParametrosTipoIdentificacion(ObjetoTipoIdentificacion tipoIdentificacion)
         {
