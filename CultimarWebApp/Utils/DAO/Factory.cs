@@ -381,6 +381,38 @@ namespace CultimarWebApp.Utils.DAO
             return ListadoAlimentos;
         }
         /// <summary>
+        /// Listado Calibres del sistema
+        /// </summary>
+        /// <returns>objeto tipo calibre con los campos correspondientes</returns>
+        public List<ObjetoCalibre> ListadoCalibre()
+        {
+            var ListaCalibre = new List<ObjetoCalibre>();
+            var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_GET_LISTADOCALIBRE", new System.Collections.Hashtable());
+
+            if (data.Rows.Count > 0)
+            {
+                for (var i = 0; i < data.Rows.Count; i++)
+                {
+                    var validador = new object();
+                    var resultadoListado = new ObjetoCalibre();
+                    validador = data.Rows[i].Field<object>("idCalibre");
+                    resultadoListado.IdCalibre = validador != null ? data.Rows[i].Field<int>("idCalibre") : -1;
+
+                    validador = data.Rows[i].Field<object>("TipoCalibre");
+                    resultadoListado.NombreCalibre = validador != null ? data.Rows[i].Field<string>("TipoCalibre") : "NO ASIGNADO";
+
+                    validador = data.Rows[i].Field<object>("Descripcion");
+                    resultadoListado.DescripcionCalibre = validador != null ? data.Rows[i].Field<string>("Descripcion") : "NO ASIGNADO";
+                    
+                    validador = data.Rows[i].Field<object>("Activo");
+                    resultadoListado.Estado = validador != null ? data.Rows[i].Field<bool>("Activo") : false;
+
+                    ListaCalibre.Add(resultadoListado);
+                }
+            }
+            return ListaCalibre;
+        }
+        /// <summary>
         /// Listado de Factores de medicion
         /// </summary>
         /// <returns>lista con los factores de medicion</returns>
@@ -416,6 +448,21 @@ namespace CultimarWebApp.Utils.DAO
                     validador = data.Rows[i].Field<object>("Oxigeno");
                     resultadoListado.OxigenoFactor = validador != null ? data.Rows[i].Field<string>("Oxigeno") : "NO ASIGNADO";
 
+                    validador = data.Rows[i].Field<object>("UltimoTamizado");
+                    resultadoListado.UltimoTamizado = validador != null ? data.Rows[i].Field<DateTime>("UltimoTamizado") : DateTime.Now;
+
+                    validador = data.Rows[i].Field<object>("idCalibre");
+                    resultadoListado.IdCalibre = validador != null ? data.Rows[i].Field<int>("idCalibre") : -1;
+
+                    validador = data.Rows[i].Field<object>("TipoCalibre");
+                    resultadoListado.NombreCalibre = validador != null ? data.Rows[i].Field<string>("TipoCalibre") : "NO ASIGNADO";
+
+                    validador = data.Rows[i].Field<object>("Ploidia");
+                    resultadoListado.Ploidia = validador != null ? data.Rows[i].Field<string>("Ploidia") : "NO ASIGNADO";
+
+                    validador = data.Rows[i].Field<object>("Volumen");
+                    resultadoListado.Volumen = validador != null ? data.Rows[i].Field<string>("Volumen") : "NO ASIGNADO";
+                    
                     validador = data.Rows[i].Field<object>("Estado");
                     resultadoListado.Estado = validador != null ? data.Rows[i].Field<bool>("Estado") : false;
 
@@ -667,6 +714,33 @@ namespace CultimarWebApp.Utils.DAO
                                                                                                 {"idAlimento", tipoAlimento.IdAlimento },
                                                                                                 {"nombreAlimento",tipoAlimento.NombreAlimento },
                                                                                                 {"idTipoAlimento",tipoAlimento.IdTipoAlimento }
+                                                                                            });
+                if (data.Rows.Count > 0)
+                {
+                    respuesta = true;
+                }
+            }
+            catch (SqlException ex)
+            {
+                new CapturaExcepciones(ex);
+            }
+            catch (Exception ex)
+            {
+                new CapturaExcepciones(ex);
+            }
+            return respuesta;
+        }
+
+        public bool SetGrabaParametrosCalibre(ObjetoCalibre calibre)
+        {
+            var respuesta = false;
+            try
+            {
+                var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_SET_GRABACALIBRE", new System.Collections.Hashtable()
+                                                                                            {
+                                                                                                {"idcalibre", calibre.IdCalibre },
+                                                                                                {"nombreCalibre",calibre.NombreCalibre },
+                                                                                                {"descripcionCalibre",calibre.DescripcionCalibre }
                                                                                             });
                 if (data.Rows.Count > 0)
                 {

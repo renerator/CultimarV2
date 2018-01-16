@@ -54,6 +54,8 @@ namespace CultimarWebApp.Controllers
                 ViewBag.ParametrosTipoAlimentos = parametrosTipoAlimentos;
                 IEnumerable<ObjetoAlimentos> parametrosAlimentos = _control.ListadoAlimentos();
                 ViewBag.ParametrosAlimentos = parametrosAlimentos;
+                IEnumerable<ObjetoCalibre> parametroCalibre = _control.ListadoCalibre();
+                ViewBag.ParametroCalibre = parametroCalibre;
 
                 IEnumerable<SelectListItem> selectTipoAlimento = _control.ListadoTipoAlimentos().Select(c => new SelectListItem()
                 {
@@ -85,6 +87,16 @@ namespace CultimarWebApp.Controllers
                 datosUsuario = (ObjetoLogin)Session["DatosUsuario"];
                 ViewBag.Message = "Bienvenido: " + datosUsuario.Nombre;
                 IEnumerable<ObjetoFactoresMedicion> model = _control.ListaFactoresMedicion();
+
+
+                IEnumerable<SelectListItem> selectTipoCalibre = _control.ListadoCalibre().Select(c => new SelectListItem()
+                {
+                    Text = c.NombreCalibre,
+                    Value = c.IdCalibre.ToString()
+                }).ToList();
+                ViewBag.SelectCalibre = selectTipoCalibre;
+
+
                 return View(model);
             }
             catch (Exception ex)
@@ -504,6 +516,44 @@ namespace CultimarWebApp.Controllers
 
                     };
                     if (_control.SetGrabaParametroAlimento(pAlimento))
+                    {
+                        validador = 1;
+                    }
+                    else
+                    {
+                        validador = 2;
+                    }
+                }
+                else
+                {
+                    validador = 3;
+                }
+            }
+            catch (Exception ex)
+            {
+                new CapturaExcepciones(ex);
+                validador = -1;
+                throw;
+            }
+
+            return (Json(validador));
+        }
+
+        public JsonResult GrabaParametroCalibre(int idCalibre, string nombrecalibre, string descripcionCalibre)
+        {
+            var validador = 0;
+            try
+            {
+                if (!string.IsNullOrEmpty(nombrecalibre))
+                {
+                    var pCalibre = new ObjetoCalibre()
+                    {
+                        IdCalibre = idCalibre,
+                        NombreCalibre = nombrecalibre,
+                        DescripcionCalibre = descripcionCalibre
+
+                    };
+                    if (_control.SetGrabaParametroCalibre(pCalibre))
                     {
                         validador = 1;
                     }

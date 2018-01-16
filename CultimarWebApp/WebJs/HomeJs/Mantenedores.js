@@ -47,6 +47,13 @@ function EditaAlimento(idAlimento, nombreAlimento, idTipoAlimento)
     $("#selectTipoAlimento").val(idTipoAlimento);
 }
 
+function EditaCalibre(idCalibre, nombreCalibre, descripcionCalibre)
+{
+    $("#idCalibre").val(idCalibre);
+    $("#nombreCalibre").val(nombreCalibre);
+    $("#descripcionCalibre").val(descripcionCalibre);
+}
+
 $(document).ready(function () {
     
     
@@ -287,6 +294,44 @@ $(document).ready(function () {
             "infoFiltered": "(Filtrando de un total de  _MAX_ registros)"
         }
     });
+
+    //GrabaParametroCalibre(int idCalibre, string nombrecalibre, string descripcionCalibre)
+    
+    $("#btnGrabarParametrosCalibre").click(function () {
+        var ID = $("#idCalibre").val();
+        if (ID != null && ID != "") {
+            ID = ID;
+        }
+        else {
+            ID = -1;
+        }
+        $.ajax({
+            url: "GrabaParametroCalibre",
+            type: "POST",
+            data: { idCalibre: ID, nombreCalibre: $("#nombreCalibre").val(), descripcionCalibre: $("#descripcionCalibre").val() },
+            async: true,
+            success: function (data) {
+                if (data == 1) {
+                    $("#btnCerrarModalCalibre").click();
+                    alert("El Ingreso se ha realizado sin problemas.");
+                }
+                if (data == 2) {
+                    alert("No se puede grabar el dato en la BD, intentalo nuevamente.");
+                }
+                if (data == 3) {
+                    alert("El nombre del parametro no puede estar vacio, no se ha realizado la operación.");
+                }
+                if (data == -1) {
+                    top.location.href = 'ErrorPage?error=101';
+                }
+                if (data == 0) {
+                    alert("Hay un problema con el metodo de grabación, reinicia la sesión e intentalo nuevamente.");
+                }
+            }
+        });
+    });
+
+
     
     $("#btnGrabarParametrosAlimentos").click(function () {
         var ID = $("#IdAlimento").val();

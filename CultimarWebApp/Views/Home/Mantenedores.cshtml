@@ -49,7 +49,7 @@
                         <div class="x_content">
                             
                                 <!-- start accordion -->
-                                <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
+                                <div class="accordion" id="accordion" role="tablist" aria-multiselectable="false">
                                     <!-- Parametros de Alimentos-->
                                     <div class="panel">
                                         <a class="panel-heading" role="tab" id="headingCero" data-toggle="collapse" data-parent="#accordion" href="#collapseCero" aria-expanded="true" aria-controls="collapseCero">
@@ -220,10 +220,10 @@
                                     <!-- Fin Parametros Alimentos-->
                                     <!-- Parametros de Origen-->
                                     <div class="panel">
-                                        <a class="panel-heading collapsed" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                        <a class="panel-heading collapsed" role="tab" id="headingOnes" data-toggle="collapse" data-parent="#accordion" href="#collapseOnes" aria-expanded="false" aria-controls="collapseOnes">
                                             <h4 class="panel-title">Mantenedor de Origen</h4>
                                         </a>
-                                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                        <div id="collapseOnes" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOnes">
                                             <div class="panel-body">
                                                 <p>
                                                     <strong>En esta sección veras un listado con los parametros de Origen, podras agregar uno nuevo si así lo requieres</strong>
@@ -749,19 +749,19 @@
                                                 </p>
                                                 <div class="table-responsive">
                                                     @{
-                                                        var gridCalibre = new WebGrid(source: ViewBag.ParametrosTipoSistema, canPage: false);
+                                                        var gridCalibre = new WebGrid(source: ViewBag.ParametroCalibre, canPage: false);
                                                     }
-                                                    @gridTipoSistema.GetHtml(
+                                                    @gridCalibre.GetHtml(
                                                                         htmlAttributes: new { id = "tblParametrosCalibre" },
                                                                         tableStyle: "table table-bordered",
                                                                         columns:
-                                                                            gridTipoSistema.Columns(
-                                                                                gridTipoSistema.Column(header: "Identificador", format: @<text>@item.IdTipoSistema</text>),
-                                                                                gridTipoSistema.Column(header: "Calibre", format: @<text>@item.NombreSistema</text>),
-                                                                                gridTipoSistema.Column(header: "Descripción", format: @<text>@item.NombreSistema</text>),
-                                                                                gridTipoSistema.Column(header: "Estado", format: item => item.Estado ?
+                                                                            gridCalibre.Columns(
+                                                                                gridCalibre.Column(header: "Identificador", format: @<text>@item.IdCalibre</text>),
+                                                                                gridCalibre.Column(header: "Calibre", format: @<text>@item.NombreCalibre</text>),
+                                                                                gridCalibre.Column(header: "Descripción", format: @<text>@item.DescripcionCalibre</text>),
+                                                                                gridCalibre.Column(header: "Estado", format: item => item.Estado ?
                                                                                     Html.Raw("<i class='fa fa-thumbs-up' data-toggle='tooltip' data-placement='top' title='' data-original-title='Parametro Activo'></i>") : Html.Raw("<i class='fa fa-thumbs-down' data-toggle='tooltip' data-placement='top' title='' data-original-title='Parametro Inactivo'></i>")),
-                                                                                    gridTipoSistema.Column(header: "Editar", format: @<button class="btn btn-success" type="button" data-toggle="modal" tooltip="Editar Parametro" data-target="#modalPopUpIngresoTipoSistema" onclick="EditaTipoSistema(@item.IdTipoSistema,'@item.NombreSistema')">Editar</button>))
+                                                                                    gridCalibre.Column(header: "Editar", format: @<button class="btn btn-success" type="button" data-toggle="modal" tooltip="Editar Parametro" data-target="#modalPopUpIngresoCalibre" onclick="EditaCalibre(@item.IdCalibre,'@item.NombreCalibre','@item.DescripcionCalibre')">Editar</button>))
                                                                             )
                                                 </div>
                                                 <div class="form-group">

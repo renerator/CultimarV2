@@ -35,22 +35,23 @@
                                                             htmlAttributes: new { id = "tblFactoresMedicion" },
                                                             tableStyle: "table table-bordered",
                                                             columns:
-                                                                grid.Columns(
+                                                                grid.Columns
+                                                                (
                                                                     grid.Column(header: "Identificador", format: @<text>@item.IdFactor</text>),
                                                                     grid.Column(header: "Nombre Factor", format: @<text>@item.NombreFactor</text>),
-                                                                    grid.Column(header: "Parametro Factor", format: @<text>@item.ParametroFactor</text>),
-                                                                    grid.Column(header: "Frecuencia Factor", format: @<text>@item.FrecuenciaFactor</text>),
-                                                                    grid.Column(header: "Temperatura Factor", format: @<text>@item.TemperaturaFactor</text>),
-                                                                    grid.Column(header: "Alimentación Factor", format: @<text>@item.AlimentacionFactor</text>),
-                                                                    grid.Column(header: "Oxigeno Factor", format: @<text>@item.OxigenoFactor</text>)
-                                                                ))
+                                                                    grid.Column(header: "Ultimo Tamizado", format: @<text>@item.UltimoTamizado.ToString("dd/MM/yyyy")</text>),
+                                                                    grid.Column(header: "Tipo Calibre", format: @<text>@item.NombreCalibre</text>),
+                                                                    grid.Column(header: "Ploidia", format: @<text>@item.Ploidia</text>),
+                                                                    grid.Column(header: "Volumen", format: @<text>@item.Volumen</text>)
+                                                                 )
+                                                 )
                         </div>
                         <div class="form-group">
                             <div>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Agregar Nuevo Factor de Medición</button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalFactorMedicion">Agregar Nuevo Factor de Medición</button>
                             </div>
                         </div>
-                        <div id="modalPopUpIngresoUsuario" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div id="modalFactorMedicion" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -63,30 +64,27 @@
                                         <h4>Ingrese los datos solicitados</h4>
                                         <div class="x_content">
                                             <br />
+                                            <input type="text" id="idFactor" style="display: none;">
                                             <form class="form-horizontal form-label-left input_mask">
                                                 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                                                     <input type="text" required="required" class="form-control has-feedback-left" id="nombreFactor" placeholder="Nombre Factor">
                                                     <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                                                 </div>
                                                 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                                                    <input type="text" required="required" class="form-control" id="parametroFactor" placeholder="Parametro Factor">
+                                                    <input type="text" required="required" class="form-control" id="ultimoTamizado" placeholder="Ultimo Tamizado">
                                                     <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                                                 </div>
                                                 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                                                    <input type="text" required="required" class="form-control has-feedback-left" id="frecuenciaFactor" placeholder="Frecuencia Factor">
+                                                    @Html.DropDownList("TipoCalibre", (IEnumerable<SelectListItem>)ViewBag.SelectCalibre, "Tipo Calibre", new { @class = "form-control", @ID = "selectTipoCalibre" })
+                                                    @*<span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>*@
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                                    <input type="text" required="required" class="form-control" id="ploidia" placeholder="Ploidia">
+                                                    <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                                    <input type="text" required="required" class="form-control has-feedback-left" id="volumen" placeholder="Volumen">
                                                     <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-                                                </div>
-                                                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                                                    <input type="text" required="required" class="form-control" id="temperaturaFactor" placeholder="Temperatura Factor">
-                                                    <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
-                                                </div>
-                                                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                                                    <input type="text" required="required" class="form-control has-feedback-left" id="alimentacionFactor" placeholder="Alimentación Factor">
-                                                    <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-                                                </div>
-                                                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                                                    <input type="text" required="required" class="form-control" id="oxigenoFactor" placeholder="Oxigeno Factor">
-                                                    <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                                                 </div>
                                                 <div class="ln_solid"></div>
                                                 <div class="form-group">

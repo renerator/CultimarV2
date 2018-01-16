@@ -129,6 +129,10 @@ namespace CultimarWebApp.Utils.DAO
         {
             return _dtFac.ListadoAlimentos();
         }
+        public List<ObjetoCalibre> ListadoCalibre()
+        {
+            return _dtFac.ListadoCalibre();
+        }
 
         public List<ObjetoFactoresMedicion> ListaFactoresMedicion()
         {
@@ -199,6 +203,11 @@ namespace CultimarWebApp.Utils.DAO
         public bool SetGrabaParametroAlimento(ObjetoAlimentos alimento)
         {
             return _dtFac.SetGrabaParametrosAlimento(alimento);
+        }
+
+        public bool SetGrabaParametroCalibre(ObjetoCalibre calibre)
+        {
+            return _dtFac.SetGrabaParametrosCalibre(calibre);
         }
         public bool SetGrabaParametrosTipoIdentificacion(ObjetoTipoIdentificacion tipoIdentificacion)
         {
