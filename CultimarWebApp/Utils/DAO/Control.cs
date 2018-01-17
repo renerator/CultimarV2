@@ -223,9 +223,9 @@ namespace CultimarWebApp.Utils.DAO
             return _dtFac.setGrabaParametrosTipoSistema(tipoSistema);
         }
 
-        public bool SetGrabaMicroAlga(ObjetoMicroAlga microAlga)
+        public bool SetGrabaMicroAlga(int idUsuario, ObjetoMicroAlga microAlga)
         {
-            return _dtMicroAlgas.SetGrabaMicroAlga(microAlga);
+            return _dtMicroAlgas.SetGrabaMicroAlga(idUsuario, microAlga);
         }
         public bool SetGrabaFactoresMedicion(ObjetoFactoresMedicion factorMedicion)
         {

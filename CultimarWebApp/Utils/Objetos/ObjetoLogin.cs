@@ -8,12 +8,19 @@ namespace CultimarWebApp.Utils.Objetos
     public class ObjetoLogin
     {
 
+        private int _idUsuario;
         private string _rut;
         private string _nombre;
         private int _idPerfil;
         private bool _autorizaModificacion;
         private bool _activo;
 
+
+        public int IdUsuario
+        {
+            get { return _idUsuario; }
+            set { _idUsuario = value; }
+        }
         public string Rut
         {
             get { return _rut; }

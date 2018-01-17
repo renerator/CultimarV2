@@ -102,7 +102,7 @@ namespace CultimarWebApp.Controllers
                             {
                                 if (datosUsuario.AutorizaModificacion)
                                 {
-                                    if (_control.SetGrabaMicroAlga(microAlga))
+                                    if (_control.SetGrabaMicroAlga(datosUsuario.IdUsuario, microAlga))
                                     {
                                         validador = 1;
                                     }
@@ -118,7 +118,7 @@ namespace CultimarWebApp.Controllers
                             }
                             else
                             {
-                                if (_control.SetGrabaMicroAlga(microAlga))
+                                if (_control.SetGrabaMicroAlga(datosUsuario.IdUsuario, microAlga))
                                 {
                                     validador = 1;
                                 }

@@ -79,6 +79,10 @@ namespace CultimarWebApp.Utils.DAO
                 {
                     var validador = new object();
                     var resultadoListado = new ObjetoLogin();
+                    
+                    validador = data.Rows[i].Field<object>("id_Usuario");
+                    resultadoListado.IdUsuario = validador != null ? data.Rows[i].Field<int>("id_Usuario") : -1;
+                    
                     validador = data.Rows[i].Field<object>("id_Perfil");
                     resultadoListado.IdPerfil = validador != null ? data.Rows[i].Field<int>("id_Perfil") : -1;
 

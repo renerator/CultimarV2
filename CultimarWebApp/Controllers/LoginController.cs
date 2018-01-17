@@ -40,6 +40,7 @@ namespace CultimarWebApp.Controllers
                         {
                             for (var i = 0; i < resultado.Count; i++)
                             {
+                                datosUsuarios.IdUsuario = resultado[i].IdUsuario;
                                 datosUsuarios.Nombre = resultado[i].Nombre;
                                 datosUsuarios.Rut = resultado[i].Rut;
                                 datosUsuarios.IdPerfil = resultado[i].IdPerfil;

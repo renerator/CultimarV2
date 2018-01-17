@@ -48,13 +48,14 @@ namespace CultimarWebApp.Utils.DAO
             return lisMicroAlgas;
         }
 
-        public bool SetGrabaMicroAlga(ObjetoMicroAlga microAlga)
+        public bool SetGrabaMicroAlga(int idUsuario, ObjetoMicroAlga microAlga)
         {
             var respuesta = false;
             try
             {
                 var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_SET_GRABAMICROALGA", new System.Collections.Hashtable()
                                                                                             {
+                                                                                                {"@idUsuario",idUsuario },
                                                                                                 {"@id", microAlga.IdMicroAlga },
                                                                                                 {"@idEspecie", microAlga.IdEspecie },
                                                                                                 {"@volumenSembrado", microAlga.VolumenSembrado },
