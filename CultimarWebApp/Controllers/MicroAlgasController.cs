@@ -54,7 +54,7 @@ namespace CultimarWebApp.Controllers
                 ViewBag.ParametrosEspecies = parametrosEspecies;
                 IEnumerable<SelectListItem> parametrosTipoContenedor = _control.ListadoTipoContenedor().Select(c => new SelectListItem()
                 {
-                    Text = c.NombreContenedor,
+                    Text = c.TipoContenedor,
                     Value = c.IdContenedor.ToString()
                 }).ToList();
                 ViewBag.ParametrosTipoContenedor = parametrosTipoContenedor;

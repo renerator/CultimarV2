@@ -76,7 +76,8 @@ namespace CultimarWebApp.Utils.DAO
             }
             return respuesta;
         }
-
+        
+       
         public List<ObjetoMicroAlga> ListadoSeguimientoMicroAlgas()
         {
             var lisMicroAlgas = new List<ObjetoMicroAlga>();

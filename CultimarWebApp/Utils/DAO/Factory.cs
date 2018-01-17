@@ -937,6 +937,40 @@ namespace CultimarWebApp.Utils.DAO
             }
             return respuesta;
         }
+        /// <summary>
+        /// Metodo que graba los factores de medicion
+        /// </summary>
+        /// <param name="factorMedicion">objeto tipo factores medicion, con los parametros requeridos</param>
+        /// <returns></returns>
+        public bool SetGrabaFactoresMedicion(ObjetoFactoresMedicion factorMedicion)
+        {
+            var respuesta = false;
+            try
+            {
+                var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_SET_GRABAFACTORESMEDICION", new System.Collections.Hashtable()
+                                                                                            {
+                                                                                                {"@id", factorMedicion.IdFactor },
+                                                                                                {"@nombreFactor", factorMedicion.NombreFactor },
+                                                                                                {"@ultimoTamizado", factorMedicion.UltimoTamizado },
+                                                                                                {"@idCalibre", factorMedicion.IdCalibre },
+                                                                                                {"@ploidia", factorMedicion.Ploidia },
+                                                                                                {"@volumen", factorMedicion.Volumen }
+                                                                                             });
+                if (data.Rows.Count > 0)
+                {
+                    respuesta = true;
+                }
+            }
+            catch (SqlException ex)
+            {
+                new CapturaExcepciones(ex);
+            }
+            catch (Exception ex)
+            {
+                new CapturaExcepciones(ex);
+            }
+            return respuesta;
+        }
 
     }
 }

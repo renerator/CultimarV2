@@ -227,5 +227,9 @@ namespace CultimarWebApp.Utils.DAO
         {
             return _dtMicroAlgas.SetGrabaMicroAlga(microAlga);
         }
+        public bool SetGrabaFactoresMedicion(ObjetoFactoresMedicion factorMedicion)
+        {
+            return _dtFac.SetGrabaFactoresMedicion(factorMedicion);
+        }
     }
 }

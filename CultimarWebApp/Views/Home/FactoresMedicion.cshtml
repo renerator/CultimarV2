@@ -42,9 +42,9 @@
                                                                     grid.Column(header: "Ultimo Tamizado", format: @<text>@item.UltimoTamizado.ToString("dd/MM/yyyy")</text>),
                                                                     grid.Column(header: "Tipo Calibre", format: @<text>@item.NombreCalibre</text>),
                                                                     grid.Column(header: "Ploidia", format: @<text>@item.Ploidia</text>),
-                                                                    grid.Column(header: "Volumen", format: @<text>@item.Volumen</text>)
+                                                                    grid.Column(header: "Volumen", format: @<text>@item.Volumen</text>),
+                                                                    grid.Column(header: "Editar", format: @<button class="btn btn-success" type="button" data-toggle="modal" tooltip="Editar Parametro" data-target="#modalFactorMedicion" onclick="EditaFactorMedicion(@item.IdFactor,'@item.NombreFactor', '@item.UltimoTamizado.ToString("dd/MM/yyyy")', '@item.idCalibre','@item.Ploidia','@item.Volumen')">Editar</button>))
                                                                  )
-                                                 )
                         </div>
                         <div class="form-group">
                             <div>
@@ -66,25 +66,38 @@
                                             <br />
                                             <input type="text" id="idFactor" style="display: none;">
                                             <form class="form-horizontal form-label-left input_mask">
-                                                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                                                    <input type="text" required="required" class="form-control has-feedback-left" id="nombreFactor" placeholder="Nombre Factor">
-                                                    <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Nombre Factor</label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <input type="text" required="required" class="form-control" id="nombreFactor" placeholder="Nombre Factor">
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                                                    <input type="text" required="required" class="form-control" id="ultimoTamizado" placeholder="Ultimo Tamizado">
-                                                    <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha último Tamizado</label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        @*<input type="text" required="required" class="form-control" id="ultimoTamizado" placeholder="Ultimo Tamizado">*@
+                                                        <input type="text" class="form-control has-feedback-right" id="single_cal1" placeholder="01/01/0001" aria-describedby="inputSuccess2Status">
+                                                        <span class="fa fa-calendar-o form-control-feedback right" aria-hidden="true"></span>
+                                                        <span id="inputSuccess2Status" class="sr-only">(success)</span>
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                                                    @Html.DropDownList("TipoCalibre", (IEnumerable<SelectListItem>)ViewBag.SelectCalibre, "Tipo Calibre", new { @class = "form-control", @ID = "selectTipoCalibre" })
-                                                    @*<span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>*@
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo Calibre</label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        @Html.DropDownList("TipoCalibre", (IEnumerable<SelectListItem>)ViewBag.SelectCalibre, "Tipo Calibre", new { @class = "form-control", @ID = "selectTipoCalibre" })
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                                                    <input type="text" required="required" class="form-control" id="ploidia" placeholder="Ploidia">
-                                                    <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Ploidia</label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <input type="text" required="required" class="form-control" id="ploidia" placeholder="Ploidia">
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                                                    <input type="text" required="required" class="form-control has-feedback-left" id="volumen" placeholder="Volumen">
-                                                    <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Volumen</label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <input type="text" required="required" class="form-control" id="volumen" placeholder="Volumen">
+                                                    </div>
                                                 </div>
                                                 <div class="ln_solid"></div>
                                                 <div class="form-group">

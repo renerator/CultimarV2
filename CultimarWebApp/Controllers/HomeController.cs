@@ -106,6 +106,32 @@ namespace CultimarWebApp.Controllers
                 throw;
             }
         }
+
+        public JsonResult GrabaFactoresMedicion(int idFactor, string nombreFactor, string ultimoTamizado, int idCalibre, string ploidia, string volumen)
+        {
+            var validador = 0;
+            var factorMedicion = new ObjetoFactoresMedicion() {
+                IdFactor = idFactor,
+                NombreFactor = nombreFactor,
+                UltimoTamizado = Convert.ToDateTime(ultimoTamizado),
+                IdCalibre = idCalibre,
+                Ploidia = ploidia,
+                Volumen = volumen
+            };
+
+            if (_control.SetGrabaFactoresMedicion(factorMedicion))
+            {
+                validador = 1;
+            }
+            else
+            {
+                validador = 2;
+            }
+
+            return (Json(validador));
+        }
+
+
         [SessionFilter]
         public ActionResult Usuarios()
         {
