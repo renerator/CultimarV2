@@ -21,7 +21,7 @@ namespace CultimarWebApp.Controllers
                 var datosUsuario = new ObjetoLogin();
                 datosUsuario = (ObjetoLogin)Session["DatosUsuario"];
                 ViewBag.Message = "Bienvenido: " + datosUsuario.Nombre;
-                IEnumerable<ObjetoMicroAlga> model = _control.ListadoMicroAlgas();
+                IEnumerable<ObjetoMicroAlga> model = _control.ListadoMicroAlgas(-1);
                 IEnumerable<SelectListItem> items = _control.ListadoParametrosEspecies().Select(c => new SelectListItem()
                 {
                     Text = c.NombreEspecies,
@@ -114,6 +114,8 @@ namespace CultimarWebApp.Controllers
                                 else
                                 {
                                     validador = 4;
+                                    EnvioMail correo = new EnvioMail();
+                                    correo.SendCorreoSolitaModificación(correo.ModificaMicroAlgas(idMicroAlga,datosUsuario.Nombre));
                                 }
                             }
                             else

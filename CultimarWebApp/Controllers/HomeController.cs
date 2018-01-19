@@ -218,9 +218,15 @@ namespace CultimarWebApp.Controllers
 
             var validador = 0;
 
+            
+            
             if (_control.SetAutorizaUsuario(idUsuario))
             {
                 validador = 1;
+                var datos = _control.DatosPersona(idUsuario);
+                var correo = new EnvioMail();
+                correo.SendCorreoAutorizaQuita(correo.QuitaoAutorizaPersona(datos[0].Nombre, "autoriza"), datos[0].Email, "Autoriza Permiso");
+                
             }
 
             return (Json(validador));
@@ -234,6 +240,9 @@ namespace CultimarWebApp.Controllers
             if (_control.SetQuitaPermisoUsuario(idUsuario))
             {
                 validador = 1;
+                var datos = _control.DatosPersona(idUsuario);
+                var correo = new EnvioMail();
+                correo.SendCorreoAutorizaQuita(correo.QuitaoAutorizaPersona(datos[0].Nombre, "quita"), datos[0].Email, "Quita Permiso");
             }
 
             return (Json(validador));

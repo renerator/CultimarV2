@@ -40,7 +40,7 @@ $(document).ready(function () {
                             alert("Ha ocurrido un error al grabar los datos, intentalo nuevamente.");
                         }
                         if (data == 4) {
-                            alert("No tienes permiso para modificar, debes solicitar permiso al administrador para que puedas modificar datos en el sistema.");
+                            alert("No tienes permiso para modificar, Hemos enviado un correo al administrador del sistema solicitando autorización para la modificación del registro, cuando te den autorización, te llegara un Email con la información.");
                         }
                         if (data == 5) {
                             alert("Tu perfil de usuario no te permite realizar ninguna acción, solo puedes leer la información ingresada al sistema.");

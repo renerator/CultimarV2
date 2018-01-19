@@ -42,6 +42,7 @@ namespace CultimarWebApp.Controllers
                             {
                                 datosUsuarios.IdUsuario = resultado[i].IdUsuario;
                                 datosUsuarios.Nombre = resultado[i].Nombre;
+                                datosUsuarios.Email = resultado[i].Email;
                                 datosUsuarios.Rut = resultado[i].Rut;
                                 datosUsuarios.IdPerfil = resultado[i].IdPerfil;
                                 datosUsuarios.AutorizaModificacion = resultado[i].AutorizaModificacion;

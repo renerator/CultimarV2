@@ -7,11 +7,12 @@ namespace CultimarWebApp.Utils.DAO
 {
     internal class FactoryMicroAlgas
     {
-        public List<ObjetoMicroAlga> ListadoMicroAlgas()
+        public List<ObjetoMicroAlga> ListadoMicroAlgas(int id)
         {
             var lisMicroAlgas = new List<ObjetoMicroAlga>();
-            var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_GET_LISTADOMICROALGAS", new System.Collections.Hashtable());
-
+            var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_GET_LISTADOMICROALGAS", new System.Collections.Hashtable() {
+                                                                                                {"@id",id }
+                                                                                             });
             if (data.Rows.Count > 0)
             {
                 for (var i = 0; i < data.Rows.Count; i++)

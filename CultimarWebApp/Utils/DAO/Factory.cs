@@ -89,6 +89,9 @@ namespace CultimarWebApp.Utils.DAO
                     validador = data.Rows[i].Field<object>("Nombre");
                     resultadoListado.Nombre = validador != null ? data.Rows[i].Field<string>("Nombre") : "NO ASIGNADO";
 
+                    validador = data.Rows[i].Field<object>("Email");
+                    resultadoListado.Email = validador != null ? data.Rows[i].Field<string>("Email") : "NO ASIGNADO";
+
                     validador = data.Rows[i].Field<object>("RUT");
                     resultadoListado.Rut = validador != null ? data.Rows[i].Field<string>("RUT") : "NO ASIGNADO";
 
@@ -98,6 +101,33 @@ namespace CultimarWebApp.Utils.DAO
                     validador = data.Rows[i].Field<object>("Activo");
                     resultadoListado.Activo = validador != null ? data.Rows[i].Field<bool>("Activo") : false;
                     
+                    DatosLogin.Add(resultadoListado);
+                }
+            }
+            return DatosLogin;
+        }
+
+        public List<ObjetoLogin> DatosPersona(int idPersona)
+        {
+            var DatosLogin = new List<ObjetoLogin>();
+            var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_GET_DATOSPERSONAxID", new System.Collections.Hashtable()
+                                                                                            {
+                                                                                                {"idPersona", idPersona}
+                                                                                            });
+
+            if (data.Rows.Count > 0)
+            {
+                for (var i = 0; i < data.Rows.Count; i++)
+                {
+                    var validador = new object();
+                    var resultadoListado = new ObjetoLogin();
+
+                    validador = data.Rows[i].Field<object>("Nombre");
+                    resultadoListado.Nombre = validador != null ? data.Rows[i].Field<string>("Nombre") : "NO ASIGNADO";
+
+                    validador = data.Rows[i].Field<object>("Email");
+                    resultadoListado.Email = validador != null ? data.Rows[i].Field<string>("Email") : "NO ASIGNADO";
+
                     DatosLogin.Add(resultadoListado);
                 }
             }

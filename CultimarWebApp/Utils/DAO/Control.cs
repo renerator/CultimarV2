@@ -63,7 +63,10 @@ namespace CultimarWebApp.Utils.DAO
         {
             return _dtFac.LoginUsuario(rut, pass);
         }
-
+        public List<ObjetoLogin> DatosPersona(int idPersona)
+        {
+            return _dtFac.DatosPersona(idPersona);
+        }
         public List<ObjetoPerfil> ListadoPerfiles()
         {
             return _dtFac.ListadoPerfiles();
@@ -139,9 +142,9 @@ namespace CultimarWebApp.Utils.DAO
             return _dtFac.ListadoFactoresMedicion();
         }
 
-        public List<ObjetoMicroAlga> ListadoMicroAlgas()
+        public List<ObjetoMicroAlga> ListadoMicroAlgas(int id)
         {
-            return _dtMicroAlgas.ListadoMicroAlgas();
+            return _dtMicroAlgas.ListadoMicroAlgas(id);
         }
 
         public List<ObjetoMicroAlga> ListadoSeguimientoMicroAlgas()
