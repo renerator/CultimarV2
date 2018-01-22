@@ -10,6 +10,7 @@ namespace CultimarWebApp.Utils.Objetos
         private int _idUsuario;
         private int _idPerfil;
         private string _rutUsuario;
+        private string _email;
         private string _pass;
         private string _nombreUsuario;
         private string _nombrePerfilUsuario;
@@ -46,7 +47,11 @@ namespace CultimarWebApp.Utils.Objetos
             get { return _rutUsuario; }
             set { _rutUsuario = value; }
         }
-
+        public string Email
+        {
+            get { return _email; }
+            set { _email = value; }
+        }
         public string Pass
         {
             get { return _pass; }

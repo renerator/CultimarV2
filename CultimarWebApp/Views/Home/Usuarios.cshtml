@@ -94,12 +94,27 @@
                                                 <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Seleccione Perfil</label>
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Seleccione Perfil<span class="required">*</span></label>
                                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                                    @Html.DropDownList("Perfil", (IEnumerable<SelectListItem>)ViewBag.Perfil, "Seleccione..." , new { @class = "form-control", @ID = "selectPerfil" })
+                                                    @Html.DropDownList("Perfil", (IEnumerable<SelectListItem>)ViewBag.Perfil, "Seleccione..." , new { @class = "form-control", @ID = "selectPerfil", @required = "required" })
                                                     </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">
+                                                    Email <span class="required">*</span>
+                                                </label>
+                                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                                    <input type="email" id="email" name="email" required="required" class="form-control col-md-9 col-xs-12">
                                                 </div>
-
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">
+                                                    Confirma Email <span class="required">*</span>
+                                                </label>
+                                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                                    <input type="email" id="email2" name="confirm_email" data-validate-linked="email" required="required" class="form-control col-md-9 col-xs-12">
+                                                </div>
+                                            </div>
                                             <div class="ln_solid"></div>
                                             <div class="form-group">
                                                 <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">

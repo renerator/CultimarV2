@@ -562,7 +562,8 @@ namespace CultimarWebApp.Utils.DAO
                                                                                                 {"rutUsuario", usuario.RutUsuario},
                                                                                                 {"pass", usuario.Pass },
                                                                                                 {"nombreUsuario", usuario.NombreUsuario },
-                                                                                                {"idPerfil", usuario.IdPerfil }
+                                                                                                {"idPerfil", usuario.IdPerfil },
+                                                                                                {"Email", usuario.Email }
                                                                                             });
                 if (data.Rows.Count > 0)
                 {

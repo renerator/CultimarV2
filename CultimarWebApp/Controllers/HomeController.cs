@@ -176,7 +176,7 @@ namespace CultimarWebApp.Controllers
             }
 
         }
-        public JsonResult GrabaDatos(string rut, string pass, string nombreUsuario, string apellidoUsuario, int idPerfil)
+        public JsonResult GrabaDatos(string rut, string pass, string nombreUsuario, string apellidoUsuario, int idPerfil, string email)
         {
             var usuario = new ObjetoUsuarios();
             var validador = 0;
@@ -188,6 +188,7 @@ namespace CultimarWebApp.Controllers
                     usuario.Pass = HashMd5.GetMD5(pass);
                     usuario.NombreUsuario = string.Concat(nombreUsuario, " ", apellidoUsuario);
                     usuario.IdPerfil = idPerfil;
+                    usuario.Email = email;
                     if (_control.GetVerificaUsuario(rut))
                     {
                         validador = 2;

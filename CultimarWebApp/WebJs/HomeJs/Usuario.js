@@ -20,7 +20,7 @@
         $.ajax({
             url: "GrabaDatos",
             type: "POST",
-            data: { rut: $("#inputSuccess4").val(), pass: $("#inputSuccess5").val(), nombreUsuario: $("#inputSuccess2").val(), apellidoUsuario: $("#inputSuccess3").val(), idPerfil: $("#selectPerfil").val() },
+            data: { rut: $("#inputSuccess4").val(), pass: $("#inputSuccess5").val(), nombreUsuario: $("#inputSuccess2").val(), apellidoUsuario: $("#inputSuccess3").val(), idPerfil: $("#selectPerfil").val(), email: $("#email").val() },
             async: true,
             success: function (data) {
                 if (data == 1) {
