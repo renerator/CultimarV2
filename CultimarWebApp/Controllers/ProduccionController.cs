@@ -33,6 +33,29 @@ namespace CultimarWebApp.Controllers
                 ViewBag.selectTipoM = TipoMortalidad;
 
 
+
+
+                IEnumerable<SelectListItem> ListaPloidia = _control.ListadoPloidia().Select(p => new SelectListItem()
+                {
+                    Text = p.nombrePloidia,
+                    Value = p.IdPloidia.ToString()
+                }).ToList();
+
+                ViewBag.selectPloidia = ListaPloidia;
+
+                
+
+
+                IEnumerable<SelectListItem> seleccionMedicion = _control.ListaFactoresMedicion().Select(d => new SelectListItem()
+                {
+                    Text = d.NombreFactor,
+                    Value = d.IdFactor.ToString()
+                }).ToList();
+
+                ViewBag.FactorM = seleccionMedicion;
+
+
+
                 return View(model);
             }
             catch (Exception ex)
@@ -169,6 +192,9 @@ namespace CultimarWebApp.Controllers
                 }).ToList();
 
                 ViewBag.FactorMedicion = items3;
+
+
+                
 
 
                 return View(model);

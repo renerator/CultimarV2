@@ -446,6 +446,41 @@ namespace CultimarWebApp.Utils.DAO
             }
             return ListaCalibre;
         }
+
+
+        /// <summary>
+        /// Listado Plodia del sistema
+        /// </summary>
+        /// <returns>objeto tipo  pLOIDIA</returns>
+        public List<ObjetoPloidia> ListadoPloidia()
+        {
+            var ListaPloidia = new List<ObjetoPloidia>();
+            var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_GET_PLOIDIA", new System.Collections.Hashtable());
+
+            if (data.Rows.Count > 0)
+            {
+                for (var i = 0; i < data.Rows.Count; i++)
+                {
+                    var validador = new object();
+                    var resultadoListado = new ObjetoPloidia();
+                    validador = data.Rows[i].Field<object>("Id");
+                    resultadoListado.IdPloidia = validador != null ? data.Rows[i].Field<int>("Id") : -1;
+
+                    validador = data.Rows[i].Field<object>("Ploida");
+                    resultadoListado.nombrePloidia = validador != null ? data.Rows[i].Field<string>("Ploida") : "NO ASIGNADO";
+                     
+
+                    validador = data.Rows[i].Field<object>("Estado");
+                    resultadoListado.Estado = validador != null ? data.Rows[i].Field<bool>("Estado") : false;
+
+                    ListaPloidia.Add(resultadoListado);
+                }
+            }
+            return ListaPloidia;
+        }
+
+
+
         /// <summary>
         /// Listado de Factores de medicion
         /// </summary>

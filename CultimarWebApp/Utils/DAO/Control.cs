@@ -152,6 +152,12 @@ namespace CultimarWebApp.Utils.DAO
             return _dtMicroAlgas.ListadoSeguimientoMicroAlgas();
         }
 
+
+        public List<ObjetoPloidia> ListadoPloidia()
+        {
+            return _dtFac.ListadoPloidia();
+        }
+
         public bool SetGrabaUsuario(ObjetoUsuarios usuario)
         {
             return _dtFac.setGrabaUsuario(usuario);

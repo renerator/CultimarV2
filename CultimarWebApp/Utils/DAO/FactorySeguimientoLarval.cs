@@ -46,8 +46,8 @@ namespace CultimarWebApp.Utils.DAO
                     validador = data.Rows[i].Field<object>("FechaRegistro");
                     resultadoListado.FechaRegistro = validador != null ? data.Rows[i].Field<DateTime>("FechaRegistro") : DateTime.Today;
 
-                    validador = data.Rows[i].Field<object>("FactoresMedicion");
-                    resultadoListado.FactoresMedicion = validador != null ? data.Rows[i].Field<int>("FactoresMedicion") : 0;
+                    validador = data.Rows[i].Field<object>("IdFactor");
+                    resultadoListado.IdFactor = validador != null ? data.Rows[i].Field<int>("IdFactor") : 0;
 
                     validador = data.Rows[i].Field<object>("IdMortalidad");
                     resultadoListado.IdMortalidad= validador != null ? data.Rows[i].Field<int>("IdMortalidad") : 0;

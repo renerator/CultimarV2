@@ -1,12 +1,12 @@
 ﻿
-function EditaSeguimintoLarval(IdMortalidad, idCultivoLarval, CantidadLarvas, CosechaLarvas, NumeroEstanque, DensidadCultivo, IdFactoresM)
+function EditaSeguimintoLarval(IdMortalidad, idCultivoLarval, CantidadLarvas, CosechaLarvas, NumeroEstanque, DensidadCultivo, FactorM, selectTipoM)
 {  
     $("#IdCultivoLarval").val(idCultivoLarval);
     $("#CantidadLarvas").val(CantidadLarvas);
     $("#CosechaLarvas").val(CosechaLarvas);
     $("#NumeroEstanque").val(NumeroEstanque);
     $("#DensidadCultivo").val(DensidadCultivo);
-    $("#IdFactoresM").val(IdFactoresM);
+    $("#FactorM").val(seleccionMedicion);
     $("#selectTipoM").val(IdMortalidad);
 
  
@@ -24,9 +24,7 @@ $(document).ready(function () {
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
         }
-    });
-     
-
+    }); 
 
     $("#divAlert").hide();
     $("#btnGrabarDatos").click(function () {
@@ -39,7 +37,7 @@ $(document).ready(function () {
                 _CosechaLarvas: $("#CosechaLarvas").val(),
                 _NumeroEstanque: $("#NumeroEstanque").val(),
                 _DensidadCultivo: $("#DensidadCultivo").val(), 
-                _IdFactoresM: $("#IdFactoresM").val(),
+                _IdFactoresM: $("#FactorM").val(),
                 _selectTipoM: $("#selectTipoM").val() 
             },
 

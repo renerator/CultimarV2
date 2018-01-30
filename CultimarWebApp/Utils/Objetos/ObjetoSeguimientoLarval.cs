@@ -17,6 +17,16 @@ namespace CultimarWebApp.Utils.Objetos
         private string _nombre;
         private bool _estado;
         private int _IdMortalidad;
+        private int _IdFactor;
+
+
+
+        public int IdFactor
+        {
+            get { return _IdFactor; }
+            set { _IdFactor = value; }
+        }
+
 
         public int IdMortalidad
         {
