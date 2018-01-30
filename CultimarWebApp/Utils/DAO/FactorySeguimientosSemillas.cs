@@ -21,10 +21,7 @@ namespace CultimarWebApp.Utils.DAO
         public List<ObjetoSeguimientoSemilla> SeguimientoSemilla(int Id)
         {
             var listadoSeguimientoSemilla = new List<ObjetoSeguimientoSemilla>();
-            var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_GET_ListaSguimientoSemilla", new System.Collections.Hashtable()
-                                                                                            {
-                                                                                                {"Id", Id}
-                                                                                            });
+            var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_GET_ListaSguimientoSemilla", new System.Collections.Hashtable());
 
             if (data.Rows.Count > 0)
             {
@@ -32,14 +29,14 @@ namespace CultimarWebApp.Utils.DAO
                 {
                     var validador = new object();
                     var resultadoListado = new ObjetoSeguimientoSemilla();
-                     
+
 
                     validador = data.Rows[i].Field<object>("Id_SeguimientoSemilla");
-                    resultadoListado.IdSeguimientoSemilla = validador != null ? data.Rows[i].Field<Decimal>("Id_SeguimientoSemilla") : -1;
+                    resultadoListado.IdSeguimientoSemilla = validador != null ? data.Rows[i].Field<int>("Id_SeguimientoSemilla") : -1;
 
 
                     validador = data.Rows[i].Field<object>("FechaRegistro");
-                    resultadoListado.FechaRegistro = validador != null ? data.Rows[i].Field<DateTime>("FechaRegistro") : Convert.ToDateTime("01/01/2017");
+                    resultadoListado.FechaRegistro1 = validador != null ? data.Rows[i].Field<DateTime>("FechaRegistro") : DateTime.Parse("01/01/2017");
 
                     validador = data.Rows[i].Field<object>("contenedororigen");
                     resultadoListado.NombreContenedororigen = validador != null ? data.Rows[i].Field<string>("contenedororigen") : "Sin Contendor";
@@ -63,7 +60,7 @@ namespace CultimarWebApp.Utils.DAO
 
 
                     validador = data.Rows[i].Field<object>("idOrigen");
-                    resultadoListado.idOrigen= validador != null ? data.Rows[i].Field<int>("idOrigen") : 0;
+                    resultadoListado.idOrigen = validador != null ? data.Rows[i].Field<int>("idOrigen") : 0;
 
 
                     validador = data.Rows[i].Field<object>("IdDestino");
@@ -104,7 +101,7 @@ namespace CultimarWebApp.Utils.DAO
                                                                                                 {"@p_IdTipoContenedorDestino", semilla.IdTipoContenedorDestino},
                                                                                                 {"@p_CantidadCosechado", semilla.CantidadCosechado},
                                                                                                 {"@p_CantidadCalibre", semilla.CantidadCalibre },
-                                                                                                {"@p_accion", "A" }}); 
+                                                                                                {"@p_accion", "A" }});
                 if (data.Rows.Count > 0)
                 {
                     respuesta = true;

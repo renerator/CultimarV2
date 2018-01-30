@@ -129,15 +129,13 @@ namespace CultimarWebApp.Controllers
             {
                 validador = 1;
             }
-
             return (Json(validador));
-
 
         }
 
 
         public ActionResult SeguimientoSemilla()
-        {
+       {
             try
             {
                 var datosUsuario = new ObjetoLogin();
@@ -194,12 +192,12 @@ namespace CultimarWebApp.Controllers
 
 
 
-
+          
             var seguimientoSemilla = new ObjetoSeguimientoSemilla();
             var validador = 0;
             seguimientoSemilla.IdSeguimientoSemilla = int.Parse(_IdSemilla.ToString());
             seguimientoSemilla.IdTipoContenedorOrigen = int.Parse(_IdTipoContenedorOrigen);
-            seguimientoSemilla.FechaRegistro = DateTime.Parse(_FechaRegistro.ToString());
+            seguimientoSemilla.FechaRegistro = _FechaRegistro.ToString();
             seguimientoSemilla.IdFactoresMedicion = _IdFactoresMedicion;
             seguimientoSemilla.CantidadOrigen = _CantidadOrigen;
             seguimientoSemilla.CalibreOrigen = _CalibreOrigen;

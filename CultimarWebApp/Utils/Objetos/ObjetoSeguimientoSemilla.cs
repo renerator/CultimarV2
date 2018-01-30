@@ -8,9 +8,10 @@ namespace CultimarWebApp.Utils.Objetos
     public class ObjetoSeguimientoSemilla
     {
 
-        private Decimal _IdSeguimientoSemilla;
+        private int _IdSeguimientoSemilla;
         private int _IdTipoContenedorOrigen;
-        private DateTime _FechaRegistro;
+        private string _FechaRegistro;
+        private DateTime _FechaRegistro1;
         private int _IdFactoresMedicion;
         private int _CantidadOrigen;
         private int _CalibreOrigen; 
@@ -39,7 +40,7 @@ namespace CultimarWebApp.Utils.Objetos
 
 
 
-        public Decimal IdSeguimientoSemilla
+        public int IdSeguimientoSemilla
         {
             get { return _IdSeguimientoSemilla; }
             set { _IdSeguimientoSemilla = value; }
@@ -64,11 +65,18 @@ namespace CultimarWebApp.Utils.Objetos
             get { return _IdTipoContenedorOrigen; }
             set { _IdTipoContenedorOrigen = value; }
         }
-        public DateTime FechaRegistro
+        public string  FechaRegistro
         {
             get { return _FechaRegistro; }
             set { _FechaRegistro = value; }
         }
+        public DateTime FechaRegistro1
+        {
+            get { return _FechaRegistro1; }
+            set { _FechaRegistro1 = value; }
+        }
+
+        
         public int IdFactoresMedicion
         {
             get { return _IdFactoresMedicion; }
