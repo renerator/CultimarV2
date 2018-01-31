@@ -114,8 +114,8 @@ namespace CultimarWebApp.Controllers
                                 else
                                 {
                                     validador = 4;
-                                    EnvioMail correo = new EnvioMail();
-                                    correo.SendCorreoSolitaModificación(correo.ModificaMicroAlgas(idMicroAlga,datosUsuario.Nombre));
+                                    //EnvioMail correo = new EnvioMail();
+                                    //correo.SendCorreoSolitaModificación(correo.ModificaMicroAlgas(idMicroAlga,datosUsuario.Nombre));
                                 }
                             }
                             else

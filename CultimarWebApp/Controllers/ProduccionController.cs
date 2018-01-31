@@ -105,8 +105,7 @@ namespace CultimarWebApp.Controllers
             seguimientoLarval.CantidadDeLarvas = _CantidadLarvas;
             seguimientoLarval.CosechaLarvas = _CosechaLarvas;
             seguimientoLarval.NumeroEstanque = _NumeroEstanque;
-            seguimientoLarval.DensidadCultivo = _DensidadCultivo;
-            seguimientoLarval.FechaRegistro = DateTime.Parse(DateTime.Today.ToShortDateString().ToString());
+            seguimientoLarval.DensidadCultivo = _DensidadCultivo; 
             seguimientoLarval.FactoresMedicion = _IdFactoresM;
             seguimientoLarval.IdMortalidad = _selectTipoM;
             seguimientoLarval.Estado = true;

@@ -1,19 +1,15 @@
 ﻿
-function EditaSeguimintoLarval(IdMortalidad, idCultivoLarval, CantidadLarvas, CosechaLarvas, NumeroEstanque, DensidadCultivo, FactorM, selectTipoM)
-{  
+function EditaSeguimintoLarval(IdMortalidad, idCultivoLarval, CantidadLarvas, CosechaLarvas, NumeroEstanque, DensidadCultivo, IdFactor)
+{ 
+    $("#selectTipoM").val(IdMortalidad);
     $("#IdCultivoLarval").val(idCultivoLarval);
     $("#CantidadLarvas").val(CantidadLarvas);
     $("#CosechaLarvas").val(CosechaLarvas);
     $("#NumeroEstanque").val(NumeroEstanque);
     $("#DensidadCultivo").val(DensidadCultivo);
-    $("#FactorM").val(seleccionMedicion);
-    $("#selectTipoM").val(IdMortalidad);
-
- 
+    $("#FactorM").val(IdFactor); 
 }
-
-
-
+ 
 $(document).ready(function () {
      
     $("#tblLarvas").DataTable({

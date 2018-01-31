@@ -74,8 +74,7 @@ namespace CultimarWebApp.Utils.DAO
                                                                                                 {"@p_CantidadDeLarvas", seguimientolarval.CantidadDeLarvas },
                                                                                                 {"@p_CosechaLarvas", seguimientolarval.CosechaLarvas},
                                                                                                 {"@p_NumeroEstanque", seguimientolarval.NumeroEstanque},
-                                                                                                {"@p_DensidadCultivo", seguimientolarval.DensidadCultivo },
-                                                                                                {"@p_FechaRegistro", seguimientolarval.FechaRegistro.ToShortDateString() },
+                                                                                                {"@p_DensidadCultivo", seguimientolarval.DensidadCultivo }, 
                                                                                                 {"@p_FactoresMedicion", seguimientolarval.FactoresMedicion },
                                                                                                 {"@p_IdMortalidad", seguimientolarval.IdMortalidad }
                                                                                            });

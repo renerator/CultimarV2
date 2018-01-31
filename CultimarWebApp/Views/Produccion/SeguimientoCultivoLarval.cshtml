@@ -46,16 +46,16 @@ grid.Column(columnName: "NumeroEstanque", header: "Numero Estanque", format: @<t
 grid.Column(columnName: "DensidadCultivo", header: "Densidad Cultivo", format: @<text>@item.DensidadCultivo</text>),
 grid.Column(columnName: "FechaRegistro", header: "Fecha Registro", format: @<text>@item.FechaRegistro.ToString("MM/dd/yyyy") </text>), 
 grid.Column(columnName: "NumeroEstanque", header: "Numero Estanque", format: @<text>@item.NumeroEstanque</text>),
-grid.Column(header: "Editar", format: @<button class="btn btn-success" type="button" data-toggle="modal" tooltip="Editar Parametro" data-target="#modalPopUpIngresoUsuario"
+grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="modal" tooltip="Editar Parametro" data-target="#modalPopUpIngresoUsuario"
                                                onclick="EditaSeguimintoLarval(@item.IdMortalidad,
-                                               @item.Id,
-                                               @item.CantidadDeLarvas,
-                                               @item.CosechaLarvas,
-                                               @item.NumeroEstanque,
-                                               @item.DensidadCultivo,
-                                               @item.IdFactor,
-                                               @item.NumeroEstanque
-                                               )">
+                                                                              @item.Id,
+                                                                              @item.CantidadDeLarvas,
+                                                                              @item.CosechaLarvas,
+                                                                              @item.NumeroEstanque,
+                                                                              @item.DensidadCultivo,
+                                                                              @item.IdFactor,
+                                                                              @item.NumeroEstanque
+                                                                                   )">
     Editar
 </button>)))
 
@@ -143,15 +143,7 @@ grid.Column(header: "Editar", format: @<button class="btn btn-success" type="but
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                 @Html.DropDownList("TipoMortalidad", (IEnumerable<SelectListItem>)ViewBag.selectTipoM, "Seleccione...", new { @class = "form-control", @ID = "selectTipoM" })
                                             </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Ploidia</label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                @Html.DropDownList("Ploidia", (IEnumerable<SelectListItem>)ViewBag.selectPloidia, "Seleccione...", new { @class = "form-control", @ID = "selectPloidia" })
-                                            </div>
-                                        </div>
-
+                                        </div> 
 
                                         <div class="ln_solid"></div>
                                         <div class="form-group">
