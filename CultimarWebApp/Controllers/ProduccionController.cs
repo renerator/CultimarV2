@@ -73,13 +73,9 @@ namespace CultimarWebApp.Controllers
                 IEnumerable<ObjetoRegistroProduccion> model = _control.ListadoRegistroProduccion();
 
 
-                IEnumerable<SelectListItem> items3 = _control.ListaFactoresMedicion().Select(c => new SelectListItem()
-                {
-                    Text = c.NombreFactor,
-                    Value = c.IdFactor.ToString()
-                }).ToList();
 
-                ViewBag.FactorMedicion = items3;
+                var item3 = _control.ListadoFactorMedicion();
+                ViewBag.FactorM = new MultiSelectList(item3, "IdFactor", "NombreFactor");
 
 
                 return View(model);
@@ -188,13 +184,7 @@ namespace CultimarWebApp.Controllers
 
                 ViewBag.ContenedorDestino = items2;
 
-                //IEnumerable<SelectListItem> items3 = _control.ListaFactoresMedicion().Select(c => new SelectListItem()
-                //{
-                //    Text = c.NombreFactor,
-                //    Value = c.IdFactor.ToString()
-                //}).ToList();
-
-                //ViewBag.FactorMedicion = items3;
+       
 
                 var item3 = _control.ListadoFactorMedicion();
                 ViewBag.FactorM = new MultiSelectList(item3, "IdFactor", "NombreFactor");

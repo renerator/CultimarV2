@@ -45,7 +45,7 @@ grid.Column(columnName: "CalibreOrigen", header: "Calibre Origen", format: @<tex
 grid.Column(columnName: "CantidadCosechado", header: "Cantidad Cosechado", format: @<text>@item.CantidadCosechado</text>),
 grid.Column(columnName: "CantidadCalibre", header: "Cantidad Cosechado", format: @<text>@item.CantidadCosechado</text>),
 grid.Column(columnName: "CantidadCosechado", header: "Cantidad Calibre", format: @<text>@item.CantidadCalibre</text>),
-grid.Column(header: "Editar", format: @<button class="btn btn-success" type="button" data-toggle="modal" tooltip="Editar Parametro" data-target="#modalPopUpIngresoUsuario"
+grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="modal" tooltip="Editar Parametro" data-target="#modalPopUpIngresoUsuario"
                                                onclick="EditaSemilla(@item.idOrigen,
                                                @item.IdDestino,
                                                @item.IdFactoresMedicion,
@@ -115,9 +115,7 @@ grid.Column(header: "Editar", format: @<button class="btn btn-success" type="but
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                 @*@Html.DropDownList("FactorMedicion", (IEnumerable<SelectListItem>)ViewBag.FactorMedicion, "Seleccione...", new { @class = "form-control", @ID = "selectFactorM" })*@
 
-
-
-                                                @Html.ListBox("FactorMedicion", ViewBag.FactorM as MultiSelectList, new { @class = "select2_multiple form-control", @ID = "FactorM" })
+                                                @Html.ListBox("FactorM", ViewBag.FactorM as MultiSelectList, new { @class = "select2_multiple form-control", @ID = "FactorM" }) 
 
                                             </div>
                                         </div>

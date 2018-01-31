@@ -14,7 +14,7 @@
     $("#IdSemilla").val(IdSeguimientoSemilla);
     $("#selectOrigen").val(idOrigen);
     $(single_cal1).val(single_cal1);
-    $("#selectFactorM").val(idFactorMedicion);
+    $("#FactorM").val(idFactorMedicion);
     $("#IdCantidadOrigen").val(IdCantidadOrigen);
     $("#IdCalibreOrigen").val(IdCalibreOrigen);
     $("#selectDestino").val(IdDestino);
@@ -42,7 +42,7 @@ $(document).ready(function () {
 
     $("#divAlert").hide();
     $("#btnGrabarDatos").click(function () {
-        alert($("#FactorM").val());
+       
         $.ajax({
             url: "GrabaDatos",
             type: "POST",
@@ -50,7 +50,7 @@ $(document).ready(function () {
                 _IdSemilla: $("#IdSemilla").val(),
                 _IdTipoContenedorOrigen: $("#selectOrigen").val(),
                 _FechaRegistro: $(single_cal1).val(),
-                _IdFactoresMedicion: $("#selectFactorM").val(),
+                _IdFactoresMedicion: $("#FactorM").val(),
                 _CantidadOrigen: $("#IdCantidadOrigen").val(),
                 _CalibreOrigen: $("#IdCalibreOrigen").val(),
                 _IdTipoContenedorDestino: $("#selectDestino").val(),
