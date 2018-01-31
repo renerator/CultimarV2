@@ -1,23 +1,22 @@
 ﻿
 function EditaProduccion(IdRegistroProduccion,
     CantidadProductoresMachos,
-    CantidadProductoresHembras, 
-    FechaInicioCultivo,
+    CantidadProductoresHembras,  
     CantidadFecundada,
     NumeroDesoveTemporada,
     CantidadSembrada,
-    FactoresMedicion,
+    IdFactor,
     NumeroEstanquesUtilizado,
     DensidadSiembra) {
      
+     
     $("#IdRegistro").val(IdRegistroProduccion);
     $("#CantidadPMachos").val(CantidadProductoresMachos);
-    $("#CantidadPHembras").val(CantidadProductoresHembras);
-    $(single_cal1).val(FechaInicioCultivo);
+    $("#CantidadPHembras").val(CantidadProductoresHembras); 
     $("#CantidadFecundada").val(CantidadFecundada);
     $("#NroDesoveTemporada").val(NumeroDesoveTemporada);
     $("#CantidadSembrada").val(CantidadSembrada);
-    $("#FactoresMedicion").val(FactoresMedicion);
+    $("#FactorM").val(IdFactor);
     $("#NroEstanque").val(NumeroEstanquesUtilizado);
     $("#DensidadSiembra").val(DensidadSiembra); 
 }
@@ -46,12 +45,11 @@ $(document).ready(function () {
             data: {
                 _IdProduccion: $("#IdRegistro").val(),
                 _CantidadProductoresMachos: $("#CantidadPMachos").val(),
-                _CantidadProductoresHembras: $("#CantidadPHembras").val(),
-                _FechaInicioCultivo: $(single_cal1).val(),
+                _CantidadProductoresHembras: $("#CantidadPHembras").val(), 
                 _CantidadFecundada: $("#CantidadFecundada").val(),
                 _NumeroDesoveTemporada: $("#NroDesoveTemporada").val(),
                 _CantidadSembrada: $("#CantidadSembrada").val(),
-                _FactoresMedicion: $("#FactoresMedicion").val(),
+                _FactoresMedicion: $("#FactorM").val(),
                 _NumeroEstanquesUtilizado: $("#NroEstanque").val(),
                 _DensidadSiembra: $("#DensidadSiembra").val()
             },

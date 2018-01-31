@@ -34,28 +34,28 @@
                             }
                             @grid.GetHtml(
 htmlAttributes: new { id = "tblRegistroProduccion" },
+exclusions: new[] {"IdFactor"},
 tableStyle: "table table-bordered",
 columns:
 grid.Columns(
 grid.Column(columnName: "Id", header: "Id", format: @<text>@item.IdRegistroProduccion</text>),
 grid.Column(columnName: "CantidadProductoresMachos", header: "Machos", format: @<text>@item.CantidadProductoresMachos</text>),
 grid.Column(columnName: "CantidadProductoresHembras", header: "Hembras", format: @<text>@item.CantidadProductoresHembras</text>),
-grid.Column(columnName: "FechaInicioCultivo", header: "F.Cultivo", format: @<text>@item.FechaInicioCultivo.ToString("MM/dd/yyyy")</text>),
+grid.Column(columnName: "FechaRegistro", header: "F.Registro", format: @<text>@item.FechaRegistro.ToString("MM/dd/yyyy")</text>),
 grid.Column(columnName: "CantidadFecundada", header: "C.Fecundada", format: @<text>@item.CantidadFecundada</text>),
 grid.Column(columnName: "NumeroDesoveTemporada", header: "N°Desove", format: @<text>@item.NumeroDesoveTemporada</text>),
 grid.Column(columnName: "CantidadSembrada", header: "Sembrada", format: @<text>@item.CantidadSembrada</text>),
 grid.Column(columnName: "FactoresMedicion", header: "F.Medición", format: @<text>@item.FactoresMedicion</text>),
 grid.Column(columnName: "NumeroEstanquesUtilizado", header: "Estanques", format: @<text>@item.NumeroEstanquesUtilizado</text>),
 grid.Column(columnName: "DensidadSiembra", header: "Siembra", format: @<text>@item.DensidadSiembra</text>), 
-grid.Column(header: "Editar", format: @<button class="btn btn-success" type="button" data-toggle="modal" tooltip="Editar Parametro" data-target="#modalPopUpIngresoUsuario" 
+grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="modal" tooltip="Editar Parametro" data-target="#modalPopUpIngresoUsuario" 
                                                onclick="EditaProduccion(@item.IdRegistroProduccion,
                                                @item.CantidadProductoresMachos,
-                                               @item.CantidadProductoresHembras, 
-                                               '@item.FechaInicioCultivo',
+                                               @item.CantidadProductoresHembras,  
                                                @item.CantidadFecundada,
                                                @item.NumeroDesoveTemporada,
                                                @item.CantidadSembrada,
-                                               @item.FactoresMedicion,
+                                               @item.IdFactor,
                                                @item.NumeroEstanquesUtilizado,
                                                @item.DensidadSiembra)">Editar</button>))
 
@@ -82,11 +82,12 @@ grid.Column(header: "Editar", format: @<button class="btn btn-success" type="but
                                     </div>
                                     <div class="modal-body">
                                         <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-                                           
 
-                                            <div  style="display: none;">>
+
+                                            <div style="display: none;">
+                                                >
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
-                                                   Id Produción <span class="required">*</span>
+                                                    Id Produción <span class="required">*</span>
                                                 </label>
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                                     <input type="text" id="IdRegistro" value="-1" class="form-control col-md-7 col-xs-12">
@@ -108,19 +109,7 @@ grid.Column(header: "Editar", format: @<button class="btn btn-success" type="but
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                                     <input type="text" id="CantidadPHembras" required="required" class="form-control col-md-7 col-xs-12">
                                                 </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
-                                                    Fecha Cultivos <span class="required">*</span>
-                                                </label>
-                                                <div class="col-md-6 col-sm-6 col-xs-12 xdisplay_inputx form-group has-feedback">
-                                                    <input id="single_cal1" name="FechaCultivos" type="text" class="form-control has-feedback-right" placeholder="Fecha" aria-describedby="inputSuccess2Status">
-                                                    <span class="fa fa-calendar-o form-control-feedback right" aria-hidden="true"></span>
-                                                    <span id="inputSuccess2Status" class="sr-only">(success)</span>
-
-                                                </div>
-                                            </div>
+                                            </div> 
 
                                             <div class="form-group">
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
@@ -148,10 +137,10 @@ grid.Column(header: "Editar", format: @<button class="btn btn-success" type="but
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
-                                                    Factores de medición<span class="required">*</span>
+                                                    Factores Medicion <span class="required">*</span>
                                                 </label>
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                                    <input type="text" id="FactoresMedicion" required="required" class="form-control col-md-7 col-xs-12">
+                                                    @Html.DropDownList("FactorMedicion", (IEnumerable<SelectListItem>)ViewBag.FactorM, "Seleccione...", new { @class = "form-control", @ID = "FactorM" })
                                                 </div>
                                             </div>
 
@@ -171,9 +160,6 @@ grid.Column(header: "Editar", format: @<button class="btn btn-success" type="but
                                                     <input type="text" id="DensidadSiembra" required="required" class="form-control col-md-7 col-xs-12">
                                                 </div>
                                             </div>
-
-
-
 
                                             <div class="ln_solid"></div>
                                             <div class="form-group">

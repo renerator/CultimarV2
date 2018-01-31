@@ -20,7 +20,14 @@ namespace CultimarWebApp.Utils.Objetos
         private int _NumeroEstanquesUtilizado;
         private int _DensidadSiembra;
         private int _IdPloidia;
-     
+        private int _IdFactor;
+
+
+        public int IdFactor
+        {
+            get { return _IdFactor; }
+            set { _IdFactor = value; }
+        }
         public int IdPloidia
         {
             get { return _IdPloidia; }
