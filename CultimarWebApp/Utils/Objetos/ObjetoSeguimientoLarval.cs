@@ -13,7 +13,7 @@ namespace CultimarWebApp.Utils.Objetos
         private int _numeroEstanque;
         private int _densidadCultivo;
         private DateTime _fechaRegistro;
-        private int _factoresMedicion;
+        private string _factoresMedicion;
         private string _nombre;
         private bool _estado;
         private int _IdMortalidad;
@@ -64,7 +64,7 @@ namespace CultimarWebApp.Utils.Objetos
             get { return _fechaRegistro; }
             set { _fechaRegistro = value; }
         }
-        public int FactoresMedicion
+        public string FactoresMedicion
         {
             get { return _factoresMedicion; }
             set { _factoresMedicion = value; }

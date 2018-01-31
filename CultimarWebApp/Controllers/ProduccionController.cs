@@ -32,17 +32,7 @@ namespace CultimarWebApp.Controllers
 
                 ViewBag.selectTipoM = TipoMortalidad;
 
-
-
-
-                IEnumerable<SelectListItem> ListaPloidia = _control.ListadoPloidia().Select(p => new SelectListItem()
-                {
-                    Text = p.nombrePloidia,
-                    Value = p.IdPloidia.ToString()
-                }).ToList();
-
-                ViewBag.selectPloidia = ListaPloidia;
-
+                 
                 
 
 
@@ -108,7 +98,7 @@ namespace CultimarWebApp.Controllers
                                            int _CosechaLarvas,
                                            int _NumeroEstanque,
                                            int _DensidadCultivo,
-                                           int _IdFactoresM,
+                                           string _IdFactoresM,
                                            int _selectTipoM)
         {
 
