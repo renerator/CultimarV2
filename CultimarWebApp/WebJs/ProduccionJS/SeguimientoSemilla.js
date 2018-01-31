@@ -42,6 +42,7 @@ $(document).ready(function () {
 
     $("#divAlert").hide();
     $("#btnGrabarDatos").click(function () {
+        alert($("#FactorM").val());
         $.ajax({
             url: "GrabaDatos",
             type: "POST",

@@ -56,6 +56,11 @@ namespace CultimarWebApp.Controllers
 
 
 
+ 
+
+                ViewBag.FactorM = seleccionMedicion;
+
+
                 return View(model);
             }
             catch (Exception ex)
@@ -76,6 +81,16 @@ namespace CultimarWebApp.Controllers
                 datosUsuario = (ObjetoLogin)Session["DatosUsuario"];
                 ViewBag.Message = "Bienvenido: " + datosUsuario.Nombre;
                 IEnumerable<ObjetoRegistroProduccion> model = _control.ListadoRegistroProduccion();
+
+
+                IEnumerable<SelectListItem> items3 = _control.ListaFactoresMedicion().Select(c => new SelectListItem()
+                {
+                    Text = c.NombreFactor,
+                    Value = c.IdFactor.ToString()
+                }).ToList();
+
+                ViewBag.FactorMedicion = items3;
+
 
                 return View(model);
             }
@@ -138,8 +153,7 @@ namespace CultimarWebApp.Controllers
             var validador = 0;
             registoProduccion.IdRegistroProduccion = _IdProduccion;
             registoProduccion.CantidadProductoresMachos = _CantidadProductoresMachos;
-            registoProduccion.CantidadProductoresHembras = _CantidadProductoresHembras;
-            registoProduccion.FechaInicioCultivo = DateTime.Parse(_FechaInicioCultivo.ToString());
+            registoProduccion.CantidadProductoresHembras = _CantidadProductoresHembras; 
             registoProduccion.NumeroDesoveTemporada = _NumeroDesoveTemporada;
             registoProduccion.CantidadFecundada = _CantidadFecundada;
             registoProduccion.CantidadSembrada = _CantidadSembrada;
@@ -184,16 +198,16 @@ namespace CultimarWebApp.Controllers
 
                 ViewBag.ContenedorDestino = items2;
 
-                IEnumerable<SelectListItem> items3 = _control.ListaFactoresMedicion().Select(c => new SelectListItem()
-                {
-                    Text = c.NombreFactor,
-                    Value = c.IdFactor.ToString()
-                }).ToList();
+                //IEnumerable<SelectListItem> items3 = _control.ListaFactoresMedicion().Select(c => new SelectListItem()
+                //{
+                //    Text = c.NombreFactor,
+                //    Value = c.IdFactor.ToString()
+                //}).ToList();
 
-                ViewBag.FactorMedicion = items3;
+                //ViewBag.FactorMedicion = items3;
 
-
-                
+                var item3 = _control.ListadoFactorMedicion();
+                ViewBag.FactorM = new MultiSelectList(item3, "IdFactor", "NombreFactor");
 
 
                 return View(model);

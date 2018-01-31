@@ -113,7 +113,12 @@ grid.Column(header: "Editar", format: @<button class="btn btn-success" type="but
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Factor Medición</label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                @Html.DropDownList("FactorMedicion", (IEnumerable<SelectListItem>)ViewBag.FactorMedicion, "Seleccione...", new { @class = "form-control", @ID = "selectFactorM" })
+                                                @*@Html.DropDownList("FactorMedicion", (IEnumerable<SelectListItem>)ViewBag.FactorMedicion, "Seleccione...", new { @class = "form-control", @ID = "selectFactorM" })*@
+
+
+
+                                                @Html.ListBox("FactorMedicion", ViewBag.FactorM as MultiSelectList, new { @class = "select2_multiple form-control", @ID = "FactorM" })
+
                                             </div>
                                         </div>
                                         <div class="form-group">
