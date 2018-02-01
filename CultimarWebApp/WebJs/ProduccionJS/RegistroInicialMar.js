@@ -48,12 +48,12 @@
 
     $("#btnPopUpRegistroInicialMar").click(function () {
         $("#IdRegistroInicialMar").val("");
-        $("#selectOrigen").val("0");
+        $("#selectOrigen").val("");
         $("#CantidadOrigen").val("");
         $("#CalibreOrigen").val("");
-        $("#selectTipoSistema").val("0");
+        $("#selectTipoSistema").val("");
         $("#Cantidad").val("");
-        $("#selectTipoMortalidad").val("0");
+        $("#selectTipoMortalidad").val("");
     });
 
 
