@@ -18,7 +18,17 @@ namespace CultimarWebApp.Utils.DAO
         private FactoryRegistroProduccion _dtFactoryRegistroProduccion = new FactoryRegistroProduccion();
         private FactoryMicroAlgas _dtMicroAlgas = new FactoryMicroAlgas();
         private FactorySeguimientoFijacion _dtFijacion = new FactorySeguimientoFijacion();
+        private FactoryRegistroInicialMar _dtMar = new FactoryRegistroInicialMar();
 
+        public List<ObjetoRegistroInicialMar> ListadoRegistroInicialMar(int idRegistro)
+        {
+            return _dtMar.ListadoRegistroInicialMar(idRegistro);
+        }
+
+        public bool SetGrabaRegistroInicialMar(int idUsuario, ObjetoRegistroInicialMar registroMar)
+        {
+            return _dtMar.SetGrabaRegistroInicialMar(idUsuario, registroMar);
+        }
         public List<ObjetoSeguimientoLarval> ListadoSeguimientoLarval()
         {
             return _dtSegLarval.ListadoSeguimientoLarval();

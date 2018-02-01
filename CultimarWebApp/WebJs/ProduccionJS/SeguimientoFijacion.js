@@ -12,7 +12,7 @@
     _FactoresMedicion 
 ) {
 
-    alert(_IdSeguimientoFijacion);
+    //alert(_IdSeguimientoFijacion);
 
     $("#IdSeguimientoFijacion").val(_IdSeguimientoFijacion),
     $("#IdCalibreLarvas").val(_LarvasCalibre),

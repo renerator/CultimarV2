@@ -64,6 +64,58 @@ namespace CultimarWebApp.Utils
                 throw (new CapturaExcepciones(ex));
             }
         }
+        public string ModificaRegistroInicialMar(int id, string nombreSolicita)
+        {
+            var salida = string.Empty;
+            var reader = new StreamReader(HttpContext.Current.Server.MapPath(Ur + "SolicitudPermiso.html"));
+            salida = reader.ReadToEnd();
+            reader.Close();
+            salida = salida.Replace("%nombreSolicita%", nombreSolicita);
+
+            var contenido = string.Empty;
+            var detalle = string.Empty;
+            var datos = _control.ListadoRegistroInicialMar(id);
+
+            if (datos.Count > 0)
+            {
+                contenido += "<tr>";
+                contenido += "	<td>Ingreso Registro inicial Mar</td>";
+                contenido += "    <td style='width:90px;'>";
+                contenido += "        <span>" + datos[0].NombreOrigen + "</span>";
+                contenido += "    </td>";
+                contenido += "    <td style='width:90px;'>";
+                contenido += "        <span>" + datos[0].FechaIngreso.ToShortDateString() + "</span>";
+                contenido += "    </td>";
+                contenido += "    <td>";
+                contenido += "        <span>" + DateTime.Now.ToShortDateString() + "</span>";
+                contenido += "    </td>";
+                contenido += "</tr>";
+
+                detalle += "<tr>";
+                detalle += "	<td>" + datos[0].IdRegistro.ToString() + "</td>";
+                detalle += "    <td style='width:90px;'>";
+                detalle += "        <span>" + datos[0].NombreOrigen + "</span>";
+                detalle += "    </td>";
+                detalle += "    <td>";
+                detalle += "    <table>";
+                detalle += "        <tr>";
+                detalle += "            <th scope='col'> Cantidad </th>";
+                detalle += "            <th scope='col'> Sistema </th>";
+                detalle += "            <th scope='col'> Mortalidad </th>";
+                detalle += "        </tr>";
+                detalle += "        <tr>";
+                detalle += "            <td><span>" + datos[0].Cantidad + "</span></td>";
+                detalle += "            <td><span>" + datos[0].NombreSistema + "</span></td>";
+                detalle += "            <td><span>" + datos[0].NombreMortalidad + "</span></td>";
+                detalle += "        </tr>";
+                detalle += "    </table>";
+                detalle += "    </td>";
+                detalle += "</tr>";
+            }
+            salida = salida.Replace("%tablaContenido%", contenido);
+            salida = salida.Replace("%tablaDetalle%", detalle);
+            return salida;
+        }
         public string ModificaMicroAlgas(int id, string nombreSolicita)
         {
             var salida = string.Empty;

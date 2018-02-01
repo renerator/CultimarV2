@@ -327,7 +327,114 @@ namespace CultimarWebApp.Controllers
 
         }
 
+        public ActionResult RegistroInicialMar()
+        {
+            try
+            {
+                var datosUsuario = new ObjetoLogin();
+                datosUsuario = (ObjetoLogin)Session["DatosUsuario"];
+                ViewBag.Message = "Bienvenido: " + datosUsuario.Nombre;
+                IEnumerable<ObjetoRegistroInicialMar> model = _control.ListadoRegistroInicialMar(-1);
 
+                IEnumerable<SelectListItem> parametrosOrigen = _control.ListadoParametrosOrigen().Select(c => new SelectListItem()
+                {
+                    Text = c.NombreOrigen,
+                    Value = c.IdOrigen.ToString()
+                }).ToList();
+                
+                ViewBag.ParametrosOrigen = parametrosOrigen;
+
+                    IEnumerable<SelectListItem> parametrosTipoMortalidad = _control.ListadoTipoMortalidad().Select(c => new SelectListItem()
+                    {
+                        Text = c.NombreMortalidad,
+                        Value = c.IdMortalidad.ToString()
+                    }).ToList();
+
+
+                ViewBag.ParametrosTipoMortalidad = parametrosTipoMortalidad;
+
+                IEnumerable<SelectListItem> parametrosTipoSistema = _control.ListadoTipoSistema().Select(c => new SelectListItem()
+                {
+                    Text = c.NombreSistema,
+                    Value = c.IdTipoSistema.ToString()
+                }).ToList();
+
+                ViewBag.ParametrosTipoSistema = parametrosTipoSistema;
+
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                new CapturaExcepciones(ex);
+                return ErrorPage(1001);
+                throw;
+            }
+        }
+
+        public JsonResult GrabaRegistroInicialMar(int idRegistro, string fechaIngreso, string fechaFuturo, int cantidadOrigen, int calibreOrigen, int idOrigen, int cantidad, int idTipoSistema, int idMortalidad)
+        {
+            var datosUsuario = new ObjetoLogin();
+            datosUsuario = (ObjetoLogin)Session["DatosUsuario"];
+            var validador = 0;
+
+            switch (datosUsuario.IdPerfil)
+            {
+                case 3:
+                    validador = 5;
+                    break;
+                default:
+                    var registroInicialMar = new ObjetoRegistroInicialMar()
+                    {
+                        IdRegistro = idRegistro,
+                        FechaIngreso = Convert.ToDateTime(fechaIngreso),
+                        FechaFuturoDesdoble = Convert.ToDateTime(fechaFuturo),
+                        CantidadOrigen = cantidadOrigen,
+                        CalibreOrigen = calibreOrigen,
+                        IdOrigen = idOrigen,
+                        Cantidad = cantidad,
+                        IdTipoSistema = idTipoSistema,
+                        IdMortalidad = idMortalidad
+                    };
+                    if (idRegistro != -1)
+                    {
+                        if (datosUsuario.AutorizaModificacion)
+                        {
+                            if (_control.SetGrabaRegistroInicialMar(datosUsuario.IdUsuario, registroInicialMar))
+                            {
+                                validador = 1;
+                            }
+                            else
+                            {
+                                validador = 3;
+                            }
+                        }
+                        else
+                        {
+                            validador = 4;
+                            EnvioMail correo = new EnvioMail();
+                            correo.SendCorreoSolitaModificación(correo.ModificaRegistroInicialMar(idRegistro, datosUsuario.Nombre));
+                        }
+                    }
+                    else
+                    {
+                        if (_control.SetGrabaRegistroInicialMar(datosUsuario.IdUsuario, registroInicialMar))
+                        {
+                            validador = 1;
+                        }
+                        else
+                        {
+                            validador = 3;
+                        }
+                    }
+                    break;
+            }
+
+
+            
+            
+
+            return (Json(validador));
+        }
 
         public ActionResult ErrorPage(int error)
         {

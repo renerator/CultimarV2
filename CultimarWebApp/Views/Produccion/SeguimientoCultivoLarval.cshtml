@@ -35,13 +35,13 @@
                         }
                         @grid.GetHtml(
 htmlAttributes: new { id = "tblLarvas" },
-exclusions: new[] { "IdMortalidad", "FactoresMedicion" },
+exclusions: new[] { "IdMortalidad", "IdFactor" },
 tableStyle: "table table-bordered",
 columns:
 grid.Columns(
 grid.Column(columnName: "Id", header: "Identificador", format: @<text>@item.Id</text>),
 grid.Column(columnName: "CantidadDeLarvas", header: "Cantidad DeLarvas", format: @<text>@item.CantidadDeLarvas</text>),
-grid.Column(columnName: "FactoresMedicion", header: "IdFactor", format: @<text>@item.FactoresMedicion</text>),
+@*grid.Column(columnName: "FactoresMedicion", header: "IdFactor", format: @<text>@item.FactoresMedicion</text>),*@
 grid.Column(columnName: "CosechaLarvas", header: "Cosecha Larvas", format: @<text>@item.CosechaLarvas</text>),
 grid.Column(columnName: "NumeroEstanque", header: "Numero Estanque", format: @<text>@item.NumeroEstanque</text>),
 grid.Column(columnName: "DensidadCultivo", header: "Densidad Cultivo", format: @<text>@item.DensidadCultivo</text>),

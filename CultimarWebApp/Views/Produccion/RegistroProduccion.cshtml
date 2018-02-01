@@ -47,17 +47,15 @@ grid.Column(columnName: "FactoresMedicion", header: "F.Medición", format: @<tex
 grid.Column(columnName: "NumeroEstanquesUtilizado", header: "Estanques", format: @<text>@item.NumeroEstanquesUtilizado</text>),
 grid.Column(columnName: "DensidadSiembra", header: "Siembra", format: @<text>@item.DensidadSiembra</text>), 
 grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="modal" tooltip="Editar Parametro" data-target="#modalPopUpIngresoUsuario" 
-                                               onclick="EditaFijacion(@item.IdSeguimientoFijacion,
-                                               @item.LarvasCalibre,
-                                               @item.LarvasCantidad,  
-                                               @item.CosechaCalibre,
-                                               @item.CosechaCantidad,
-                                               @item.NumeroEstanque,
-                                               @item.DensidadSiembra,
-                                               @item.IdMortalidad,
-                                               @item.CantidadMortalidad,
+                                               onclick="EditaFijacion(@item.IdRegistroProduccion,
+                                               @item.CantidadProductoresMachos,
+                                               @item.CantidadProductoresHembras,  
+                                               @item.CantidadFecundada,
+                                               @item.NumeroDesoveTemporada,
+                                               @item.CantidadSembrada,
                                                @item.FactoresMedicion,
-                                               @item.FechaRegistro)">Editar</button>))  
+                                               @item.NumeroEstanquesUtilizado,
+                                               @item.DensidadSiembra)">Editar</button>))  
 )
                         </div>
 
