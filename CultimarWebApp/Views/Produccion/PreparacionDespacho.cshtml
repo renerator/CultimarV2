@@ -1,16 +1,19 @@
 ﻿
 @{
-    ViewBag.Title = "RegistroProduccion";
+    ViewBag.Title = "PreparacionDespacho";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script src="~/WebJs/ProduccionJS/RegistroProduccion.js"></script>
+<script src="~/WebJs/ProduccionJS/PreparacionDespacho.js"></script>
+
+
+
 <div class="right_col" role="main">
     <h3>@ViewBag.Message</h3>
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Listado de Registro de Producción</h2>
+                    <h2>Listado de Registro en Preparación y Despacho</h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li>
                             <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -23,38 +26,38 @@
                 </div>
                 <div class="x_content">
                     <p class="text-muted font-13 m-b-30">
-                        Este listado muestra los Registro de produccion
+                        Este listado muestra los Registro en Preparación y Despacho
                     </p>
                     <div class="table-responsive">
                         @{
                             var grid = new WebGrid(Model, canPage: false);
                         }
                         @grid.GetHtml(
-htmlAttributes: new { id = "tblRegistroProduccion" },
-exclusions: new[] { "IdMortalidad" },
+htmlAttributes: new { id = "tblPreparacionDespacho" },
+exclusions: new[] { "IdOrigen", "IdDestino" },
 tableStyle: "table table-bordered",
 columns:
 grid.Columns(
-grid.Column(columnName: "Id", header: "Id", format: @<text>@item.IdRegistroProduccion</text>),
-grid.Column(columnName: "CantidadProductoresMachos", header: "Machos", format: @<text>@item.CantidadProductoresMachos</text>),
-grid.Column(columnName: "CantidadProductoresHembras", header: "Hembras", format: @<text>@item.CantidadProductoresHembras</text>),
-grid.Column(columnName: "FechaRegistro", header: "F.Registro", format: @<text>@item.FechaRegistro.ToString("MM/dd/yyyy")</text>),
-grid.Column(columnName: "CantidadFecundada", header: "C.Fecundada", format: @<text>@item.CantidadFecundada</text>),
-grid.Column(columnName: "NumeroDesoveTemporada", header: "N°Desove", format: @<text>@item.NumeroDesoveTemporada</text>),
-grid.Column(columnName: "CantidadSembrada", header: "Sembrada", format: @<text>@item.CantidadSembrada</text>),
-grid.Column(columnName: "FactoresMedicion", header: "F.Medición", format: @<text>@item.FactoresMedicion</text>),
-grid.Column(columnName: "NumeroEstanquesUtilizado", header: "Estanques", format: @<text>@item.NumeroEstanquesUtilizado</text>),
-grid.Column(columnName: "DensidadSiembra", header: "Siembra", format: @<text>@item.DensidadSiembra</text>),
+grid.Column(columnName: "Id", header: "Id", format: @<text>@item.IdPreparoDespacho</text>),
+grid.Column(columnName: "FechaEnvio", header: "Fecha Envio", format: @<text>@item.FechaEnvio</text>),
+grid.Column(columnName: "FechaPreparado", header: "Fecha Preparado", format: @<text>@item.FechaPreparado</text>),
+grid.Column(columnName: "PesoNeto", header: "Peso Neto", format: @<text>@item.PesoNeto</text>),
+grid.Column(columnName: "PesoBruto", header: "Peso Bruto", format: @<text>@item.PesoBruto</text>),
+grid.Column(columnName: "Cantidad", header: "Cantidad", format: @<text>@item.Cantidad</text>),
+grid.Column(columnName: "Calibre", header: "Calibre", format: @<text>@item.Calibre</text>),
+grid.Column(columnName: "Cliente", header: "Cliente", format: @<text>@item.Cliente</text>),
 grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="modal" tooltip="Editar Parametro" data-target="#modalPopUpIngresoUsuario"
-                             onclick="EditaProduccion(@item.IdRegistroProduccion,
-                                               @item.CantidadProductoresMachos,
-                                               @item.CantidadProductoresHembras,
-                                               @item.CantidadFecundada,
-                                               @item.NumeroDesoveTemporada,
-                                               @item.CantidadSembrada,
-                                               @item.FactoresMedicion,
-                                               @item.NumeroEstanquesUtilizado,
-                                               @item.DensidadSiembra )">
+                             onclick="EditDespacho(@item.IdPreparoDespacho,
+                                               '@item.FechaEnvio',
+                                               '@item.FechaPreparado',
+                                                @item.IdOrigen,
+                                                @item.IdDestino,
+                                                @item.PesoNeto,
+                                                @item.PesoBruto,
+                                                @item.Cantidad,
+                                                @item.Calibre,
+                                                '@item.Cliente'
+                                               )">
     Editar
 </button>))
 )
@@ -75,7 +78,7 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
                                     <button type="button" class="close" data-dismiss="modal">
                                         <span aria-hidden="true">X</span>
                                     </button>
-                                    <h4 class="modal-title" id="myModalLabel">Registro Inicial de Producción</h4>
+                                    <h4 class="modal-title" id="myModalLabel">Registo Preparación y Despacho</h4>
                                 </div>
                                 <div class="modal-body">
                                     <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
@@ -83,79 +86,99 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
 
                                         <div style="display: none;">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
-                                                Id Produción <span class="required">*</span>
+                                                Id despacho <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="text" id="IdRegistro" value="-1" class="form-control col-md-7 col-xs-12">
+                                                <input type="text" id="idDespacho" value="-1" class="form-control col-md-7 col-xs-12">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                                Fecha Envio <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-xs-12 xdisplay_inputx form-group has-feedback-right">
+                                                <input id="single_cal1" type="text" class="form-control has-feedback-right" placeholder="Fecha" aria-describedby="inputSuccess2Status">
+                                                <span class="fa fa-calendar-o form-control-feedback right" aria-hidden="true"></span>
+                                                <span id="inputSuccess2Status" class="sr-only">(success)</span>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                                Fecha Preparado <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-xs-12 xdisplay_inputx form-group has-feedback-right">
+                                                <input id="single_cal3" type="text" class="form-control has-feedback-right" placeholder="Fecha" aria-describedby="inputSuccess2Status">
+                                                <span class="fa fa-calendar-o form-control-feedback right" aria-hidden="true"></span>
+                                                <span id="inputSuccess2Status" class="sr-only">(success)</span>
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Seleccione Origen</label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                @Html.DropDownList("ContenedorOrigen", (IEnumerable<SelectListItem>)ViewBag.selectOrigen, "Seleccione...", new { @class = "form-control", @ID = "selectOrigen" })
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Seleccione Destino</label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                @Html.DropDownList("ContenedorDestino", (IEnumerable<SelectListItem>)ViewBag.selectDestino, "Seleccione...", new { @class = "form-control", @ID = "selectDestino" })
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
-                                                Cant. Productores Machos <span class="required">*</span>
+                                                Calibres <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="text" id="CantidadPMachos" required="required" class="form-control col-md-7 col-xs-12">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
-                                                Cant. Productores Hembras <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="text" id="CantidadPHembras" required="required" class="form-control col-md-7 col-xs-12">
+                                                <input type="text" id="idCalibre" required="required" class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
-                                                Cantidad Fecundada <span class="required">*</span>
+                                                Cantidad <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="text" id="CantidadFecundada" required="required" class="form-control col-md-7 col-xs-12">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
-                                                N° Desove Temporada<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="text" id="NroDesoveTemporada" required="required" class="form-control col-md-7 col-xs-12">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
-                                                Cantidad Sembrada<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="text" id="CantidadSembrada" required="required" class="form-control col-md-7 col-xs-12">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
-                                                Factores Medicion <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                @Html.ListBox("FactorM", ViewBag.FactorM as MultiSelectList, new { @class = "select2_multiple form-control", @ID = "FactorM" })
+                                                <input type="text" id="idCantidadCalibres" required="required" class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
-                                                Numeros de Estanque<span class="required">*</span>
+                                                Peso Neto <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="text" id="NroEstanque" required="required" class="form-control col-md-7 col-xs-12">
+                                                <input type="text" id="idPesoNeto" required="required" class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
+
+
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
-                                                Densidad de Siembra<span class="required">*</span>
+                                                Peso Bruto <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="text" id="DensidadSiembra" required="required" class="form-control col-md-7 col-xs-12">
+                                                <input type="text" id="idPesoBruto" required="required" class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                                               Nombre Cliente <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="text" id="idCliente" required="required" class="form-control col-md-7 col-xs-12">
+                                            </div>
+                                        </div>
+
 
                                         <div class="ln_solid"></div>
                                         <div class="form-group">
@@ -171,7 +194,9 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
                                 </div>
                             </div>
                         </div>
-                    </div> 
+                    </div>
+
+
                 </div>
             </div>
         </div>

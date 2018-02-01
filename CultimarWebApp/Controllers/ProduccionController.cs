@@ -329,6 +329,94 @@ namespace CultimarWebApp.Controllers
 
 
 
+
+        public ActionResult PreparacionDespacho()
+        {
+            try
+            { 
+
+                var datosUsuario = new ObjetoLogin();
+                datosUsuario = (ObjetoLogin)Session["DatosUsuario"];
+                ViewBag.Message = "Bienvenido: " + datosUsuario.Nombre;
+                IEnumerable<ObjetoPreparadoDespacho> model = _control.ListadoPreparadoDespachado();
+
+
+                IEnumerable<SelectListItem> items2 = _control.ListadoParametrosOrigen().Select(c => new SelectListItem()
+                {
+                    Text = c.NombreOrigen,
+                    Value = c.IdOrigen.ToString()
+                }).ToList();
+
+                ViewBag.selectOrigen = items2;
+
+
+                IEnumerable<SelectListItem> items3= _control.ListadoParametrosDestino().Select(d => new SelectListItem()
+                {
+                    Text = d.NombreDestino,
+                    Value = d.IdDestino.ToString()
+                }).ToList();
+
+                ViewBag.selectDestino = items3;
+
+
+
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                new CapturaExcepciones(ex);
+                return ErrorPage(1001);
+                throw;
+            }
+        }
+
+
+
+        
+
+
+             public JsonResult GrabaPdespacho(int _IdPreparoDespacho,
+                                            string _FechaEnvio,
+                                            string _FechaPreparado,
+                                            int _IdOrigen,
+                                            int _IdDestino,
+                                            int _PesoNeto,
+                                            int _PesoBruto,
+                                            int _Cantidad,
+                                            int _Calibre,
+                                            string _cliente)
+        {
+
+
+
+
+            var pdespacho = new ObjetoPreparadoDespacho();
+            var validador = 0;
+
+            pdespacho.IdPreparoDespacho = _IdPreparoDespacho; 
+            pdespacho.FechaEnvio = _FechaEnvio;
+            pdespacho.FechaPreparado = _FechaPreparado;
+            pdespacho.IdOrigen = _IdOrigen;
+            pdespacho.IdDestino = _IdDestino;
+            pdespacho.PesoNeto = _PesoNeto;
+            pdespacho.PesoBruto = _PesoBruto;
+            pdespacho.Cantidad = _Cantidad;
+            pdespacho.Calibre = _Calibre;
+            pdespacho.Cliente = _cliente;
+
+            if (_control.setGrabaPreparacionDespacho(pdespacho))
+            {
+                validador = 1;
+            }
+
+            return (Json(validador));
+
+
+        }
+
+
+
+
         public ActionResult ErrorPage(int error)
         {
             return Redirect(Url.Content("~/Error/Index?error=" + error));

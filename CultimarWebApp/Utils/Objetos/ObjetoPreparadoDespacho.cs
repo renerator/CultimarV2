@@ -18,7 +18,7 @@ namespace CultimarWebApp.Utils.Objetos
         private int _Calibre;
         private string _Cliente;
 
-        public int IdTipoAlimento
+        public int IdPreparoDespacho
         {
             get { return _IdPreparoDespacho; }
             set { _IdPreparoDespacho = value; }

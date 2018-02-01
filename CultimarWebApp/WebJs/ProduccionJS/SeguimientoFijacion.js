@@ -11,8 +11,7 @@
     _CantidadMortalidad,
     _FactoresMedicion 
 ) {
-
-    alert(_IdSeguimientoFijacion);
+     
 
     $("#IdSeguimientoFijacion").val(_IdSeguimientoFijacion),
     $("#IdCalibreLarvas").val(_LarvasCalibre),
