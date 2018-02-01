@@ -1,11 +1,9 @@
 ﻿
 @{
-    ViewBag.Title = "RegistroProduccion";
+    ViewBag.Title = "SeguimientoFijacion";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
  
-
-<script src="~/WebJs/ProduccionJS/RegistroProduccion.js"></script>
  
     <div class="right_col" role="main">
         <h3>@ViewBag.Message</h3>
@@ -33,8 +31,8 @@
                                 var grid = new WebGrid(Model, canPage: false);
                             }
                             @grid.GetHtml(
-htmlAttributes: new { id = "tblRegistroProduccion" },
-exclusions: new[] {"IdFactor"},
+htmlAttributes: new { id = "tblRegistroProduccion" }, 
+exclusions: new[] { "IdMortalidad" },
 tableStyle: "table table-bordered",
 columns:
 grid.Columns(
@@ -49,17 +47,17 @@ grid.Column(columnName: "FactoresMedicion", header: "F.Medición", format: @<tex
 grid.Column(columnName: "NumeroEstanquesUtilizado", header: "Estanques", format: @<text>@item.NumeroEstanquesUtilizado</text>),
 grid.Column(columnName: "DensidadSiembra", header: "Siembra", format: @<text>@item.DensidadSiembra</text>), 
 grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="modal" tooltip="Editar Parametro" data-target="#modalPopUpIngresoUsuario" 
-                                               onclick="EditaProduccion(@item.IdRegistroProduccion,
-                                               @item.CantidadProductoresMachos,
-                                               @item.CantidadProductoresHembras,  
-                                               @item.CantidadFecundada,
-                                               @item.NumeroDesoveTemporada,
-                                               @item.CantidadSembrada,
-                                               @item.IdFactor,
-                                               @item.NumeroEstanquesUtilizado,
-                                               @item.DensidadSiembra)">Editar</button>))
-
-
+                                               onclick="EditaFijacion(@item.IdSeguimientoFijacion,
+                                               @item.LarvasCalibre,
+                                               @item.LarvasCantidad,  
+                                               @item.CosechaCalibre,
+                                               @item.CosechaCantidad,
+                                               @item.NumeroEstanque,
+                                               @item.DensidadSiembra,
+                                               @item.IdMortalidad,
+                                               @item.CantidadMortalidad,
+                                               @item.FactoresMedicion,
+                                               @item.FechaRegistro)">Editar</button>))  
 )
                         </div>
 
@@ -84,8 +82,7 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
                                         <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
 
-                                            <div style="display: none;">
-                                                >
+                                            <div style="display: none;"> 
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
                                                     Id Produción <span class="required">*</span>
                                                 </label>

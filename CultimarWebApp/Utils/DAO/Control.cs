@@ -17,6 +17,7 @@ namespace CultimarWebApp.Utils.DAO
         private FactoryTipoContenedor _dtFactoryTipoContenedor = new FactoryTipoContenedor();
         private FactoryRegistroProduccion _dtFactoryRegistroProduccion = new FactoryRegistroProduccion();
         private FactoryMicroAlgas _dtMicroAlgas = new FactoryMicroAlgas();
+        private FactorySeguimientoFijacion _dtFijacion = new FactorySeguimientoFijacion();
 
         public List<ObjetoSeguimientoLarval> ListadoSeguimientoLarval()
         {
@@ -32,21 +33,26 @@ namespace CultimarWebApp.Utils.DAO
         public bool setGrabaSeguimientoLarval(ObjetoSeguimientoLarval larval)
         {
             return _dtSegLarval.setGrabaSegimientoLarval(larval);
-        }
-
-        //public bool SetEditaSegimientoLarval(ObjetoSeguimientoLarval larval)
-        //{
-        //    return _dtSegLarval.setEditaSegimientoLarval(larval);
-        //}
-        //public bool SetEliminaSeguimientoLarval(int id)
-        //{
-        //    return _dtSegLarval.setEliminaSeguimientoLarval(id);
-        //}
+        } 
 
         public List<ObjetoSeguimientoSemilla> ListadoSeguimientoSemilla()
         {
             return _dtFacSeguimientoSemilla.SeguimientoSemilla(1);
         }
+
+
+        public List<ObjetoSeguimientoFijacion> ListadoSeguimientoFijacion()
+        {
+            return _dtFijacion.ListadoFijacion();
+        }
+
+
+
+        public bool setGrabaSeguimientoFijacion(ObjetoSeguimientoFijacion fijacion)
+        {
+            return _dtFijacion.setGrabasegimientoFijacion(fijacion);
+        }
+
 
         public List<ObjetoRegistroProduccion> ListadoRegistroProduccion()
         {

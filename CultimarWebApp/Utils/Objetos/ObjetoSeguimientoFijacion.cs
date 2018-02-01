@@ -7,8 +7,7 @@ namespace CultimarWebApp.Utils.Objetos
 {
     public class ObjetoSeguimientoFijacion
     {
-        private int _id;
-        private DateTime _fechaRegistro;
+        private int _id; 
         private int _larvasCalibre;
         private int _larvasCantidad;
         private int _cosechaCalibre;
@@ -16,19 +15,28 @@ namespace CultimarWebApp.Utils.Objetos
         private int _numeroEstanque;
         private int _densidadSiembra;
         private int _idMortalidad;
+        private int _cantidadMortalidad;
+        private string _fechaRegistro;
         private string _factoresMedicion;
         private DateTime _fechaSistema;
         private bool _estado;
 
+        
 
-        public int Id
+        public int IdSeguimientoFijacion
         {
             get { return _id; }
             set { _id = value; }
         }
 
+        public int CantidadMortalidad
+        {
+            get { return _cantidadMortalidad; }
+            set { _cantidadMortalidad = value; }
+        }
 
-        public DateTime FechaRegistro
+
+        public string FechaRegistro
         {
             get { return _fechaRegistro; }
             set { _fechaRegistro = value; }
@@ -97,7 +105,7 @@ namespace CultimarWebApp.Utils.Objetos
 
 
 
-        public ObjetoSeguimientoFijacion(int Id, DateTime fechaRegistro, int larvasCalibre, int larvasCantidad, int cosechaCalibre, int cosechaCantidad, int numeroEstanque,
+        public ObjetoSeguimientoFijacion(int Id, string fechaRegistro, int larvasCalibre, int larvasCantidad, int cosechaCalibre, int cosechaCantidad, int numeroEstanque,
                                             int densidadSiembra, int idMortalidad, string factoresMedicion, DateTime fechaSistema, bool estado)
         {
             FechaRegistro = fechaRegistro;

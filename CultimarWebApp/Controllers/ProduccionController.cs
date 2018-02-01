@@ -13,6 +13,9 @@ namespace CultimarWebApp.Controllers
     {
         // GET: Produccion
         Control _control = new Control();
+
+        #region
+
         public ActionResult SeguimientoCultivoLarval()
         {
             try
@@ -32,9 +35,7 @@ namespace CultimarWebApp.Controllers
 
                 ViewBag.selectTipoM = TipoMortalidad;
 
-                 
-                
-
+                  
 
                 IEnumerable<SelectListItem> seleccionMedicion = _control.ListaFactoresMedicion().Select(d => new SelectListItem()
                 {
@@ -60,6 +61,7 @@ namespace CultimarWebApp.Controllers
                 throw;
             }
         }
+        #endregion
 
         public ActionResult RegistroProduccion()
         {
@@ -235,6 +237,97 @@ namespace CultimarWebApp.Controllers
 
 
         }
+
+
+        public ActionResult SeguimientoFijacion()
+        {
+            try
+            {
+
+
+                var datosUsuario = new ObjetoLogin();
+                datosUsuario = (ObjetoLogin)Session["DatosUsuario"];
+                ViewBag.Message = "Bienvenido: " + datosUsuario.Nombre;
+                IEnumerable<ObjetoSeguimientoFijacion> model = _control.ListadoSeguimientoFijacion();
+
+
+                IEnumerable<SelectListItem> items2 = _control.ListadoParametrosDestino().Select(c => new SelectListItem()
+                {
+                    Text = c.NombreDestino,
+                    Value = c.IdDestino.ToString()
+                }).ToList();
+
+                ViewBag.ContenedorDestino = items2;
+
+
+                IEnumerable<SelectListItem> TipoMortalidad = _control.ListadoTipoMortalidad().Select(c => new SelectListItem()
+                {
+                    Text = c.NombreMortalidad,
+                    Value = c.IdMortalidad.ToString()
+                }).ToList();
+
+                ViewBag.selectTipoM = TipoMortalidad;
+
+
+                var item3 = _control.ListadoFactorMedicion();
+                ViewBag.FactorM = new MultiSelectList(item3, "IdFactor", "NombreFactor");
+
+
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                new CapturaExcepciones(ex);
+                return ErrorPage(1001);
+                throw;
+            }
+        }
+
+
+
+
+        public JsonResult GrabaSeguimientoFijacion(int _IdSeguimientoFijacion,
+                                            int _LarvasCalibre,
+                                            int _LarvasCantidad,
+                                            int _CosechaCalibre,
+                                            int _CosechaCantidad,
+                                            int _NumeroEstanque,
+                                            int _DensidadSiembra,
+                                            int _IdMortalidad,
+                                            int _CantidadMortalidad,
+                                            string _FactoresMedicion,
+                                            string _FechaRegistro)
+        {
+             
+
+
+
+            var  seguimientoFijnacion = new ObjetoSeguimientoFijacion();
+            var validador = 0;
+
+            seguimientoFijnacion.IdSeguimientoFijacion = _IdSeguimientoFijacion;
+            seguimientoFijnacion.LarvasCalibre = _LarvasCalibre;
+            seguimientoFijnacion.LarvasCantidad = _LarvasCantidad;
+            seguimientoFijnacion.CosechaCalibre = _CosechaCalibre;
+            seguimientoFijnacion.NumeroEstanque = _NumeroEstanque;
+            seguimientoFijnacion.DensidadSiembra = _DensidadSiembra;
+            seguimientoFijnacion.IdMortalidad = _IdMortalidad;
+            seguimientoFijnacion.CantidadMortalidad = _CantidadMortalidad;
+            seguimientoFijnacion.FactoresMedicion = _FactoresMedicion;
+            seguimientoFijnacion.FechaRegistro = _FechaRegistro;
+
+             
+            if (_control.setGrabaSeguimientoFijacion(seguimientoFijnacion))
+            {
+                validador = 1;
+            }
+
+            return (Json(validador));
+
+
+        }
+
+
 
         public ActionResult ErrorPage(int error)
         {

@@ -27,34 +27,45 @@ namespace CultimarWebApp.Utils.DAO
                     var validador = new object();
                     var resultadoListado = new ObjetoSeguimientoFijacion();
                     validador = data.Rows[i].Field<object>("Id");
-                    resultadoListado.Id = validador != null ? data.Rows[i].Field<int>("Id") : -1;
+                    resultadoListado.IdSeguimientoFijacion = validador != null ? data.Rows[i].Field<int>("Id") : -1;
 
-                    validador = data.Rows[i].Field<object>("Fecha Registro");
-                    resultadoListado.FechaRegistro = validador != null ? data.Rows[i].Field<DateTime>("FechaRegistro") : Convert.ToDateTime(2017-12-19);
+                    validador = data.Rows[i].Field<object>("FechaRegistro");
+                    resultadoListado.FechaRegistro = validador != null ? data.Rows[i].Field<string>("FechaRegistro") : "2017-12-19";
 
                     validador = data.Rows[i].Field<object>("LarvasCalibre");
                     resultadoListado.LarvasCalibre = validador != null ? data.Rows[i].Field<int>("LarvasCalibre") : 0;
 
-                    validador = data.Rows[i].Field<object>("Cosecha Calibre");
+                    validador = data.Rows[i].Field<object>("LarvasCantidad");
+                    resultadoListado.LarvasCantidad = validador != null ? data.Rows[i].Field<int>("LarvasCantidad") : 0;
+                    
+
+                    validador = data.Rows[i].Field<object>("CosechaCalibre");
                     resultadoListado.CosechaCalibre = validador != null ? data.Rows[i].Field<int>("CosechaCalibre") : 0;
 
-                    validador = data.Rows[i].Field<object>("Cosecha Cantidad");
+                    validador = data.Rows[i].Field<object>("CosechaCantidad");
                     resultadoListado.CosechaCantidad = validador != null ? data.Rows[i].Field<int>("CosechaCantidad") : 0;
 
-                    validador = data.Rows[i].Field<object>("Numero Estanque");
+                    validador = data.Rows[i].Field<object>("NumeroEstanque");
                     resultadoListado.NumeroEstanque = validador != null ? data.Rows[i].Field<int>("NumeroEstanque") : 0;
 
-                    validador = data.Rows[i].Field<object>("Densidad Siembra");
+                    validador = data.Rows[i].Field<object>("DensidadSiembra");
                     resultadoListado.DensidadSiembra = validador != null ? data.Rows[i].Field<int>("DensidadSiembra") :0;
-
-                    validador = data.Rows[i].Field<object>("Mortalidad");
-                    resultadoListado.IdMortalidad = validador != null ? data.Rows[i].Field<int>("Nombre") : 0;
+                     
              
-                    validador = data.Rows[i].Field<object>("Factores Medicion");
+                    validador = data.Rows[i].Field<object>("FactoresMedicion");
                     resultadoListado.FactoresMedicion = validador != null ? data.Rows[i].Field<string>("FactoresMedicion") : "";
 
-                    validador = data.Rows[i].Field<object>("Fecha Sistema");
-                    resultadoListado.FechaSistema = validador != null ? data.Rows[i].Field<DateTime>("FechaSistema") :DateTime.Today;
+
+
+                    validador = data.Rows[i].Field<object>("IdMortalidad");
+                    resultadoListado.IdMortalidad = validador != null ? data.Rows[i].Field<int>("IdMortalidad") : 0;
+
+
+                    validador = data.Rows[i].Field<object>("CantidadMortalidad");
+                    resultadoListado.CantidadMortalidad = validador != null ? data.Rows[i].Field<int>("CantidadMortalidad") : 0;
+
+
+
 
                     validador = data.Rows[i].Field<object>("Estado");
                     resultadoListado.Estado = validador != null ? data.Rows[i].Field<bool>("Estado") : true;
@@ -76,18 +87,17 @@ namespace CultimarWebApp.Utils.DAO
             {
                 var data = new DBConector().EjecutarProcedimientoAlmacenado("CRUD_SeguimientoFijacion", new System.Collections.Hashtable()
                                                                                             {
-                                                                                                {"FechaRegistro", seguimientofijacion.FechaRegistro },
-                                                                                                {"LarvasCalibre", seguimientofijacion.LarvasCalibre },
-                                                                                                {"LarvasCantidad", seguimientofijacion.LarvasCantidad },
-                                                                                                {"CosechaCalibre", seguimientofijacion.CosechaCalibre },
-                                                                                                {"CosechaCantidad", seguimientofijacion.CosechaCantidad },
-                                                                                                {"NumeroEstanque", seguimientofijacion.NumeroEstanque },
-                                                                                                {"DensidadSiembra", seguimientofijacion.DensidadSiembra },
-                                                                                                {"IdMortalidad", seguimientofijacion.IdMortalidad },
-                                                                                                {"FactoresMedicion", seguimientofijacion.FactoresMedicion },
-                                                                                                {"FechaSistema", seguimientofijacion.FechaSistema },
-                                                                                                {"Estado", seguimientofijacion.Estado },
-                                                                                                {"A",seguimientofijacion }
+                                                                                                {"@p_Id", seguimientofijacion.IdSeguimientoFijacion },
+                                                                                                {"@p_LarvasCalibre", seguimientofijacion.LarvasCalibre },
+                                                                                                {"@p_LarvasCantidad", seguimientofijacion.LarvasCantidad },
+                                                                                                {"@p_CosechaCalibre", seguimientofijacion.CosechaCalibre },
+                                                                                                {"@p_CosechaCantidad", seguimientofijacion.CosechaCantidad },
+                                                                                                {"@p_NumeroEstanque", seguimientofijacion.NumeroEstanque },
+                                                                                                {"@p_DensidadSiembra", seguimientofijacion.DensidadSiembra }, 
+                                                                                                {"@p_IdMortalidad", seguimientofijacion.IdMortalidad },
+                                                                                                {"@p_CantidadMortalidad",seguimientofijacion.CantidadMortalidad },
+                                                                                                {"@p_FactoresMedicion", seguimientofijacion.FactoresMedicion },
+                                                                                                {"@p_FechaRegistro", seguimientofijacion.FechaRegistro } 
                                                                                            });
                 if (data.Rows.Count > 0)
                 {
