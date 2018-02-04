@@ -25,6 +25,9 @@ namespace CultimarWebApp.Controllers
             string url = string.Empty;
             try
             {
+                var rutUsuario = ValidaRut.DigitoVerificador(model.Rut);
+
+
                 if (!ModelState.IsValid)
                 {
                     return View(model);

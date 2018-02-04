@@ -16,11 +16,11 @@ namespace CultimarWebApp.Utils.DAO
         /// </summary>
 
 
-        public List<ObjetoSeguimientoLarval> ListadoSeguimientoLarval()
+        public List<ObjetoSeguimientoLarval> ListadoSeguimientoLarval(int id)
         {
             var ListadoSeguimientoLarval = new List<ObjetoSeguimientoLarval>();
 
-            var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_GET_LISTADOSEGUIMIENTOLARVAL", new System.Collections.Hashtable());
+            var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_GET_LISTADOSEGUIMIENTOLARVAL", new System.Collections.Hashtable() { { "@id", id } });
 
             if (data.Rows.Count > 0)
             {
@@ -64,13 +64,15 @@ namespace CultimarWebApp.Utils.DAO
         /// </summary>
 
 
-        public bool setGrabaSegimientoLarval(ObjetoSeguimientoLarval seguimientolarval)
+        public bool SetGrabaSegimientoLarval(int idUsuario, ObjetoSeguimientoLarval seguimientolarval)
         {
             var respuesta = false;
             try
             {
                 var data = new DBConector().EjecutarProcedimientoAlmacenado("CRUD_SeguimientoLarval", new System.Collections.Hashtable()
-                                                                                            {   {"@p_Id", seguimientolarval.Id },
+                                                                                            {
+                    {"@IdUsuario", idUsuario},
+                    { "@p_Id", seguimientolarval.Id },
                                                                                                 {"@p_CantidadDeLarvas", seguimientolarval.CantidadDeLarvas },
                                                                                                 {"@p_CosechaLarvas", seguimientolarval.CosechaLarvas},
                                                                                                 {"@p_NumeroEstanque", seguimientolarval.NumeroEstanque},

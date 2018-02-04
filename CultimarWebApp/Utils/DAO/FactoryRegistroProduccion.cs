@@ -20,11 +20,10 @@ namespace CultimarWebApp.Utils.DAO
         /// </summary>
         /// <param name="Id">ID del seguimiento usuadi</param>
         /// <returns>Lista se consumura desde la paginas de seguimiento de semilla segun perfil asociado</returns>
-        public List<ObjetoRegistroProduccion> listadoRegistroProduccion()
+        public List<ObjetoRegistroProduccion> listadoRegistroProduccion(int id)
         {
             var listadoRegistoProduccion = new List<ObjetoRegistroProduccion>();
-            var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_GET_RegistroProduccion", new System.Collections.Hashtable()
-                                                                                            );
+            var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_GET_RegistroProduccion", new System.Collections.Hashtable() { { "@id", id } });
 
             if (data.Rows.Count > 0)
             {
@@ -58,7 +57,7 @@ namespace CultimarWebApp.Utils.DAO
 
   
                     validador = data.Rows[i].Field<object>("IdFactor");
-                    resultadoListado.FactoresMedicion = validador != null ? data.Rows[i].Field<int>("IdFactor") : 0;
+                    resultadoListado.FactoresMedicion = validador != null ? data.Rows[i].Field<string>("IdFactor") : "0";
 
 
                     validador = data.Rows[i].Field<object>("NumeroEstanquesUtilizado");
@@ -77,13 +76,13 @@ namespace CultimarWebApp.Utils.DAO
 
 
 
-        public bool setGrabaRegistroProduccion(ObjetoRegistroProduccion produccion)
+        public bool SetGrabaRegistroProduccion(int idUsuario, ObjetoRegistroProduccion produccion)
         {
             var respuesta = false;
             try
             {
                 var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_Set_GrabaProduccion", new System.Collections.Hashtable()
-                                                                                            {
+                                                                                            { {"@IdUsuario", idUsuario},
                                                                                               {"@idProduccion",produccion.IdRegistroProduccion},
                                                                                                 {"@p_CantidadProductoresMachos",produccion.CantidadProductoresMachos},
                                                                                                 {"@p_CantidadProductoresHembras", produccion.CantidadProductoresHembras },

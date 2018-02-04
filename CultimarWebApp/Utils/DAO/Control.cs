@@ -22,14 +22,14 @@ namespace CultimarWebApp.Utils.DAO
         private FactoryPreparadoDespacho _preparado = new FactoryPreparadoDespacho();
 
 
-        public List<ObjetoPreparadoDespacho> ListadoPreparadoDespachado()
+        public List<ObjetoPreparadoDespacho> ListadoPreparadoDespachado(int id)
         {
-            return _preparado.ListadoPreparadoDespechao();
+            return _preparado.ListadoPreparadoDespechao(id);
         }
 
-        public bool setGrabaPreparacionDespacho(ObjetoPreparadoDespacho pdespach)
+        public bool SetGrabaPreparacionDespacho(int idUsuario, ObjetoPreparadoDespacho pdespach)
         {
-            return _preparado.setGrabaPreparadoDespachl(pdespach);
+            return _preparado.SetGrabaPreparadoDespachl(idUsuario, pdespach);
         }
         public List<ObjetoRegistroInicialMar> ListadoRegistroInicialMar(int idRegistro)
         {
@@ -40,9 +40,9 @@ namespace CultimarWebApp.Utils.DAO
         {
             return _dtMar.SetGrabaRegistroInicialMar(idUsuario, registroMar);
         }
-        public List<ObjetoSeguimientoLarval> ListadoSeguimientoLarval()
+        public List<ObjetoSeguimientoLarval> ListadoSeguimientoLarval(int id)
         {
-            return _dtSegLarval.ListadoSeguimientoLarval();
+            return _dtSegLarval.ListadoSeguimientoLarval(id);
         }
 
         public List<ObjetoFactoresMedicion> ListadoFactorMedicion()
@@ -51,33 +51,33 @@ namespace CultimarWebApp.Utils.DAO
         }
 
 
-        public bool setGrabaSeguimientoLarval(ObjetoSeguimientoLarval larval)
+        public bool SetGrabaSeguimientoLarval(int idUsuario, ObjetoSeguimientoLarval larval)
         {
-            return _dtSegLarval.setGrabaSegimientoLarval(larval);
+            return _dtSegLarval.SetGrabaSegimientoLarval(idUsuario, larval);
         } 
 
-        public List<ObjetoSeguimientoSemilla> ListadoSeguimientoSemilla()
+        public List<ObjetoSeguimientoSemilla> ListadoSeguimientoSemilla(int id)
         {
-            return _dtFacSeguimientoSemilla.SeguimientoSemilla(1);
+            return _dtFacSeguimientoSemilla.SeguimientoSemilla(id);
         }
 
 
-        public List<ObjetoSeguimientoFijacion> ListadoSeguimientoFijacion()
+        public List<ObjetoSeguimientoFijacion> ListadoSeguimientoFijacion(int id)
         {
-            return _dtFijacion.ListadoFijacion();
+            return _dtFijacion.ListadoFijacion(id);
         }
 
 
 
-        public bool setGrabaSeguimientoFijacion(ObjetoSeguimientoFijacion fijacion)
+        public bool SetGrabaSeguimientoFijacion(int idUsuario, ObjetoSeguimientoFijacion fijacion)
         {
-            return _dtFijacion.setGrabasegimientoFijacion(fijacion);
+            return _dtFijacion.SetGrabasegimientoFijacion(idUsuario, fijacion);
         }
 
 
-        public List<ObjetoRegistroProduccion> ListadoRegistroProduccion()
+        public List<ObjetoRegistroProduccion> ListadoRegistroProduccion(int id)
         {
-            return _dtFactoryRegistroProduccion.listadoRegistroProduccion();
+            return _dtFactoryRegistroProduccion.listadoRegistroProduccion(id);
         }
 
 
@@ -189,14 +189,14 @@ namespace CultimarWebApp.Utils.DAO
         {
             return _dtFac.setGrabaUsuario(usuario);
         }
-        public bool SetGrabaSeguimientoSemilla(ObjetoSeguimientoSemilla semilla)
+        public bool SetGrabaSeguimientoSemilla(int idUsuario, ObjetoSeguimientoSemilla semilla)
         {
-            return _dtFacSeguimientoSemilla.setGrabaSeuimientoSemillla(semilla);
+            return _dtFacSeguimientoSemilla.SetGrabaSeuimientoSemillla(idUsuario, semilla);
         }
 
-        public bool SetGrabaRegistroProduccion(ObjetoRegistroProduccion produccion)
+        public bool SetGrabaRegistroProduccion(int idUsuario, ObjetoRegistroProduccion produccion)
         {
-            return _dtFactoryRegistroProduccion.setGrabaRegistroProduccion(produccion);
+            return _dtFactoryRegistroProduccion.SetGrabaRegistroProduccion(idUsuario, produccion);
         }
         public bool GetVerificaUsuario(string rutUsuario)
         {

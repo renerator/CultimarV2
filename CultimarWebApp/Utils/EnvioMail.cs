@@ -64,6 +64,267 @@ namespace CultimarWebApp.Utils
                 throw (new CapturaExcepciones(ex));
             }
         }
+        public string ModificaRegistroPreparadoDespacho(int id, string nombreSolicita)
+        {
+            var salida = string.Empty;
+            var reader = new StreamReader(HttpContext.Current.Server.MapPath(Ur + "SolicitudPermiso.html"));
+            salida = reader.ReadToEnd();
+            reader.Close();
+            salida = salida.Replace("%nombreSolicita%", nombreSolicita);
+
+            var contenido = string.Empty;
+            var detalle = string.Empty;
+            var datos = _control.ListadoPreparadoDespachado(id);
+
+            if (datos.Count > 0)
+            {
+                contenido += "<tr>";
+                contenido += "	<td>Ingreso Preparado Despacho</td>";
+                contenido += "    <td style='width:90px;'>";
+                contenido += "        <span>" + datos[0].IdPreparoDespacho.ToString() + "</span>";
+                contenido += "    </td>";
+                contenido += "    <td style='width:90px;'>";
+                contenido += "        <span>" + datos[0].FechaEnvio + "</span>";
+                contenido += "    </td>";
+                contenido += "    <td>";
+                contenido += "        <span>" + DateTime.Now.ToShortDateString() + "</span>";
+                contenido += "    </td>";
+                contenido += "</tr>";
+
+                detalle += "<tr>";
+                detalle += "	<td>" + datos[0].IdPreparoDespacho.ToString() + "</td>";
+                detalle += "    <td style='width:90px;'>";
+                detalle += "        <span>" + datos[0].Cliente + "</span>";
+                detalle += "    </td>";
+                detalle += "    <td>";
+                detalle += "    <table>";
+                detalle += "        <tr>";
+                detalle += "            <th scope='col'> Cantidad </th>";
+                detalle += "            <th scope='col'> Calibre </th>";
+                detalle += "            <th scope='col'> Fecha Preparado </th>";
+                detalle += "        </tr>";
+                detalle += "        <tr>";
+                detalle += "            <td><span>" + datos[0].Cantidad + "</span></td>";
+                detalle += "            <td><span>" + datos[0].Calibre + "</span></td>";
+                detalle += "            <td><span>" + datos[0].FechaPreparado + "</span></td>";
+                detalle += "        </tr>";
+                detalle += "    </table>";
+                detalle += "    </td>";
+                detalle += "</tr>";
+            }
+            salida = salida.Replace("%tablaContenido%", contenido);
+            salida = salida.Replace("%tablaDetalle%", detalle);
+            return salida;
+        }
+        
+        public string ModificaSeguimientoRegistroProduccion(int id, string nombreSolicita)
+        {
+            var salida = string.Empty;
+            var reader = new StreamReader(HttpContext.Current.Server.MapPath(Ur + "SolicitudPermiso.html"));
+            salida = reader.ReadToEnd();
+            reader.Close();
+            salida = salida.Replace("%nombreSolicita%", nombreSolicita);
+
+            var contenido = string.Empty;
+            var detalle = string.Empty;
+            var datos = _control.ListadoRegistroProduccion(id);
+
+            if (datos.Count > 0)
+            {
+                contenido += "<tr>";
+                contenido += "	<td>Ingreso Registro inicial Mar</td>";
+                contenido += "    <td style='width:90px;'>";
+                contenido += "        <span>" + datos[0].IdRegistroProduccion.ToString() + "</span>";
+                contenido += "    </td>";
+                contenido += "    <td style='width:90px;'>";
+                contenido += "        <span>" + datos[0].FechaRegistro + "</span>";
+                contenido += "    </td>";
+                contenido += "    <td>";
+                contenido += "        <span>" + DateTime.Now.ToShortDateString() + "</span>";
+                contenido += "    </td>";
+                contenido += "</tr>";
+
+                detalle += "<tr>";
+                detalle += "	<td>" + datos[0].IdRegistroProduccion.ToString() + "</td>";
+                detalle += "    <td style='width:90px;'>";
+                detalle += "        <span>Registro Seguimiento Producción</span>";
+                detalle += "    </td>";
+                detalle += "    <td>";
+                detalle += "    <table>";
+                detalle += "        <tr>";
+                detalle += "            <th scope='col'> Numero Desove </th>";
+                detalle += "            <th scope='col'> Numero Estanque Utilizado </th>";
+                detalle += "            <th scope='col'> Cantidad Sembrada </th>";
+                detalle += "        </tr>";
+                detalle += "        <tr>";
+                detalle += "            <td><span>" + datos[0].NumeroDesoveTemporada + "</span></td>";
+                detalle += "            <td><span>" + datos[0].NumeroEstanquesUtilizado.ToString() + "</span></td>";
+                detalle += "            <td><span>" + datos[0].CantidadSembrada.ToString() + "</span></td>";
+                detalle += "        </tr>";
+                detalle += "    </table>";
+                detalle += "    </td>";
+                detalle += "</tr>";
+            }
+            salida = salida.Replace("%tablaContenido%", contenido);
+            salida = salida.Replace("%tablaDetalle%", detalle);
+            return salida;
+        }
+        public string ModificaRegistroSeguimientoLarval(int id, string nombreSolicita)
+        {
+            var salida = string.Empty;
+            var reader = new StreamReader(HttpContext.Current.Server.MapPath(Ur + "SolicitudPermiso.html"));
+            salida = reader.ReadToEnd();
+            reader.Close();
+            salida = salida.Replace("%nombreSolicita%", nombreSolicita);
+
+            var contenido = string.Empty;
+            var detalle = string.Empty;
+            var datos = _control.ListadoSeguimientoLarval(id);
+
+            if (datos.Count > 0)
+            {
+                contenido += "<tr>";
+                contenido += "	<td>Ingreso Registro inicial Mar</td>";
+                contenido += "    <td style='width:90px;'>";
+                contenido += "        <span>" + datos[0].Id.ToString() + "</span>";
+                contenido += "    </td>";
+                contenido += "    <td style='width:90px;'>";
+                contenido += "        <span>" + datos[0].FechaRegistro + "</span>";
+                contenido += "    </td>";
+                contenido += "    <td>";
+                contenido += "        <span>" + DateTime.Now.ToShortDateString() + "</span>";
+                contenido += "    </td>";
+                contenido += "</tr>";
+
+                detalle += "<tr>";
+                detalle += "	<td>" + datos[0].Id.ToString() + "</td>";
+                detalle += "    <td style='width:90px;'>";
+                detalle += "        <span>Registro Seguimiento Larval</span>";
+                detalle += "    </td>";
+                detalle += "    <td>";
+                detalle += "    <table>";
+                detalle += "        <tr>";
+                detalle += "            <th scope='col'> Nombre </th>";
+                detalle += "            <th scope='col'> Cantidad Larvas </th>";
+                detalle += "            <th scope='col'> Numero Estanque </th>";
+                detalle += "        </tr>";
+                detalle += "        <tr>";
+                detalle += "            <td><span>" + datos[0].Nombre + "</span></td>";
+                detalle += "            <td><span>" + datos[0].CantidadDeLarvas.ToString() + "</span></td>";
+                detalle += "            <td><span>" + datos[0].NumeroEstanque.ToString() + "</span></td>";
+                detalle += "        </tr>";
+                detalle += "    </table>";
+                detalle += "    </td>";
+                detalle += "</tr>";
+            }
+            salida = salida.Replace("%tablaContenido%", contenido);
+            salida = salida.Replace("%tablaDetalle%", detalle);
+            return salida;
+        }
+        public string ModificaRegistroSeguimientoSemilla(int id, string nombreSolicita)
+        {
+            var salida = string.Empty;
+            var reader = new StreamReader(HttpContext.Current.Server.MapPath(Ur + "SolicitudPermiso.html"));
+            salida = reader.ReadToEnd();
+            reader.Close();
+            salida = salida.Replace("%nombreSolicita%", nombreSolicita);
+
+            var contenido = string.Empty;
+            var detalle = string.Empty;
+            var datos = _control.ListadoSeguimientoSemilla(id);
+
+            if (datos.Count > 0)
+            {
+                contenido += "<tr>";
+                contenido += "	<td>Ingreso Registro inicial Mar</td>";
+                contenido += "    <td style='width:90px;'>";
+                contenido += "        <span>" + datos[0].IdSeguimientoSemilla.ToString() + "</span>";
+                contenido += "    </td>";
+                contenido += "    <td style='width:90px;'>";
+                contenido += "        <span>" + datos[0].FechaRegistro + "</span>";
+                contenido += "    </td>";
+                contenido += "    <td>";
+                contenido += "        <span>" + DateTime.Now.ToShortDateString() + "</span>";
+                contenido += "    </td>";
+                contenido += "</tr>";
+
+                detalle += "<tr>";
+                detalle += "	<td>" + datos[0].IdSeguimientoSemilla.ToString() + "</td>";
+                detalle += "    <td style='width:90px;'>";
+                detalle += "        <span>Registro Seguimiento Semilla</span>";
+                detalle += "    </td>";
+                detalle += "    <td>";
+                detalle += "    <table>";
+                detalle += "        <tr>";
+                detalle += "            <th scope='col'> Cantidad Cosechado </th>";
+                detalle += "            <th scope='col'> Cantidad Calibre </th>";
+                detalle += "            <th scope='col'> Contenedor Destino </th>";
+                detalle += "        </tr>";
+                detalle += "        <tr>";
+                detalle += "            <td><span>" + datos[0].CantidadCosechado + "</span></td>";
+                detalle += "            <td><span>" + datos[0].CantidadCalibre + "</span></td>";
+                detalle += "            <td><span>" + datos[0].NombreContenedorDestino + "</span></td>";
+                detalle += "        </tr>";
+                detalle += "    </table>";
+                detalle += "    </td>";
+                detalle += "</tr>";
+            }
+            salida = salida.Replace("%tablaContenido%", contenido);
+            salida = salida.Replace("%tablaDetalle%", detalle);
+            return salida;
+        }
+        public string ModificaRegistroSeguimientoFijacion(int id, string nombreSolicita)
+        {
+            var salida = string.Empty;
+            var reader = new StreamReader(HttpContext.Current.Server.MapPath(Ur + "SolicitudPermiso.html"));
+            salida = reader.ReadToEnd();
+            reader.Close();
+            salida = salida.Replace("%nombreSolicita%", nombreSolicita);
+
+            var contenido = string.Empty;
+            var detalle = string.Empty;
+            var datos = _control.ListadoSeguimientoFijacion(id);
+
+            if (datos.Count > 0)
+            {
+                contenido += "<tr>";
+                contenido += "	<td>Ingreso Registro inicial Mar</td>";
+                contenido += "    <td style='width:90px;'>";
+                contenido += "        <span>" + datos[0].IdSeguimientoFijacion.ToString() + "</span>";
+                contenido += "    </td>";
+                contenido += "    <td style='width:90px;'>";
+                contenido += "        <span>" + datos[0].FechaRegistro + "</span>";
+                contenido += "    </td>";
+                contenido += "    <td>";
+                contenido += "        <span>" + DateTime.Now.ToShortDateString() + "</span>";
+                contenido += "    </td>";
+                contenido += "</tr>";
+
+                detalle += "<tr>";
+                detalle += "	<td>" + datos[0].IdSeguimientoFijacion.ToString() + "</td>";
+                detalle += "    <td style='width:90px;'>";
+                detalle += "        <span>" + datos[0].NumeroEstanque.ToString() + "</span>";
+                detalle += "    </td>";
+                detalle += "    <td>";
+                detalle += "    <table>";
+                detalle += "        <tr>";
+                detalle += "            <th scope='col'> Cantidad Cosecha </th>";
+                detalle += "            <th scope='col'> Calibre Cosecha </th>";
+                detalle += "            <th scope='col'> Densidad Siembra </th>";
+                detalle += "        </tr>";
+                detalle += "        <tr>";
+                detalle += "            <td><span>" + datos[0].CosechaCantidad + "</span></td>";
+                detalle += "            <td><span>" + datos[0].CosechaCalibre + "</span></td>";
+                detalle += "            <td><span>" + datos[0].DensidadSiembra + "</span></td>";
+                detalle += "        </tr>";
+                detalle += "    </table>";
+                detalle += "    </td>";
+                detalle += "</tr>";
+            }
+            salida = salida.Replace("%tablaContenido%", contenido);
+            salida = salida.Replace("%tablaDetalle%", detalle);
+            return salida;
+        }
         public string ModificaRegistroInicialMar(int id, string nombreSolicita)
         {
             var salida = string.Empty;

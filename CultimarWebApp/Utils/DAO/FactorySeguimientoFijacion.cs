@@ -15,10 +15,12 @@ namespace CultimarWebApp.Utils.DAO
         /// </summary>
 
 
-        public List<ObjetoSeguimientoFijacion> ListadoFijacion()
+        public List<ObjetoSeguimientoFijacion> ListadoFijacion(int id)
         {
             var ListadoSeguimientoFijacion = new List<ObjetoSeguimientoFijacion>();
-            var data = new DBConector().EjecutarProcedimientoAlmacenado("[SP_GET_LISTADOSEGUIMIENTOFIJACION]", new System.Collections.Hashtable());
+            var data = new DBConector().EjecutarProcedimientoAlmacenado("[SP_GET_LISTADOSEGUIMIENTOFIJACION]", new System.Collections.Hashtable(){
+                                                                                                {"@id", id}
+                                                                                            });
 
             if (data.Rows.Count > 0)
             {
@@ -80,13 +82,14 @@ namespace CultimarWebApp.Utils.DAO
         /// Metodo para grabar seguimiento larval
         /// </summary>
 
-        public bool setGrabasegimientoFijacion(ObjetoSeguimientoFijacion seguimientofijacion)
+        public bool SetGrabasegimientoFijacion(int idUsuario, ObjetoSeguimientoFijacion seguimientofijacion)
         {
             var respuesta = false;
             try
             {
                 var data = new DBConector().EjecutarProcedimientoAlmacenado("CRUD_SeguimientoFijacion", new System.Collections.Hashtable()
                                                                                             {
+                    { "@IdUsuario", idUsuario},
                                                                                                 {"@p_Id", seguimientofijacion.IdSeguimientoFijacion },
                                                                                                 {"@p_LarvasCalibre", seguimientofijacion.LarvasCalibre },
                                                                                                 {"@p_LarvasCantidad", seguimientofijacion.LarvasCantidad },

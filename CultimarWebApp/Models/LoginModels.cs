@@ -8,7 +8,7 @@ namespace CultimarWebApp.Models
     {
         [Required(ErrorMessage = "El Rut es requerido")]
         [DataType(DataType.Text)]
-        [RegularExpression(@"^([0-9]+-[0-9K])$", ErrorMessage = "El formato del Rut es inválido")]
+        //[RegularExpression(@"^([0-9]+-[0-9K])$", ErrorMessage = "El formato del Rut es inválido")]
         [Display(Name = "Rut Usuario")]
         public string Rut { get; set; }
 

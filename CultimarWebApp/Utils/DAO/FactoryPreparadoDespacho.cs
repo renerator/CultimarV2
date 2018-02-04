@@ -12,11 +12,14 @@ namespace CultimarWebApp.Utils.DAO
     {
 
 
-        public List<ObjetoPreparadoDespacho> ListadoPreparadoDespechao()
+        public List<ObjetoPreparadoDespacho> ListadoPreparadoDespechao(int id)
         {
             var ListadoPDespachoado = new List<ObjetoPreparadoDespacho>();
 
-            var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_GET_LISTADOPreparadoDespacho", new System.Collections.Hashtable());
+            var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_GET_LISTADOPreparadoDespacho", new System.Collections.Hashtable()
+                                                                                            {
+                                                                                                {"@id", id}
+                                                                                            });
 
             if (data.Rows.Count > 0)
             {
@@ -66,13 +69,15 @@ namespace CultimarWebApp.Utils.DAO
 
 
 
-        public bool setGrabaPreparadoDespachl(ObjetoPreparadoDespacho pdespacho)
+        public bool SetGrabaPreparadoDespachl(int idUsuario, ObjetoPreparadoDespacho pdespacho)
         {
             var respuesta = false;
             try
             {
                 var data = new DBConector().EjecutarProcedimientoAlmacenado("CRUD_PreparadoDespacho", new System.Collections.Hashtable()
-                                                                                            {   {"@p_Id", pdespacho.IdPreparoDespacho },
+                                                                                            {
+                                                                                                { "@IdUsuario", idUsuario},
+                                                                                                { "@p_Id", pdespacho.IdPreparoDespacho },
                                                                                                 {"@p_FechaEnvio", pdespacho.FechaEnvio },
                                                                                                 {"@p_FechaPreparado", pdespacho.FechaPreparado},
                                                                                                 {"@p_IdOrigen", pdespacho.IdOrigen},
@@ -81,7 +86,7 @@ namespace CultimarWebApp.Utils.DAO
                                                                                                 {"@p_PesoBruto", pdespacho.PesoBruto },
                                                                                                 {"@p_Cantidad", pdespacho.Cantidad },
                                                                                                 {"@p_Calibre", pdespacho.Calibre },
-                                                                                                  {"@p_Cliente", pdespacho.Cliente}
+                                                                                                {"@p_Cliente", pdespacho.Cliente}
 
                                                                                            });
                 if (data.Rows.Count > 0)

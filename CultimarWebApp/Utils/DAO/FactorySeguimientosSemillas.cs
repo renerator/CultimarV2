@@ -18,10 +18,10 @@ namespace CultimarWebApp.Utils.DAO
         /// </summary>
         /// <param name="Id">ID del seguimiento usuadi</param>
         /// <returns>Lista se consumura desde la paginas de seguimiento de semilla segun perfil asociado</returns>
-        public List<ObjetoSeguimientoSemilla> SeguimientoSemilla(int Id)
+        public List<ObjetoSeguimientoSemilla> SeguimientoSemilla(int id)
         {
             var listadoSeguimientoSemilla = new List<ObjetoSeguimientoSemilla>();
-            var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_GET_ListaSguimientoSemilla", new System.Collections.Hashtable());
+            var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_GET_ListaSguimientoSemilla", new System.Collections.Hashtable() { { "@id", id } });
 
             if (data.Rows.Count > 0)
             {
@@ -85,13 +85,14 @@ namespace CultimarWebApp.Utils.DAO
         /// </summary>
         /// <param name="seguimiento semillas">Objeto del tipo usuario con todos los datos</param>
         /// <returns>valor mayor a 1 si el grabado resulta OK, 0 si hay error. </returns>
-        public bool setGrabaSeuimientoSemillla(ObjetoSeguimientoSemilla semilla)
+        public bool SetGrabaSeuimientoSemillla(int idUsuario, ObjetoSeguimientoSemilla semilla)
         {
             var respuesta = false;
             try
             {
                 var data = new DBConector().EjecutarProcedimientoAlmacenado("CRUD_SeguimientoSemilla", new System.Collections.Hashtable()
                                                                                             {
+                                                                                                {"@IdUsuario", idUsuario},
                                                                                                 {"@p_id_SeguimientoSemilla",semilla.IdSeguimientoSemilla},
                                                                                                 {"@p_IdTipoContenedorOrigen", semilla.IdTipoContenedorOrigen },
                                                                                                 {"@p_FechaRegistro", semilla.FechaRegistro },

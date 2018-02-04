@@ -64,9 +64,25 @@ $(document).ready(function () {
 
             async: true,
             success: function (data) {
-                if (data == 0) {
+                //if (data == 0) {
+                //    $("#btnCerrarModal").click();
+                //    alert("El Ingreso se ha realizado sin problemas.");
+                //}
+                if (data == 1) {
                     $("#btnCerrarModal").click();
                     alert("El Ingreso se ha realizado sin problemas.");
+                }
+                if (data == 3) {
+                    alert("Ha ocurrido un error al grabar los datos, intentalo nuevamente.");
+                }
+                if (data == 4) {
+                    alert("No tienes permiso para modificar, Hemos enviado un correo al administrador del sistema solicitando autorización para la modificación del registro, cuando te den autorización, te llegara un Email con la información.");
+                }
+                if (data == 5) {
+                    alert("Tu perfil de usuario no te permite realizar ninguna acción, solo puedes leer la información ingresada al sistema.");
+                }
+                if (data == 0) {
+                    alert("No se ha realizado la acción, intentalo nuevamente.");
                 }
             }
         });
