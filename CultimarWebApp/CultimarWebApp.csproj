@@ -184,6 +184,8 @@
     <Compile Include="Utils\DAO\Control.cs" />
     <Compile Include="Utils\DAO\Factory.cs" />
     <Compile Include="Utils\DAO\FactoryMicroAlgas.cs" />
+    <Compile Include="Utils\DAO\FactoryPreparadoDespacho.cs" />
+    <Compile Include="Utils\DAO\FactoryRegistroInicialMar.cs" />
     <Compile Include="Utils\DAO\FactoryRegistroProduccion.cs" />
     <Compile Include="Utils\DAO\FactorySeguimientoFijacion.cs" />
     <Compile Include="Utils\DAO\FactorySeguimientoLarval.cs" />
@@ -191,6 +193,7 @@
     <Compile Include="Utils\DAO\FactoryTipoContenedor.cs" />
     <Compile Include="Utils\DataSource.cs" />
     <Compile Include="Utils\DBConector.cs" />
+    <Compile Include="Utils\EnvioMail.cs" />
     <Compile Include="Utils\HashMd5.cs" />
     <Compile Include="Utils\Objetos\ObjetoAlimentos.cs" />
     <Compile Include="Utils\Objetos\ObjetoCalibre.cs" />
@@ -203,6 +206,9 @@
     <Compile Include="Utils\Objetos\ObjetoMicroAlga.cs" />
     <Compile Include="Utils\Objetos\ObjetoOrigen.cs" />
     <Compile Include="Utils\Objetos\ObjetoPerfil.cs" />
+    <Compile Include="Utils\Objetos\ObjetoPloidia.cs" />
+    <Compile Include="Utils\Objetos\ObjetoPreparadoDespacho.cs" />
+    <Compile Include="Utils\Objetos\ObjetoRegistroInicialMar.cs" />
     <Compile Include="Utils\Objetos\ObjetoRegistroProduccion.cs" />
     <Compile Include="Utils\Objetos\ObjetoSeguimientoFijacion.cs" />
     <Compile Include="Utils\Objetos\ObjetoSeguimientoLarval.cs" />
@@ -308,7 +314,6 @@
     <Content Include="images\prod-3.jpg" />
     <Content Include="images\prod-4.jpg" />
     <Content Include="images\prod-5.jpg" />
-    <Content Include="images\shirleyvivanco.jpeg" />
     <Content Include="images\user.png" />
     <Content Include="images\visa.png" />
     <Content Include="images\welcome.png" />
@@ -3741,13 +3746,18 @@
     <Content Include="Scripts\vendors\validator\index.html" />
     <Content Include="Scripts\vendors\validator\multifield.js" />
     <Content Include="Scripts\vendors\validator\validator.js" />
+    <Content Include="Utils\HtmlCorreos\AutorizaPermiso.html" />
+    <Content Include="Utils\HtmlCorreos\SolicitudPermiso.html" />
     <Content Include="WebJs\HomeJs\FactoresMedicion.js" />
     <Content Include="WebJs\HomeJs\Mantenedores.js" />
     <Content Include="WebJs\HomeJs\Usuario.js" />
     <Content Include="WebJs\MicroAlgaJs\IngresoMicroAlga.js" />
     <Content Include="WebJs\MicroAlgaJs\SeguimientoMicroAlgaJs.js" />
+    <Content Include="WebJs\ProduccionJS\PreparacionDespacho.js" />
     <Content Include="WebJs\ProduccionJS\RegistroCultivoLarval.js" />
+    <Content Include="WebJs\ProduccionJS\RegistroInicialMar.js" />
     <Content Include="WebJs\ProduccionJS\RegistroProduccion.js" />
+    <Content Include="WebJs\ProduccionJS\SeguimientoFijacion.js" />
     <Content Include="WebJs\ProduccionJS\SeguimientoSemilla.js" />
     <Content Include="WebJs\Rut.js" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
@@ -4572,10 +4582,13 @@
     <Content Include="Views\Produccion\RegistroProduccion.cshtml" />
     <Content Include="Views\MicroAlgas\IngresoMicroAlgas.cshtml" />
     <Content Include="Views\MicroAlgas\SeguimientoMicroAlgas.cshtml" />
+    <Content Include="Scripts\Spanish.json" />
+    <Content Include="Views\Produccion\PreparacionDespacho.cshtml" />
+    <Content Include="Views\Produccion\RegistroInicialMar.cshtml" />
+    <Content Include="Views\Produccion\SeguimientoFijacion.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Scripts\Spanish.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
