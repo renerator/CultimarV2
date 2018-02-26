@@ -14,12 +14,14 @@ namespace CultimarWebApp.Utils.DAO
         private Factory _dtFac = new Factory();
         private FactorySeguimientoLarval _dtSegLarval = new FactorySeguimientoLarval();
         private FactorySeguimientosSemillas _dtFacSeguimientoSemilla = new FactorySeguimientosSemillas();
+        private FactoryRegistroInicialSemilla _dtFactRegistroInicialSemilla = new FactoryRegistroInicialSemilla();
         private FactoryTipoContenedor _dtFactoryTipoContenedor = new FactoryTipoContenedor();
         private FactoryRegistroProduccion _dtFactoryRegistroProduccion = new FactoryRegistroProduccion();
         private FactoryMicroAlgas _dtMicroAlgas = new FactoryMicroAlgas();
         private FactorySeguimientoFijacion _dtFijacion = new FactorySeguimientoFijacion();
         private FactoryRegistroInicialMar _dtMar = new FactoryRegistroInicialMar();
         private FactoryPreparadoDespacho _preparado = new FactoryPreparadoDespacho();
+        private FactorySeguimientoMar _dtFactSeguimientoMar = new FactorySeguimientoMar();
 
 
         public List<ObjetoPreparadoDespacho> ListadoPreparadoDespachado(int id)
@@ -31,15 +33,40 @@ namespace CultimarWebApp.Utils.DAO
         {
             return _preparado.SetGrabaPreparadoDespachl(idUsuario, pdespach);
         }
+
+        public bool SetGrabaRegistroInicialSemilla(int idUsuario, ObjetoSeguimientoSemilla registro)
+        {
+            return _dtFactRegistroInicialSemilla.SetGrabaRegistroInicialSemilla(idUsuario, registro);
+        }
+
+
         public List<ObjetoRegistroInicialMar> ListadoRegistroInicialMar(int idRegistro)
         {
             return _dtMar.ListadoRegistroInicialMar(idRegistro);
+        }
+        //
+
+        public List<ObjetoUbicacionOceanica> ListadoUbicacionOceanica()
+        {
+            return _dtFac.ListadoUbicacionOceanica();
+        }
+
+
+        public List<ObjetoSeguimientoMar> ListadoSeguimientoMar(int idRegistro)
+        {
+            return _dtFactSeguimientoMar.ListadoSeguimientoMar(idRegistro);
         }
 
         public bool SetGrabaRegistroInicialMar(int idUsuario, ObjetoRegistroInicialMar registroMar)
         {
             return _dtMar.SetGrabaRegistroInicialMar(idUsuario, registroMar);
         }
+
+        public bool SetGrabaSeguimientoMar(int idUsuario, ObjetoSeguimientoMar registroMar)
+        {
+            return _dtFactSeguimientoMar.SetGrabaSeguimientoMar(idUsuario, registroMar);
+        }
+
         public List<ObjetoSeguimientoLarval> ListadoSeguimientoLarval(int id)
         {
             return _dtSegLarval.ListadoSeguimientoLarval(id);
@@ -80,6 +107,10 @@ namespace CultimarWebApp.Utils.DAO
             return _dtFactoryRegistroProduccion.listadoRegistroProduccion(id);
         }
 
+        public List<ObjetoSeguimientoSemilla> ListadoRegistroInicialSemillas(int id)
+        {
+            return _dtFactRegistroInicialSemilla.ListadoRegistroInicial(id);
+        }
 
         public List<ObjetoMenu> MenuUsuario(int idUsuario)
         {
@@ -174,9 +205,9 @@ namespace CultimarWebApp.Utils.DAO
             return _dtMicroAlgas.ListadoMicroAlgas(id);
         }
 
-        public List<ObjetoMicroAlga> ListadoSeguimientoMicroAlgas()
+        public List<ObjetoMicroAlga> ListadoSeguimientoMicroAlgas(int id)
         {
-            return _dtMicroAlgas.ListadoSeguimientoMicroAlgas();
+            return _dtMicroAlgas.ListadoSeguimientoMicroAlgas(id);
         }
 
 
@@ -240,6 +271,10 @@ namespace CultimarWebApp.Utils.DAO
         {
             return _dtFac.SetGrabaParametrosAlimento(alimento);
         }
+        public bool SetGrabaParametroUbicacion(ObjetoUbicacionOceanica ubicacion)
+        {
+            return _dtFac.SetGrabaParametrosUbicacion(ubicacion);
+        }
 
         public bool SetGrabaParametroCalibre(ObjetoCalibre calibre)
         {
@@ -263,6 +298,12 @@ namespace CultimarWebApp.Utils.DAO
         {
             return _dtMicroAlgas.SetGrabaMicroAlga(idUsuario, microAlga);
         }
+        
+        public bool SetGrabaSeguimientoMicroAlga(int idUsuario, ObjetoMicroAlga microAlga)
+        {
+            return _dtMicroAlgas.SetGrabaSeguimientoMicroAlga(idUsuario, microAlga);
+        }
+
         public bool SetGrabaFactoresMedicion(ObjetoFactoresMedicion factorMedicion)
         {
             return _dtFac.SetGrabaFactoresMedicion(factorMedicion);

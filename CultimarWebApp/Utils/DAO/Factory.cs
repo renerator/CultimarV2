@@ -164,6 +164,33 @@ namespace CultimarWebApp.Utils.DAO
             return ListadoPerfil;
         }
 
+        public List<ObjetoUbicacionOceanica> ListadoUbicacionOceanica()
+        {
+            var ListadoPerfil = new List<ObjetoUbicacionOceanica>();
+            var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_GET_LISTADOUBICACIONOCEANICA", new System.Collections.Hashtable());
+
+            if (data.Rows.Count > 0)
+            {
+                for (var i = 0; i < data.Rows.Count; i++)
+                {
+                    var validador = new object();
+                    var resultadoListado = new ObjetoUbicacionOceanica();
+                    validador = data.Rows[i].Field<object>("idUbicacion");
+                    resultadoListado.IdUbicacion = validador != null ? data.Rows[i].Field<int>("idUbicacion") : -1;
+
+                    validador = data.Rows[i].Field<object>("NombreUbicacion");
+                    resultadoListado.NombreUbicacion = validador != null ? data.Rows[i].Field<string>("NombreUbicacion") : "NO ASIGNADO";
+
+                    validador = data.Rows[i].Field<object>("Estado");
+                    resultadoListado.Estado = validador != null ? data.Rows[i].Field<bool>("Estado") : false;
+
+                    ListadoPerfil.Add(resultadoListado);
+                }
+            }
+            return ListadoPerfil;
+        }
+
+
         public List<ObjetoOrigen> ListadoParametrosOrigen()
         {
             var ListadoOrigen = new List<ObjetoOrigen>();
@@ -801,6 +828,31 @@ namespace CultimarWebApp.Utils.DAO
             return respuesta;
         }
 
+        public bool SetGrabaParametrosUbicacion(ObjetoUbicacionOceanica ubicacion)
+        {
+            var respuesta = false;
+            try
+            {
+                var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_SET_GRABAUBICACIONOCEANICA", new System.Collections.Hashtable()
+                                                                                            {
+                                                                                                {"idUbicacion", ubicacion.IdUbicacion },
+                                                                                                {"nombreUbicacion",ubicacion.NombreUbicacion }
+                                                                                            });
+                if (data.Rows.Count > 0)
+                {
+                    respuesta = true;
+                }
+            }
+            catch (SqlException ex)
+            {
+                new CapturaExcepciones(ex);
+            }
+            catch (Exception ex)
+            {
+                new CapturaExcepciones(ex);
+            }
+            return respuesta;
+        }
         public bool SetGrabaParametrosCalibre(ObjetoCalibre calibre)
         {
             var respuesta = false;

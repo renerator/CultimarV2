@@ -37,8 +37,9 @@ namespace CultimarWebApp.Controllers
                 datosUsuario = (ObjetoLogin)Session["DatosUsuario"];
                 ViewBag.Message = "Bienvenido: " + datosUsuario.Nombre;
                 IEnumerable<ObjetoOrigen> parametrosOrigen = _control.ListadoParametrosOrigen();
-                ViewBag.ParametrosOrigen = parametrosOrigen;
                 IEnumerable<ObjetoDestino> parametrosDestino = _control.ListadoParametrosDestino();
+                ViewBag.ParametrosOrigen = parametrosOrigen;
+                
                 ViewBag.ParametrosDestino = parametrosDestino;
                 IEnumerable<ObjetoEspecies> parametrosEspecies = _control.ListadoParametrosEspecies();
                 ViewBag.ParametrosEspecies = parametrosEspecies;
@@ -50,22 +51,27 @@ namespace CultimarWebApp.Controllers
                 ViewBag.ParametrosTipoMortalidad = parametrosTipoMortalidad;
                 IEnumerable<ObjetoTipoSistema> parametrosTipoSistema = _control.ListadoTipoSistema();
                 ViewBag.ParametrosTipoSistema = parametrosTipoSistema;
-                IEnumerable<ObjetoAlimentos> parametrosTipoAlimentos = _control.ListadoTipoAlimentos();
-                ViewBag.ParametrosTipoAlimentos = parametrosTipoAlimentos;
-                IEnumerable<ObjetoAlimentos> parametrosAlimentos = _control.ListadoAlimentos();
-                ViewBag.ParametrosAlimentos = parametrosAlimentos;
+                //IEnumerable<ObjetoAlimentos> parametrosTipoAlimentos = _control.ListadoTipoAlimentos();
+                //ViewBag.ParametrosTipoAlimentos = parametrosTipoAlimentos;
+                //IEnumerable<ObjetoAlimentos> parametrosAlimentos = _control.ListadoAlimentos();
+                //ViewBag.ParametrosAlimentos = parametrosAlimentos;
                 IEnumerable<ObjetoCalibre> parametroCalibre = _control.ListadoCalibre();
                 ViewBag.ParametroCalibre = parametroCalibre;
 
-                IEnumerable<SelectListItem> selectTipoAlimento = _control.ListadoTipoAlimentos().Select(c => new SelectListItem()
-                {
-                    Text = c.NombreTipoAlimento,
-                    Value = c.IdTipoAlimento.ToString()
-                }).ToList();
-                ViewBag.SelectTipoAlimento = selectTipoAlimento;
+                IEnumerable<ObjetoUbicacionOceanica> parametrosUbicacionOceanica = _control.ListadoUbicacionOceanica();
+                ViewBag.ParametroUbicacionOceanica = parametrosUbicacionOceanica;
 
-                //var list = _control.ListadoTipoMortalidad();
-                //ViewBag.MultiSelector = new MultiSelectList(list, "IdMortalidad", "NombreMortalidad");
+
+
+                //IEnumerable<SelectListItem> selectTipoAlimento = _control.ListadoTipoAlimentos().Select(c => new SelectListItem()
+                //{
+                //    Text = c.NombreTipoAlimento,
+                //    Value = c.IdTipoAlimento.ToString()
+                //}).ToList();
+                //ViewBag.SelectTipoAlimento = selectTipoAlimento;
+
+                ////var list = _control.ListadoTipoMortalidad();
+                ////ViewBag.MultiSelector = new MultiSelectList(list, "IdMortalidad", "NombreMortalidad");
 
 
 
@@ -537,21 +543,20 @@ namespace CultimarWebApp.Controllers
 
             return (Json(validador));
         }
-        public JsonResult GrabaParametroAlimento(int idAlimento, string nombreAlimento, int idTipoAlimento)
+        public JsonResult GrabaParametroAlimento(int idAlimento, string nombreAlimento)
         {
             var validador = 0;
             try
             {
                 if (!string.IsNullOrEmpty(nombreAlimento))
                 {
-                    var pAlimento = new ObjetoAlimentos()
+                    var pAlimento = new ObjetoUbicacionOceanica()
                     {
-                        IdAlimento = idAlimento,
-                        NombreAlimento = nombreAlimento,
-                        IdTipoAlimento = idTipoAlimento
+                        IdUbicacion = idAlimento,
+                        NombreUbicacion = nombreAlimento
 
                     };
-                    if (_control.SetGrabaParametroAlimento(pAlimento))
+                    if (_control.SetGrabaParametroUbicacion(pAlimento))
                     {
                         validador = 1;
                     }

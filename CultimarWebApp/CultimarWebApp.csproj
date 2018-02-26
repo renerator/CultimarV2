@@ -186,9 +186,11 @@
     <Compile Include="Utils\DAO\FactoryMicroAlgas.cs" />
     <Compile Include="Utils\DAO\FactoryPreparadoDespacho.cs" />
     <Compile Include="Utils\DAO\FactoryRegistroInicialMar.cs" />
+    <Compile Include="Utils\DAO\FactoryRegistroInicialSemilla.cs" />
     <Compile Include="Utils\DAO\FactoryRegistroProduccion.cs" />
     <Compile Include="Utils\DAO\FactorySeguimientoFijacion.cs" />
     <Compile Include="Utils\DAO\FactorySeguimientoLarval.cs" />
+    <Compile Include="Utils\DAO\FactorySeguimientoMar.cs" />
     <Compile Include="Utils\DAO\FactorySeguimientosSemillas.cs" />
     <Compile Include="Utils\DAO\FactoryTipoContenedor.cs" />
     <Compile Include="Utils\DataSource.cs" />
@@ -212,16 +214,22 @@
     <Compile Include="Utils\Objetos\ObjetoRegistroProduccion.cs" />
     <Compile Include="Utils\Objetos\ObjetoSeguimientoFijacion.cs" />
     <Compile Include="Utils\Objetos\ObjetoSeguimientoLarval.cs" />
+    <Compile Include="Utils\Objetos\ObjetoSeguimientoMar.cs" />
     <Compile Include="Utils\Objetos\ObjetoSeguimientoSemilla.cs" />
     <Compile Include="Utils\Objetos\ObjetoTipoContenedor.cs" />
     <Compile Include="Utils\Objetos\ObjetoTipoIdentificacion.cs" />
     <Compile Include="Utils\Objetos\ObjetoTipoMortalidad.cs" />
     <Compile Include="Utils\Objetos\ObjetoTipoSistema.cs" />
+    <Compile Include="Utils\Objetos\ObjetoUbicacionOceanica.cs" />
     <Compile Include="Utils\Objetos\ObjetoUsuarios.cs" />
     <Compile Include="Utils\Smtp.cs" />
     <Compile Include="Utils\ValidaRut.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="build\css\custom.css" />
+    <Content Include="build\css\custom.min.css" />
+    <Content Include="build\js\custom.js" />
+    <Content Include="build\js\custom.min.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\bootstrap-progressbar-3.3.4.min.css" />
@@ -357,6 +365,8 @@
     <Content Include="Content\fonts\scss\_spinning.scss" />
     <Content Include="Content\fonts\scss\_stacked.scss" />
     <Content Include="Content\fonts\scss\_variables.scss" />
+    <Content Include="Scripts\custom.min.js" />
+    <Content Include="Scripts\HighChart\highcharts.js" />
     <Content Include="Scripts\jquery-2.2.1.min.js" />
     <Content Include="Scripts\vendors\alertifyjs\alertify.js" />
     <Content Include="Scripts\vendors\alertifyjs\alertify.min.js" />
@@ -3756,8 +3766,10 @@
     <Content Include="WebJs\ProduccionJS\PreparacionDespacho.js" />
     <Content Include="WebJs\ProduccionJS\RegistroCultivoLarval.js" />
     <Content Include="WebJs\ProduccionJS\RegistroInicialMar.js" />
+    <Content Include="WebJs\ProduccionJS\RegistroInicialSemilla.js" />
     <Content Include="WebJs\ProduccionJS\RegistroProduccion.js" />
     <Content Include="WebJs\ProduccionJS\SeguimientoFijacion.js" />
+    <Content Include="WebJs\ProduccionJS\SeguimientoMar.js" />
     <Content Include="WebJs\ProduccionJS\SeguimientoSemilla.js" />
     <Content Include="WebJs\Rut.js" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
@@ -4589,6 +4601,8 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Views\Produccion\RegistroInicialSemillas.cshtml" />
+    <Content Include="Views\Produccion\SeguimientoProduccionMar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

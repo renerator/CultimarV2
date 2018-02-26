@@ -30,7 +30,7 @@ namespace CultimarWebApp
                         "~/Scripts/vendors/iCheck/icheck.min.js",
                         "~/Scripts/vendors/skycons/skycons.js",
                         "~/Scripts/vendors/raphael/raphael.min.js",
-                        "~/Scripts/morris.js/morris.min.js",
+                        "~/Scripts/vendors/morris.js/morris.min.js",
                         "~/Scripts/vendors/Flot/jquery.flot.js",
                         "~/Scripts/vendors/Flot/jquery.flot.pie.js",
                         "~/Scripts/vendors/Flot/jquery.flot.time.js",
@@ -47,7 +47,6 @@ namespace CultimarWebApp
                         "~/Scripts/vendors/bootstrap-daterangepicker/daterangepicker.js",
                         "~/Scripts/vendors/alertifyjs/alertify.js",
                         "~/Scripts/vendors/datatables.net/js/jquery.dataTables.min.js",
-                        //"~/Scripts/vendors/datatables.net/js/jquery.dataTables.js",
                         "~/Scripts/vendors/datatables.net-buttons/js/dataTables.buttons.js",
                         "~/Scripts/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js",
                         "~/Scripts/vendors/datatables.net-buttons/js/dataTables.buttons.min.js",
@@ -61,9 +60,9 @@ namespace CultimarWebApp
                         "~/Scripts/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js",
                         "~/Scripts/vendors/datatables.net-scroller/js/dataTables.scroller.min.js",
                         "~/Scripts/vendors/jszip/dist/jszip.min.js",
-                        "~/Scripts/vendors/pdfmake/build/pdfmake.min.js",
-                        "~/Scripts/vendors/pdfmake/build/vfs_fonts.js",
-                        "~/Scripts/custom.min.js"
+                        //"~/Scripts/vendors/pdfmake/build/pdfmake.min.js",
+                        //"~/Scripts/vendors/pdfmake/build/vfs_fonts.js",
+                        "~/build/js/custom.min.js"
                         ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
@@ -71,6 +70,8 @@ namespace CultimarWebApp
                       "~/Scripts/vendors/font-awesome/css/font-awesome.min.css",
                       "~/Scripts/vendors/nprogress/nprogress.css",
                       "~/Scripts/vendors/iCheck/skins/flat/green.css",
+                      "~/Scripts/vendors/switchery/dist/switchery.min.css",
+                      "~/Scripts/vendors/select2/dist/css/select2.min.css",
                       "~/Scripts/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css",
                       "~/Scripts/vendors/jqvmap/dist/jqvmap.min.css",
                       "~/Scripts/vendors/bootstrap-daterangepicker/daterangepicker.css",
@@ -80,7 +81,9 @@ namespace CultimarWebApp
                       "~/Scripts/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css",
                       "~/Scripts/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css",
                       "~/Scripts/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css",
-                      "~/Content/css/custom.min.css"));
+                      "~/build/css/custom.min.css"));
+
+            //BundleTable.EnableOptimizations = true;
         }
     }
 }

@@ -13,6 +13,15 @@
         var fechaIngreso = formateaFecha($("#single_cal1").val());
         var fechaFuturoDesobe = formateaFecha($("#single_cal2").val());
         var ID = $("#IdRegistroInicialMar").val();
+        var NombreCultivo = $("#NombreCultivo").val();
+        var CalibreOrigen = $("#CalibreOrigen").val();
+        var CantidadOrigen = $("#CantidadOrigen").val();
+        var IdSistema = $("#selectTipoSistema").val();
+        var Cantidad = $("#Cantidad").val();
+        var IdMortalidad = $("#selectTipoMortalidad").val();
+        var observaciones = $("#txtObservaciones").val();
+
+
         if (ID != null && ID != "") {
             ID = ID;
         }
@@ -22,7 +31,18 @@
         $.ajax({
             url: "GrabaRegistroInicialMar",
             type: "POST",
-            data: { idRegistro: ID, fechaIngreso: fechaIngreso, fechaFuturo: fechaFuturoDesobe, cantidadOrigen: $("#CantidadOrigen").val(), calibreOrigen: $("#CalibreOrigen").val(), idOrigen: $("#selectOrigen").val(), cantidad: $("#Cantidad").val(), IdTipoSistema: $("#selectTipoSistema").val(), idMortalidad: $("#selectTipoMortalidad").val() },
+            data: {
+                idRegistro: ID,
+                idCultivo: NombreCultivo,
+                fechaIngreso: fechaIngreso,
+                fechaFuturo: fechaFuturoDesobe,
+                cantidadOrigen: CantidadOrigen,
+                calibreOrigen: CalibreOrigen,
+                cantidad: Cantidad,
+                IdTipoSistema: IdSistema,
+                idMortalidad: IdMortalidad,
+                observaciones: observaciones
+            },
             async: true,
             success: function (data) {
                 if (data == 1) {
@@ -48,28 +68,30 @@
 
     $("#btnPopUpRegistroInicialMar").click(function () {
         $("#IdRegistroInicialMar").val("");
-        $("#selectOrigen").val("");
-        $("#CantidadOrigen").val("");
+        $("#NombreCultivo").val("");
         $("#CalibreOrigen").val("");
+        $("#CantidadOrigen").val("");
         $("#selectTipoSistema").val("");
         $("#Cantidad").val("");
         $("#selectTipoMortalidad").val("");
+        $("#txtObservaciones").val("");
     });
 
 
 
 });
 
-function EditaRegistro(IdRegistro, FechaIngreso, FechaFuturoDesdoble, IdOrigen, CantidadOrigen, CalibreOrigen, IdTipoSistema, Cantidad, IdTipoMortalidad) {
+function EditaRegistro(IdRegistro, IdRegistroLarval, FechaIngreso, FechaFuturoDesdoble, IdOrigen, CantidadOrigen, CalibreOrigen, IdTipoSistema, Cantidad, IdTipoMortalidad, Observaciones) {
     $("#IdRegistroInicialMar").val(IdRegistro);
+    $("#NombreCultivo").val(IdRegistroLarval);
+    $("#CalibreOrigen").val(IdOrigen);
     $("#single_cal1").val(FechaIngreso);
     $("#single_cal2").val(FechaFuturoDesdoble);
-    $("#selectOrigen").val(IdOrigen);
     $("#CantidadOrigen").val(CantidadOrigen);
-    $("#CalibreOrigen").val(CalibreOrigen);
     $("#selectTipoSistema").val(IdTipoSistema);
     $("#Cantidad").val(Cantidad);
     $("#selectTipoMortalidad").val(IdTipoMortalidad);
+    $("#txtObservaciones").val(Observaciones);
 }
 
 function formateaFecha(fechaInput) {

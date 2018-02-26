@@ -9,6 +9,10 @@ namespace CultimarWebApp.Utils.Objetos
     {
 
         private int _idRegistroProduccion;
+        private int _idTipoIdentificacion;
+        private string _nombreRegistro;
+        private string _observaciones;
+        private string _nombreEstanque;
         private int _CantidadProductoresMachos;
         private int _CantidadProductoresHembras;
         private DateTime _FechaInicioCultivo;
@@ -21,13 +25,46 @@ namespace CultimarWebApp.Utils.Objetos
         private int _DensidadSiembra;
         private int _IdPloidia;
         private int _IdFactor;
+        private bool _Estado;
 
+
+        public string NombreEstanque
+        {
+            get { return _nombreEstanque; }
+            set { _nombreEstanque = value; }
+        }
 
         public int IdFactor
         {
             get { return _IdFactor; }
             set { _IdFactor = value; }
         }
+
+        public bool Estado
+        {
+            get { return _Estado; }
+            set { _Estado = value; }
+        }
+
+
+        public int IdTipoIdentificacion
+        {
+            get { return _idTipoIdentificacion; }
+            set { _idTipoIdentificacion = value; }
+        }
+
+        public string NombreRegistro
+        {
+            get { return _nombreRegistro; }
+            set { _nombreRegistro = value; }
+        }
+
+        public string Observaciones
+        {
+            get { return _observaciones; }
+            set { _observaciones = value; }
+        }
+
         public int IdPloidia
         {
             get { return _IdPloidia; }

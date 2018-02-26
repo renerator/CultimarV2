@@ -8,18 +8,71 @@ namespace CultimarWebApp.Utils.Objetos
     public class ObjetoSeguimientoLarval
     {
         private int _id;
+        private int _idRegistro;
+        private int _idCalibre;
         private int _cantidadDeLarvas;
         private int _cosechaLarvas;
         private int _numeroEstanque;
+        private int _cantidadMortalidad;
+        private string _nombreEstanqueOrigen;
+        private int _numeroEstanqueDestino;
+        private string _nombreEstanqueDestino;
         private int _densidadCultivo;
         private DateTime _fechaRegistro;
         private string _factoresMedicion;
-        private string _nombre;
+        private string _nombreMortalidad;
+        private string _nombreRegistro;
         private bool _estado;
         private int _IdMortalidad;
         private string _IdFactor;
+        private string _observaciones;
+
+        public int IdRegistro
+        {
+            get { return _idRegistro; }
+            set { _idRegistro = value; }
+        }
+        public int IdCalibre
+        {
+            get { return _idCalibre; }
+            set { _idCalibre = value; }
+        }
+        public int CantidadMortalidad
+        {
+            get { return _cantidadMortalidad; }
+            set { _cantidadMortalidad = value; }
+        }
 
 
+        public int NumeroEstanqueDestino
+        {
+            get { return _numeroEstanqueDestino; }
+            set { _numeroEstanqueDestino = value; }
+        }
+
+        public string NombreEstanqueOrigen
+        {
+            get { return _nombreEstanqueOrigen; }
+            set { _nombreEstanqueOrigen = value; }
+        }
+
+        public string NombreEstanqueDestino
+        {
+            get { return _nombreEstanqueDestino; }
+            set { _nombreEstanqueDestino = value; }
+        }
+
+        public string Observaciones
+        {
+            get { return _observaciones; }
+            set { _observaciones = value; }
+        }
+
+        public string NombreRegistro
+        {
+            get { return _nombreRegistro; }
+            set { _nombreRegistro = value; }
+        }
 
         public string  IdFactor
         {
@@ -69,10 +122,10 @@ namespace CultimarWebApp.Utils.Objetos
             get { return _factoresMedicion; }
             set { _factoresMedicion = value; }
         }
-        public string Nombre
+        public string NombreMortalidad
         {
-            get { return _nombre; }
-            set { _nombre = value; }
+            get { return _nombreMortalidad; }
+            set { _nombreMortalidad = value; }
         }
         public bool Estado
         {

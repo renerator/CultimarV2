@@ -1,17 +1,51 @@
-﻿
-function EditaSeguimintoLarval(idCultivoLarval,IdMortalidad,CantidadLarvas, CosechaLarvas, DensidadCultivo, FactoresMedicion, NumeroEstanque)
+﻿/**
+ * 
+ * @param {any} idCultivoLarval
+ * @param {any} idRegistro
+ * @param {any} idMortalidad
+ * @param {any} CantidadLarvas
+ * @param {any} CosechaLarvas
+ * @param {any} DensidadCultivo
+ * @param {any} FactoresMedicion
+ * @param {any} idEstanqueOrigen
+ * @param {any} idEstanqueDestino
+ * @param {any} idCalibre
+ * @param {any} cantidadMortalidad
+ * @param {any} obs
+ */
+function EditaSeguimientoLarval(idCultivoLarval, idRegistro,idMortalidad,CantidadLarvas,CosechaLarvas,DensidadCultivo,FactoresMedicion,idEstanqueOrigen,idEstanqueDestino,idCalibre,cantidadMortalidad,obs)
 {  
-    $("#selectTipoM").val(IdMortalidad);
+    $("#selectTipoM").val(idMortalidad);
+    $("#selectRegistroInicial").val(idRegistro);
     $("#IdCultivoLarval").val(idCultivoLarval);
     $("#CantidadLarvas").val(CantidadLarvas);
     $("#CosechaLarvas").val(CosechaLarvas);
-    $("#NumeroEstanque").val(NumeroEstanque);
+    $("#selectOrigen").val(idEstanqueOrigen);
+    $("#selectDestino").val(idEstanqueDestino);
+    $("#selectCalibre").val(idCalibre);
     $("#DensidadCultivo").val(DensidadCultivo);
-    $("#FactorM").val(FactoresMedicion); 
+    $("#FactorM").val(FactoresMedicion);
+    $("#cantidadMortalidad").val(cantidadMortalidad);
+    $("#txtObservaciones").val(obs);
 }
  
 $(document).ready(function () {
-     
+
+    $("#btnNuevoSeguimiento").click(function () {
+        $("#selectTipoM").val("");
+        $("#selectRegistroInicial").val("");
+        $("#IdCultivoLarval").val("");
+        $("#CantidadLarvas").val("");
+        $("#CosechaLarvas").val("");
+        $("#selectOrigen").val("");
+        $("#selectDestino").val("");
+        $("#selectCalibre").val("");
+        $("#DensidadCultivo").val("");
+        $("#cantidadMortalidad").val("");
+        $("#txtObservaciones").val("");
+    });
+
+
     $("#tblLarvas").DataTable({
         paging: true,
         retrieve: true,
@@ -22,19 +56,42 @@ $(document).ready(function () {
         }
     }); 
 
-    $("#divAlert").hide();
     $("#btnGrabarDatos").click(function () {
+        var calibre = $("#selectCalibre").val();
+        var idRegistro = $("#selectRegistroInicial").val();
+        var estanqueOrigen = $("#selectOrigen").val();
+        var estanqueDestino = $("#selectDestino").val();
+        var cantidadMortalidad = $("#cantidadMortalidad").val();
+        var obs = $("#txtObservaciones").val();
+        var ID = $("#IdCultivoLarval").val();
+        var cantidadLarvas = $("#CantidadLarvas").val();
+        var cosechaLarvas = $("#CosechaLarvas").val();
+        var densidadCultivo = $("#DensidadCultivo").val();
+        var Factores = $("#FactorM").val();
+        var tipoMortalidad = $("#selectTipoM").val();
+        if (ID != null && ID != "") {
+            ID = ID;
+        }
+        else {
+            ID = -1;
+        }
         $.ajax({
             url: "GrabaDatosLarval",
             type: "POST",
             data: {
-                _idCultivoLarval: $("#IdCultivoLarval").val(),
-                _CantidadLarvas: $("#CantidadLarvas").val(),
-                _CosechaLarvas: $("#CosechaLarvas").val(),
-                _NumeroEstanque: $("#NumeroEstanque").val(),
-                _DensidadCultivo: $("#DensidadCultivo").val(), 
-                _IdFactoresM: $("#FactorM").val(),
-                _selectTipoM: $("#selectTipoM").val() 
+                _idCultivoLarval: ID,
+                _idRegistro: idRegistro,
+                _CantidadLarvas: cantidadLarvas,
+                _CosechaLarvas: cosechaLarvas,
+                _NumeroEstanque: 0,
+                _DensidadCultivo: densidadCultivo, 
+                _IdFactoresM: Factores ,
+                _selectTipoM: tipoMortalidad,
+                _idCalibre: calibre,
+                _idEstanqueOrigen: estanqueOrigen,
+                _idEstanqueDestino: estanqueDestino,
+                _cantidadMortalidad: cantidadMortalidad,
+                _observaciones : obs
             },
 
             async: true,

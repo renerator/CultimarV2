@@ -32,11 +32,16 @@ namespace CultimarWebApp.Utils.DAO
                     var validador = new object();
                     var resultadoListado = new ObjetoRegistroProduccion();
 
-
-
                     validador = data.Rows[i].Field<object>("Id");
                     resultadoListado.IdRegistroProduccion = validador != null ? data.Rows[i].Field<int>("Id") : 0;
-                     
+
+                    validador = data.Rows[i].Field<object>("idTipoIdentificacion");
+                    resultadoListado.IdTipoIdentificacion = validador != null ? data.Rows[i].Field<int>("idTipoIdentificacion") : 0;
+
+                    validador = data.Rows[i].Field<object>("NombreCultivo");
+                    resultadoListado.NombreRegistro = validador != null ? data.Rows[i].Field<string>("NombreCultivo") : "SIN ASIGNACION";
+
+
                     validador = data.Rows[i].Field<object>("CantidadProductoresMachos");
                     resultadoListado.CantidadProductoresMachos = validador != null ? data.Rows[i].Field<int>("CantidadProductoresMachos") : 0;
 
@@ -55,18 +60,24 @@ namespace CultimarWebApp.Utils.DAO
                     validador = data.Rows[i].Field<object>("CantidadSembrada");
                     resultadoListado.CantidadSembrada = validador != null ? data.Rows[i].Field<int>("CantidadSembrada") : 0;
 
-  
-                    validador = data.Rows[i].Field<object>("IdFactor");
-                    resultadoListado.FactoresMedicion = validador != null ? data.Rows[i].Field<string>("IdFactor") : "0";
+                    validador = data.Rows[i].Field<object>("FactoresMedicion");
+                    resultadoListado.FactoresMedicion = validador != null ? data.Rows[i].Field<string>("FactoresMedicion") : "0";
 
+                    validador = data.Rows[i].Field<object>("Observaciones");
+                    resultadoListado.Observaciones = validador != null ? data.Rows[i].Field<string>("Observaciones") : "SON OBSERVACIONES AL REGISTRO";
 
                     validador = data.Rows[i].Field<object>("NumeroEstanquesUtilizado");
                     resultadoListado.NumeroEstanquesUtilizado = validador != null ? data.Rows[i].Field<int>("NumeroEstanquesUtilizado") : 0;
 
+                    validador = data.Rows[i].Field<object>("EstanqueUtilizado");
+                    resultadoListado.NombreEstanque = validador != null ? data.Rows[i].Field<string>("EstanqueUtilizado") : "SIN ASIGNACION";
+
+
                     validador = data.Rows[i].Field<object>("DensidadSiembra");
                     resultadoListado.DensidadSiembra = validador != null ? data.Rows[i].Field<int>("DensidadSiembra") : 0;
 
-
+                    validador = data.Rows[i].Field<object>("Estado");
+                    resultadoListado.Estado = validador != null ? data.Rows[i].Field<bool>("Estado") : false;
 
                     listadoRegistoProduccion.Add(resultadoListado);
                 }
@@ -84,6 +95,7 @@ namespace CultimarWebApp.Utils.DAO
                 var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_Set_GrabaProduccion", new System.Collections.Hashtable()
                                                                                             { {"@IdUsuario", idUsuario},
                                                                                               {"@idProduccion",produccion.IdRegistroProduccion},
+                                                                                              {"@idTipoIdentificacion",produccion.IdTipoIdentificacion},
                                                                                                 {"@p_CantidadProductoresMachos",produccion.CantidadProductoresMachos},
                                                                                                 {"@p_CantidadProductoresHembras", produccion.CantidadProductoresHembras },
                                                                                                 {"@p_CantidadFecundada", produccion.CantidadFecundada },
@@ -91,7 +103,8 @@ namespace CultimarWebApp.Utils.DAO
                                                                                                 {"@p_CantidadSembrada", produccion.CantidadSembrada },
                                                                                                 {"@p_FactoresMedicion", produccion.FactoresMedicion},
                                                                                                 {"@p_NumeroEstanquesUtilizado", produccion.NumeroEstanquesUtilizado},
-                                                                                                {"@p_DensidadSiembra", produccion.DensidadSiembra }});
+                                                                                                {"@p_DensidadSiembra", produccion.DensidadSiembra },
+                                                                                                {"@Observaciones", produccion.Observaciones }});
                 if (data.Rows.Count > 0)
                 {
                     respuesta = true;

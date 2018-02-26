@@ -17,7 +17,7 @@
 
     $("#divAlert").hide();
     $("#btnGrabarDatos").click(function () {
-        alert("llegamos al metodo click");
+        //alert("llegamos al metodo click");
         $.ajax({
             url: "GrabaDatos",
             type: "POST",

@@ -10,11 +10,11 @@ namespace CultimarWebApp.Utils.DAO
 {
     public class FactorySeguimientoFijacion
     {
-        /// <summary>
-        /// Metodo para listar el seguimiento Fijacion
-        /// </summary>
-
-
+       /// <summary>
+       /// Listado Seguimiento Fijacion
+       /// </summary>
+       /// <param name="id">Id del parametro a seleccionar, si distinto -1 trae el registro unico, de lo contrario trae todos los registros</param>
+       /// <returns>Lista del tipo ObjetoSeguimientoFijacion con los datos ingresados ordenados desde el ultimo registro ingresado</returns>
         public List<ObjetoSeguimientoFijacion> ListadoFijacion(int id)
         {
             var ListadoSeguimientoFijacion = new List<ObjetoSeguimientoFijacion>();
@@ -31,18 +31,41 @@ namespace CultimarWebApp.Utils.DAO
                     validador = data.Rows[i].Field<object>("Id");
                     resultadoListado.IdSeguimientoFijacion = validador != null ? data.Rows[i].Field<int>("Id") : -1;
 
-                    validador = data.Rows[i].Field<object>("FechaRegistro");
-                    resultadoListado.FechaRegistro = validador != null ? data.Rows[i].Field<string>("FechaRegistro") : "2017-12-19";
+                    validador = data.Rows[i].Field<object>("IdCultivo");
+                    resultadoListado.IdCultivo = validador != null ? data.Rows[i].Field<int>("IdCultivo") : -1;
 
-                    validador = data.Rows[i].Field<object>("LarvasCalibre");
-                    resultadoListado.LarvasCalibre = validador != null ? data.Rows[i].Field<int>("LarvasCalibre") : 0;
+                    validador = data.Rows[i].Field<object>("NombreCultivo");
+                    resultadoListado.NombreCultivo = validador != null ? data.Rows[i].Field<string>("NombreCultivo") : "Sin Asignación";
+
+                    validador = data.Rows[i].Field<object>("FechaRegistro");
+                    resultadoListado.FechaRegistro = validador != null ? data.Rows[i].Field<string>("FechaRegistro") : "1900-01-01";
+
+                    validador = data.Rows[i].Field<object>("idLarvasCalibre");
+                    resultadoListado.LarvasCalibre = validador != null ? data.Rows[i].Field<int>("idLarvasCalibre") : 0;
+
+                    validador = data.Rows[i].Field<object>("NombreCalibreLarva");
+                    resultadoListado.NombreCalibreLarva = validador != null ? data.Rows[i].Field<string>("NombreCalibreLarva") : "SIN ASIGNACION";
 
                     validador = data.Rows[i].Field<object>("LarvasCantidad");
                     resultadoListado.LarvasCantidad = validador != null ? data.Rows[i].Field<int>("LarvasCantidad") : 0;
-                    
 
-                    validador = data.Rows[i].Field<object>("CosechaCalibre");
-                    resultadoListado.CosechaCalibre = validador != null ? data.Rows[i].Field<int>("CosechaCalibre") : 0;
+                    validador = data.Rows[i].Field<object>("FijacionCantidad");
+                    resultadoListado.FijacionCantidad = validador != null ? data.Rows[i].Field<int>("FijacionCantidad") : 0;
+
+                    validador = data.Rows[i].Field<object>("idCalibreFijacion");
+                    resultadoListado.FijacionCalibre = validador != null ? data.Rows[i].Field<int>("idCalibreFijacion") : 0;
+
+                    validador = data.Rows[i].Field<object>("NombreCalibreFijacion");
+                    resultadoListado.NombreCalibreFijacion = validador != null ? data.Rows[i].Field<string>("NombreCalibreFijacion") : "SIN ASIGNACION";
+
+                    validador = data.Rows[i].Field<object>("idCalibreSemilla");
+                    resultadoListado.SemillaCalibre = validador != null ? data.Rows[i].Field<int>("idCalibreSemilla") : 0;
+
+                    validador = data.Rows[i].Field<object>("NombreCalibreSemilla");
+                    resultadoListado.NombreCalibreSemilla = validador != null ? data.Rows[i].Field<string>("NombreCalibreSemilla") : "SIN ASIGNACION";
+
+                    validador = data.Rows[i].Field<object>("CosechaCantidad");
+                    resultadoListado.CosechaSemilla = validador != null ? data.Rows[i].Field<int>("CosechaCantidad") : 0;
 
                     validador = data.Rows[i].Field<object>("CosechaCantidad");
                     resultadoListado.CosechaCantidad = validador != null ? data.Rows[i].Field<int>("CosechaCantidad") : 0;
@@ -51,26 +74,25 @@ namespace CultimarWebApp.Utils.DAO
                     resultadoListado.NumeroEstanque = validador != null ? data.Rows[i].Field<int>("NumeroEstanque") : 0;
 
                     validador = data.Rows[i].Field<object>("DensidadSiembra");
-                    resultadoListado.DensidadSiembra = validador != null ? data.Rows[i].Field<int>("DensidadSiembra") :0;
-                     
-             
+                    resultadoListado.DensidadSiembra = validador != null ? data.Rows[i].Field<int>("DensidadSiembra") : 0;
+
                     validador = data.Rows[i].Field<object>("FactoresMedicion");
                     resultadoListado.FactoresMedicion = validador != null ? data.Rows[i].Field<string>("FactoresMedicion") : "";
 
+                    validador = data.Rows[i].Field<object>("FechaSistema");
+                    resultadoListado.FechaSistema = validador != null ? data.Rows[i].Field<DateTime>("FechaSistema") : DateTime.Now;
 
+                    validador = data.Rows[i].Field<object>("Estado");
+                    resultadoListado.Estado = validador != null ? data.Rows[i].Field<bool>("Estado") : true;
 
                     validador = data.Rows[i].Field<object>("IdMortalidad");
                     resultadoListado.IdMortalidad = validador != null ? data.Rows[i].Field<int>("IdMortalidad") : 0;
 
-
                     validador = data.Rows[i].Field<object>("CantidadMortalidad");
                     resultadoListado.CantidadMortalidad = validador != null ? data.Rows[i].Field<int>("CantidadMortalidad") : 0;
 
-
-
-
-                    validador = data.Rows[i].Field<object>("Estado");
-                    resultadoListado.Estado = validador != null ? data.Rows[i].Field<bool>("Estado") : true;
+                    validador = data.Rows[i].Field<object>("Observaciones");
+                    resultadoListado.Observaciones = validador != null ? data.Rows[i].Field<string>("Observaciones") : "SIN OBSERVACIONES PARA EL REGISTRO";
 
                     ListadoSeguimientoFijacion.Add(resultadoListado);
                 }
@@ -89,18 +111,23 @@ namespace CultimarWebApp.Utils.DAO
             {
                 var data = new DBConector().EjecutarProcedimientoAlmacenado("CRUD_SeguimientoFijacion", new System.Collections.Hashtable()
                                                                                             {
-                    { "@IdUsuario", idUsuario},
-                                                                                                {"@p_Id", seguimientofijacion.IdSeguimientoFijacion },
-                                                                                                {"@p_LarvasCalibre", seguimientofijacion.LarvasCalibre },
-                                                                                                {"@p_LarvasCantidad", seguimientofijacion.LarvasCantidad },
-                                                                                                {"@p_CosechaCalibre", seguimientofijacion.CosechaCalibre },
-                                                                                                {"@p_CosechaCantidad", seguimientofijacion.CosechaCantidad },
-                                                                                                {"@p_NumeroEstanque", seguimientofijacion.NumeroEstanque },
-                                                                                                {"@p_DensidadSiembra", seguimientofijacion.DensidadSiembra }, 
-                                                                                                {"@p_IdMortalidad", seguimientofijacion.IdMortalidad },
-                                                                                                {"@p_CantidadMortalidad",seguimientofijacion.CantidadMortalidad },
-                                                                                                {"@p_FactoresMedicion", seguimientofijacion.FactoresMedicion },
-                                                                                                {"@p_FechaRegistro", seguimientofijacion.FechaRegistro } 
+                                                                                                { "@IdUsuario", idUsuario},
+                                                                                                {"@IdSeguimientoFijacion", seguimientofijacion.IdSeguimientoFijacion},
+                                                                                                {"@IdCultivo", seguimientofijacion.IdCultivo},
+                                                                                                {"@FechaRegistro", seguimientofijacion.FechaRegistro},
+                                                                                                {"@LarvasCalibre", seguimientofijacion.LarvasCalibre},
+                                                                                                {"@LarvasCantidad", seguimientofijacion.LarvasCantidad},
+                                                                                                {"@FijacionCantidad", seguimientofijacion.FijacionCantidad},
+                                                                                                {"@FijacionCalibre", seguimientofijacion.FijacionCalibre},
+                                                                                                {"@CosechaSemilla", seguimientofijacion.CosechaSemilla},
+                                                                                                {"@SemillaCalibre", seguimientofijacion.SemillaCalibre},
+                                                                                                {"@CosechaCantidad", seguimientofijacion.CosechaCantidad},
+                                                                                                {"@NumeroEstanque", seguimientofijacion.NumeroEstanque},
+                                                                                                {"@DensidadSiembra", seguimientofijacion.DensidadSiembra},
+                                                                                                {"@IdMortalidad", seguimientofijacion.IdMortalidad},
+                                                                                                {"@CantidadMortalidad", seguimientofijacion.CantidadMortalidad},
+                                                                                                {"@FactoresMedicion", seguimientofijacion.FactoresMedicion},
+                                                                                                {"@Observaciones", seguimientofijacion.Observaciones}
                                                                                            });
                 if (data.Rows.Count > 0)
                 {
@@ -117,79 +144,5 @@ namespace CultimarWebApp.Utils.DAO
             }
             return respuesta;
         }
-
-        public bool setEditarsegimientoFijacion(ObjetoSeguimientoFijacion seguimientofijacion)
-        {
-            var respuesta = false;
-            try
-            {
-                var data = new DBConector().EjecutarProcedimientoAlmacenado("[CRUD_SeguimientoFijacion]", new System.Collections.Hashtable()
-                                                                                            {
-                                                                                                {"FechaRegistro", seguimientofijacion.FechaRegistro },
-                                                                                                {"LarvasCalibre", seguimientofijacion.LarvasCalibre },
-                                                                                                {"LarvasCantidad", seguimientofijacion.LarvasCantidad },
-                                                                                                {"CosechaCalibre", seguimientofijacion.CosechaCalibre },
-                                                                                                {"CosechaCantidad", seguimientofijacion.CosechaCantidad },
-                                                                                                {"NumeroEstanque", seguimientofijacion.NumeroEstanque },
-                                                                                                {"DensidadSiembra", seguimientofijacion.DensidadSiembra },
-                                                                                                {"IdMortalidad", seguimientofijacion.IdMortalidad },
-                                                                                                {"FactoresMedicion", seguimientofijacion.FactoresMedicion },
-                                                                                                {"FechaSistema", seguimientofijacion.FechaSistema },
-                                                                                                {"Estado", seguimientofijacion.Estado },
-                                                                                                {"A",seguimientofijacion }
-                                                                                           });
-                if (data.Rows.Count > 0)
-                {
-                    respuesta = true;
-                }
-            }
-            catch (SqlException ex)
-            {
-                new CapturaExcepciones(ex);
-            }
-            catch (Exception ex)
-            {
-                new CapturaExcepciones(ex);
-            }
-            return respuesta;
-        }
-
-        public bool setQuitaSeguimientoFijacion(int id, ObjetoSeguimientoFijacion seguimientofijacion)
-        {
-            var respuesta = false;
-            try
-            {
-                var data = new DBConector().EjecutarProcedimientoAlmacenado("[CRUD_SeguimientoFijacion]", new System.Collections.Hashtable()
-                                                                                            {
-                                                                                                {"Id", id},
-                                                                                                {"FechaRegistro", seguimientofijacion.FechaRegistro },
-                                                                                                {"LarvasCalibre", seguimientofijacion.LarvasCalibre },
-                                                                                                {"LarvasCantidad", seguimientofijacion.LarvasCantidad },
-                                                                                                {"CosechaCalibre", seguimientofijacion.CosechaCalibre },
-                                                                                                {"CosechaCantidad", seguimientofijacion.CosechaCantidad },
-                                                                                                {"NumeroEstanque", seguimientofijacion.NumeroEstanque },
-                                                                                                {"DensidadSiembra", seguimientofijacion.DensidadSiembra },
-                                                                                                {"IdMortalidad", seguimientofijacion.IdMortalidad },
-                                                                                                {"FactoresMedicion", seguimientofijacion.FactoresMedicion },
-                                                                                                {"FechaSistema", seguimientofijacion.FechaSistema },
-                                                                                                {"Estado", seguimientofijacion.Estado },
-                                                                                                {"E",seguimientofijacion }
-                                                                                            });
-                if (data.Rows.Count > 0)
-                {
-                    respuesta = true;
-                }
-            }
-            catch (SqlException ex)
-            {
-                new CapturaExcepciones(ex);
-            }
-            catch (Exception ex)
-            {
-                new CapturaExcepciones(ex);
-            }
-            return respuesta;
-        }
-
     }
 }

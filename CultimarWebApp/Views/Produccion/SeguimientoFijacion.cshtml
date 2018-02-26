@@ -37,27 +37,34 @@ exclusions: new[] { "IdMortalidad", "FactoresMedicion", "CantidadMortalidad" },
 tableStyle: "table table-bordered",
 columns:
 grid.Columns(
-grid.Column(columnName: "IdSeguimientoFijacion", header: "Id", format: @<text>@item.IdSeguimientoFijacion</text>),
-grid.Column(columnName: "FechaRegistro", header: "FechaRegistro", format: @<text>@item.FechaRegistro </text>),
-grid.Column(columnName: "LarvasCalibre", header: "Larvas Calibre", format: @<text>@item.LarvasCalibre</text>),
-grid.Column(columnName: "CosechaCalibre", header: "Cosecha Calibre", format: @<text>@item.CosechaCalibre</text>),
-grid.Column(columnName: "LarvasCantidad", header: "Cantidad Larvas", format: @<text>@item.LarvasCantidad</text>), 
-grid.Column(columnName: "Cosecha Cantidad", header: "Cantidad Cantidad", format: @<text>@item.CosechaCantidad</text>),
-grid.Column(columnName: "NumeroEstanque", header: "Numero Estanque", format: @<text>@item.NumeroEstanque</text>),
-grid.Column(columnName: "DensidadSiembra", header: "Densidad Siembra", format: @<text>@item.DensidadSiembra</text>),
-grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="modal" tooltip="Editar Parametro" data-target="#modalPopUpIngresoUsuario"
-                             onclick="EditaFijacion(@item.IdSeguimientoFijacion,
-                                               '@item.FechaRegistro',
-                                               @item.LarvasCalibre,
-                                               @item.LarvasCantidad,
-                                               @item.CosechaCalibre, 
-                                               @item.CosechaCantidad,
-                                               @item.NumeroEstanque,
-                                               @item.DensidadSiembra,
-                                               @item.IdMortalidad,
-                                               @item.CantidadMortalidad,
-                                               @item.FactoresMedicion
-                                               )">
+grid.Column(header: "BATCH", format: @<text>@item.NombreCultivo</text>),
+grid.Column(header: "Fecha Registro", format: @<text>@item.FechaRegistro </text>),
+grid.Column(header: "Fecha Sistema", format: @<text>@item.FechaSistema.ToString("dd/MM/yyyy") </text>),
+grid.Column(header: "Hora Sistema", format: @<text>@item.FechaSistema.ToString("HH:MM") </text>),
+grid.Column(header: "Calibre de Larvas", format: @<text>@item.NombreCalibreLarva</text>),
+grid.Column(header: "Cantidad de Larvas", format: @<text>@item.LarvasCantidad</text>),
+grid.Column(header: "Calibre Fijación", format: @<text>@item.NombreCalibreFijacion</text>),
+grid.Column(header: "Cantidad Fijación", format: @<text>@item.FijacionCantidad</text>),
+grid.Column(header: "Cantidad Cosecha", format: @<text>@item.CosechaCantidad</text>),
+grid.Column(header: "Calibre Semillas", format: @<text>@item.NombreCalibreSemilla</text>),
+grid.Column(header: "Acciones", format: @<button class="btn btn-success" type="button" data-toggle="modal" tooltip="Editar Parametro" data-target="#modalPopUpIngresoUsuario"
+                                                 onclick="EditaFijacion(
+                                                                     @item.IdSeguimientoFijacion,
+                                                                     @item.IdCultivo,
+                                                                    '@item.FechaRegistro',
+                                                                     @item.LarvasCantidad,
+                                                                     @item.LarvasCalibre,
+                                                                     @item.FijacionCantidad,
+                                                                     @item.FijacionCalibre,
+                                                                     @item.CosechaSemilla,
+                                                                     @item.SemillaCalibre,
+                                                                     @item.CosechaCantidad,
+                                                                     @item.NumeroEstanque,
+                                                                     @item.DensidadSiembra,
+                                                                     @item.IdMortalidad,
+                                                                     @item.CantidadMortalidad,
+                                                                    '@item.Observaciones'
+                                                                     )">
                         Editar
                     </button>)
 
@@ -68,7 +75,7 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
                     <div id="divAlert"></div>
                     <div class="form-group">
                         <div>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Agregar Seguimiento Fijación</button>
+                            <button type="button" id="btnNuevaFijacion" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Agregar Seguimiento Fijación</button>
                         </div>
                     </div>
 
@@ -79,7 +86,7 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
                                     <button type="button" class="close" data-dismiss="modal">
                                         <span aria-hidden="true">X</span>
                                     </button>
-                                    <h4 class="modal-title" id="myModalLabel">Ingreso Seguimiento Fijación</h4>
+                                    <h4 class="modal-title" id="myModalLabel">Seguimiento Fijación Larvas</h4>
                                 </div>
                                 <div class="modal-body">
                                     <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
@@ -93,61 +100,99 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
                                                 <input type="text" id="IdSeguimientoFijacion" value="-1" class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
-
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                                                Seguimiento al Batch: <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                @Html.DropDownList("nombreCultivo", (IEnumerable<SelectListItem>)ViewBag.RegistroCultivo, "Seleccione...", new { @class = "form-control", @ID = "selectNombreCultivo" })
+                                            </div>
+                                        </div>
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
                                                 Fecha Registro <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-xs-12 xdisplay_inputx form-group has-feedback-right">
-                                                <input id="single_cal1"  type="text" class="form-control has-feedback-right" placeholder="Fecha" aria-describedby="inputSuccess2Status">
+                                                <input id="single_cal1" type="text" class="form-control has-feedback-right" placeholder="Fecha" aria-describedby="inputSuccess2Status">
                                                 <span class="fa fa-calendar-o form-control-feedback right" aria-hidden="true"></span>
                                                 <span id="inputSuccess2Status" class="sr-only">(success)</span>
 
                                             </div>
                                         </div>
-
+                                        <div class="ln_solid"></div>
+                                        <label>
+                                            Larvas para Fijación
+                                        </label>
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
                                                 Cantidad Larvas <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="text" id="idCantidadLarvas" required="required" class="form-control col-md-7 col-xs-12">
+                                                <input type="text" id="cantidadLarvas" required="required" class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
-
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
-                                                Calibres  Larvas <span class="required">*</span>
+                                                Calibre Larvas <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="text" id="IdCalibreLarvas" required="required" class="form-control col-md-7 col-xs-12">
+                                                @Html.DropDownList("CalibreLarvas", (IEnumerable<SelectListItem>)ViewBag.ParametroCalibreLarvas, "Seleccione Calibre Larvas", new { @class = "form-control", @ID = "selectCalibreLarvas" })
                                             </div>
                                         </div>
-
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
-                                                Cosecha Calibre <span class="required">*</span>
+                                                Cantidad Fijación<span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="text" id="IdCosechaCalibre" required="required" class="form-control col-md-7 col-xs-12">
+                                                <input type="text" id="cantidadFijacion" required="required" class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
-
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
-                                                Cantidad Cosecha<span class="required">*</span>
+                                                Calibre Fijación <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="text" id="IdCosechaCantidad" required="required" class="form-control col-md-7 col-xs-12">
+                                                @Html.DropDownList("CalibreFijacion", (IEnumerable<SelectListItem>)ViewBag.ParametroCalibreFijacion, "Seleccione Calibre Fijación", new { @class = "form-control", @ID = "selectCalibreFijación" })
                                             </div>
                                         </div>
-
+                                        <div class="ln_solid"></div>
+                                        <label>
+                                            Cosecha, Calibre de Semilla y Cantidad
+                                        </label>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                                                Cosecha Semillas<span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="text" id="cosechaSemillas" required="required" class="form-control col-md-7 col-xs-12">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                                                Calibre Semillas <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                @Html.DropDownList("CalibreSemillas", (IEnumerable<SelectListItem>)ViewBag.ParametroCalibreSemillas, "Seleccione Calibre Semillas", new { @class = "form-control", @ID = "selectCalibreSemillas" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                                                Cantidad Semillas<span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="text" id="cantidadSemillas" required="required" class="form-control col-md-7 col-xs-12">
+                                            </div>
+                                        </div>
+                                        <div class="ln_solid"></div>
+                                        <label>
+                                            Otros Datos
+                                        </label>
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
                                                 Numero Estanque<span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="text" id="IdNumeroEstanque" required="required" class="form-control col-md-7 col-xs-12">
+                                                @Html.DropDownList("idNumeroEstanque", (IEnumerable<SelectListItem>)ViewBag.Contenedor, "Seleccione Número Estanque", new { @class = "form-control", @ID = "idNumeroEstanque" })
                                             </div>
                                         </div>
 
@@ -177,14 +222,17 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
                                                 <input type="text" id="IdCantidadMortalidad" required="required" class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
-
-
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Factor Medición</label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-
                                                 @Html.ListBox("FactorM", ViewBag.FactorM as MultiSelectList, new { @class = "select2_multiple form-control", @ID = "FactorM" })
-
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Observaciones</label>
+                                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                                <textarea id="txtObservaciones" class="form-control col-md-7 col-xs-12" name="txtObservaciones" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100"
+                                                          data-parsley-validation-threshold="10"></textarea>
                                             </div>
                                         </div>
                                         <div class="ln_solid"></div>

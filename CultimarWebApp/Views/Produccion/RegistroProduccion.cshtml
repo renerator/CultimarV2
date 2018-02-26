@@ -10,7 +10,7 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Listado de Registro de Producción</h2>
+                    <h2>Listado de Registro Inicial de Producción Larvas</h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li>
                             <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -23,11 +23,11 @@
                 </div>
                 <div class="x_content">
                     <p class="text-muted font-13 m-b-30">
-                        Este listado muestra los Registro de produccion
+                        Este listado muestra los Registro de produccion inicial de larvas ingresados en el sistema, para luego hacerles seguimiento
                     </p>
                     <div class="table-responsive">
                         @{
-                            var grid = new WebGrid(Model, canPage: false);
+        var grid = new WebGrid(Model, canPage: false);
                         }
                         @grid.GetHtml(
 htmlAttributes: new { id = "tblRegistroProduccion" },
@@ -35,26 +35,29 @@ exclusions: new[] { "IdMortalidad" },
 tableStyle: "table table-bordered",
 columns:
 grid.Columns(
-grid.Column(columnName: "Id", header: "Id", format: @<text>@item.IdRegistroProduccion</text>),
+grid.Column(columnName: "NombreRegistro", header: "Batch", format: @<text>@item.NombreRegistro</text>),
 grid.Column(columnName: "CantidadProductoresMachos", header: "Machos", format: @<text>@item.CantidadProductoresMachos</text>),
 grid.Column(columnName: "CantidadProductoresHembras", header: "Hembras", format: @<text>@item.CantidadProductoresHembras</text>),
-grid.Column(columnName: "FechaRegistro", header: "F.Registro", format: @<text>@item.FechaRegistro.ToString("MM/dd/yyyy")</text>),
-grid.Column(columnName: "CantidadFecundada", header: "C.Fecundada", format: @<text>@item.CantidadFecundada</text>),
+grid.Column(columnName: "FechaRegistro", header: "F.Registro", format: @<text>@item.FechaRegistro.ToString("dd/MM/yyyy")</text>),
+grid.Column(columnName: "CantidadFecundada", header: "C. Fecundada", format: @<text>@item.CantidadFecundada</text>),
 grid.Column(columnName: "NumeroDesoveTemporada", header: "N°Desove", format: @<text>@item.NumeroDesoveTemporada</text>),
-grid.Column(columnName: "CantidadSembrada", header: "Sembrada", format: @<text>@item.CantidadSembrada</text>),
-grid.Column(columnName: "FactoresMedicion", header: "F.Medición", format: @<text>@item.FactoresMedicion</text>),
-grid.Column(columnName: "NumeroEstanquesUtilizado", header: "Estanques", format: @<text>@item.NumeroEstanquesUtilizado</text>),
-grid.Column(columnName: "DensidadSiembra", header: "Siembra", format: @<text>@item.DensidadSiembra</text>),
+grid.Column(columnName: "CantidadSembrada", header: "C.Sembrada", format: @<text>@item.CantidadSembrada</text>),
+grid.Column(columnName: "EstanquesUtilizado", header: "Estanque Utilizado", format: @<text>@item.NombreEstanque</text>),
+grid.Column(columnName: "DensidadSiembra", header: "Densidad Siembra", format: @<text>@item.DensidadSiembra</text>),
 grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="modal" tooltip="Editar Parametro" data-target="#modalPopUpIngresoUsuario"
                              onclick="EditaProduccion(@item.IdRegistroProduccion,
-                                               @item.CantidadProductoresMachos,
-                                               @item.CantidadProductoresHembras,
-                                               @item.CantidadFecundada,
-                                               @item.NumeroDesoveTemporada,
-                                               @item.CantidadSembrada,
+                                                @item.IdTipoIdentificacion,
+                                               '@item.CantidadProductoresMachos',
+                                               '@item.CantidadProductoresHembras',
+                                               '@item.CantidadFecundada',
+                                               '@item.NumeroDesoveTemporada',
+                                               '@item.CantidadSembrada',
                                                '@item.FactoresMedicion',
-                                               @item.NumeroEstanquesUtilizado,
-                                               @item.DensidadSiembra)">Editar</button>))  
+                                               '@item.NumeroEstanquesUtilizado',
+                                               '@item.DensidadSiembra',
+                                               '@item.Observaciones')">
+                        Editar
+                    </button>))
 )
                     </div>
 
@@ -62,7 +65,7 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
                     <div id="divAlert"></div>
                     <div class="form-group">
                         <div>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Registro Producción</button>
+                            <button type="button" id="btnNuevo" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Registro Inicial Producción Larvas</button>
                         </div>
                     </div>
 
@@ -73,7 +76,7 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
                                     <button type="button" class="close" data-dismiss="modal">
                                         <span aria-hidden="true">X</span>
                                     </button>
-                                    <h4 class="modal-title" id="myModalLabel">Registro Inicial de Producción</h4>
+                                    <h4 class="modal-title" id="myModalLabel">Ingresa los datos solicitados</h4>
                                 </div>
                                 <div class="modal-body">
                                     <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
@@ -87,7 +90,15 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
                                                 <input type="text" id="IdRegistro" value="-1" class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
-
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                                                Nombre Batch<span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                @*<input type="text" id="txtNombreRegistro" required="required" class="form-control col-md-7 col-xs-12">*@
+                                                @Html.DropDownList("RegistroInicial", (IEnumerable<SelectListItem>)ViewBag.RegistroInicial, "Seleccione...", new { @class = "form-control", @ID = "selectNombreBatch" })
+                                            </div>
+                                        </div>
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
                                                 Cant. Productores Machos <span class="required">*</span>
@@ -134,16 +145,16 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
                                                 Factores Medicion <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                @Html.ListBox("FactorM", ViewBag.FactorM as MultiSelectList, new { @class = "select2_multiple form-control", @ID = "FactorM" })
+                                                @Html.ListBox("FactorM", ViewBag.FactorM as MultiSelectList, new { @class = "select_multiple form-control", @ID = "FactorM" })
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
-                                                Numeros de Estanque<span class="required">*</span>
+                                                Número de Estanque<span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="text" id="NroEstanque" required="required" class="form-control col-md-7 col-xs-12">
+                                                @Html.DropDownList("RegistroInicial", (IEnumerable<SelectListItem>)ViewBag.EstanqueLarvas, "Seleccione...", new { @class = "form-control", @ID = "NroEstanque" })
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -152,6 +163,13 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                 <input type="text" id="DensidadSiembra" required="required" class="form-control col-md-7 col-xs-12">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Observaciones</label>
+                                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                                <textarea id="txtObservaciones" class="form-control col-md-7 col-xs-12" name="txtObservaciones" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100"
+                                                          data-parsley-validation-threshold="10"></textarea>
                                             </div>
                                         </div>
 

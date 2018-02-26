@@ -20,6 +20,7 @@ namespace CultimarWebApp.Controllers
         {
             try
             {
+                ViewBag.showSuccessAlert = true;
                 var datosUsuario = new ObjetoLogin();
                 datosUsuario = (ObjetoLogin)Session["DatosUsuario"];
                 ViewBag.Message = "Bienvenido: " + datosUsuario.Nombre;
@@ -38,6 +39,37 @@ namespace CultimarWebApp.Controllers
                 }).ToList();
 
                 ViewBag.FactorM = seleccionMedicion;
+
+                //_control.ListadoRegistroProduccion(-1)
+                IEnumerable<SelectListItem> seleccionRegistroInicial = _control.ListadoRegistroProduccion(-1).Select(d => new SelectListItem()
+                {
+                    Text = d.NombreRegistro,
+                    Value = d.IdRegistroProduccion.ToString()
+                }).ToList();
+                ViewBag.RegistroInicial = seleccionRegistroInicial;
+
+                IEnumerable<SelectListItem> parametroCalibre = _control.ListadoCalibre().Where(item => item.DescripcionCalibre == "Larvas").Select(c => new SelectListItem()
+                {
+                    Text = c.NombreCalibre,
+                    Value = c.IdCalibre.ToString()
+                }).ToList();
+                ViewBag.ParametroCalibre = parametroCalibre;
+
+                IEnumerable<SelectListItem> parametrosOrigen = _control.ListadoTipoContenedor().Where(item => item.TipoContenedor == "Larvas").Select(c => new SelectListItem()
+                {
+                    Text = c.NombreContenedor,
+                    Value = c.IdContenedor.ToString()
+                }).ToList();
+                ViewBag.ParametrosOrigen = parametrosOrigen;
+                IEnumerable<SelectListItem> parametrosDestino = _control.ListadoTipoContenedor().Where(item => item.TipoContenedor == "Larvas").Select(c => new SelectListItem()
+                {
+                    Text = c.NombreContenedor,
+                    Value = c.IdContenedor.ToString()
+                }).ToList();
+                ViewBag.ParametrosDestino = parametrosDestino;
+
+
+
                 return View(model);
             }
             catch (Exception ex)
@@ -59,6 +91,23 @@ namespace CultimarWebApp.Controllers
                 IEnumerable<ObjetoRegistroProduccion> model = _control.ListadoRegistroProduccion(-1);
                 var item3 = _control.ListadoFactorMedicion();
                 ViewBag.FactorM = new MultiSelectList(item3, "IdFactor", "NombreFactor");
+
+                
+                IEnumerable<SelectListItem> identificacionLarvas = _control.ListadoTipoIdentificacion().Select(d => new SelectListItem()
+                {
+                    Text = d.NombreIdentificacion,
+                    Value = d.IdIdentificacion.ToString()
+                }).ToList();
+                ViewBag.RegistroInicial = identificacionLarvas;
+
+                IEnumerable<SelectListItem> parametroEstanqueLarvas = _control.ListadoTipoContenedor().Where(item => item.TipoContenedor == "Larvas").Select(c => new SelectListItem()
+                {
+                    Text = c.NombreContenedor,
+                    Value = c.IdContenedor.ToString()
+                }).ToList();
+                ViewBag.EstanqueLarvas = parametroEstanqueLarvas;
+
+
                 return View(model);
             }
             catch (Exception ex)
@@ -68,16 +117,29 @@ namespace CultimarWebApp.Controllers
                 throw;
             }
         }
-
+        /*
+          var calibre = $("#selectCalibre").val();
+        var estanqueOrigen = $("#selectOrigen").val();
+        var estanqueDestino = $("#selectDestino").val();
+        var cantidadMortalidad = $("#cantidadMortalidad").val();
+        var obs = $("#txtObservaciones").val();
+             */
 
         public JsonResult GrabaDatosLarval(int _idCultivoLarval,
+                                            int _idRegistro,
                                            int _CantidadLarvas,
                                            int _CosechaLarvas,
                                            int _NumeroEstanque,
                                            int _DensidadCultivo,
                                            string _IdFactoresM,
-                                           int _selectTipoM)
+                                           int _selectTipoM,
+                                           int _idCalibre,
+                                           int _idEstanqueOrigen,
+                                           int _idEstanqueDestino,
+                                           int _cantidadMortalidad,
+                                           string _observaciones)
         {
+            
             var datosUsuario = new ObjetoLogin();
             datosUsuario = (ObjetoLogin)Session["DatosUsuario"];
             var seguimientoLarval = new ObjetoSeguimientoLarval();
@@ -89,13 +151,18 @@ namespace CultimarWebApp.Controllers
                     break;
                 default:
                     seguimientoLarval.Id = _idCultivoLarval;
+                    seguimientoLarval.IdRegistro = _idRegistro;
                     seguimientoLarval.CantidadDeLarvas = _CantidadLarvas;
                     seguimientoLarval.CosechaLarvas = _CosechaLarvas;
-                    seguimientoLarval.NumeroEstanque = _NumeroEstanque;
                     seguimientoLarval.DensidadCultivo = _DensidadCultivo;
                     seguimientoLarval.FactoresMedicion = _IdFactoresM;
                     seguimientoLarval.IdMortalidad = _selectTipoM;
                     seguimientoLarval.Estado = true;
+                    seguimientoLarval.IdCalibre = _idCalibre;
+                    seguimientoLarval.NumeroEstanque = _idEstanqueOrigen;
+                    seguimientoLarval.NumeroEstanqueDestino = _idEstanqueDestino;
+                    seguimientoLarval.CantidadMortalidad = _cantidadMortalidad;
+                    seguimientoLarval.Observaciones = _observaciones;
                     if (_idCultivoLarval != -1)
                     {
                         if (datosUsuario.AutorizaModificacion)
@@ -132,22 +199,31 @@ namespace CultimarWebApp.Controllers
             return (Json(validador));
         }
 
-
         public JsonResult GrabaDatosRegistroProduccion(int _IdProduccion,
+                                                        int _idTipoIdentificacion,
                                                         int _CantidadProductoresMachos,
                                                        int _CantidadProductoresHembras,
-                                                       string _FechaInicioCultivo,
                                                        int _CantidadFecundada,
                                                        int _NumeroDesoveTemporada,
                                                        int _CantidadSembrada,
-                                                       string _FactoresMedicion,
+                                                       string[] _FactoresMedicion,
                                                        int _NumeroEstanquesUtilizado,
-                                                       int _DensidadSiembra)
+                                                       int _DensidadSiembra,
+                                                       string _Observaciones)
         {
             var datosUsuario = new ObjetoLogin();
             datosUsuario = (ObjetoLogin)Session["DatosUsuario"];
             var registoProduccion = new ObjetoRegistroProduccion();
             var validador = 0;
+            var factores = string.Empty;
+
+            foreach (var expression in _FactoresMedicion)
+            {
+                factores += expression + ",";
+            }
+
+            factores = factores.TrimEnd(',');
+
             switch (datosUsuario.IdPerfil)
             {
                 case 3:
@@ -155,14 +231,16 @@ namespace CultimarWebApp.Controllers
                     break;
                 default:
                     registoProduccion.IdRegistroProduccion = _IdProduccion;
+                    registoProduccion.IdTipoIdentificacion = _idTipoIdentificacion;
                     registoProduccion.CantidadProductoresMachos = _CantidadProductoresMachos;
                     registoProduccion.CantidadProductoresHembras = _CantidadProductoresHembras;
                     registoProduccion.NumeroDesoveTemporada = _NumeroDesoveTemporada;
                     registoProduccion.CantidadFecundada = _CantidadFecundada;
                     registoProduccion.CantidadSembrada = _CantidadSembrada;
-                    registoProduccion.FactoresMedicion = _FactoresMedicion;
+                    registoProduccion.FactoresMedicion = factores;
                     registoProduccion.NumeroEstanquesUtilizado = _NumeroEstanquesUtilizado;
                     registoProduccion.DensidadSiembra = _DensidadSiembra;
+                    registoProduccion.Observaciones = _Observaciones;
                     if (_IdProduccion != -1)
                     {
                         if (datosUsuario.AutorizaModificacion)
@@ -210,29 +288,49 @@ namespace CultimarWebApp.Controllers
                 ViewBag.Message = "Bienvenido: " + datosUsuario.Nombre;
                 IEnumerable<ObjetoSeguimientoSemilla> model = _control.ListadoSeguimientoSemilla(-1);
 
+               
 
-                IEnumerable<SelectListItem> items = _control.ListadoParametrosOrigen().Select(c => new SelectListItem()
+                IEnumerable<SelectListItem> items = _control.ListadoRegistroInicialSemillas(-1).Select(c => new SelectListItem()
                 {
-                    Text = c.NombreOrigen,
-                    Value = c.IdOrigen.ToString()
+                    Text = c.NombreRegistroLarval,
+                    Value = c.IdRegistroInicialSemilla.ToString()
                 }).ToList();
 
-                ViewBag.ContenedorOrigen = items;
+                ViewBag.NombreCultivo = items;
 
 
-
-                IEnumerable<SelectListItem> items2 = _control.ListadoParametrosDestino().Select(c => new SelectListItem()
+                IEnumerable<SelectListItem> parametroZona = _control.ListadoTipoContenedor().Where(item => item.TipoContenedor == "Semillas").Select(c => new SelectListItem()
                 {
-                    Text = c.NombreDestino,
-                    Value = c.IdDestino.ToString()
+                    Text = c.NombreContenedor,
+                    Value = c.IdContenedor.ToString()
                 }).ToList();
-
-                ViewBag.ContenedorDestino = items2;
-
-       
+                ViewBag.ZonaCultivo = parametroZona;
 
                 var item3 = _control.ListadoFactorMedicion();
                 ViewBag.FactorM = new MultiSelectList(item3, "IdFactor", "NombreFactor");
+
+                IEnumerable<SelectListItem> parametroCalibre = _control.ListadoCalibre().Where(item => item.DescripcionCalibre == "Semilla").Select(c => new SelectListItem()
+                {
+                    Text = c.NombreCalibre,
+                    Value = c.IdCalibre.ToString()
+                }).ToList();
+                ViewBag.CalibreOrigen = parametroCalibre;
+
+                IEnumerable<SelectListItem> parametroCalibre2 = _control.ListadoCalibre().Where(item => item.DescripcionCalibre == "Semilla").Select(c => new SelectListItem()
+                {
+                    Text = c.NombreCalibre,
+                    Value = c.IdCalibre.ToString()
+                }).ToList();
+                ViewBag.CalibreDestino = parametroCalibre2;
+
+
+                IEnumerable<SelectListItem> TipoMortalidad = _control.ListadoTipoMortalidad().Select(c => new SelectListItem()
+                {
+                    Text = c.NombreMortalidad,
+                    Value = c.IdMortalidad.ToString()
+                }).ToList();
+
+                ViewBag.selectTipoM = TipoMortalidad;
 
 
                 return View(model);
@@ -248,32 +346,63 @@ namespace CultimarWebApp.Controllers
         }
 
 
-        public JsonResult GrabaDatos(string _IdSemilla, string _IdTipoContenedorOrigen, string _FechaRegistro,
-                                     int _IdFactoresMedicion, int _CantidadOrigen, int _CalibreOrigen,
-                                       int _IdTipoContenedorDestino, int _CantidadCosechado, int _CantidadCalibre)
+        public JsonResult GrabaDatosSeguimientoSemilla(
+                                                        int _ID,
+                                                        int _batch,
+                                                        string _zonaCultivo,
+                                                        int _contenedorOrigen,
+                                                        string _fechaRegistro,
+                                                        int _tipoMortalidad,
+                                                        string[] _factoresMedicion,
+                                                        int _cantidadOrigen,
+                                                        int _calibreOrigen,
+                                                        int _cantidadDestino,
+                                                        int _calibreDestino,
+                                                        int _contenedorDestino,
+                                                        int _cantidadMuestra,
+                                                        int _volumenMuestra,
+                                                        int _volumenTotal,
+                                                        string _observaciones)
+
         {
             var datosUsuario = new ObjetoLogin();
             datosUsuario = (ObjetoLogin)Session["DatosUsuario"];
-            var seguimientoSemilla = new ObjetoSeguimientoSemilla();
             var validador = 0;
+            var factores = string.Empty;
 
+            foreach (var expression in _factoresMedicion)
+            {
+                factores += expression + ",";
+            }
+
+            factores = factores.TrimEnd(',');
+            var seguimientoSemilla = new ObjetoSeguimientoSemilla()
+            {
+                IdSeguimientoSemilla = _ID,
+                IdRegistroLarval = _batch,
+                ZonaCultivo = _zonaCultivo,
+                IdTipoContenedorOrigen = _contenedorOrigen,
+                FechaRegistro1 = Convert.ToDateTime(_fechaRegistro),
+                IdMortalidad = _tipoMortalidad,
+                FactoresMedicion = factores,
+                CantidadOrigen = _cantidadOrigen,
+                idOrigen = _calibreOrigen,
+                CantidadDestino = _cantidadDestino,
+                IdDestino = _calibreDestino,
+                IdTipoContenedorDestino = _contenedorDestino,
+                CantidadMuestra = _cantidadMuestra,
+                VolumenMuestra = _volumenMuestra,
+                VolumenTotal = _volumenTotal,
+                Observaciones = _observaciones
+            };
             switch (datosUsuario.IdPerfil)
             {
                 case 3:
                     validador = 5;
                     break;
                 default:
-                    seguimientoSemilla.IdSeguimientoSemilla = int.Parse(_IdSemilla.ToString());
-                    seguimientoSemilla.IdTipoContenedorOrigen = int.Parse(_IdTipoContenedorOrigen);
-                    seguimientoSemilla.FechaRegistro = _FechaRegistro.ToString();
-                    seguimientoSemilla.IdFactoresMedicion = _IdFactoresMedicion;
-                    seguimientoSemilla.CantidadOrigen = _CantidadOrigen;
-                    seguimientoSemilla.CalibreOrigen = _CalibreOrigen;
-                    seguimientoSemilla.IdTipoContenedorDestino = _IdTipoContenedorDestino;
-                    seguimientoSemilla.CantidadCosechado = _CantidadCosechado;
-                    seguimientoSemilla.CantidadCalibre = _CantidadCalibre;
-                    seguimientoSemilla.Estado = true;
-                    if (int.Parse(_IdSemilla.ToString()) != -1)
+                    
+                    if (_ID != -1)
                     {
                         if (datosUsuario.AutorizaModificacion)
                         {
@@ -290,7 +419,7 @@ namespace CultimarWebApp.Controllers
                         {
                             validador = 4;
                             EnvioMail correo = new EnvioMail();
-                            correo.SendCorreoSolitaModificación(correo.ModificaRegistroSeguimientoSemilla(int.Parse(_IdSemilla.ToString()), datosUsuario.Nombre));
+                            correo.SendCorreoSolitaModificación(correo.ModificaRegistroSeguimientoSemilla(_ID, datosUsuario.Nombre));
                         }
                     }
                     else
@@ -322,13 +451,12 @@ namespace CultimarWebApp.Controllers
                 IEnumerable<ObjetoSeguimientoFijacion> model = _control.ListadoSeguimientoFijacion(-1);
 
 
-                IEnumerable<SelectListItem> items2 = _control.ListadoParametrosDestino().Select(c => new SelectListItem()
+                IEnumerable<SelectListItem> parametroContenedor = _control.ListadoTipoContenedor().Where(item => item.TipoContenedor == "Fijación").Select(c => new SelectListItem()
                 {
-                    Text = c.NombreDestino,
-                    Value = c.IdDestino.ToString()
+                    Text = c.NombreContenedor,
+                    Value = c.IdContenedor.ToString()
                 }).ToList();
-
-                ViewBag.ContenedorDestino = items2;
+                ViewBag.Contenedor = parametroContenedor;
 
 
                 IEnumerable<SelectListItem> TipoMortalidad = _control.ListadoTipoMortalidad().Select(c => new SelectListItem()
@@ -338,6 +466,37 @@ namespace CultimarWebApp.Controllers
                 }).ToList();
 
                 ViewBag.selectTipoM = TipoMortalidad;
+
+                IEnumerable<SelectListItem> seleccionRegistroInicial = _control.ListadoRegistroProduccion(-1).Select(d => new SelectListItem()
+                {
+                    Text = d.NombreRegistro,
+                    Value = d.IdRegistroProduccion.ToString()
+                }).ToList();
+                ViewBag.RegistroCultivo = seleccionRegistroInicial;
+
+                IEnumerable<SelectListItem> parametroCalibre = _control.ListadoCalibre().Where(item => item.DescripcionCalibre == "Larvas").Select(c => new SelectListItem()
+                {
+                    Text = c.NombreCalibre,
+                    Value = c.IdCalibre.ToString()
+                }).ToList();
+                ViewBag.ParametroCalibreLarvas = parametroCalibre;
+
+                IEnumerable<SelectListItem> parametroCalibreFijacion = _control.ListadoCalibre().Where(item => item.DescripcionCalibre == "Fijación").Select(c => new SelectListItem()
+                {
+                    Text = c.NombreCalibre,
+                    Value = c.IdCalibre.ToString()
+                }).ToList();
+                ViewBag.ParametroCalibreFijacion = parametroCalibreFijacion;
+
+                IEnumerable<SelectListItem> parametroCalibreSemilla = _control.ListadoCalibre().Where(item => item.DescripcionCalibre == "Semilla").Select(c => new SelectListItem()
+                {
+                    Text = c.NombreCalibre,
+                    Value = c.IdCalibre.ToString()
+                }).ToList();
+                ViewBag.ParametroCalibreSemillas = parametroCalibreSemilla;
+
+
+
 
 
                 var item3 = _control.ListadoFactorMedicion();
@@ -353,26 +512,38 @@ namespace CultimarWebApp.Controllers
                 throw;
             }
         }
-
-
-
-
-        public JsonResult GrabaSeguimientoFijacion(int _IdSeguimientoFijacion,
+        
+        public JsonResult GrabaSeguimientoFijacion(
+                                            int _IdSeguimientoFijacion,
+                                            int _idCultivo,
+                                            string _FechaRegistro,
                                             int _LarvasCalibre,
                                             int _LarvasCantidad,
-                                            int _CosechaCalibre,
-                                            int _CosechaCantidad,
+                                            int _CantidadFijacion,
+                                            int _CalibreFijacion,
+                                            int _CosechaSemillas,
+                                            int _CalibreSemillas,
+                                            int _CantidadSemillas,
                                             int _NumeroEstanque,
                                             int _DensidadSiembra,
                                             int _IdMortalidad,
                                             int _CantidadMortalidad,
-                                            string _FactoresMedicion,
-                                            string _FechaRegistro)
+                                            string[] _FactoresMedicion,
+                                            string _Observaciones
+                                                        )
         {
 
             var datosUsuario = new ObjetoLogin();
             datosUsuario = (ObjetoLogin)Session["DatosUsuario"];
-            var  seguimientoFijnacion = new ObjetoSeguimientoFijacion();
+            var factores = string.Empty;
+
+            foreach (var expression in _FactoresMedicion)
+            {
+                factores += expression + ",";
+            }
+
+            factores = factores.TrimEnd(',');
+
             var validador = 0;
             switch (datosUsuario.IdPerfil)
             {
@@ -380,21 +551,31 @@ namespace CultimarWebApp.Controllers
                     validador = 5;
                     break;
                 default:
-                    seguimientoFijnacion.IdSeguimientoFijacion = _IdSeguimientoFijacion;
-                    seguimientoFijnacion.LarvasCalibre = _LarvasCalibre;
-                    seguimientoFijnacion.LarvasCantidad = _LarvasCantidad;
-                    seguimientoFijnacion.CosechaCalibre = _CosechaCalibre;
-                    seguimientoFijnacion.NumeroEstanque = _NumeroEstanque;
-                    seguimientoFijnacion.DensidadSiembra = _DensidadSiembra;
-                    seguimientoFijnacion.IdMortalidad = _IdMortalidad;
-                    seguimientoFijnacion.CantidadMortalidad = _CantidadMortalidad;
-                    seguimientoFijnacion.FactoresMedicion = _FactoresMedicion;
-                    seguimientoFijnacion.FechaRegistro = _FechaRegistro;
+                    var seguimientoFijacion = new ObjetoSeguimientoFijacion() {
+                        IdSeguimientoFijacion = _IdSeguimientoFijacion,
+                        IdCultivo = _idCultivo,
+                        FechaRegistro = _FechaRegistro,
+                        LarvasCalibre = _LarvasCalibre,
+                        LarvasCantidad = _LarvasCantidad,
+                        FijacionCantidad = _CantidadFijacion,
+                        FijacionCalibre = _CalibreFijacion,
+                        CosechaSemilla = _CosechaSemillas,
+                        SemillaCalibre = _CalibreSemillas,
+                        CosechaCantidad = _CantidadSemillas,
+                        NumeroEstanque = _NumeroEstanque,
+                        DensidadSiembra = _DensidadSiembra,
+                        IdMortalidad = _IdMortalidad,
+                        CantidadMortalidad = _CantidadMortalidad,
+                        FactoresMedicion = factores,
+                        Observaciones = _Observaciones
+                    };
+
+
                     if (_IdSeguimientoFijacion != -1)
                     {
                         if (datosUsuario.AutorizaModificacion)
                         {
-                            if (_control.SetGrabaSeguimientoFijacion(datosUsuario.IdUsuario, seguimientoFijnacion))
+                            if (_control.SetGrabaSeguimientoFijacion(datosUsuario.IdUsuario, seguimientoFijacion))
                             {
                                 validador = 1;
                             }
@@ -412,7 +593,7 @@ namespace CultimarWebApp.Controllers
                     }
                     else
                     {
-                        if (_control.SetGrabaSeguimientoFijacion(datosUsuario.IdUsuario, seguimientoFijnacion))
+                        if (_control.SetGrabaSeguimientoFijacion(datosUsuario.IdUsuario, seguimientoFijacion))
                         {
                             validador = 1;
                         }
@@ -424,14 +605,7 @@ namespace CultimarWebApp.Controllers
                     break;
             }
 
-            //if (_control.setGrabaSeguimientoFijacion(seguimientoFijnacion))
-            //{
-            //    validador = 1;
-            //}
-
             return (Json(validador));
-
-
         }
 
         public ActionResult RegistroInicialMar()
@@ -442,23 +616,30 @@ namespace CultimarWebApp.Controllers
                 datosUsuario = (ObjetoLogin)Session["DatosUsuario"];
                 ViewBag.Message = "Bienvenido: " + datosUsuario.Nombre;
                 IEnumerable<ObjetoRegistroInicialMar> model = _control.ListadoRegistroInicialMar(-1);
-
-                IEnumerable<SelectListItem> parametrosOrigen = _control.ListadoParametrosOrigen().Select(c => new SelectListItem()
+                IEnumerable<SelectListItem> items = _control.ListadoTipoIdentificacion().Select(c => new SelectListItem()
                 {
-                    Text = c.NombreOrigen,
-                    Value = c.IdOrigen.ToString()
+                    Text = c.NombreIdentificacion,
+                    Value = c.IdIdentificacion.ToString()
                 }).ToList();
-                
-                ViewBag.ParametrosOrigen = parametrosOrigen;
 
-                    IEnumerable<SelectListItem> parametrosTipoMortalidad = _control.ListadoTipoMortalidad().Select(c => new SelectListItem()
-                    {
-                        Text = c.NombreMortalidad,
-                        Value = c.IdMortalidad.ToString()
-                    }).ToList();
+                ViewBag.NombreCultivo = items;
 
-
+                IEnumerable<SelectListItem> parametrosTipoMortalidad = _control.ListadoTipoMortalidad().Select(c => new SelectListItem()
+                {
+                    Text = c.NombreMortalidad,
+                    Value = c.IdMortalidad.ToString()
+                }).ToList();
                 ViewBag.ParametrosTipoMortalidad = parametrosTipoMortalidad;
+
+                IEnumerable<SelectListItem> parametroCalibre = _control.ListadoCalibre().Select(c => new SelectListItem()
+                {
+                    Text = c.DescripcionCalibre + "  "  + c.NombreCalibre,
+                    Value = c.IdCalibre.ToString()
+                }).ToList();
+                ViewBag.ParametroCalibre = parametroCalibre;
+
+
+               
 
                 IEnumerable<SelectListItem> parametrosTipoSistema = _control.ListadoTipoSistema().Select(c => new SelectListItem()
                 {
@@ -478,7 +659,7 @@ namespace CultimarWebApp.Controllers
             }
         }
 
-        public JsonResult GrabaRegistroInicialMar(int idRegistro, string fechaIngreso, string fechaFuturo, int cantidadOrigen, int calibreOrigen, int idOrigen, int cantidad, int idTipoSistema, int idMortalidad)
+        public JsonResult GrabaRegistroInicialMar(int idRegistro, int idCultivo, string fechaIngreso, string fechaFuturo, int cantidadOrigen, int calibreOrigen, int cantidad, int idTipoSistema, int idMortalidad, string observaciones)
         {
             var datosUsuario = new ObjetoLogin();
             datosUsuario = (ObjetoLogin)Session["DatosUsuario"];
@@ -493,14 +674,15 @@ namespace CultimarWebApp.Controllers
                     var registroInicialMar = new ObjetoRegistroInicialMar()
                     {
                         IdRegistro = idRegistro,
+                        IdRegistroLarval = idCultivo,
                         FechaIngreso = Convert.ToDateTime(fechaIngreso),
                         FechaFuturoDesdoble = Convert.ToDateTime(fechaFuturo),
                         CantidadOrigen = cantidadOrigen,
-                        CalibreOrigen = calibreOrigen,
-                        IdOrigen = idOrigen,
+                        IdOrigen = calibreOrigen,
                         Cantidad = cantidad,
                         IdTipoSistema = idTipoSistema,
-                        IdMortalidad = idMortalidad
+                        IdMortalidad = idMortalidad,
+                        Observaciones = observaciones
                     };
                     if (idRegistro != -1)
                     {
@@ -539,7 +721,137 @@ namespace CultimarWebApp.Controllers
             return (Json(validador));
         }
 
+        public ActionResult SeguimientoProduccionMar()
+        {
+            var datosUsuario = new ObjetoLogin();
+            datosUsuario = (ObjetoLogin)Session["DatosUsuario"];
+            ViewBag.Message = "Bienvenido: " + datosUsuario.Nombre;
 
+            IEnumerable<ObjetoSeguimientoMar> model = _control.ListadoSeguimientoMar(-1);
+
+            IEnumerable<SelectListItem> items = _control.ListadoRegistroInicialMar(-1).Select(c => new SelectListItem()
+            {
+                Text = c.NombreCultivo,
+                Value = c.IdRegistroLarval.ToString()
+            }).ToList();
+
+            ViewBag.NombreCultivo = items;
+
+            IEnumerable<SelectListItem> parametrosTipoMortalidad = _control.ListadoTipoMortalidad().Select(c => new SelectListItem()
+            {
+                Text = c.NombreMortalidad,
+                Value = c.IdMortalidad.ToString()
+            }).ToList();
+            ViewBag.ParametrosTipoMortalidad = parametrosTipoMortalidad;
+
+            IEnumerable<SelectListItem> parametroCalibre = _control.ListadoCalibre().Select(c => new SelectListItem()
+            {
+                Text = c.DescripcionCalibre + "  " + c.NombreCalibre,
+                Value = c.IdCalibre.ToString()
+            }).ToList();
+            ViewBag.ParametroCalibre = parametroCalibre;
+
+
+            IEnumerable<SelectListItem> parametrosTipoSistema = _control.ListadoTipoSistema().Select(c => new SelectListItem()
+            {
+                Text = c.NombreSistema,
+                Value = c.IdTipoSistema.ToString()
+            }).ToList();
+
+            ViewBag.ParametrosTipoSistema = parametrosTipoSistema;
+
+            IEnumerable<SelectListItem> parametrosUbicacionOceanica = _control.ListadoUbicacionOceanica().Select(c => new SelectListItem()
+            {
+                Text = c.NombreUbicacion,
+                Value = c.IdUbicacion.ToString()
+            }).ToList();
+
+            ViewBag.ParametroUbicacionOceanica = parametrosUbicacionOceanica;
+
+            return View(model);
+        }
+
+        public JsonResult GrabaSeguimientoMar(
+              int _IdSeguimiento
+            , int _IdRegistroInicial
+            , int _IdMortalidad
+            , string _FechaDesdoble
+            , int _CantidadOrigen
+            , int _IdCalibreOrigen
+            , int _IdUbicacionOrigen
+            , int _CantidadSistemaOrigen
+            , int _IdSistemaOrigen
+            , int _CantidadDestino
+            , int _IdCalibreDestino
+            , int _IdUbicacionDestino
+            , int _CantidadSistemaDestino
+            , int _IdSistemaDestino
+            , string _Observaciones)
+        {
+            var datosUsuario = new ObjetoLogin();
+            datosUsuario = (ObjetoLogin)Session["DatosUsuario"];
+            var validador = 0;
+
+            switch (datosUsuario.IdPerfil)
+            {
+                case 3:
+                    validador = 5;
+                    break;
+                default:
+                    var seguimientoMar = new ObjetoSeguimientoMar()
+                    {
+                        IdSeguimiento = _IdSeguimiento
+                        ,IdRegistroInicial = _IdRegistroInicial
+                        ,IdMortalidad = _IdMortalidad
+                        ,FechaDesdoble = Convert.ToDateTime(_FechaDesdoble)
+                        ,CantidadOrigen = _CantidadOrigen
+                        ,IdCalibreOrigen = _IdCalibreOrigen
+                        ,IdUbicacionOrigen = _IdUbicacionOrigen
+                        ,CantidadSistemaOrigen = _CantidadSistemaOrigen
+                        ,IdSistemaOrigen = _IdSistemaOrigen
+                        ,CantidadDestino = _CantidadDestino
+                        ,IdCalibreDestino = _IdCalibreDestino
+                        ,IdUbicacionDestino = _IdUbicacionDestino
+                        ,CantidadSistemaDestino = _CantidadSistemaDestino
+                        ,IdSistemaDestino = _IdSistemaDestino
+                        ,Observaciones = _Observaciones
+                    };
+                    if (_IdSeguimiento != -1)
+                    {
+                        if (datosUsuario.AutorizaModificacion)
+                        {
+                            if (_control.SetGrabaSeguimientoMar(datosUsuario.IdUsuario, seguimientoMar))
+                            {
+                                validador = 1;
+                            }
+                            else
+                            {
+                                validador = 3;
+                            }
+                        }
+                        else
+                        {
+                            validador = 4;
+                            EnvioMail correo = new EnvioMail();
+                            correo.SendCorreoSolitaModificación(correo.ModificaRegistroSeguimientoMar(_IdSeguimiento, datosUsuario.Nombre));
+                        }
+                    }
+                    else
+                    {
+                        if (_control.SetGrabaSeguimientoMar(datosUsuario.IdUsuario, seguimientoMar))
+                        {
+                            validador = 1;
+                        }
+                        else
+                        {
+                            validador = 3;
+                        }
+                    }
+                    break;
+            }
+
+            return (Json(validador));
+        }
         public ActionResult PreparacionDespacho()
         {
             try
@@ -647,6 +959,103 @@ namespace CultimarWebApp.Controllers
             }
             return (Json(validador));
         }
+        
+        public JsonResult GrabaRegistroInicialSemillas(
+                                         int IdRegistroInicial
+                                        ,int idCultivo
+                                        ,int IdCalibre
+                                        , string FechaRegistro
+                                        , string FechaDesdoble
+                                        , string Ploidia
+                                        , string Muestreo
+                                        , string Observaciones
+                                      )
+        {
+            var datosUsuario = new ObjetoLogin();
+            datosUsuario = (ObjetoLogin)Session["DatosUsuario"];
+            var validador = 0;
+            switch (datosUsuario.IdPerfil)
+            {
+                case 3:
+                    validador = 5;
+                    break;
+                default:
+                    var semilla = new ObjetoSeguimientoSemilla() {
+                        IdRegistroInicialSemilla = IdRegistroInicial,
+                        IdRegistroLarval = idCultivo,
+                        IdCalibre = IdCalibre,
+                        FechaRegistroInicial = Convert.ToDateTime(FechaRegistro),
+                        FechaDesdobleInicial = Convert.ToDateTime(FechaDesdoble),
+                        Ploidia = Ploidia,
+                        Muestreo = Muestreo,
+                        Observaciones = Observaciones
+                    };
+
+                    if (IdRegistroInicial != -1)
+                    {
+                        if (datosUsuario.AutorizaModificacion)
+                        {
+                            if (_control.SetGrabaRegistroInicialSemilla(datosUsuario.IdUsuario, semilla))
+                            {
+                                validador = 1;
+                            }
+                            else
+                            {
+                                validador = 3;
+                            }
+                        }
+                        else
+                        {
+                            //validador = 4;
+                            //EnvioMail correo = new EnvioMail();
+                            //correo.SendCorreoSolitaModificación(correo.ModificaRegistroPreparadoDespacho(IdRegistroInicial, datosUsuario.Nombre));
+                        }
+                    }
+                    else
+                    {
+                        if (_control.SetGrabaRegistroInicialSemilla(datosUsuario.IdUsuario, semilla))
+                        {
+                            validador = 1;
+                        }
+                        else
+                        {
+                            validador = 3;
+                        }
+                    }
+
+                    break;
+            }
+            return (Json(validador));
+        }
+
+        
+        public ActionResult RegistroInicialSemillas()
+        {
+            var datosUsuario = new ObjetoLogin();
+            datosUsuario = (ObjetoLogin)Session["DatosUsuario"];
+            ViewBag.Message = "Bienvenido: " + datosUsuario.Nombre;
+            IEnumerable<ObjetoSeguimientoSemilla> model = _control.ListadoRegistroInicialSemillas(-1);
+
+            IEnumerable<SelectListItem> seleccionRegistroInicial = _control.ListadoRegistroProduccion(-1).Select(d => new SelectListItem()
+            {
+                Text = d.NombreRegistro,
+                Value = d.IdRegistroProduccion.ToString()
+            }).ToList();
+            ViewBag.RegistroCultivo = seleccionRegistroInicial;
+
+            IEnumerable<SelectListItem> parametroCalibre = _control.ListadoCalibre().Where(item => item.DescripcionCalibre == "Semilla").Select(c => new SelectListItem()
+            {
+                Text = c.NombreCalibre,
+                Value = c.IdCalibre.ToString()
+            }).ToList();
+            ViewBag.ParametroCalibre = parametroCalibre;
+
+
+
+
+            return View(model);
+        }
+
         public ActionResult ErrorPage(int error)
         {
             return Redirect(Url.Content("~/Error/Index?error=" + error));

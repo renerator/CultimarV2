@@ -26,7 +26,7 @@ $(document).ready(function () {
                 $.ajax({
                     url: "GrabaDatosMicroAlga",
                     type: "POST",
-                    data: { idMicroAlga: ID, idEspecie: $("#selectEspecies").val(), cantidadVolumen: $("#cantidadVolumen").val(), numeroBolsa: $("#numeroBolsa").val(), fecha: fechaConFormato },
+                    data: { idMicroAlga: ID, idEspecie: $("#selectEspecies").val(), cantidadVolumen: $("#cantidadVolumen").val(), numeroBolsa: $("#numeroBolsa").val(), fecha: fechaConFormato, nombreRegistro: $("#txtNombreRegistro").val(), observaciones: $("#txtObservaciones").val()  },
                     async: true,
                     success: function (data) {
                         if (data == 1) {
@@ -61,15 +61,20 @@ $(document).ready(function () {
         $("#IdMicroAlga").val("");
         $("#cantidadVolumen").val("");
         $("#numeroBolsa").val("");
+        $("#txtNombreRegistro").val("");
+        $("#txtObservaciones").val("");
+
     });
 });
 
-function EditaMicroAlga(idMicroAlga, nombreEspecie, cantidadVolumen, numeroBolsa, fecha, idEspecie) {
+function EditaMicroAlga(idMicroAlga, nombreEspecie, cantidadVolumen, numeroBolsa, fecha, idEspecie, nombreRegistro, observaciones) {
     $("#selectEspecies").val(idEspecie);
     $("#IdMicroAlga").val(idMicroAlga);
     $("#cantidadVolumen").val(cantidadVolumen);
     $("#numeroBolsa").val(numeroBolsa);
     $("#single_cal1").val(fecha);
+    $("#txtNombreRegistro").val(nombreRegistro);
+    $("#txtObservaciones").val(observaciones);
 }
 
 

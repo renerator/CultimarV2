@@ -8,6 +8,7 @@ namespace CultimarWebApp.Utils.Objetos
     public class ObjetoRegistroInicialMar
     {
         private int _idRegistro;
+        private int _idRegistroLarval;
         private DateTime _fechaIngreso;
         private DateTime _fechaFuturoDesdoble;
         private int _cantidadOrigen;
@@ -19,6 +20,35 @@ namespace CultimarWebApp.Utils.Objetos
         private string _nombreSistema;
         private int _idMortalidad;
         private string _nombreMortalidad;
+
+        private bool _estado;
+        public bool Estado
+        {
+            get { return _estado; }
+            set { _estado = value; }
+        }
+
+
+        private string _nombreCultivo;
+        public string NombreCultivo
+        {
+            get { return _nombreCultivo; }
+            set { _nombreCultivo = value; }
+        }
+
+
+        private string _observaciones;
+        public string Observaciones
+        {
+            get { return _observaciones; }
+            set { _observaciones = value; }
+        }
+
+        public int IdRegistroLarval
+        {
+            get { return _idRegistroLarval; }
+            set { _idRegistroLarval = value; }
+        }
 
 
         public int IdRegistro
