@@ -109,6 +109,7 @@ namespace CultimarWebApp.Utils.DAO
                                                                                                 {"@ResultadoTCBS", microAlga.ResultadoTCBS },
                                                                                                 {"@VolumenCosechado", microAlga.VolumenCosechado },
                                                                                                 {"@Concentracion", microAlga.Concentracion },
+                                                                                                {"@puntuacion", microAlga.Puntuacion },
                                                                                                 {"@Observaciones", microAlga.Observaciones },
                                                                                                 {"@Estado", microAlga.Estado }
                                                                                              });
@@ -188,7 +189,9 @@ namespace CultimarWebApp.Utils.DAO
 
                     validador = data.Rows[i].Field<object>("Concentracion");
                     resultadoListado.Concentracion = validador != null ? data.Rows[i].Field<int>("Concentracion") : -1;
-                    
+                    validador = data.Rows[i].Field<object>("Puntuacion");
+                    resultadoListado.Puntuacion = validador != null ? data.Rows[i].Field<int>("Puntuacion") : 0;
+
                     validador = data.Rows[i].Field<object>("Observaciones");
                     resultadoListado.Observaciones = validador != null ? data.Rows[i].Field<string>("Observaciones") : "SIN OBSERVACIONES PARA EL REGISTRO";
 

@@ -12,6 +12,8 @@ namespace CultimarWebApp.Utils.Objetos
         private int _idRegistroLarval;
         private string _nombreRegistroLarval;
         private int _idCalibre;
+        private int _idTipoContenedor;
+        private string _nombreContenedor;
         private string _nombreCalibreSemilla;
         private DateTime _fechaRegistroInicial;
         private DateTime _fechaDesdobleInicial;
@@ -19,12 +21,32 @@ namespace CultimarWebApp.Utils.Objetos
         private string _muestreo;
         private string _observaciones;
         private string _zonaCultivo;
+
+        private int _cantidadMortalidad;
+        public int CantidadMortalidad
+        {
+            get { return _cantidadMortalidad; }
+            set { _cantidadMortalidad = value; }
+        }
+
+
         public string ZonaCultivo
         {
             get { return _zonaCultivo; }
             set { _zonaCultivo = value; }
         }
 
+        public int IdTipoContenedor
+        {
+            get { return _idTipoContenedor; }
+            set { _idTipoContenedor = value; }
+        }
+
+        public string NombreContenedor
+        {
+            get { return _nombreContenedor; }
+            set { _nombreContenedor = value; }
+        }
 
         private bool _estado;
 
@@ -45,6 +67,14 @@ namespace CultimarWebApp.Utils.Objetos
         private int _idOrigen;
         private int _IdDestino;
         private int _IdMortalidad;
+
+
+        private int _litrosContenedor;
+        public int LitrosContenedor
+        {
+            get { return _litrosContenedor; }
+            set { _litrosContenedor = value; }
+        }
 
 
         private int _cantidadMuestra;

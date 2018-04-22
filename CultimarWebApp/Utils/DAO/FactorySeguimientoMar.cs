@@ -39,7 +39,7 @@ namespace CultimarWebApp.Utils.DAO
                     resultadoListado.FechaDesdoble = validador != null ? data.Rows[i].Field<DateTime>("FechaDesdoble") : DateTime.Now;
 
                     validador = data.Rows[i].Field<object>("CantidadOrigen");
-                    resultadoListado.CantidadOrigen = validador != null ? data.Rows[i].Field<int>("CantidadOrigen") : -1;
+                    resultadoListado.CantidadOrigen = validador != null ? data.Rows[i].Field<double>("CantidadOrigen") : -1;
 
                     validador = data.Rows[i].Field<object>("idCalibreOrigen");
                     resultadoListado.IdCalibreOrigen = validador != null ? data.Rows[i].Field<int>("idCalibreOrigen") : -1;
@@ -59,8 +59,6 @@ namespace CultimarWebApp.Utils.DAO
                     validador = data.Rows[i].Field<object>("NombreUbicacionDestino");
                     resultadoListado.NombreUbicacionDestino = validador != null ? data.Rows[i].Field<string>("NombreUbicacionDestino") : "NO ASIGNADO";
 
-
-
                     validador = data.Rows[i].Field<object>("CantidadSistemaOrigen");
                     resultadoListado.CantidadSistemaOrigen = validador != null ? data.Rows[i].Field<int>("CantidadSistemaOrigen") : -1;
 
@@ -71,7 +69,7 @@ namespace CultimarWebApp.Utils.DAO
                     resultadoListado.NombreSistemaOrigen = validador != null ? data.Rows[i].Field<string>("NombreSistemaOrigen") : "NO ASIGNADO";
 
                     validador = data.Rows[i].Field<object>("CantidadDestino");
-                    resultadoListado.CantidadDestino = validador != null ? data.Rows[i].Field<int>("CantidadDestino") : -1;
+                    resultadoListado.CantidadDestino = validador != null ? data.Rows[i].Field<double>("CantidadDestino") : -1;
 
                     validador = data.Rows[i].Field<object>("idCalibreDestino");
                     resultadoListado.IdCalibreDestino = validador != null ? data.Rows[i].Field<int>("idCalibreDestino") : -1;
@@ -90,7 +88,19 @@ namespace CultimarWebApp.Utils.DAO
                     
                     validador = data.Rows[i].Field<object>("Observaciones");
                     resultadoListado.Observaciones = validador != null ? data.Rows[i].Field<string>("Observaciones") : "SIN OBSERVACIONES PARA EL REGISTRO";
-                    
+
+                    validador = data.Rows[i].Field<object>("CantidadMuestra");
+                    resultadoListado.CantidadMuestra = validador != null ? data.Rows[i].Field<int>("CantidadMuestra") : 0;
+
+                    validador = data.Rows[i].Field<object>("VolumenMuestra");
+                    resultadoListado.VolumenMuestra = validador != null ? data.Rows[i].Field<int>("VolumenMuestra") : 0;
+
+                    validador = data.Rows[i].Field<object>("VolumenTotal");
+                    resultadoListado.VolumenTotal = validador != null ? data.Rows[i].Field<int>("VolumenTotal") : 0;
+
+                    validador = data.Rows[i].Field<object>("LitrosContenedor");
+                    resultadoListado.LitrosContenedor = validador != null ? data.Rows[i].Field<int>("LitrosContenedor") : 0;
+
 
                     listadoSeguimientoMar.Add(resultadoListado);
                 }
@@ -120,9 +130,13 @@ namespace CultimarWebApp.Utils.DAO
                                                                                                 {"@idUbicacionDestino",mar.IdUbicacionDestino },
                                                                                                 {"@CantidadSistemaDestino",mar.CantidadSistemaDestino },
                                                                                                 {"@idSistemaDestino",mar.IdSistemaDestino },
-                                                                                                {"@Observaciones",mar.Observaciones }
-
+                                                                                                {"@Observaciones",mar.Observaciones },
+                                                                                                {"@CantidadMuestra",mar.CantidadMuestra },
+                                                                                                {"@VolumenMuestra",mar.VolumenMuestra },
+                                                                                                {"@VolumenTotal",mar.VolumenTotal },
+                                                                                                {"@LitrosContenedor",mar.LitrosContenedor }
                                                                                              });
+               
                 if (data.Rows.Count > 0)
                 {
                     respuesta = true;

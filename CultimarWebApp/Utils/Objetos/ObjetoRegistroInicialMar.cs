@@ -20,6 +20,12 @@ namespace CultimarWebApp.Utils.Objetos
         private string _nombreSistema;
         private int _idMortalidad;
         private string _nombreMortalidad;
+        private int _ubicacionOceanica;
+        public int UbicacionOceanica
+        {
+            get { return _ubicacionOceanica; }
+            set { _ubicacionOceanica = value; }
+        }
 
         private bool _estado;
         public bool Estado

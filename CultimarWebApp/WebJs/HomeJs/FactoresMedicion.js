@@ -42,6 +42,9 @@
                                 if (data == 0) {
                                     alert("No se ha realizado la acción, intentalo nuevamente.");
                                 }
+                                if (data == 2) {
+                                    alert("Hubo un error al tratar de grabar el Factor de medición: " + $("#nombreFactor").val() );
+                                }
                             }
                         });
                     }

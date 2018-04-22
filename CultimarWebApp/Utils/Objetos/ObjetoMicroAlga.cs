@@ -31,8 +31,14 @@ namespace CultimarWebApp.Utils.Objetos
         private bool _resultadoTCBS;
         private int _volumenCosechado;
         private int _concentracion;
+        private int _puntuacion;
         private int _conteo;
 
+        public int Puntuacion
+        {
+            get { return _puntuacion; }
+            set { _puntuacion = value; }
+        }
         public int IdDestino
         {
             get { return _idDestino; }

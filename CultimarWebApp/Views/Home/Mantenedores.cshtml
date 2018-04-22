@@ -61,17 +61,17 @@
                                                 <strong>En esta sección, podras agregar nuevas ubicaciones oceanicas o editar las existentes.</strong>
                                             </p>
                                             <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
-                                               
+
                                                 <div class="table-responsive">
                                                     @{
-            var gridParametrosTipoAlimentos = new WebGrid(source: ViewBag.ParametroUbicacionOceanica, canPage: false);
+                            var gridParametrosTipoAlimentos = new WebGrid(source: ViewBag.ParametroUbicacionOceanica, canPage: false);
                                                     }
                                                     @gridParametrosTipoAlimentos.GetHtml(
 htmlAttributes: new { id = "tblParametrosTipoAlimentos" },
 tableStyle: "table table-bordered",
 columns:
-  gridParametrosTipoAlimentos.Columns(
-      gridParametrosTipoAlimentos.Column(header: "Identificador", format: @<text>@item.IdUbicacion</text>),
+gridParametrosTipoAlimentos.Columns(
+gridParametrosTipoAlimentos.Column(header: "Identificador", format: @<text>@item.IdUbicacion</text>),
 gridParametrosTipoAlimentos.Column(header: "Nombre Ubicación", format: @<text>@item.NombreUbicacion</text>),
 gridParametrosTipoAlimentos.Column(header: "Estado", format: item => item.Estado ?
 Html.Raw("<i class='fa fa-thumbs-up' data-toggle='tooltip' data-placement='top' title='' data-original-title='Parametro Activo'></i>") : Html.Raw("<i class='fa fa-thumbs-down' data-toggle='tooltip' data-placement='top' title='' data-original-title='Parametro Inactivo'></i>")),
@@ -666,11 +666,11 @@ gridTipoSistema.Column(header: "Editar", format: @<button class="btn btn-success
                         var gridTipoIdentificacion = new WebGrid(source: ViewBag.ParametrosTipoIdentificacion, canPage: false);
                                                 }
                                                 @gridTipoIdentificacion.GetHtml(
-                      htmlAttributes: new { id = "tblParametrosTipoIdentificacion" },
-                      tableStyle: "table table-bordered",
-                      columns:
-                          gridTipoIdentificacion.Columns(
-                              gridTipoIdentificacion.Column(header: "Identificador", format: @<text>@item.IdIdentificacion</text>),
+htmlAttributes: new { id = "tblParametrosTipoIdentificacion" },
+tableStyle: "table table-bordered",
+columns:
+gridTipoIdentificacion.Columns(
+gridTipoIdentificacion.Column(header: "Identificador", format: @<text>@item.IdIdentificacion</text>),
 gridTipoIdentificacion.Column(header: "Nombre BATCH", format: @<text>@item.NombreIdentificacion</text>),
 gridTipoIdentificacion.Column(header: "Estado", format: item => item.Estado ?
 Html.Raw("<i class='fa fa-thumbs-up' data-toggle='tooltip' data-placement='top' title='' data-original-title='Parametro Activo'></i>") : Html.Raw("<i class='fa fa-thumbs-down' data-toggle='tooltip' data-placement='top' title='' data-original-title='Parametro Inactivo'></i>")),
@@ -724,6 +724,79 @@ gridTipoIdentificacion.Column(header: "Editar", format: @<button class="btn btn-
                                     </div>
                                 </div>
                                 <!-- Fin Parametros de Nombre de BATCH-->
+                                <!-- Inicio Parametros de Nombre de Destino Despacho-->
+                                <div class="panel">
+                                    <a class="panel-heading collapsed" role="tab" id="headingFive" data-toggle="collapse" data-parent="#accordion" href="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+                                        <h4 class="panel-title">Mantenedor de Nombres de Destino Despacho</h4>
+                                    </a>
+                                    <div id="collapseNine" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingNine">
+                                        <div class="panel-body">
+                                            <p>
+                                                <strong>En esta sección veras un listado con los nombres de los destinos de Despacho ingresados, podras agregar uno nuevo o editar uno si así lo requieres</strong>
+                                            </p>
+                                            <div class="table-responsive">
+                                                @{
+        var gridDestinosDespacho = new WebGrid(source: ViewBag.ParametroDestinoDespacho, canPage: false);
+                                                }
+                                                @gridDestinosDespacho.GetHtml(
+htmlAttributes: new { id = "tblParametrosDestinoDespacho" },
+tableStyle: "table table-bordered",
+columns:
+gridDestinosDespacho.Columns(
+gridDestinosDespacho.Column(header: "Identificador", format: @<text>@item.IdDestinoDespacho</text>),
+gridDestinosDespacho.Column(header: "Nombre Destino", format: @<text>@item.NombreDestinoDespacho</text>),
+gridDestinosDespacho.Column(header: "Estado", format: item => item.Estado ?
+Html.Raw("<i class='fa fa-thumbs-up' data-toggle='tooltip' data-placement='top' title='' data-original-title='Parametro Activo'></i>") : Html.Raw("<i class='fa fa-thumbs-down' data-toggle='tooltip' data-placement='top' title='' data-original-title='Parametro Inactivo'></i>")),
+gridDestinosDespacho.Column(header: "Editar", format: @<button class="btn btn-success" type="button" data-toggle="modal" tooltip="Editar Parametro" data-target="#modalPopUpIngresodestinoDespacho" onclick="EditaDestinoDespacho(@item.IdDestinoDespacho,'@item.NombreDestinoDespacho')">Editar</button>))
+)
+                                            </div>
+                                            <div class="form-group">
+                                                <div>
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal" id="btnNuevoDestinoDespacho" data-target="#modalPopUpIngresodestinoDespacho">Agregar Nuevo Destino Despacho</button>
+                                                </div>
+                                            </div>
+                                            <div id="modalPopUpIngresodestinoDespacho" class="modal fade bs-example-modal-lg" tabindex="-2" role="dialog" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal">
+                                                                <span aria-hidden="true">×</span>
+                                                            </button>
+                                                            <h4 class="modal-title" id="myModalLabel">Nombre Destino</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <h4>Ingrese los datos solicitados</h4>
+                                                            <div class="x_content">
+                                                                <br />
+                                                                <input type="text" id="idDestinoDespacho" style="display: none;">
+
+                                                                <form class="form-horizontal form-label-left input_mask">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Nombre del Destino</label>
+                                                                        <div class="col-md-9 col-sm-9 col-xs-12">
+                                                                            <input type="text" required="required" class="form-control has-feedback-left" id="nombreDestinoDespacho" placeholder="Nombre Destino Despacho">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="ln_solid"></div>
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                                                                            <button class="btn btn-primary" type="reset">Resetear</button>
+                                                                            <button type="submit" class="btn btn-success" id="btnGrabaDestinoDespacho">Grabar</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" id="btnCerrarModalDestinoDespacho" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Fin Destino Despacho-->
                             </div>
                                 <!-- end of accordion -->
                             </div>

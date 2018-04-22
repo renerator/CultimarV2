@@ -50,11 +50,14 @@ $(document).ready(function () {
     $("#btnNuevaFijacion").click(function () {
         $("#IdSeguimientoFijacion").val("");
         $("#selectNombreCultivo").val("");
-        $("#IdCalibreLarvas").val("");
-        $("#idCantidadLarvas").val("");
-        $("#IdCosechaCalibre").val("");
-        $("#IdCosechaCantidad").val("");
-        $("#IdNumeroEstanque").val("");
+        $("#selectCalibreLarvas").val("");
+        $("#cantidadLarvas").val("");
+        $("#cantidadFijacion").val("");
+        $("#selectCalibreFijación").val("");
+        $("#cosechaSemillas").val("");
+        $("#selectCalibreSemillas").val("");
+        $("#cantidadSemillas").val("");
+        $("#idNumeroEstanque").val("");
         $("#IdDensidadSiembra").val("");
         $("#selectTipoM").val("");
         $("#IdCantidadMortalidad").val("");
@@ -122,6 +125,7 @@ $(document).ready(function () {
                 if (data == 1) {
                     $("#btnCerrarModal").click();
                     alert("El Ingreso se ha realizado sin problemas.");
+                    window.location.reload(true);
                 }
                 if (data == 3) {
                     alert("Ha ocurrido un error al grabar los datos, intentalo nuevamente.");

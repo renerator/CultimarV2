@@ -14,7 +14,10 @@
     VolumenMuestra,
     VolumenTotal,
     Observaciones,
-    ZonaCultivo) {
+    ZonaCultivo,
+    CantidadMortalidad,
+    litrosContenedor) 
+{
     $("#IdSemilla").val(IdSeguimientoSemilla);
     $("#NombreCultivo").val(IdRegistroLarval);
     $("#selectZonaCultivo").val(ZonaCultivo);
@@ -31,7 +34,8 @@
     $("#VolumenMuestra").val(VolumenMuestra);
     $("#volumenTotal").val(VolumenTotal);
     $("#txtObservaciones").val(Observaciones);
-
+    $("#CantidadMortalidad").val(CantidadMortalidad);
+    $("#litrosContenedor").val(litrosContenedor);
 }
 
 
@@ -70,15 +74,34 @@ $(document).ready(function () {
     $("#cantidadMuestra").val(0);
     $("#VolumenMuestra").val(0);
     $("#volumenTotal").val(0);
+    $("#litrosContenedor").val(0);
 
-    $("#cantidadMuestra").change(function () {
-        var suma = $("#cantidadMuestra").val() * $("#VolumenMuestra").val();
-        $("#volumenTotal").val(suma);
-    });
     $("#VolumenMuestra").change(function () {
-        var suma = $("#cantidadMuestra").val() * $("#VolumenMuestra").val();
+        //var suma = $("#cantidadMuestra").val() * $("#VolumenMuestra").val() * $("#litrosContenedor").val() * 1000;
+        var volumen = $("#VolumenMuestra").val();
+        var cantidad = $("#cantidadMuestra").val();
+        var litros = $("#litrosContenedor").val();
+        var suma = (((cantidad / volumen) * 1000)) * litros;
+        $("#volumenTotal").val(suma); $("#volumenTotal").val(suma);
+    });
+    $("#cantidadMuestra").change(function () {
+        //var suma = $("#cantidadMuestra").val() * $("#VolumenMuestra").val() * $("#litrosContenedor").val() * 1000;
+        var volumen = $("#VolumenMuestra").val();
+        var cantidad = $("#cantidadMuestra").val();
+        var litros = $("#litrosContenedor").val();
+        var suma = (((cantidad / volumen) * 1000)) * litros;
         $("#volumenTotal").val(suma);
     });
+    
+    $("#litrosContenedor").change(function () {
+        //var suma = $("#cantidadMuestra").val() * $("#VolumenMuestra").val() * $("#VolumenMuestra").val() * 1000;
+        var volumen = $("#VolumenMuestra").val();
+        var cantidad = $("#cantidadMuestra").val();
+        var litros = $("#litrosContenedor").val();
+        var suma = (((cantidad / volumen) * 1000)) * litros;
+        $("#volumenTotal").val(suma);
+    });
+
 
 
     $("#btnAgregaSeguimientoSemilla").click(function () {
@@ -87,15 +110,17 @@ $(document).ready(function () {
         $("#selectZonaCultivo").val("");
         $("#selectOrigen").val("");
         $("#selectMortalidad").val("");
-        $("#CantidadOrigen").val("");
+        $("#CantidadOrigen").val(0);
         $("#CalibreOrigen").val("");
-        $("#CantidadDestino").val("")
+        $("#CantidadDestino").val(0)
         $("#CalibreDestino").val("");
         $("#selectDestino").val("");
-        $("#cantidadMuestra").val("");
-        $("#VolumenMuestra").val("");
-        $("#volumenTotal").val("");
+        $("#cantidadMuestra").val(0);
+        $("#VolumenMuestra").val(0);
+        $("#volumenTotal").val(0);
         $("#txtObservaciones").val("");
+        $("#CantidadMortalidad").val(0);
+        $("#litrosContenedor").val(0);
     });
 
 
@@ -117,7 +142,8 @@ $(document).ready(function () {
         var volumenMuestra = $("#VolumenMuestra").val();
         var volumenTotal = $("#volumenTotal").val();
         var observaciones = $("#txtObservaciones").val();
-
+        var cantidadMortalidad = $("#CantidadMortalidad").val();
+        var litrosContenedor = $("#litrosContenedor").val();
 
 
         if (ID != null && ID != "") {
@@ -146,7 +172,9 @@ $(document).ready(function () {
                 _cantidadMuestra: cantidadMuestra,
                 _volumenMuestra: volumenMuestra,
                 _volumenTotal: volumenTotal,
-                _observaciones: observaciones
+                _litrosContenedor: litrosContenedor,
+                _observaciones: observaciones,
+                _cantidadMortalidad: cantidadMortalidad
             },
 
             async: true,
@@ -158,6 +186,7 @@ $(document).ready(function () {
                 if (data == 1) {
                     $("#btnCerrarModal").click();
                     alert("El Ingreso se ha realizado sin problemas.");
+                    window.location.reload(true);
                 }
                 if (data == 3) {
                     alert("Ha ocurrido un error al grabar los datos, intentalo nuevamente.");

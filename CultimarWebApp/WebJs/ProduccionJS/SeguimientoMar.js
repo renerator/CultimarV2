@@ -14,8 +14,11 @@ _CantidadDestino,
 _IdCalibreDestino,
 _CantidadSistemaDestino,
 _IdSistemaDestino,
-_Observaciones
-) {
+_Observaciones,
+_CantidadMuestra,
+_VolumenMuestra,
+_VolumenTotal,
+_LitrosContenedor) {
     $("#IdRegistroSeguimiento").val(_IdSeguimiento);
     $("#NombreCultivo").val(_IdRegistroInicial);
     $("#selectTipoMortalidad").val(_IdMortalidad);
@@ -31,7 +34,10 @@ _Observaciones
     $("#txtObservaciones").val(_Observaciones);
     $("#selectUbicacionDestino").val(_IdUbicacionDestino);
     $("#selectUbicacionOrigen").val(_IdUbicacionOrigen);
-
+    $("#cantidadMuestra").val(_CantidadMuestra);
+    $("#VolumenMuestra").val(_VolumenMuestra);
+    $("#volumenTotal").val(_VolumenTotal);
+    $("#litrosContenedor").val(_LitrosContenedor);
 }
 
 function formateaFecha(fechaInput) {
@@ -51,7 +57,14 @@ function formateaFecha(fechaInput) {
     return fecha;
 }
 
-
+function validateDecimal(valor) {
+    var RE = /^\d*\,?\d*$/;
+    if (RE.test(valor)) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 
 $(document).ready(function () {
@@ -79,8 +92,39 @@ $(document).ready(function () {
         $("#txtObservaciones").val("");
         $("#selectUbicacionDestino").val("");
         $("#selectUbicacionOrigen").val("");
+        $("#cantidadMuestra").val(0);
+        $("#VolumenMuestra").val(0);
+        $("#volumenTotal").val(0);
+        $("#litrosContenedor").val(0);
 
     });
+    $("#VolumenMuestra").change(function () {
+        //var suma = $("#cantidadMuestra").val() * $("#VolumenMuestra").val() * $("#litrosContenedor").val() * 1000;
+        var volumen = $("#VolumenMuestra").val();
+        var cantidad = $("#cantidadMuestra").val();
+        var litros = $("#litrosContenedor").val();
+        var suma = (((cantidad / volumen) * 1000)) * litros;
+        $("#volumenTotal").val(suma); $("#volumenTotal").val(suma);
+    });
+    $("#cantidadMuestra").change(function () {
+        //var suma = $("#cantidadMuestra").val() * $("#VolumenMuestra").val() * $("#litrosContenedor").val() * 1000;
+        var volumen = $("#VolumenMuestra").val();
+        var cantidad = $("#cantidadMuestra").val();
+        var litros = $("#litrosContenedor").val();
+        var suma = (((cantidad / volumen) * 1000)) * litros;
+        $("#volumenTotal").val(suma);
+    });
+
+    $("#litrosContenedor").change(function () {
+        //var suma = $("#cantidadMuestra").val() * $("#VolumenMuestra").val() * $("#VolumenMuestra").val() * 1000;
+        var volumen = $("#VolumenMuestra").val();
+        var cantidad = $("#cantidadMuestra").val();
+        var litros = $("#litrosContenedor").val();
+        var suma = (((cantidad / volumen) * 1000)) * litros;
+        $("#volumenTotal").val(suma);
+    });
+
+
 
     $("#btnGrabarDatos").click(function () {
         var ID = $("#IdRegistroSeguimiento").val();
@@ -98,56 +142,73 @@ $(document).ready(function () {
         var CantidadSistemaDestino = $("#CantidadSistemaDestino").val();
         var IdSistemaDestino = $("#selectTipoSistemaDestino").val();
         var Observaciones = $("#txtObservaciones").val();
-        
-        if (ID != null && ID != "") {
-            ID = ID;
+        var CantidadMuestra = $("#cantidadMuestra").val();
+        var VolumenMuestra = $("#VolumenMuestra").val();
+        var VolumenTotal = $("#volumenTotal").val();
+        var LitrosContenedor = $("#litrosContenedor").val();
+
+
+        if (!validateDecimal(CantidadOrigen) || !validateDecimal(CantidadDestino)) {
+            alert("El campo Cantidad de Origen y Cantidad Destino es un campo decimal que debe ser separado por COMA (,) con formato 00,000");
         }
         else {
-            ID = -1;
-        }
-
-        $.ajax({
-            url: "GrabaSeguimientoMar",
-            type: "POST",
-            data: {
-                _IdSeguimiento: ID,
-                _IdRegistroInicial: IdRegistroInicial,
-                _IdMortalidad: IdMortalidad,
-                _FechaDesdoble: FechaDesdoble,
-                _CantidadOrigen: CantidadOrigen,
-                _IdCalibreOrigen: IdCalibreOrigen,
-                _IdUbicacionOrigen: IdUbicacionOrigen,
-                _CantidadSistemaOrigen: CantidadSistemaOrigen,
-                _IdSistemaOrigen: IdSistemaOrigen,
-                _CantidadDestino: CantidadDestino,
-                _IdCalibreDestino: IdCalibreDestino,
-                _IdUbicacionDestino: IdUbicacionDestino,
-                _CantidadSistemaDestino: CantidadSistemaDestino,
-                _IdSistemaDestino: IdSistemaDestino,
-                _Observaciones: Observaciones
-            },
-
-            async: true,
-            success: function (data) {
-               
-                if (data == 1) {
-                    $("#btnCerrarModal").click();
-                    alert("El Ingreso se ha realizado sin problemas.");
-                }
-                if (data == 3) {
-                    alert("Ha ocurrido un error al grabar los datos, intentalo nuevamente.");
-                }
-                if (data == 4) {
-                    alert("No tienes permiso para modificar, Hemos enviado un correo al administrador del sistema solicitando autorización para la modificación del registro, cuando te den autorización, te llegara un Email con la información.");
-                }
-                if (data == 5) {
-                    alert("Tu perfil de usuario no te permite realizar ninguna acción, solo puedes leer la información ingresada al sistema.");
-                }
-                if (data == 0) {
-                    alert("No se ha realizado la acción, intentalo nuevamente.");
-                }
+            if (ID != null && ID != "") {
+                ID = ID;
             }
-        });
+            else {
+                ID = -1;
+            }
+
+            $.ajax({
+                url: "GrabaSeguimientoMar",
+                type: "POST",
+                data: {
+                    _IdSeguimiento: ID,
+                    _IdRegistroInicial: IdRegistroInicial,
+                    _IdMortalidad: IdMortalidad,
+                    _FechaDesdoble: FechaDesdoble,
+                    _CantidadOrigen: CantidadOrigen,
+                    _IdCalibreOrigen: IdCalibreOrigen,
+                    _IdUbicacionOrigen: IdUbicacionOrigen,
+                    _CantidadSistemaOrigen: CantidadSistemaOrigen,
+                    _IdSistemaOrigen: IdSistemaOrigen,
+                    _CantidadDestino: CantidadDestino,
+                    _IdCalibreDestino: IdCalibreDestino,
+                    _IdUbicacionDestino: IdUbicacionDestino,
+                    _CantidadSistemaDestino: CantidadSistemaDestino,
+                    _IdSistemaDestino: IdSistemaDestino,
+                    _Observaciones: Observaciones,
+                    _CantidadMuestra: CantidadMuestra,
+                    _VolumenMuestra: VolumenMuestra,
+                    _VolumenTotal: VolumenTotal,
+                    _LitrosContenedor: LitrosContenedor
+                },
+
+                async: true,
+                success: function (data) {
+
+                    if (data == 1) {
+                        $("#btnCerrarModal").click();
+                        alert("El Ingreso se ha realizado sin problemas.");
+                        window.location.reload(true);
+                    }
+                    if (data == 3) {
+                        alert("Ha ocurrido un error al grabar los datos, intentalo nuevamente.");
+                    }
+                    if (data == 4) {
+                        alert("No tienes permiso para modificar, Hemos enviado un correo al administrador del sistema solicitando autorización para la modificación del registro, cuando te den autorización, te llegara un Email con la información.");
+                    }
+                    if (data == 5) {
+                        alert("Tu perfil de usuario no te permite realizar ninguna acción, solo puedes leer la información ingresada al sistema.");
+                    }
+                    if (data == 0) {
+                        alert("No se ha realizado la acción, intentalo nuevamente.");
+                    }
+                }
+            });
+        }
+        
+        
     });
 
 });

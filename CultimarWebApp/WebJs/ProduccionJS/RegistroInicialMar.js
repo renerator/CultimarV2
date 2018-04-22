@@ -20,6 +20,7 @@
         var Cantidad = $("#Cantidad").val();
         var IdMortalidad = $("#selectTipoMortalidad").val();
         var observaciones = $("#txtObservaciones").val();
+        var _ubicacionOceanica = $("#ubicacionOceanica").val();
 
 
         if (ID != null && ID != "") {
@@ -41,13 +42,15 @@
                 cantidad: Cantidad,
                 IdTipoSistema: IdSistema,
                 idMortalidad: IdMortalidad,
-                observaciones: observaciones
+                observaciones: observaciones,
+                ubicacionOceanica: _ubicacionOceanica
             },
             async: true,
             success: function (data) {
                 if (data == 1) {
                     $("#btnCerrarModal").click();
                     alert("El Ingreso se ha realizado sin problemas.");
+                    window.location.reload(true);
                 }
                 if (data == 3) {
                     alert("Ha ocurrido un error al grabar los datos, intentalo nuevamente.");
@@ -75,13 +78,14 @@
         $("#Cantidad").val("");
         $("#selectTipoMortalidad").val("");
         $("#txtObservaciones").val("");
+        $("#ubicacionOceanica").val("");
     });
 
 
 
 });
 
-function EditaRegistro(IdRegistro, IdRegistroLarval, FechaIngreso, FechaFuturoDesdoble, IdOrigen, CantidadOrigen, CalibreOrigen, IdTipoSistema, Cantidad, IdTipoMortalidad, Observaciones) {
+function EditaRegistro(IdRegistro, IdRegistroLarval, FechaIngreso, FechaFuturoDesdoble, IdOrigen, CantidadOrigen, CalibreOrigen, IdTipoSistema, Cantidad, IdTipoMortalidad, Observaciones, ubicacionOceanica) {
     $("#IdRegistroInicialMar").val(IdRegistro);
     $("#NombreCultivo").val(IdRegistroLarval);
     $("#CalibreOrigen").val(IdOrigen);
@@ -92,6 +96,7 @@ function EditaRegistro(IdRegistro, IdRegistroLarval, FechaIngreso, FechaFuturoDe
     $("#Cantidad").val(Cantidad);
     $("#selectTipoMortalidad").val(IdTipoMortalidad);
     $("#txtObservaciones").val(Observaciones);
+    $("#ubicacionOceanica").val(ubicacionOceanica);
 }
 
 function formateaFecha(fechaInput) {
@@ -110,3 +115,5 @@ function formateaFecha(fechaInput) {
     fecha = d + "-" + m + "-" + y;
     return fecha;
 }
+
+

@@ -30,7 +30,7 @@
                     </p>
                     <div class="table-responsive">
                         @{
-                            var grid = new WebGrid(Model, canPage: false);
+        var grid = new WebGrid(Model, canPage: false);
                         }
                         @grid.GetHtml(
 htmlAttributes: new { id = "tblSeguimientosSemilla" },
@@ -38,20 +38,19 @@ exclusions: new[] { "idOrigen", "IdDestino", "IdFactoresMedicion" },
 tableStyle: "table table-bordered",
 columns:
 grid.Columns(
+grid.Column(header: "Contenedor Origen", format: @<text>@item.NombreContenedororigen</text>),
 grid.Column(header: "BATCH", format: @<text>@item.NombreRegistroLarval</text>),
 grid.Column(header: "FechaRegistro", format: @<text>@item.FechaRegistro1.ToString("dd/MM/yyyy") </text>),
-grid.Column(header: "Contenedor Origen", format: @<text>@item.NombreContenedororigen</text>),
 grid.Column(header: "Contenedor Destino", format: @<text>@item.NombreContenedorDestino</text>),
 grid.Column(header: "Calibre Origen", format: @<text>@item.NombreCalibreOrigen</text>),
 grid.Column(header: "Calibre Destino", format: @<text>@item.NombreCalibreDestino</text>),
 grid.Column(header: "Volumen Total Registrado", format: @<text>@item.VolumenTotal</text>),
-grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="modal" tooltip="Editar Parametro" data-target="#modalPopUpIngresoUsuario"  onclick="EditaSeguimientoInicialSemilla(
-                                                                                                                                                                                                     @item.IdSeguimientoSemilla,
+grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="modal" tooltip="Editar Parametro" data-target="#modalPopUpIngresoUsuario" onclick="EditaSeguimientoInicialSemilla(@item.IdSeguimientoSemilla,
                                                                                                                                                                                                      @item.IdRegistroLarval,
                                                                                                                                                                                                      @item.IdTipoContenedorOrigen,
                                                                                                                                                                                                      '@item.FechaRegistro1.ToString("MM/dd/yyyy")',
                                                                                                                                                                                                      @item.IdMortalidad,
-                                                                                                                                                                                                     @item.FactoresMedicion,
+                                                                                                                                                                                                     '@item.FactoresMedicion',
                                                                                                                                                                                                      @item.CantidadOrigen,
                                                                                                                                                                                                      @item.idOrigen,
                                                                                                                                                                                                      @item.CantidadDestino,
@@ -61,9 +60,9 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
                                                                                                                                                                                                      @item.VolumenMuestra,
                                                                                                                                                                                                      @item.VolumenTotal,
                                                                                                                                                                                                      '@item.Observaciones',
-                                                                                                                                                                                                     '@item.ZonaCultivo')">
-                        Editar
-                    </button>)
+                                                                                                                                                                                                     '@item.ZonaCultivo', @item.CantidadMortalidad, @item.LitrosContenedor)">
+    Editar
+</button>)
 
 ))
 
@@ -98,6 +97,12 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
                                             </div>
                                         </div>
                                         <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Seleccione Contenedor Origen<span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                @Html.DropDownList("selectOrigen", (IEnumerable<SelectListItem>)ViewBag.ZonaCultivo, "Seleccione Contenedor de Origen", new { @class = "form-control", @required = "required", @ID = "selectOrigen" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
                                                 Nombre BATCH <span class="required">*</span>
                                             </label>
@@ -115,12 +120,7 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Seleccione Contenedor Origen<span class="required">*</span></label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                @Html.DropDownList("selectOrigen", (IEnumerable<SelectListItem>)ViewBag.ZonaCultivo, "Seleccione Contenedor de Origen", new { @class = "form-control", @required = "required", @ID = "selectOrigen" })
-                                            </div>
-                                        </div>
+
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
                                                 Fecha Registro <span class="required">*</span>
@@ -138,12 +138,17 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
                                                 @Html.DropDownList("selectMortalidad", (IEnumerable<SelectListItem>)ViewBag.selectTipoM, "Seleccione Tipo Mortalidad", new { @class = "form-control", @required = "required", @ID = "selectMortalidad" })
                                             </div>
                                         </div>
-
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Cantidad Mortalidad<span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="number" id="CantidadMortalidad" name="CantidadMortalidad" required="required" data-validate-minmax="1,999999999999999" class="form-control col-md-7 col-xs-12">
+                                            </div>
+                                        </div>
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Factor Medición</label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
 
-                                                @Html.ListBox("FactorM", ViewBag.FactorM as MultiSelectList, new { @class = "select2_multiple form-control", @ID = "FactorM" })
+                                                @Html.ListBox("FactorM", ViewBag.FactorM as MultiSelectList, new { @class = "select2_multiple form-control", @required = "required", @ID = "FactorM" })
 
                                             </div>
                                         </div>
@@ -154,7 +159,7 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
                                                 Cantidad Origen <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="text" id="CantidadOrigen" name="CantidadOrigen" required="required" class="form-control col-md-7 col-xs-12">
+                                                <input type="number" id="CantidadOrigen" name="CantidadOrigen" required="required" data-validate-minmax="1,999999999999999" class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -172,7 +177,7 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
                                                 Cantidad Destino<span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="text" id="CantidadDestino" name="CantidadOrigen" required="required" class="form-control col-md-7 col-xs-12">
+                                                <input type="number" id="CantidadDestino" name="CantidadOrigen" required="required" data-validate-minmax="1,999999999999999" class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -184,7 +189,7 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Seleccione Contenedor Destino</label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                @Html.DropDownList("selectDestino", (IEnumerable<SelectListItem>)ViewBag.ZonaCultivo, "Seleccione Contenedor de Destino", new { @class = "form-control", @ID = "selectDestino" })
+                                                @Html.DropDownList("selectDestino", (IEnumerable<SelectListItem>)ViewBag.ZonaCultivo, "Seleccione Contenedor de Destino", new { @class = "form-control", @required = "required", @ID = "selectDestino" })
                                             </div>
                                         </div>
                                         <div class="ln_solid"></div>
@@ -192,23 +197,31 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
-                                                Cantidad Muestra <span class="required">*</span>
+                                                Volumen de la Muestra (ml) <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="text" id="cantidadMuestra" name="cantidadMuestra" required="required" class="form-control col-md-7 col-xs-12">
+                                                <input type="number" id="VolumenMuestra" name="VolumenMuestra" required="required" data-validate-minmax="1,999999999999999" class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
-                                                Volumen Muestra <span class="required">*</span>
+                                                Cantidad Contada <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="text" id="VolumenMuestra" name="VolumenMuestra" required="required" class="form-control col-md-7 col-xs-12">
+                                                <input type="number" id="cantidadMuestra" name="cantidadMuestra" required="required" data-validate-minmax="1,999999999999999" class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
-                                                Volumen Total<span class="required">*</span>
+                                                Litros en el Contenedor<span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="number" id="litrosContenedor" name="litrosContenedor" data-validate-minmax="1,999999999999999" class="form-control col-md-7 col-xs-12">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                                                Cantidad Total<span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                 <input type="text" id="volumenTotal" name="volumenTotal" disabled="disabled" class="form-control col-md-7 col-xs-12">

@@ -22,7 +22,7 @@ namespace CultimarWebApp.Utils.Objetos
         private DateTime _FechaRegistro;
         private string _FactoresMedicion;
         private int _NumeroEstanquesUtilizado;
-        private int _DensidadSiembra;
+        private double _DensidadSiembra;
         private int _IdPloidia;
         private int _IdFactor;
         private bool _Estado;
@@ -70,7 +70,7 @@ namespace CultimarWebApp.Utils.Objetos
             get { return _IdPloidia; }
             set { _IdPloidia = value; }
         }
-        public int DensidadSiembra
+        public double DensidadSiembra
         {
             get { return _DensidadSiembra; }
             set { _DensidadSiembra = value; }

@@ -1,6 +1,7 @@
 ﻿
-function EditaRegistroInicialSemilla(idRegistroInicialSemilla, idRegistroLarval, idCalibre, FechaRegistro, FechaDesdoble, Ploidia, Muestreo, Observaciones) {
+function EditaRegistroInicialSemilla(idRegistroInicialSemilla, idTipoContenedor, idRegistroLarval, idCalibre, FechaRegistro, FechaDesdoble, Ploidia, Muestreo, Observaciones) {
     $("#IdRegistroInicialSemilla").val(idRegistroInicialSemilla);
+    $("#selectTipoContenedor").val(idTipoContenedor);
     $("#selectRegistroInicial").val(idRegistroLarval);
     $("#selectParametroCalibre").val(idCalibre);
     $("#single_cal1").val(FechaRegistro);
@@ -26,6 +27,7 @@ $(document).ready(function () {
     $("#btnPopUpRegistroInicial").click(function () {
         $("#IdRegistroInicialSemilla").val("");
         $("#selectRegistroInicial").val("");
+        $("#selectTipoContenedor").val("");
         $("#selectParametroCalibre").val("");
         $("#ploidia").val("");
         $("#muestreo").val("");
@@ -34,6 +36,7 @@ $(document).ready(function () {
 
     $("#btnGrabaRegistroInicialSemilla").click(function () {
         var ID = $("#IdRegistroInicialSemilla").val();
+        var idTipoContenedor = $("#selectTipoContenedor").val();
         var idCultivo = $("#selectRegistroInicial").val();
         var idCalibre = $("#selectParametroCalibre").val();
         var FechaRegistro = formateaFecha($("#single_cal1").val());
@@ -54,6 +57,7 @@ $(document).ready(function () {
             type: "POST",
             data: {
                 IdRegistroInicial: ID
+                ,idTipoContenedor: idTipoContenedor
                 ,idCultivo: idCultivo
                 ,IdCalibre: idCalibre
                 ,FechaRegistro: FechaRegistro

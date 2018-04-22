@@ -74,7 +74,7 @@ namespace CultimarWebApp.Utils.DAO
 
 
                     validador = data.Rows[i].Field<object>("DensidadSiembra");
-                    resultadoListado.DensidadSiembra = validador != null ? data.Rows[i].Field<int>("DensidadSiembra") : 0;
+                    resultadoListado.DensidadSiembra = validador != null ? data.Rows[i].Field<double>("DensidadSiembra") : 0;
 
                     validador = data.Rows[i].Field<object>("Estado");
                     resultadoListado.Estado = validador != null ? data.Rows[i].Field<bool>("Estado") : false;

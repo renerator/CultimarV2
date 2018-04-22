@@ -41,7 +41,7 @@ namespace CultimarWebApp.Utils.DAO
                     resultadoListado.CantidadDeLarvas = validador != null ? data.Rows[i].Field<int>("CantidadDeLarvas") : 0;
 
                     validador = data.Rows[i].Field<object>("CosechaLarvas");
-                    resultadoListado.CosechaLarvas = validador != null ? data.Rows[i].Field<int>("CosechaLarvas") : 0;
+                    resultadoListado.CosechaLarvas = validador != null ? data.Rows[i].Field<double>("CosechaLarvas") : 0;
 
                     validador = data.Rows[i].Field<object>("idNumeroEstanqueOrigen");
                     resultadoListado.NumeroEstanque = validador != null ? data.Rows[i].Field<int>("idNumeroEstanqueOrigen") : 0;
@@ -56,7 +56,7 @@ namespace CultimarWebApp.Utils.DAO
                     resultadoListado.NombreEstanqueDestino = validador != null ? data.Rows[i].Field<string>("NombreContenedorDestino") : "SIN ASIGNACION";
 
                     validador = data.Rows[i].Field<object>("DensidadCultivo");
-                    resultadoListado.DensidadCultivo = validador != null ? data.Rows[i].Field<int>("DensidadCultivo") : 0;
+                    resultadoListado.DensidadCultivo = validador != null ? data.Rows[i].Field<double>("DensidadCultivo") : 0;
 
                     validador = data.Rows[i].Field<object>("FechaRegistro");
                     resultadoListado.FechaRegistro = validador != null ? data.Rows[i].Field<DateTime>("FechaRegistro") : DateTime.Today;

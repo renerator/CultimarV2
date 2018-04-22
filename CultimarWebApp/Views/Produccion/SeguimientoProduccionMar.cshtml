@@ -53,18 +53,22 @@ grid.Column(header: "Editar", format: @<button class="btn btn-success" type="but
                                                                                             @item.IdRegistroInicial,
                                                @item.IdMortalidad,
                                                                                             '@item.FechaDesdoble.ToString("MM/dd/yyyy")',
-                                                                                            @item.CantidadOrigen,
+                                                                                            '@item.CantidadOrigen',
                                                                                             @item.IdCalibreOrigen,
                                                                                             @item.IdUbicacionOrigen,
                                                 @item.IdUbicacionDestino,
                                                                                             @item.IdSistemaOrigen,
                                                                                             @item.CantidadSistemaOrigen,
                                                                                             @item.IdSistemaOrigen,
-                                                                                            @item.CantidadDestino,
+                                                                                            '@item.CantidadDestino',
                                                                                             @item.IdCalibreDestino,
                                                                                             @item.CantidadSistemaDestino,
                                                                                             @item.IdSistemaDestino,
-                                                                                            '@item.Observaciones')">
+                                                                                            '@item.Observaciones',
+                                                                                           @item.CantidadMuestra,
+                                                                                           @item.VolumenMuestra,
+                                                                                           @item.VolumenTotal,
+                                                                                           @item.LitrosContenedor)">
                         Editar
                     </button>))
 )
@@ -92,7 +96,8 @@ grid.Column(header: "Editar", format: @<button class="btn btn-success" type="but
                                     <div class="x_content">
                                         <br />
                                         <input type="text" id="IdRegistroSeguimiento" style="display: none;">
-                                        <form class="form-horizontal form-label-left input_mask">
+                                        @*<form class="form-horizontal form-label-left input_mask">*@
+                                        <div class="form-horizontal form-label-left input_mask">
                                             <div class="form-group">
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="NombreCultivo">
                                                     Nombre BATCH <span class="required">*</span>
@@ -138,7 +143,7 @@ grid.Column(header: "Editar", format: @<button class="btn btn-success" type="but
                                             <div class="form-group">
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Cantidad Sistema Origen<span class="required">*</span></label>
                                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                                    <input type="text" id="CantidadSistemaOrigen" required="required" class="form-control col-md-7 col-xs-12">
+                                                    <input type="number" id="CantidadSistemaOrigen" required="required" data-validate-minmax="1,999999999999999" class="form-control col-md-7 col-xs-12">
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -170,7 +175,7 @@ grid.Column(header: "Editar", format: @<button class="btn btn-success" type="but
                                             <div class="form-group">
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Cantidad Sistema Destino<span class="required">*</span></label>
                                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                                    <input type="text" id="CantidadSistemaDestino" required="required" class="form-control col-md-7 col-xs-12">
+                                                    <input type="number" id="CantidadSistemaDestino" required="required" data-validate-minmax="1,999999999999999" class="form-control col-md-7 col-xs-12">
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -180,7 +185,40 @@ grid.Column(header: "Editar", format: @<button class="btn btn-success" type="but
                                                 </div>
                                             </div>
                                             <div class="ln_solid"></div>
-                                            <label> Observaciones</label>
+                                            <label>Cantidad y Calibre Cosechado</label>
+
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                                                    Volumen de la Muestra (ml) <span class="required">*</span>
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input type="number" id="VolumenMuestra" name="VolumenMuestra" required="required" data-validate-minmax="1,999999999999999" class="form-control col-md-7 col-xs-12">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                                                    Cantidad Contada <span class="required">*</span>
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input type="number" id="cantidadMuestra" name="cantidadMuestra" required="required" data-validate-minmax="1,999999999999999" class="form-control col-md-7 col-xs-12">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                                                    Litros en el Contenedor<span class="required">*</span>
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input type="number" id="litrosContenedor" name="litrosContenedor" data-validate-minmax="1,999999999999999" class="form-control col-md-7 col-xs-12">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                                                    Cantidad Total<span class="required">*</span>
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input type="text" id="volumenTotal" name="volumenTotal" disabled="disabled" class="form-control col-md-7 col-xs-12">
+                                                </div>
+                                            </div>
                                             <div class="form-group">
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Observaciones</label>
                                                 <div class="col-md-9 col-sm-9 col-xs-12">
@@ -195,7 +233,8 @@ grid.Column(header: "Editar", format: @<button class="btn btn-success" type="but
                                                     <button type="submit" class="btn btn-success" id="btnGrabarDatos">Grabar</button>
                                                 </div>
                                             </div>
-                                        </form>
+                                            @*</form>*@
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">

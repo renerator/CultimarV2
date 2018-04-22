@@ -91,7 +91,7 @@ namespace CultimarWebApp.Controllers
             }
         }
         
-        public JsonResult GrabaSeguimientoMicroAlga(int IdMicroAlga, int idRegistroInicial, int idEspecie, string fechaRegistro, string fechaSalida, int Origen, int Destino, bool resultadoTCBS, string volumenCosechado, string concentracion,bool estadoSeguimiento, string observaciones)
+        public JsonResult GrabaSeguimientoMicroAlga(int IdMicroAlga, int idRegistroInicial, int idEspecie, string fechaRegistro, string fechaSalida, int Origen, int Destino, bool resultadoTCBS, string volumenCosechado, string concentracion,bool estadoSeguimiento, string observaciones, int puntuacion)
         {
             try
             {
@@ -118,7 +118,8 @@ namespace CultimarWebApp.Controllers
                             VolumenCosechado = Convert.ToInt32(volumenCosechado),
                             Concentracion = Convert.ToInt32(concentracion),
                             Estado = estadoSeguimiento,
-                            Observaciones = observaciones
+                            Observaciones = observaciones,
+                            Puntuacion = puntuacion
                         };
                         if (IdMicroAlga != -1)
                         {

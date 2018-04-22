@@ -11,13 +11,13 @@ namespace CultimarWebApp.Utils.Objetos
         private int _idRegistro;
         private int _idCalibre;
         private int _cantidadDeLarvas;
-        private int _cosechaLarvas;
+        private double _cosechaLarvas;
         private int _numeroEstanque;
         private int _cantidadMortalidad;
         private string _nombreEstanqueOrigen;
         private int _numeroEstanqueDestino;
         private string _nombreEstanqueDestino;
-        private int _densidadCultivo;
+        private double _densidadCultivo;
         private DateTime _fechaRegistro;
         private string _factoresMedicion;
         private string _nombreMortalidad;
@@ -97,7 +97,7 @@ namespace CultimarWebApp.Utils.Objetos
             get { return _cantidadDeLarvas; }
             set { _cantidadDeLarvas = value; }
         }
-        public int CosechaLarvas
+        public double CosechaLarvas
         {
             get { return _cosechaLarvas; }
             set { _cosechaLarvas = value; }
@@ -107,7 +107,7 @@ namespace CultimarWebApp.Utils.Objetos
             get { return _numeroEstanque; }
             set { _numeroEstanque = value; }
         }
-        public int DensidadCultivo
+        public double DensidadCultivo
         {
             get { return _densidadCultivo; }
             set { _densidadCultivo = value; }

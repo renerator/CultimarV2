@@ -79,9 +79,9 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
                                     <h4 class="modal-title" id="myModalLabel">Ingresa los datos solicitados</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                                    @*<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">*@
 
-
+                                    <div id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                                         <div style="display: none;">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
                                                 Id Produción <span class="required">*</span>
@@ -96,7 +96,7 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                 @*<input type="text" id="txtNombreRegistro" required="required" class="form-control col-md-7 col-xs-12">*@
-                                                @Html.DropDownList("RegistroInicial", (IEnumerable<SelectListItem>)ViewBag.RegistroInicial, "Seleccione...", new { @class = "form-control", @ID = "selectNombreBatch" })
+                                                @Html.DropDownList("RegistroInicial", (IEnumerable<SelectListItem>)ViewBag.RegistroInicial, "Seleccione...", new { @class = "form-control", @required = "required", @ID = "selectNombreBatch" })
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -104,7 +104,7 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
                                                 Cant. Productores Machos <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="text" id="CantidadPMachos" required="required" class="form-control col-md-7 col-xs-12">
+                                                <input type="number" id="CantidadPMachos" required="required" data-validate-minmax="1,999999999999999" class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -112,7 +112,7 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
                                                 Cant. Productores Hembras <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="text" id="CantidadPHembras" required="required" class="form-control col-md-7 col-xs-12">
+                                                <input type="number" id="CantidadPHembras" data-validate-minmax="1,999999999999999" required="required" class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
 
@@ -121,7 +121,7 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
                                                 Cantidad Fecundada <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="text" id="CantidadFecundada" required="required" class="form-control col-md-7 col-xs-12">
+                                                <input type="number" id="CantidadFecundada" data-validate-minmax="1,999999999999999" required="required" class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -129,7 +129,7 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
                                                 N° Desove Temporada<span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="text" id="NroDesoveTemporada" required="required" class="form-control col-md-7 col-xs-12">
+                                                <input type="number" id="NroDesoveTemporada" data-validate-minmax="1,999999999999999" required="required" class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -137,7 +137,7 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
                                                 Cantidad Sembrada<span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="text" id="CantidadSembrada" required="required" class="form-control col-md-7 col-xs-12">
+                                                <input type="number" id="CantidadSembrada" required="required" data-validate-minmax="1,999999999999999" class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -145,7 +145,7 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
                                                 Factores Medicion <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                @Html.ListBox("FactorM", ViewBag.FactorM as MultiSelectList, new { @class = "select_multiple form-control", @ID = "FactorM" })
+                                                @Html.ListBox("FactorM", ViewBag.FactorM as MultiSelectList, new { @class = "select_multiple form-control", @required = "required", @ID = "FactorM" })
                                             </div>
                                         </div>
 
@@ -154,7 +154,7 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
                                                 Número de Estanque<span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                @Html.DropDownList("RegistroInicial", (IEnumerable<SelectListItem>)ViewBag.EstanqueLarvas, "Seleccione...", new { @class = "form-control", @ID = "NroEstanque" })
+                                                @Html.DropDownList("RegistroInicial", (IEnumerable<SelectListItem>)ViewBag.EstanqueLarvas, "Seleccione...", new { @class = "form-control", @required = "required", @ID = "NroEstanque" })
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -162,7 +162,7 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
                                                 Densidad de Siembra<span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="text" id="DensidadSiembra" required="required" class="form-control col-md-7 col-xs-12">
+                                                <input type="text" id="DensidadSiembra" required="required" data-validate-minmax="1,999999999999999" class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -180,7 +180,8 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
                                                 <button type="submit" class="btn btn-success" id="btnGrabarDatos">Grabar</button>
                                             </div>
                                         </div>
-                                    </form>
+                                        @*</form>*@
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" id="btnCerrarModal" class="btn btn-default" data-dismiss="modal">Cerrar</button>

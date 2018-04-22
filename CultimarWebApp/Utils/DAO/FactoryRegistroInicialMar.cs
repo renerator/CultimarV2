@@ -57,6 +57,10 @@ namespace CultimarWebApp.Utils.DAO
                     validador = data.Rows[i].Field<object>("IdMortalidad");
                     resultadoListado.IdMortalidad = validador != null ? data.Rows[i].Field<int>("IdMortalidad") : 0;
 
+                    validador = data.Rows[i].Field<object>("idUbicacion");
+                    resultadoListado.UbicacionOceanica = validador != null ? data.Rows[i].Field<int>("idUbicacion") : 0;
+
+
                     validador = data.Rows[i].Field<object>("NombreMortalidad");
                     resultadoListado.NombreMortalidad = validador != null ? data.Rows[i].Field<string>("NombreMortalidad") : "No Especificado";
 
@@ -91,7 +95,8 @@ namespace CultimarWebApp.Utils.DAO
                                                                                                 {"@Cantidad", registroInicialMar.Cantidad },
                                                                                                 {"@idTipoSistema", registroInicialMar.IdTipoSistema },
                                                                                                 {"@idTipoMortalidad", registroInicialMar.IdMortalidad },
-                                                                                                {"@observaciones", registroInicialMar.Observaciones }
+                                                                                                {"@observaciones", registroInicialMar.Observaciones },
+                                                                                                {"@idUbicacion", registroInicialMar.UbicacionOceanica }
                                                                                              });
                 if (data.Rows.Count > 0)
                 {

@@ -190,6 +190,32 @@ namespace CultimarWebApp.Utils.DAO
             return ListadoPerfil;
         }
 
+        public List<ObjetoDestinoDespacho> ListadoDestinosDespacho()
+        {
+            var Listado = new List<ObjetoDestinoDespacho>();
+            var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_GET_LISTADODESTINODESPACHO", new System.Collections.Hashtable());
+
+            if (data.Rows.Count > 0)
+            {
+                for (var i = 0; i < data.Rows.Count; i++)
+                {
+                    var validador = new object();
+                    var resultadoListado = new ObjetoDestinoDespacho();
+                    validador = data.Rows[i].Field<object>("idDestinoDespacho");
+                    resultadoListado.IdDestinoDespacho = validador != null ? data.Rows[i].Field<int>("idDestinoDespacho") : -1;
+
+                    validador = data.Rows[i].Field<object>("NombreContenedor");
+                    resultadoListado.NombreDestinoDespacho = validador != null ? data.Rows[i].Field<string>("NombreContenedor") : "NO ASIGNADO";
+
+                    validador = data.Rows[i].Field<object>("Estado");
+                    resultadoListado.Estado = validador != null ? data.Rows[i].Field<bool>("Estado") : false;
+
+
+                    Listado.Add(resultadoListado);
+                }
+            }
+            return Listado;
+        }
 
         public List<ObjetoOrigen> ListadoParametrosOrigen()
         {
@@ -1093,6 +1119,33 @@ namespace CultimarWebApp.Utils.DAO
             }
             return respuesta;
         }
+
+        public bool SetGrabaDestinoDespacho(ObjetoDestinoDespacho destinoDespacho)
+        {
+            var respuesta = false;
+            try
+            {
+                var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_SET_GRABADESTINODESPACHO", new System.Collections.Hashtable()
+                                                                                            {
+                                                                                                {"@idDestino", destinoDespacho.IdDestinoDespacho },
+                                                                                                {"@nombreDestino", destinoDespacho.NombreDestinoDespacho }
+                                                                                             });
+                if (data.Rows.Count > 0)
+                {
+                    respuesta = true;
+                }
+            }
+            catch (SqlException ex)
+            {
+                new CapturaExcepciones(ex);
+            }
+            catch (Exception ex)
+            {
+                new CapturaExcepciones(ex);
+            }
+            return respuesta;
+        }
+
 
     }
 }

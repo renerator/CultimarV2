@@ -8,26 +8,58 @@
     _PesoBruto,
     _Cantidad,
     _Calibre,
-    _cliente
+    _cliente,
+    _NombreOrigen,
+    _NumeroLote,
+    _IdDestino,
+    _PesoNetoEstimado,
+    _Ploidia,
+    _CantidadCajas,
+    _VolumenMuestra,
+    _CantidadContada,
+    _LitrosContenedor,
+    _CantidadTotal,
+    _Observaciones,
+    _FechaEnvio,
+    _FechaPreparado
+
+
 
 ) {
         $("#idDespacho").val(_IdPreparoDespacho),
-        $("#single_cal1").val(_FechaEnvio),
-        $("#single_cal3").val(_FechaPreparado),
+        //$("#single_cal1").val(_FechaEnvio),
+        //$("#single_cal3").val(_FechaPreparado),
         $("#selectOrigen").val(_IdOrigen),
         $("#selectDestino").val(_IdDestino),
         $("#idPesoNeto").val(_PesoNeto),
-        $("#idPesoBruto").val(_PesoBruto),
         $("#idCantidadCalibres").val(_Cantidad),
         $("#idCalibre").val(_Calibre),
         $("#idCliente").val(_cliente)
+        $("#PesoBruto").val(_PesoBruto);
+        $("#NombreOrigen").val(_NombreOrigen);
+        $("#numeroLote").val(_NumeroLote);
+        $("#selectDestino").val(_IdDestino);
+        $("#PesoNetoEstimado").val(_PesoNetoEstimado);
+        $("#ploidia").val(_Ploidia);
+        $("#numeroCajas").val(_CantidadCajas);
+        $("#VolumenMuestra").val(_VolumenMuestra);
+        $("#cantidadContada").val(_CantidadContada);
+        $("#litrosContenedor").val(_LitrosContenedor);
+        $("#txtObservaciones").val(_Observaciones);
+        $("#volumenTotal").val(_CantidadTotal);
+}
 
+function validateDecimal(valor) {
+    var RE = /^\d*\,?\d*$/;
+    if (RE.test(valor)) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 
 $(document).ready(function () {
-
-     
     $("#tblPreparacionDespacho").DataTable({
         paging: true,
         retrieve: true,
@@ -38,54 +70,175 @@ $(document).ready(function () {
         }
     });
 
+    $("#btnNuevoDespacho").click(function () {
+        $("#idDespacho").val("");
+        $("#NombreOrigen").val("");
+        $("#numeroLote").val(0);
+        $("#selectDestino").val("");
+        $("#idPesoNeto").val(0);
+        $("#PesoBruto").val(0);
+        $("#PesoNetoEstimado").val(0);
+        $("#ploidia").val("");
+        $("#numeroCajas").val(0);
+        $("#idCantidadCalibres").val(0);
+        $("#idCalibre").val("");
+        $("#idCliente").val("");
+        $("#VolumenMuestra").val(0);
+        $("#cantidadContada").val(0);
+        $("#litrosContenedor").val(0);
+        $("#txtObservaciones").val("");
+        $("#volumenTotal").val(0);
+    });
 
 
+    $("#VolumenMuestra").change(function () {
+        //var suma = $("#cantidadMuestra").val() * $("#VolumenMuestra").val() * $("#litrosContenedor").val() * 1000;
+        //cantidad contada/volumen de la muestra * 1000 * litros en el contenedor 
+        var volumen = $("#VolumenMuestra").val();
+        var cantidad = $("#cantidadContada").val();
+        var litros = $("#litrosContenedor").val();
+        //var suma = (((volumen * cantidad) / volumen) * litros) * 1000;
 
-    $("#divAlert").hide();
+        var suma = (((cantidad / volumen) * 1000)) * litros;
+        $("#volumenTotal").val(suma); 
+    });
+    $("#cantidadContada").change(function () {
+        //var suma = $("#cantidadMuestra").val() * $("#VolumenMuestra").val() * $("#litrosContenedor").val() * 1000;
+        var volumen = $("#VolumenMuestra").val();
+        var cantidad = $("#cantidadContada").val();
+        var litros = $("#litrosContenedor").val();
+        var suma = (((cantidad / volumen) * 1000)) * litros;
+        $("#volumenTotal").val(suma);
+    });
+
+    $("#litrosContenedor").change(function () {
+        //var suma = $("#cantidadMuestra").val() * $("#VolumenMuestra").val() * $("#VolumenMuestra").val() * 1000;
+        var volumen = $("#VolumenMuestra").val();
+        var cantidad = $("#cantidadContada").val();
+        var litros = $("#litrosContenedor").val();
+        var suma = (((cantidad / volumen) * 1000)) * litros;
+        $("#volumenTotal").val(suma);
+    });
+
     $("#btnGrabarDatos").click(function () {
-        $.ajax({
-            url: "GrabaPdespacho",
-            type: "POST",
-            data: {
+        var ID = $("#idDespacho").val();
+        var p_FechaEnvio = formateaFecha($("#single_cal1").val());
+        var p_FechaPreparado = formateaFecha($("#single_cal3").val());
+        var nombreOrigen = $("#NombreOrigen").val();
+        var numeroLote = $("#numeroLote").val();
+        var p_IdDestino = $("#selectDestino").val();
+        var p_PesoNeto = $("#idPesoNeto").val();
+        var p_PesoBruto = $("#PesoBruto").val();
+        var p_PesoEstimado = $("#PesoNetoEstimado").val();
+        var ploidia = $("#ploidia").val();
+        var ncajas = $("#numeroCajas").val();
+        var p_Cantidad = $("#idCantidadCalibres").val();
+        var p_Calibre = $("#idCalibre").val();
+        var p_Cliente = $("#idCliente").val();
+        var VolumenMuestra = $("#VolumenMuestra").val();
+        var CantidadContada = $("#cantidadContada").val();
+        var LitrosContenedor = $("#litrosContenedor").val();
+        var Observaciones = $("#txtObservaciones").val();
+        var CantidadTotal = $("#volumenTotal").val();
 
-                _IdPreparoDespacho: $("#idDespacho").val(),
-                _FechaEnvio: $("#single_cal1").val(),
-                _FechaPreparado: $("#single_cal3").val(),
-                _IdOrigen: $("#selectOrigen").val(),
-                _IdDestino: $("#selectDestino").val(),
-                _PesoNeto: $("#idPesoNeto").val(),
-                _PesoBruto: $("#idPesoBruto").val(),
-                _Cantidad: $("#idCantidadCalibres").val(),
-                _Calibre: $("#idCalibre").val(),
-                _cliente: $("#idCliente").val()
-            },
-
-            async: true,
-            success: function (data) {
-                //if (data == 0) {
-                //    $("#btnCerrarModal").click();
-                //    alert("El Ingreso se ha realizado sin problemas.");
-                //}
-
-                if (data == 1) {
-                    $("#btnCerrarModal").click();
-                    alert("El Ingreso se ha realizado sin problemas.");
-                }
-                if (data == 3) {
-                    alert("Ha ocurrido un error al grabar los datos, intentalo nuevamente.");
-                }
-                if (data == 4) {
-                    alert("No tienes permiso para modificar, Hemos enviado un correo al administrador del sistema solicitando autorización para la modificación del registro, cuando te den autorización, te llegara un Email con la información.");
-                }
-                if (data == 5) {
-                    alert("Tu perfil de usuario no te permite realizar ninguna acción, solo puedes leer la información ingresada al sistema.");
-                }
-                if (data == 0) {
-                    alert("No se ha realizado la acción, intentalo nuevamente.");
-                }
+        if (!validateDecimal(p_PesoNeto) || !validateDecimal(p_PesoEstimado) || !validateDecimal(p_PesoBruto)) {
+            alert("Los campos Peso Neto, Peso Estimado y Peso Bruto, son campo decimal que debe ser separado por COMA (,) con formato 00,000");
+        }
+        else {
+            if (ID != null && ID != "") {
+                ID = ID;
             }
-        });
+            else {
+                ID = -1;
+            }
+
+            $.ajax({
+                url: "GrabaPdespacho",
+                type: "POST",
+                data: {
+                    _IdPreparoDespacho: ID,
+                    _p_FechaEnvio: p_FechaEnvio,
+                    _p_FechaPreparado: p_FechaPreparado,
+                    _nombreOrigen: nombreOrigen,
+                    _numeroLote: numeroLote,
+                    _p_IdDestino: p_IdDestino,
+                    _p_PesoNeto: p_PesoNeto,
+                    _p_PesoBruto: p_PesoBruto,
+                    _p_PesoEstimado: p_PesoEstimado,
+                    _ploidia: ploidia,
+                    _ncajas: ncajas,
+                    _p_Cantidad: p_Cantidad,
+                    _p_Calibre: p_Calibre,
+                    _p_Cliente: p_Cliente,
+                    _VolumenMuestra: VolumenMuestra,
+                    _CantidadMuestra: 0,
+                    _CantidadContada: CantidadContada,
+                    _LitrosContenedor: LitrosContenedor,
+                    _Observaciones: Observaciones,
+                    _CantidadTotal: CantidadTotal
+                },
+                async: true,
+                success: function (data) {
+                    if (data == 1) {
+                        $("#btnCerrarModal").click();
+                        alert("El Ingreso se ha realizado sin problemas.");
+                        window.location.reload(true);
+                    }
+                    if (data == 3) {
+                        alert("Ha ocurrido un error al grabar los datos, intentalo nuevamente.");
+                    }
+                    if (data == 4) {
+                        alert("No tienes permiso para modificar, Hemos enviado un correo al administrador del sistema solicitando autorización para la modificación del registro, cuando te den autorización, te llegara un Email con la información.");
+                    }
+                    if (data == 5) {
+                        alert("Tu perfil de usuario no te permite realizar ninguna acción, solo puedes leer la información ingresada al sistema.");
+                    }
+                    if (data == 0) {
+                        alert("No se ha realizado la acción, intentalo nuevamente.");
+                    }
+                }
+            });
+        }
+
+        
+        
     });
 
 
 });
+
+function formateaFecha(fechaInput) {
+    var fecha = fechaInput;
+    var formattedDate = new Date(fecha);
+    var d = formattedDate.getDate();
+    if (d < 10) {
+        d = "0" + d;
+    }
+    var m = formattedDate.getMonth();
+    m += 1;  // JavaScript months are 0-11
+    if (m < 10) {
+        m = "0" + m;
+    }
+    var y = formattedDate.getFullYear();
+    fecha = d + "-" + m + "-" + y;
+    return fecha;
+}
+
+function formateaFechaalReves(fechaInput) {
+    var fecha = fechaInput;
+    var formattedDate = new Date(fecha);
+    var d = formattedDate.getDate();
+    if (d < 10) {
+        d = "0" + d;
+    }
+    var m = formattedDate.getMonth();
+    m += 1;  // JavaScript months are 0-11
+    if (m < 10) {
+        m = "0" + m;
+    }
+    var y = formattedDate.getFullYear();
+    fecha = m + "/" + d + "/" + y;
+    return fecha;
+}
+
+

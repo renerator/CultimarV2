@@ -51,6 +51,12 @@ namespace CultimarWebApp.Utils.DAO
             return _dtFac.ListadoUbicacionOceanica();
         }
 
+        public List<ObjetoDestinoDespacho> ListadoDestinoDespacho()
+        {
+            return _dtFac.ListadoDestinosDespacho();
+        }
+
+
 
         public List<ObjetoSeguimientoMar> ListadoSeguimientoMar(int idRegistro)
         {
@@ -308,5 +314,11 @@ namespace CultimarWebApp.Utils.DAO
         {
             return _dtFac.SetGrabaFactoresMedicion(factorMedicion);
         }
+
+        public bool SetGrabaDestinoDespacho(ObjetoDestinoDespacho destinoDespacho)
+        {
+            return _dtFac.SetGrabaDestinoDespacho(destinoDespacho);
+        }
+
     }
 }

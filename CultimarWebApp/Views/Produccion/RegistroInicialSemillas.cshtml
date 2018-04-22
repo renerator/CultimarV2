@@ -27,14 +27,14 @@
                     </p>
                     <div class="dataTables_wrapper form-inline dt-bootstrap no-footer">
                         @{
-            var grid = new WebGrid(Model, canPage: false);
+        var grid = new WebGrid(Model, canPage: false);
                         }
                         @grid.GetHtml(
 htmlAttributes: new { id = "tblRegistroInicialSemillas" },
 tableStyle: "table table-striped table-bordered dataTable no-footer",
 columns:
 grid.Columns(
-
+grid.Column(header: "Nombre Contenedor", format: @<text>@item.NombreContenedor</text>),
 grid.Column(header: "Nombre BATCH", format: @<text>@item.NombreRegistroLarval</text>),
 grid.Column(header: "Calibre Semilla", format: @<text>@item.NombreCalibreSemilla</text>),
 grid.Column(header: "Fecha Registro", format: @<text>@item.FechaRegistroInicial.ToString("dd/MM/yyyy")</text>),
@@ -42,18 +42,19 @@ grid.Column(header: "Fecha Desdoble Inicial", format: @<text>@item.FechaDesdoble
 grid.Column(header: "Ploidia", format: @<text>@item.Ploidia</text>),
 grid.Column(header: "Muestreo", format: @<text>@item.Muestreo</text>),
 
-grid.Column(header: "Editar", format: @<button class="btn btn-success" type="button" data-toggle="modal" tooltip="Editar Parametro" data-target="#modalPopUpIngresoRegistroInicial"  onclick="EditaRegistroInicialSemilla(
+grid.Column(header: "Editar", format: @<button class="btn btn-success" type="button" data-toggle="modal" tooltip="Editar Parametro" data-target="#modalPopUpIngresoRegistroInicial" onclick="EditaRegistroInicialSemilla(
                                                @item.IdRegistroInicialSemilla,
+                                               @item.IdTipoContenedor,
                                                @item.IdRegistroLarval,
                                                @item.IdCalibre,
                                                '@item.FechaRegistroInicial.ToString("MM/dd/yyyy")',
-                                               '@item.FechaDesdobleInicial.ToString("MM/dd/yyyy")', 
-                                               @item.Ploidia,
-                                               @item.Muestreo,
+                                               '@item.FechaDesdobleInicial.ToString("MM/dd/yyyy")',
+                                               '@item.Ploidia',
+                                               '@item.Muestreo',
                                                '@item.Observaciones'
                                                )">
-                    Editar
-                </button>))
+                        Editar
+                    </button>))
 )
 
                     </div>
@@ -61,7 +62,7 @@ grid.Column(header: "Editar", format: @<button class="btn btn-success" type="but
                     <div id="divAlert"></div>
                     <div class="form-group">
                         <div>
-                            <button type="button" id="btnPopUpRegistroInicial" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Ingresar Registro Semilla Mar</button>
+                            <button type="button" id="btnPopUpRegistroInicial" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Ingresar Registro Pre-Semilla</button>
                         </div>
                     </div>
 
@@ -81,15 +82,21 @@ grid.Column(header: "Editar", format: @<button class="btn btn-success" type="but
                             <input type="text" id="IdRegistroInicialSemilla" style="display: none;">
                             <form class="form-horizontal form-label-left input_mask">
                                 <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo Contenedor Semillas</label>
+                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                        @Html.DropDownList("selectTipoContenedor", (IEnumerable<SelectListItem>)ViewBag.ParametroContenedorSemillas, "Seleccione Tipo Contenedor", new { @class = "form-control", @required = "required", @ID = "selectTipoContenedor" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Nombre Grupo Cultivo</label>
                                     <div class="col-md-9 col-sm-9 col-xs-12">
-                                        @Html.DropDownList("RegistroInicial", (IEnumerable<SelectListItem>)ViewBag.RegistroCultivo, "Seleccione Nombre BATCH", new { @class = "form-control", @ID = "selectRegistroInicial" })
+                                        @Html.DropDownList("RegistroInicial", (IEnumerable<SelectListItem>)ViewBag.RegistroCultivo, "Seleccione Nombre BATCH", new { @class = "form-control", @required = "required", @ID = "selectRegistroInicial" })
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Calibre</label>
                                     <div class="col-md-9 col-sm-9 col-xs-12">
-                                        @Html.DropDownList("ParametroCalibre", (IEnumerable<SelectListItem>)ViewBag.ParametroCalibre, "Seleccione Calibre Semilla", new { @class = "form-control", @ID = "selectParametroCalibre" })
+                                        @Html.DropDownList("ParametroCalibre", (IEnumerable<SelectListItem>)ViewBag.ParametroCalibre, "Seleccione Calibre Semilla", new { @class = "form-control", @required = "required", @ID = "selectParametroCalibre" })
                                     </div>
                                 </div>
                                 <div class="form-group">

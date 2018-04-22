@@ -54,6 +54,10 @@ namespace CultimarWebApp.Utils.DAO
 
                     validador = data.Rows[i].Field<object>("NombreMortalidad");
                     resultadoListado.NombreMortalidad = validador != null ? data.Rows[i].Field<string>("NombreMortalidad") : "Sin Asignación";
+                    
+                    validador = data.Rows[i].Field<object>("CantidadMortalidad");
+                    resultadoListado.CantidadMortalidad = validador != null ? data.Rows[i].Field<int>("CantidadMortalidad") : 0;
+
 
                     validador = data.Rows[i].Field<object>("FactoresMedicion");
                     resultadoListado.FactoresMedicion = validador != null ? data.Rows[i].Field<string>("FactoresMedicion") : "Sin Asignación";
@@ -77,19 +81,23 @@ namespace CultimarWebApp.Utils.DAO
                     resultadoListado.NombreCalibreDestino = validador != null ? data.Rows[i].Field<string>("CalibreDestino") : "Sin Asignación";
 
                     validador = data.Rows[i].Field<object>("idContenedorDestino");
-                    resultadoListado.IdTipoContenedorDestino = validador != null ? data.Rows[i].Field<int>("idContenedorDestino") : -1;
+                    resultadoListado.IdTipoContenedorDestino = validador != null ? data.Rows[i].Field<int>("idContenedorDestino") : 0;
 
                     validador = data.Rows[i].Field<object>("ContenedorDestino");
                     resultadoListado.NombreContenedorDestino = validador != null ? data.Rows[i].Field<string>("ContenedorDestino") : "Sin Asignación";
 
                     validador = data.Rows[i].Field<object>("CantidadMuestra");
-                    resultadoListado.CantidadMuestra = validador != null ? data.Rows[i].Field<int>("CantidadMuestra") : -1;
+                    resultadoListado.CantidadMuestra = validador != null ? data.Rows[i].Field<int>("CantidadMuestra") : 0;
 
                     validador = data.Rows[i].Field<object>("VolumenMuestra");
-                    resultadoListado.VolumenMuestra = validador != null ? data.Rows[i].Field<int>("VolumenMuestra") : -1;
+                    resultadoListado.VolumenMuestra = validador != null ? data.Rows[i].Field<int>("VolumenMuestra") : 0;
+
+                    validador = data.Rows[i].Field<object>("LitrosContenedor");
+                    resultadoListado.LitrosContenedor = validador != null ? data.Rows[i].Field<int>("LitrosContenedor") : 0;
+
 
                     validador = data.Rows[i].Field<object>("VolumenTotal");
-                    resultadoListado.VolumenTotal = validador != null ? data.Rows[i].Field<int>("VolumenTotal") : -1;
+                    resultadoListado.VolumenTotal = validador != null ? data.Rows[i].Field<int>("VolumenTotal") : 0;
 
                     validador = data.Rows[i].Field<object>("Observaciones");
                     resultadoListado.Observaciones = validador != null ? data.Rows[i].Field<string>("Observaciones") : "Sin Asignación";
@@ -134,7 +142,9 @@ namespace CultimarWebApp.Utils.DAO
                                                                                                 {"@CantidadMuestra",semilla.CantidadMuestra},
                                                                                                 {"@VolumenMuestra",semilla.VolumenMuestra},
                                                                                                 {"@VolumenTotal",semilla.VolumenTotal},
-                                                                                                {"@Observaciones",semilla.Observaciones}});
+                                                                                                {"@LitrosContenedor",semilla.LitrosContenedor},
+                                                                                                {"@Observaciones",semilla.Observaciones},
+                                                                                                {"@cantidadMortalidad", semilla.CantidadMortalidad } });
                 if (data.Rows.Count > 0)
                 {
                     respuesta = true;

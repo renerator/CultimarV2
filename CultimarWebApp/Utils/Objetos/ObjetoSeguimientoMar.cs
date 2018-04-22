@@ -7,6 +7,33 @@ namespace CultimarWebApp.Utils.Objetos
 {
     public class ObjetoSeguimientoMar
     {
+        private int _cantidadMuestra;
+        public int CantidadMuestra
+        {
+            get { return _cantidadMuestra; }
+            set { _cantidadMuestra = value; }
+        }
+
+        private int _volumenMuestra;
+        public int VolumenMuestra
+        {
+            get { return _volumenMuestra; }
+            set { _volumenMuestra = value; }
+        }
+
+        private int _volumenTotal;
+        public int VolumenTotal
+        {
+            get { return _volumenTotal; }
+            set { _volumenTotal = value; }
+        }
+
+        private int _litrosContenedor;
+        public int LitrosContenedor
+        {
+            get { return _litrosContenedor; }
+            set { _litrosContenedor = value; }
+        }
         private int _idSeguimiento;
         public int IdSeguimiento
         {
@@ -51,8 +78,8 @@ namespace CultimarWebApp.Utils.Objetos
         }
 
 
-        private int _cantidadOrigen;
-        public int CantidadOrigen
+        private double _cantidadOrigen;
+        public double CantidadOrigen
         {
             get { return _cantidadOrigen; }
             set { _cantidadOrigen = value; }
@@ -107,8 +134,8 @@ namespace CultimarWebApp.Utils.Objetos
             set { _nombreSistemaOrigen = value; }
         }
 
-        private int _cantidadDestino;
-        public int CantidadDestino
+        private double _cantidadDestino;
+        public double CantidadDestino
         {
             get { return _cantidadDestino; }
             set { _cantidadDestino = value; }

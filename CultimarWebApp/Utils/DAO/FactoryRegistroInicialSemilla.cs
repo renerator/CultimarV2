@@ -34,6 +34,17 @@ namespace CultimarWebApp.Utils.DAO
                     validador = data.Rows[i].Field<object>("idRegistroLarval");
                     resultadoListado.IdRegistroLarval = validador != null ? data.Rows[i].Field<int>("idRegistroLarval") : -1;
 
+
+                    validador = data.Rows[i].Field<object>("idTipoContenedor");
+                    resultadoListado.IdTipoContenedor = validador != null ? data.Rows[i].Field<int>("idTipoContenedor") : -1;
+
+                    validador = data.Rows[i].Field<object>("NombreContenedor");
+                    resultadoListado.NombreContenedor = validador != null ? data.Rows[i].Field<string>("NombreContenedor") : "Sin Asignación";
+
+
+
+
+
                     validador = data.Rows[i].Field<object>("NombreCultivo");
                     resultadoListado.NombreRegistroLarval = validador != null ? data.Rows[i].Field<string>("NombreCultivo") : "Sin Asignación";
 
@@ -76,6 +87,7 @@ namespace CultimarWebApp.Utils.DAO
                 var data = new DBConector().EjecutarProcedimientoAlmacenado("SP_SET_GRABAREGISTROINICIALSEMILLA", new System.Collections.Hashtable()
                                                                                             {
                                                                                                 {"@idUsuario",idUsuario },
+                                                                                                {"@idTipoContenedor", registroinicial.IdTipoContenedor },
                                                                                                 {"@idRegistro", registroinicial.IdRegistroInicialSemilla },
                                                                                                 {"@idRegistroLarval", registroinicial.IdRegistroLarval },
                                                                                                 {"@idCalibre", registroinicial.IdCalibre },

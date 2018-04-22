@@ -61,6 +61,10 @@ namespace CultimarWebApp.Controllers
                 IEnumerable<ObjetoUbicacionOceanica> parametrosUbicacionOceanica = _control.ListadoUbicacionOceanica();
                 ViewBag.ParametroUbicacionOceanica = parametrosUbicacionOceanica;
 
+                IEnumerable<ObjetoDestinoDespacho> paranetrosDestinoDespacho = _control.ListadoDestinoDespacho();
+                ViewBag.ParametroDestinoDespacho = paranetrosDestinoDespacho;
+
+
 
 
                 //IEnumerable<SelectListItem> selectTipoAlimento = _control.ListadoTipoAlimentos().Select(c => new SelectListItem()
@@ -126,6 +130,27 @@ namespace CultimarWebApp.Controllers
             };
 
             if (_control.SetGrabaFactoresMedicion(factorMedicion))
+            {
+                validador = 1;
+            }
+            else
+            {
+                validador = 2;
+            }
+
+            return (Json(validador));
+        }
+
+        public JsonResult GrabaDestinoDespacho(int idDestinoDespacho, string nombreDestinoDespacho)
+        {
+            var validador = 0;
+            var datosDestinoDespacho = new ObjetoDestinoDespacho()
+            {
+                IdDestinoDespacho = idDestinoDespacho,
+                NombreDestinoDespacho = nombreDestinoDespacho
+            };
+
+            if (_control.SetGrabaDestinoDespacho(datosDestinoDespacho))
             {
                 validador = 1;
             }

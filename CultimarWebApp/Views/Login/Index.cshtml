@@ -6,7 +6,8 @@
     Layout = null;
     ViewBag.Title = "Iniciar sesión";
 }
-
+<!DOCTYPE html>
+<html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
@@ -21,7 +22,7 @@
     <link href="~/Content/css/custom.min.css" rel="stylesheet">
     <style>
         body {
-            background-image: url(../../images/DJI_0033.JPG) !important;
+            background-image: url(/images/DJI_0033.JPG) !important;
             background-position: center center;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -33,7 +34,7 @@
     <div>
         <div class="login_wrapper">
             <div class="animate form login_form">
-                
+
                 <section class="login_content">
                     @using (Html.BeginForm("Index", "Login", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
                     {
@@ -56,10 +57,10 @@
                             </div>
                         </div>
                         <div class="form-group">
-                                <div class="col-md-offset-2 col-md-10">
-                                    <input type="submit" class="btn btn-default submit" value="Iniciar Sesión" />
-                                </div>
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" class="btn btn-default submit" value="Iniciar Sesión" />
                             </div>
+                        </div>
                         <div class="clearfix"></div>
                         <div class="separator">
                             <div class="clearfix"></div>
@@ -72,7 +73,7 @@
                         <p>
                             <small>©@DateTime.Now.Year <a href="http://www.producesoftware.cl">Produce Software Ltda.</a></small>
                         </p>
-                       
+
                     }
                 </section>
 
@@ -81,4 +82,4 @@
         </div>
     </div>
 </body>
-
+</html>

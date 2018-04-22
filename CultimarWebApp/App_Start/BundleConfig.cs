@@ -19,7 +19,7 @@ namespace CultimarWebApp
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                          "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+            bundles.Add(new ScriptBundle("~/bundles/js").Include(
                         "~/Scripts/vendors/jquery/dist/jquery.min.js",
                         "~/Scripts/vendors/bootstrap/dist/js/bootstrap.min.js",
                         "~/Scripts/vendors/fastclick/lib/fastclick.js",

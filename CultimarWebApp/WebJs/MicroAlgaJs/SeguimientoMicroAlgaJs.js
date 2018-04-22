@@ -40,6 +40,7 @@
         var concentracion = $("#concentracion").val();
         var obs = $("#txtObservaciones").val();
         var ID = $("#IdMicroAlga").val();
+        var puntuacion = $("#selectPuntuacion").val();
         if (ID != null && ID != "") {
             ID = ID;
         }
@@ -62,7 +63,8 @@
                 volumenCosechado: volumenCosechado,
                 concentracion: concentracion,
                 estadoSeguimiento: estadoSeguimiento,
-                observaciones: obs
+                observaciones: obs,
+                puntuacion: puntuacion
             },
             async: true,
             success: function (data) {
@@ -107,10 +109,11 @@
         $("#concentracion").val("");
         $("#txtObservaciones").val("");
         $("#IdMicroAlga").val("");
+        $("#selectPuntuacion").val("0");
     });
 });
 
-function EditaSeguimientoMicroAlga(idSeguimientoMicroAlga, idMicroAlga, idEspecie, fechaIngreso, fechaSalida, idOrigen, idDestino, resultadoTCBS, volumenCosechado, concentracion, estado, obs) {
+function EditaSeguimientoMicroAlga(idSeguimientoMicroAlga, idMicroAlga, idEspecie, fechaIngreso, fechaSalida, idOrigen, idDestino, resultadoTCBS, volumenCosechado, concentracion, estado, obs, puntuacion) {
     $("#single_cal1").val(fechaIngreso);
     $("#single_cal2").val(fechaSalida);
     if (resultadoTCBS == "onclick") {
@@ -130,6 +133,7 @@ function EditaSeguimientoMicroAlga(idSeguimientoMicroAlga, idMicroAlga, idEspeci
     $("#concentracion").val(concentracion);
     $("#txtObservaciones").val(obs);
     $("#IdMicroAlga").val(idSeguimientoMicroAlga);
+    $("#selectPuntuacion").val(puntuacion);
 
 }
 

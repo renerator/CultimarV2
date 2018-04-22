@@ -42,7 +42,7 @@ grid.Column(columnName: "Id", header: "Id", format: @<text>@item.IdPreparoDespac
 grid.Column(columnName: "FechaEnvio", header: "Fecha Envio", format: @<text>@item.FechaEnvio</text>),
 grid.Column(columnName: "FechaPreparado", header: "Fecha Preparado", format: @<text>@item.FechaPreparado</text>),
 grid.Column(columnName: "PesoNeto", header: "Peso Neto", format: @<text>@item.PesoNeto</text>),
-grid.Column(columnName: "PesoBruto", header: "Peso Bruto", format: @<text>@item.PesoBruto</text>),
+grid.Column(columnName: "PesoBruto", header: "Peso Neto Estimado", format: @<text>@item.PesoBruto</text>),
 grid.Column(columnName: "Cantidad", header: "Cantidad", format: @<text>@item.Cantidad</text>),
 grid.Column(columnName: "Calibre", header: "Calibre", format: @<text>@item.Calibre</text>),
 grid.Column(columnName: "Cliente", header: "Cliente", format: @<text>@item.Cliente</text>),
@@ -52,22 +52,32 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
                                                '@item.FechaPreparado',
                                                 @item.IdOrigen,
                                                 @item.IdDestino,
-                                                @item.PesoNeto,
-                                                @item.PesoBruto,
-                                                @item.Cantidad,
-                                                @item.Calibre,
-                                                '@item.Cliente'
-                                               )">
+                                                '@item.PesoNeto',
+                                                '@item.PesoBruto',
+                                                '@item.Cantidad',
+                                                '@item.Calibre',
+                                                '@item.Cliente',
+                                                 '@item.NombreOrigen',
+                                                 '@item.NumeroLote',
+                                                 @item.IdDestino,
+                                                 @item.PesoNetoEstimado,
+                                                 '@item.Ploidia',
+                                                 @item.CantidadCajas,
+                                                 @item.VolumenMuestra,
+                                                 @item.CantidadContada,
+                                                 @item.LitrosContenedor,
+                                                 @item.CantidadTotal,
+                                                 '@item.Observaciones')">
     Editar
 </button>))
 )
                     </div>
 
 
-                    <div id="divAlert"></div>
+                   
                     <div class="form-group">
                         <div>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Registro Producción</button>
+                            <button type="button" id="btnNuevoDespacho" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Preparar Despacho Semilla y/o Mar</button>
                         </div>
                     </div>
 
@@ -78,11 +88,11 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
                                     <button type="button" class="close" data-dismiss="modal">
                                         <span aria-hidden="true">X</span>
                                     </button>
-                                    <h4 class="modal-title" id="myModalLabel">Registo Preparación y Despacho</h4>
+                                    <h4 class="modal-title" id="myModalLabel">Registo Preparación y Despacho Semilla y/o Mar</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-
+                                    @*<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">*@
+                                    <div id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
                                         <div style="display: none;">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
@@ -92,7 +102,18 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
                                                 <input type="text" id="idDespacho" value="-1" class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
-
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Número de Lote <span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="text" id="numeroLote" required="required" class="form-control col-md-7 col-xs-12">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Ingrese BATCH Origen <span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="text" id="NombreOrigen" required="required" class="form-control col-md-7 col-xs-12">
+                                            </div>
+                                        </div>
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
                                                 Fecha Envio <span class="required">*</span>
@@ -104,7 +125,6 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
 
                                             </div>
                                         </div>
-
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
                                                 Fecha Preparado <span class="required">*</span>
@@ -116,20 +136,10 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
 
                                             </div>
                                         </div>
-
-
                                         <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Seleccione Origen</label>
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Seleccione Destino <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                @Html.DropDownList("ContenedorOrigen", (IEnumerable<SelectListItem>)ViewBag.selectOrigen, "Seleccione...", new { @class = "form-control", @ID = "selectOrigen" })
-                                            </div>
-                                        </div>
-
-
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Seleccione Destino</label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                @Html.DropDownList("ContenedorDestino", (IEnumerable<SelectListItem>)ViewBag.selectDestino, "Seleccione...", new { @class = "form-control", @ID = "selectDestino" })
+                                                @Html.DropDownList("ContenedorDestino", (IEnumerable<SelectListItem>)ViewBag.selectDestino, "Seleccione...", new { @class = "form-control", @required = "required", @ID = "selectDestino" })
                                             </div>
                                         </div>
 
@@ -150,35 +160,98 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
                                                 <input type="text" id="idCantidadCalibres" required="required" class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                                                Ploidia <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="text" id="ploidia" required="required" class="form-control col-md-7 col-xs-12">
+                                            </div>
+                                        </div>
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
                                                 Peso Neto <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="text" id="idPesoNeto" required="required" class="form-control col-md-7 col-xs-12">
+                                                <input type="text" id="idPesoNeto" required="required" data-validate-minmax="1,999999999999999" class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
-
-
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                                                Peso Neto Estimado <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="text" id="PesoNetoEstimado" required="required" data-validate-minmax="1,999999999999999" class="form-control col-md-7 col-xs-12">
+                                            </div>
+                                        </div>
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
                                                 Peso Bruto <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="text" id="idPesoBruto" required="required" class="form-control col-md-7 col-xs-12">
+                                                <input type="text" id="PesoBruto" required="required" data-validate-minmax="1,999999999999999" class="form-control col-md-7 col-xs-12">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                                                Número de Cajas <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="number" id="numeroCajas" required="required" data-validate-minmax="1,999999999999999" class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
-                                               Nombre Cliente <span class="required">*</span>
+                                                Nombre Cliente <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                 <input type="text" id="idCliente" required="required" class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
+                                        <div class="ln_solid"></div>
+                                        <label>Otros Datos</label>
 
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                                                Volumen de la Muestra (ml) <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="text" id="VolumenMuestra" name="VolumenMuestra" data-validate-minmax="1,999999999999999" required="required" class="form-control col-md-7 col-xs-12">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                                                Cantidad Contada <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="text" id="cantidadContada" name="cantidadContada" data-validate-minmax="1,999999999999999" required="required" class="form-control col-md-7 col-xs-12">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                                                Litros en el Contenedor<span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="text" id="litrosContenedor" name="litrosContenedor" data-validate-minmax="1,999999999999999" required="required" class="form-control col-md-7 col-xs-12">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                                                Cantidad Total<span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="text" id="volumenTotal" name="volumenTotal" disabled="disabled" class="form-control col-md-7 col-xs-12">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Observaciones</label>
+                                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                                <textarea id="txtObservaciones" class="form-control col-md-7 col-xs-12" name="txtObservaciones" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100"
+                                                          data-parsley-validation-threshold="10"></textarea>
+                                            </div>
+                                        </div>
 
                                         <div class="ln_solid"></div>
                                         <div class="form-group">
@@ -187,7 +260,8 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
                                                 <button type="submit" class="btn btn-success" id="btnGrabarDatos">Grabar</button>
                                             </div>
                                         </div>
-                                    </form>
+                                        @*</form>*@
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" id="btnCerrarModal" class="btn btn-default" data-dismiss="modal">Cerrar</button>
