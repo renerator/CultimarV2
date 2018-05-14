@@ -60,13 +60,13 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
                                                  '@item.NombreOrigen',
                                                  '@item.NumeroLote',
                                                  @item.IdDestino,
-                                                 @item.PesoNetoEstimado,
+                                                 '@item.PesoNetoEstimado',
                                                  '@item.Ploidia',
                                                  @item.CantidadCajas,
-                                                 @item.VolumenMuestra,
-                                                 @item.CantidadContada,
-                                                 @item.LitrosContenedor,
-                                                 @item.CantidadTotal,
+                                                 '@item.VolumenMuestra',
+                                                 '@item.CantidadContada',
+                                                 '@item.LitrosContenedor',
+                                                 '@item.CantidadTotal',
                                                  '@item.Observaciones')">
     Editar
 </button>))
@@ -218,7 +218,7 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
                                                 Volumen de la Muestra (ml) <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="text" id="VolumenMuestra" name="VolumenMuestra" data-validate-minmax="1,999999999999999" required="required" class="form-control col-md-7 col-xs-12">
+                                                <input type="number" id="VolumenMuestra" name="VolumenMuestra" data-validate-minmax="1,999999999999999" required="required" class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -233,7 +233,7 @@ grid.Column(format: @<button class="btn btn-success" type="button" data-toggle="
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
                                                 Litros en el Contenedor<span class="required">*</span>
                                             </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <div class="col-md-6 col-sm-6 col-xs-12">   
                                                 <input type="text" id="litrosContenedor" name="litrosContenedor" data-validate-minmax="1,999999999999999" required="required" class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>

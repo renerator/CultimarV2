@@ -96,7 +96,7 @@ namespace CultimarWebApp.Utils.DAO
                     resultadoListado.VolumenMuestra = validador != null ? data.Rows[i].Field<int>("VolumenMuestra") : 0;
 
                     validador = data.Rows[i].Field<object>("VolumenTotal");
-                    resultadoListado.VolumenTotal = validador != null ? data.Rows[i].Field<int>("VolumenTotal") : 0;
+                    resultadoListado.VolumenTotal = validador != null ? data.Rows[i].Field<double>("VolumenTotal") : 0;
 
                     validador = data.Rows[i].Field<object>("LitrosContenedor");
                     resultadoListado.LitrosContenedor = validador != null ? data.Rows[i].Field<int>("LitrosContenedor") : 0;

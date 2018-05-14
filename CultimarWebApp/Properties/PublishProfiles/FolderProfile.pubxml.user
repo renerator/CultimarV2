@@ -6,7 +6,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>D:\ProduceSoftware\FundacionChile\Cultimar\Proyecto\Release\20180226</_PublishTargetUrl>
+    <_PublishTargetUrl>D:\ProduceSoftware\FundacionChile\Cultimar\Proyecto\Release\20180426</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="ApplicationInsights.config">
@@ -22,10 +22,10 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>02/03/2018 11:38:50</publishTime>
     </File>
     <File Include="bin/CultimarWebApp.dll">
-      <publishTime>02/26/2018 13:29:39</publishTime>
+      <publishTime>04/25/2018 23:30:03</publishTime>
     </File>
     <File Include="bin/CultimarWebApp.pdb">
-      <publishTime>02/26/2018 13:29:39</publishTime>
+      <publishTime>04/25/2018 23:30:03</publishTime>
     </File>
     <File Include="bin/es/Microsoft.AspNet.Identity.Core.resources.dll">
       <publishTime>04/03/2015 17:09:40</publishTime>
@@ -625,7 +625,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>02/03/2018 11:38:52</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>02/03/2018 11:38:52</publishTime>
+      <publishTime>02/27/2018 17:39:01</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>02/03/2018 11:38:50</publishTime>
@@ -649,7 +649,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>02/03/2018 11:38:50</publishTime>
     </File>
     <File Include="Scripts/jquery-2.2.1.min.js">
-      <publishTime>02/03/2018 11:38:50</publishTime>
+      <publishTime>02/27/2018 17:57:14</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.js">
       <publishTime>02/03/2018 11:38:50</publishTime>
@@ -13222,7 +13222,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>02/03/2018 11:38:52</publishTime>
     </File>
     <File Include="tsconfig.json">
-      <publishTime>02/03/2018 11:38:52</publishTime>
+      <publishTime>02/27/2018 17:46:54</publishTime>
     </File>
     <File Include="Utils/HtmlCorreos/AutorizaPermiso.html">
       <publishTime>02/03/2018 11:38:52</publishTime>
@@ -13237,7 +13237,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>02/03/2018 11:38:52</publishTime>
     </File>
     <File Include="Views/Home/Mantenedores.cshtml">
-      <publishTime>02/26/2018 13:13:19</publishTime>
+      <publishTime>03/28/2018 13:45:02</publishTime>
     </File>
     <File Include="Views/Home/Perfiles.cshtml">
       <publishTime>02/03/2018 11:38:52</publishTime>
@@ -13246,43 +13246,43 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>02/03/2018 11:38:52</publishTime>
     </File>
     <File Include="Views/Login/Index.cshtml">
-      <publishTime>02/03/2018 11:38:52</publishTime>
+      <publishTime>02/27/2018 17:13:35</publishTime>
     </File>
     <File Include="Views/MicroAlgas/IngresoMicroAlgas.cshtml">
-      <publishTime>02/21/2018 17:46:02</publishTime>
+      <publishTime>04/04/2018 23:30:50</publishTime>
     </File>
     <File Include="Views/MicroAlgas/SeguimientoMicroAlgas.cshtml">
-      <publishTime>02/22/2018 09:45:22</publishTime>
+      <publishTime>03/26/2018 10:56:23</publishTime>
     </File>
     <File Include="Views/Produccion/PreparacionDespacho.cshtml">
-      <publishTime>02/03/2018 11:38:52</publishTime>
+      <publishTime>04/25/2018 22:56:30</publishTime>
     </File>
     <File Include="Views/Produccion/RegistroInicialMar.cshtml">
-      <publishTime>02/26/2018 10:11:55</publishTime>
+      <publishTime>04/21/2018 22:21:32</publishTime>
     </File>
     <File Include="Views/Produccion/RegistroInicialSemillas.cshtml">
-      <publishTime>02/25/2018 11:39:42</publishTime>
+      <publishTime>04/20/2018 00:05:19</publishTime>
     </File>
     <File Include="Views/Produccion/RegistroProduccion.cshtml">
-      <publishTime>02/23/2018 19:20:15</publishTime>
+      <publishTime>04/19/2018 23:47:11</publishTime>
     </File>
     <File Include="Views/Produccion/SeguimientoCultivoLarval.cshtml">
-      <publishTime>02/23/2018 17:52:38</publishTime>
+      <publishTime>04/19/2018 23:59:20</publishTime>
     </File>
     <File Include="Views/Produccion/SeguimientoFijacion.cshtml">
-      <publishTime>02/24/2018 13:53:03</publishTime>
+      <publishTime>04/12/2018 09:58:53</publishTime>
     </File>
     <File Include="Views/Produccion/SeguimientoProduccionMar.cshtml">
-      <publishTime>02/26/2018 12:52:11</publishTime>
+      <publishTime>04/23/2018 23:26:03</publishTime>
     </File>
     <File Include="Views/Produccion/SeguimientoSemilla.cshtml">
-      <publishTime>02/25/2018 13:01:35</publishTime>
+      <publishTime>04/24/2018 00:00:11</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>02/23/2018 20:38:54</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>02/23/2018 17:45:34</publishTime>
+      <publishTime>03/28/2018 15:55:35</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>02/03/2018 11:38:52</publishTime>
@@ -13291,13 +13291,13 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>02/03/2018 11:38:52</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>02/04/2018 01:18:28</publishTime>
+      <publishTime>03/28/2018 15:56:06</publishTime>
     </File>
     <File Include="WebJs/HomeJs/FactoresMedicion.js">
-      <publishTime>02/03/2018 11:38:52</publishTime>
+      <publishTime>03/22/2018 09:15:08</publishTime>
     </File>
     <File Include="WebJs/HomeJs/Mantenedores.js">
-      <publishTime>02/26/2018 13:15:15</publishTime>
+      <publishTime>03/28/2018 13:43:27</publishTime>
     </File>
     <File Include="WebJs/HomeJs/Usuario.js">
       <publishTime>02/15/2018 14:42:12</publishTime>
@@ -13306,31 +13306,31 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>02/21/2018 17:37:52</publishTime>
     </File>
     <File Include="WebJs/MicroAlgaJs/SeguimientoMicroAlgaJs.js">
-      <publishTime>02/21/2018 22:28:18</publishTime>
+      <publishTime>03/26/2018 10:54:14</publishTime>
     </File>
     <File Include="WebJs/ProduccionJS/PreparacionDespacho.js">
-      <publishTime>02/03/2018 19:13:51</publishTime>
+      <publishTime>04/25/2018 08:27:42</publishTime>
     </File>
     <File Include="WebJs/ProduccionJS/RegistroCultivoLarval.js">
-      <publishTime>02/22/2018 18:06:23</publishTime>
+      <publishTime>04/20/2018 00:12:14</publishTime>
     </File>
     <File Include="WebJs/ProduccionJS/RegistroInicialMar.js">
-      <publishTime>02/26/2018 10:20:15</publishTime>
+      <publishTime>04/21/2018 22:03:32</publishTime>
     </File>
     <File Include="WebJs/ProduccionJS/RegistroInicialSemilla.js">
-      <publishTime>02/25/2018 12:16:55</publishTime>
+      <publishTime>03/22/2018 10:08:28</publishTime>
     </File>
     <File Include="WebJs/ProduccionJS/RegistroProduccion.js">
-      <publishTime>02/22/2018 15:10:53</publishTime>
+      <publishTime>04/19/2018 23:53:55</publishTime>
     </File>
     <File Include="WebJs/ProduccionJS/SeguimientoFijacion.js">
-      <publishTime>02/24/2018 13:59:33</publishTime>
+      <publishTime>04/21/2018 22:30:13</publishTime>
     </File>
     <File Include="WebJs/ProduccionJS/SeguimientoMar.js">
-      <publishTime>02/26/2018 12:52:41</publishTime>
+      <publishTime>04/23/2018 23:51:09</publishTime>
     </File>
     <File Include="WebJs/ProduccionJS/SeguimientoSemilla.js">
-      <publishTime>02/25/2018 13:10:38</publishTime>
+      <publishTime>04/24/2018 22:50:45</publishTime>
     </File>
     <File Include="WebJs/Rut.js">
       <publishTime>02/03/2018 11:38:52</publishTime>

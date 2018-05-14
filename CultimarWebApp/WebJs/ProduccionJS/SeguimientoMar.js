@@ -104,7 +104,8 @@ $(document).ready(function () {
         var cantidad = $("#cantidadMuestra").val();
         var litros = $("#litrosContenedor").val();
         var suma = (((cantidad / volumen) * 1000)) * litros;
-        $("#volumenTotal").val(suma); $("#volumenTotal").val(suma);
+        var decimal = suma.toFixed(3);
+        $("#volumenTotal").val(decimal);
     });
     $("#cantidadMuestra").change(function () {
         //var suma = $("#cantidadMuestra").val() * $("#VolumenMuestra").val() * $("#litrosContenedor").val() * 1000;
@@ -112,7 +113,8 @@ $(document).ready(function () {
         var cantidad = $("#cantidadMuestra").val();
         var litros = $("#litrosContenedor").val();
         var suma = (((cantidad / volumen) * 1000)) * litros;
-        $("#volumenTotal").val(suma);
+        var decimal = suma.toFixed(3);
+        $("#volumenTotal").val(decimal);
     });
 
     $("#litrosContenedor").change(function () {
@@ -121,7 +123,8 @@ $(document).ready(function () {
         var cantidad = $("#cantidadMuestra").val();
         var litros = $("#litrosContenedor").val();
         var suma = (((cantidad / volumen) * 1000)) * litros;
-        $("#volumenTotal").val(suma);
+        var decimal = suma.toFixed(3);
+        $("#volumenTotal").val(decimal);
     });
 
 
@@ -146,6 +149,7 @@ $(document).ready(function () {
         var VolumenMuestra = $("#VolumenMuestra").val();
         var VolumenTotal = $("#volumenTotal").val();
         var LitrosContenedor = $("#litrosContenedor").val();
+        VolumenTotal = VolumenTotal.replace(".", ",");
 
 
         if (!validateDecimal(CantidadOrigen) || !validateDecimal(CantidadDestino)) {

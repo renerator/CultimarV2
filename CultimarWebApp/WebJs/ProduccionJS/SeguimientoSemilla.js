@@ -82,7 +82,8 @@ $(document).ready(function () {
         var cantidad = $("#cantidadMuestra").val();
         var litros = $("#litrosContenedor").val();
         var suma = (((cantidad / volumen) * 1000)) * litros;
-        $("#volumenTotal").val(suma); $("#volumenTotal").val(suma);
+        var decimal = suma.toFixed(3);
+        $("#volumenTotal").val(decimal);
     });
     $("#cantidadMuestra").change(function () {
         //var suma = $("#cantidadMuestra").val() * $("#VolumenMuestra").val() * $("#litrosContenedor").val() * 1000;
@@ -90,7 +91,8 @@ $(document).ready(function () {
         var cantidad = $("#cantidadMuestra").val();
         var litros = $("#litrosContenedor").val();
         var suma = (((cantidad / volumen) * 1000)) * litros;
-        $("#volumenTotal").val(suma);
+        var decimal = suma.toFixed(3);
+        $("#volumenTotal").val(decimal);
     });
     
     $("#litrosContenedor").change(function () {
@@ -99,7 +101,8 @@ $(document).ready(function () {
         var cantidad = $("#cantidadMuestra").val();
         var litros = $("#litrosContenedor").val();
         var suma = (((cantidad / volumen) * 1000)) * litros;
-        $("#volumenTotal").val(suma);
+        var decimal = suma.toFixed(3);
+        $("#volumenTotal").val(decimal);
     });
 
 
@@ -144,7 +147,7 @@ $(document).ready(function () {
         var observaciones = $("#txtObservaciones").val();
         var cantidadMortalidad = $("#CantidadMortalidad").val();
         var litrosContenedor = $("#litrosContenedor").val();
-
+        volumenTotal = volumenTotal.replace(".", ",");
 
         if (ID != null && ID != "") {
             ID = ID;
@@ -179,11 +182,7 @@ $(document).ready(function () {
 
             async: true,
             success: function (data) {
-                //if (data == 0) {
-                //    $("#btnCerrarModal").click();
-                //    alert("El Ingreso se ha realizado sin problemas.");
-                //}
-                if (data == 1) {
+               if (data == 1) {
                     $("#btnCerrarModal").click();
                     alert("El Ingreso se ha realizado sin problemas.");
                     window.location.reload(true);

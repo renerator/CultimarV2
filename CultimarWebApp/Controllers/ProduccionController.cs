@@ -361,7 +361,7 @@ namespace CultimarWebApp.Controllers
                                                         int _contenedorDestino,
                                                         int _cantidadMuestra,
                                                         int _volumenMuestra,
-                                                        int _volumenTotal,
+                                                        string _volumenTotal,
                                                         int _litrosContenedor,
                                                         string _observaciones,
                                                         int _cantidadMortalidad)
@@ -394,7 +394,7 @@ namespace CultimarWebApp.Controllers
                 IdTipoContenedorDestino = _contenedorDestino,
                 CantidadMuestra = _cantidadMuestra,
                 VolumenMuestra = _volumenMuestra,
-                VolumenTotal = _volumenTotal,
+                VolumenTotal = Convert.ToDouble(_volumenTotal),
                 LitrosContenedor = _litrosContenedor,
                 Observaciones = _observaciones,
                 CantidadMortalidad = _cantidadMortalidad
@@ -803,7 +803,7 @@ namespace CultimarWebApp.Controllers
             , string _Observaciones
             , int _CantidadMuestra
             , int _VolumenMuestra
-            , int _VolumenTotal
+            , string _VolumenTotal
             , int _LitrosContenedor)
         {
             var datosUsuario = new ObjetoLogin();
@@ -835,7 +835,7 @@ namespace CultimarWebApp.Controllers
                         ,Observaciones = _Observaciones
                         ,CantidadMuestra = _CantidadMuestra
                         ,VolumenMuestra = _VolumenMuestra
-                        ,VolumenTotal = _VolumenTotal
+                        ,VolumenTotal = Convert.ToDouble(_VolumenTotal)
                         ,LitrosContenedor = _LitrosContenedor
                     };
                     if (_IdSeguimiento != -1)
@@ -920,7 +920,7 @@ namespace CultimarWebApp.Controllers
             , string _CantidadContada
             , string _LitrosContenedor
             , string _Observaciones
-            , int _CantidadTotal
+            , string _CantidadTotal
 )
         {
 
@@ -954,7 +954,7 @@ namespace CultimarWebApp.Controllers
                     pdespacho.CantidadContada = Convert.ToDouble(_CantidadContada);
                     pdespacho.LitrosContenedor = Convert.ToDouble(_LitrosContenedor);
                     pdespacho.Observaciones = _Observaciones;
-                    pdespacho.CantidadTotal = _CantidadTotal;
+                    pdespacho.CantidadTotal = Convert.ToDouble(_CantidadTotal);
 
                     if (_IdPreparoDespacho != -1)
                     {

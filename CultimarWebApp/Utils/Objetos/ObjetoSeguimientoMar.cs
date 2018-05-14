@@ -21,8 +21,8 @@ namespace CultimarWebApp.Utils.Objetos
             set { _volumenMuestra = value; }
         }
 
-        private int _volumenTotal;
-        public int VolumenTotal
+        private double _volumenTotal;
+        public double VolumenTotal
         {
             get { return _volumenTotal; }
             set { _volumenTotal = value; }

@@ -58,6 +58,14 @@ function validateDecimal(valor) {
     }
 }
 
+function validarSiNumero(numero) {
+    if (!/^([0-9])*$/.test(numero)) {
+        return false;
+    }
+    else {
+        return true;
+    }
+}
 
 $(document).ready(function () {
     $("#tblPreparacionDespacho").DataTable({
@@ -92,34 +100,58 @@ $(document).ready(function () {
 
 
     $("#VolumenMuestra").change(function () {
-        //var suma = $("#cantidadMuestra").val() * $("#VolumenMuestra").val() * $("#litrosContenedor").val() * 1000;
-        //cantidad contada/volumen de la muestra * 1000 * litros en el contenedor 
         var volumen = $("#VolumenMuestra").val();
         var cantidad = $("#cantidadContada").val();
         var litros = $("#litrosContenedor").val();
-        //var suma = (((volumen * cantidad) / volumen) * litros) * 1000;
-
         var suma = (((cantidad / volumen) * 1000)) * litros;
-        $("#volumenTotal").val(suma); 
+        var decimal = suma.toFixed(3);
+        $("#volumenTotal").val(decimal);
+        
+        
     });
     $("#cantidadContada").change(function () {
-        //var suma = $("#cantidadMuestra").val() * $("#VolumenMuestra").val() * $("#litrosContenedor").val() * 1000;
-        var volumen = $("#VolumenMuestra").val();
         var cantidad = $("#cantidadContada").val();
-        var litros = $("#litrosContenedor").val();
-        var suma = (((cantidad / volumen) * 1000)) * litros;
-        $("#volumenTotal").val(suma);
+        if (validarSiNumero(cantidad)) {
+            var volumen = $("#VolumenMuestra").val();
+            var litros = $("#litrosContenedor").val();
+            var suma = (((cantidad / volumen) * 1000)) * litros;
+            var decimal = suma.toFixed(3);
+            $("#volumenTotal").val(decimal);
+        }
+        else {
+            alert("El Campo Cantidad Contada debe ser numerico");
+            $("#cantidadContada").val("");
+        }
+
+
+        
     });
 
     $("#litrosContenedor").change(function () {
-        //var suma = $("#cantidadMuestra").val() * $("#VolumenMuestra").val() * $("#VolumenMuestra").val() * 1000;
-        var volumen = $("#VolumenMuestra").val();
-        var cantidad = $("#cantidadContada").val();
         var litros = $("#litrosContenedor").val();
-        var suma = (((cantidad / volumen) * 1000)) * litros;
-        $("#volumenTotal").val(suma);
-    });
+        if (validarSiNumero(litros)) {
+            var cantidad = $("#cantidadContada").val();
+            var volumen = $("#VolumenMuestra").val();
+            var litros = $("#litrosContenedor").val();
+            var suma = (((cantidad / volumen) * 1000)) * litros;
+            var decimal = suma.toFixed(3);
+            $("#volumenTotal").val(decimal);
+        }
+        else {
+            alert("El Campo Litros Contenedor debe ser numerico");
+            $("#litrosContenedor").val("");
+        }
 
+
+    });
+    /*
+    Peso neto estimado
+Volumen de la muestra
+Cantidad contada
+Litros en el contenedor
+
+
+    */
     $("#btnGrabarDatos").click(function () {
         var ID = $("#idDespacho").val();
         var p_FechaEnvio = formateaFecha($("#single_cal1").val());
@@ -140,9 +172,15 @@ $(document).ready(function () {
         var LitrosContenedor = $("#litrosContenedor").val();
         var Observaciones = $("#txtObservaciones").val();
         var CantidadTotal = $("#volumenTotal").val();
+        CantidadTotal = CantidadTotal.replace(".", ",");
+        p_PesoNeto = p_PesoNeto.replace(".", ",");
+        p_PesoEstimado = p_PesoEstimado.replace(".", ",");
+        p_PesoBruto = p_PesoBruto.replace(".", ",");
+        CantidadContada = CantidadContada.replace(".", ",");
+        LitrosContenedor = LitrosContenedor.replace(".", ",");
 
-        if (!validateDecimal(p_PesoNeto) || !validateDecimal(p_PesoEstimado) || !validateDecimal(p_PesoBruto)) {
-            alert("Los campos Peso Neto, Peso Estimado y Peso Bruto, son campo decimal que debe ser separado por COMA (,) con formato 00,000");
+        if (!validateDecimal(p_PesoNeto) || !validateDecimal(p_PesoEstimado) || !validateDecimal(p_PesoBruto) || !validateDecimal(CantidadContada) || !validateDecimal(LitrosContenedor)) {
+            alert("Los campos Peso Neto, Peso Estimado, Peso Bruto, Cantidad Contada y Litros en el Contenedor, son campo decimal que debe ser separado por COMA (,) con formato 00,000");
         }
         else {
             if (ID != null && ID != "") {
@@ -196,6 +234,10 @@ $(document).ready(function () {
                     if (data == 0) {
                         alert("No se ha realizado la acción, intentalo nuevamente.");
                     }
+                },
+                error: function (jqXHR, exception) {
+                    console.log(jqXHR);
+                    console.log(exception);
                 }
             });
         }
